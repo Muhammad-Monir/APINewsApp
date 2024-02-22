@@ -1,4 +1,4 @@
-#Thu Feb 22 10:22:45 BDT 2024
-base.0=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Thu Feb 22 18:06:19 ALMT 2024
+base.0=D\:\\flutter project\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
