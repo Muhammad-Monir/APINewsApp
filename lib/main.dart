@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BarsVisibility>(create: (_) => BarsVisibility()),
-        ChangeNotifierProvider<BottomNavigationProvider>(create: (_) => BottomNavigationProvider()),
+        ChangeNotifierProvider<BottomNavigationProvider>(
+            create: (_) => BottomNavigationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -42,5 +43,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
