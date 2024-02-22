@@ -7,5 +7,6 @@ class RoutesName {
   static const String bookmark = "/bookmark";
   static const String share = "/share";
   static const String bottomNavigationBar = "/bottom-navigation-bar";
-
+  static const String termsOfUses = "/terms-of-uses";
+  static const String drawerScreen = "/drawer_screen";
 }
