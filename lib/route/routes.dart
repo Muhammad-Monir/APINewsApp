@@ -1,10 +1,12 @@
-
-
 import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/view/bookmarks/bookmarks_screen.dart';
 import 'package:am_innn/view/bottom_navigation/bottom_navigation_bar.dart';
+import 'package:am_innn/view/feedback/feedback_screen.dart';
 import 'package:am_innn/view/font/font_screen.dart';
 import 'package:am_innn/view/home/home_screen.dart';
+import 'package:am_innn/view/login/login_screen.dart';
+import 'package:am_innn/view/privacy_policy/privacy_policy_screen.dart';
+import 'package:am_innn/view/register/register_screen.dart';
 import 'package:am_innn/view/search/search_screen.dart';
 import 'package:am_innn/view/share/share_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,31 +16,47 @@ class Routes {
     switch (settings.name) {
       case RoutesName.home:
         return MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => const HomeScreen(),
         );
-        case RoutesName.search:
+      case RoutesName.search:
         return MaterialPageRoute(
-          builder: (context) => SearchScreen(),
+          builder: (context) => const SearchScreen(),
         );
-        case RoutesName.font:
+      case RoutesName.font:
         return MaterialPageRoute(
-          builder: (context) => FontScreen(),
+          builder: (context) => const FontScreen(),
         );
-        case RoutesName.bookmark:
+      case RoutesName.bookmark:
         return MaterialPageRoute(
-          builder: (context) => BookMarksScreen(),
+          builder: (context) => const BookMarksScreen(),
         );
-        case RoutesName.share:
+      case RoutesName.share:
         return MaterialPageRoute(
-          builder: (context) => ShareScreen(),
+          builder: (context) => const ShareScreen(),
         );
-        case RoutesName.bottomNavigationBar:
+      case RoutesName.bottomNavigationBar:
         return MaterialPageRoute(
-          builder: (context) => BottomNavigationMenu(),
+          builder: (context) => const BottomNavigationMenu(),
+        );
+      case RoutesName.login:
+        return MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        );
+      case RoutesName.register:
+        return MaterialPageRoute(
+          builder: (context) => const RegisterScreen(),
+        );
+      case RoutesName.privacyPolicy:
+        return MaterialPageRoute(
+          builder: (context) => const PrivacyPolicyScreen(),
+        );
+      case RoutesName.feedBack:
+        return MaterialPageRoute(
+          builder: (context) => const FeedbackScreen(),
         );
       default:
         return MaterialPageRoute(
-          builder: (context) =>  HomeScreen(),
+          builder: (context) => const HomeScreen(),
         );
     }
   }

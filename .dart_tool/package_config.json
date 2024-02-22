@@ -74,6 +74,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///D:/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -332,7 +338,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-02-22T04:07:27.656917Z",
+  "generated": "2024-02-22T11:02:08.577855Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

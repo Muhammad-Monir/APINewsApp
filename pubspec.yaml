@@ -38,6 +38,7 @@ dependencies:
   provider:
   svg_flutter:
   google_fonts:
+  flutter_rating_bar:
 
 
 dev_dependencies:
