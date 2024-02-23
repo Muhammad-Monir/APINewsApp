@@ -98,6 +98,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
             );
           },
+          glow: false,
           itemSize: Utils.scrHeight * 0.08,
           allowHalfRating: true,
           // minRating: 1.5,

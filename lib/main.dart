@@ -1,4 +1,7 @@
 import 'package:am_innn/provider/bottom_navigation_provider.dart';
+import 'package:am_innn/provider/drop_down_provider.dart';
+import 'package:am_innn/provider/font_size_provider.dart';
+import 'package:am_innn/provider/notification_provider.dart';
 import 'package:am_innn/provider/obscure_provider.dart';
 import 'package:am_innn/provider/timer_provider.dart';
 import 'package:am_innn/route/routes.dart';
@@ -26,10 +29,12 @@ class MyApp extends StatelessWidget {
     Utils.initScreenSize(context);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<BarsVisibility>(create: (_) => BarsVisibility()),
-        ChangeNotifierProvider<ObscureProvider>(create: (_) => ObscureProvider()),
-        ChangeNotifierProvider<BottomNavigationProvider>(
-            create: (_) => BottomNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => BarsVisibility()),
+        ChangeNotifierProvider(create: (_) => ObscureProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
+        ChangeNotifierProvider(create: (_) => FontSizeProvider()),
+        ChangeNotifierProvider(create: (_) => DropDownProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
           useMaterial3: true,
         ),
-        initialRoute: RoutesName.feedBack,
+        initialRoute: RoutesName.home,
         onGenerateRoute: Routes.generateRoute,
       ),
     );

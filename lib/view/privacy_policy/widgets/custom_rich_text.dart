@@ -37,7 +37,7 @@ class CustomRichText extends StatelessWidget {
               children: [
                 TextSpan(
                   text: subtitle,
-                  style: mediumTS(homeTabTextColor, fontSize: 14),
+                  style: mediumTS(homeTabTextColor),
                 ),
               ],
             ),

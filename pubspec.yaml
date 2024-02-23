@@ -39,6 +39,7 @@ dependencies:
   svg_flutter:
   google_fonts:
   flutter_rating_bar:
+  dropdown_button2:
 
 
 dev_dependencies:
