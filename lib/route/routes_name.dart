@@ -10,4 +10,7 @@ class RoutesName {
   static const String feedBack = "/feedBack";
   static const String bottomNavigationBar = "/bottom-navigation-bar";
   static const String privacyPolicy = "/privacy-policy";
+  static const String termsOfUses = "/terms-of-uses";
+  static const String drawerScreen = "/drawer_screen";
 }
+

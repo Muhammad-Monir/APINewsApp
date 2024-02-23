@@ -24,6 +24,13 @@ class Utils {
         fit: BoxFit.contain, height: height, width: width);
   }
 
+  // show images
+  static Widget showImage(String imageName,
+      {double? height, double? width}) {
+    return Image.asset("assets/images/$imageName.png",
+        fit: BoxFit.contain, height: height, width: width);
+  }
+
 
   static void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
