@@ -58,11 +58,11 @@ class Routes {
         );
       case RoutesName.termsOfUses:
         return MaterialPageRoute(
-          builder: (context) => TermsOfUses(),
+          builder: (context) => const TermsOfUses(),
         );
       case RoutesName.drawerScreen:
         return MaterialPageRoute(
-          builder: (context) => DrawerScreen(),
+          builder: (context) => const DrawerScreen(),
         );
 
       default:

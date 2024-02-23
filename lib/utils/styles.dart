@@ -25,6 +25,7 @@
 //     fontWeight: FontWeight.w700,
 //     fontFamily: 'Avenir LT Pro');
 
+import 'package:am_innn/utils/color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,10 +53,13 @@ TextStyle mediumTS(Color color,
             fontSize: fontSize,
             fontWeight: FontWeight.w500));
 
-TextStyle semiBoldTS(Color color, {double? fontSize = 16}) =>
+TextStyle semiBoldTS(Color color,
+        {double? fontSize = 16, bool isUnderline = false}) =>
     GoogleFonts.roboto(
         textStyle: TextStyle(
-            decoration: TextDecoration.none,
+            decoration:
+                isUnderline ? TextDecoration.underline : TextDecoration.none,
+            decorationColor: isUnderline ? appThemeColor : Colors.transparent,
             color: color,
             fontSize: fontSize,
             fontWeight: FontWeight.w600));
