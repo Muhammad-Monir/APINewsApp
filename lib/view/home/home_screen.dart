@@ -1,4 +1,3 @@
-
 import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:am_innn/utils/utils.dart';
@@ -26,89 +25,87 @@ class HomeScreen extends StatelessWidget {
       //     : null,
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? Theme(
-        data: Theme.of(context).copyWith(
-            canvasColor: Colors.white,
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent),
-        child: Consumer<BottomNavigationProvider>(
-            builder: (context,provider,child) {
-              return BottomNavigationBar(
-                selectedLabelStyle: const TextStyle(
-                    color: appThemeColor
-                ),
-                unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon:
-                    // provider.selectedIndex == 0
-                    //     ? Utils.showSvgPicture('search_selected',
-                    //     height: Utils.scrHeight * 0.024,
-                    //     width: Utils.scrHeight * 0.024)
-                    //     :
-                    Utils.showSvgPicture('search',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024),
-                    label: 'Search',
-
-                  ),
-                  BottomNavigationBarItem(
-                    icon: provider.selectedIndex == 1
-                        ? Utils.showSvgPicture('selected_font',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024)
-                        : Utils.showSvgPicture('font',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024),
-                    label: 'Font',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: provider.selectedIndex == 2
-                        ? Stack(
-                      children: [
-                        Utils.showSvgPicture('selected_bookmark',
-                            height: Utils.scrHeight * 0.024,
-                            width: Utils.scrHeight * 0.024),
-                      ],
-                    )
-                        : Stack(
-                      children: [
-                        Utils.showSvgPicture('bookmark',
-                            height: Utils.scrHeight * 0.024,
-                            width: Utils.scrHeight * 0.024),
-
-                      ],
+              data: Theme.of(context).copyWith(
+                  canvasColor: Colors.white,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent),
+              child: Consumer<BottomNavigationProvider>(
+                  builder: (context, provider, child) {
+                return BottomNavigationBar(
+                  selectedLabelStyle: const TextStyle(color: appThemeColor),
+                  unselectedLabelStyle:
+                      const TextStyle(color: appSecondTextColor),
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon:
+                          // provider.selectedIndex == 0
+                          //     ? Utils.showSvgPicture('search_selected',
+                          //     height: Utils.scrHeight * 0.024,
+                          //     width: Utils.scrHeight * 0.024)
+                          //     :
+                          Utils.showSvgPicture('search',
+                              height: Utils.scrHeight * 0.024,
+                              width: Utils.scrHeight * 0.024),
+                      label: 'Search',
                     ),
-                    label: 'BookMark',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: provider.selectedIndex == 3
-                        ? Utils.showSvgPicture('share',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024)
-                        : Utils.showSvgPicture('share',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024),
-                    label: 'Share',
-                  ),
-                ],
-                useLegacyColorScheme: false,
-                showSelectedLabels: true,
-                showUnselectedLabels: true,
-                currentIndex: provider.selectedIndex,
-                type: BottomNavigationBarType.fixed,
-                onTap: (index) {
-                  provider.updateSelectedIndex(index);
-                  if(provider.selectedIndex == 0){
-                    Navigator.pushNamed(context, RoutesName.search);
-                  }
-                },
-              );
-            }
-        ),
-      )
+                    BottomNavigationBarItem(
+                      icon: provider.selectedIndex == 1
+                          ? Utils.showSvgPicture('selected_font',
+                              height: Utils.scrHeight * 0.024,
+                              width: Utils.scrHeight * 0.024)
+                          : Utils.showSvgPicture('font',
+                              height: Utils.scrHeight * 0.024,
+                              width: Utils.scrHeight * 0.024),
+                      label: 'Font',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: provider.selectedIndex == 2
+                          ? Stack(
+                              children: [
+                                Utils.showSvgPicture('selected_bookmark',
+                                    height: Utils.scrHeight * 0.024,
+                                    width: Utils.scrHeight * 0.024),
+                              ],
+                            )
+                          : Stack(
+                              children: [
+                                Utils.showSvgPicture('bookmark',
+                                    height: Utils.scrHeight * 0.024,
+                                    width: Utils.scrHeight * 0.024),
+                              ],
+                            ),
+                      label: 'BookMark',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: provider.selectedIndex == 3
+                          ? Utils.showSvgPicture('share',
+                              height: Utils.scrHeight * 0.024,
+                              width: Utils.scrHeight * 0.024)
+                          : Utils.showSvgPicture('share',
+                              height: Utils.scrHeight * 0.024,
+                              width: Utils.scrHeight * 0.024),
+                      label: 'Share',
+                    ),
+                  ],
+                  useLegacyColorScheme: false,
+                  showSelectedLabels: true,
+                  showUnselectedLabels: true,
+                  currentIndex: provider.selectedIndex,
+                  type: BottomNavigationBarType.fixed,
+                  onTap: (index) {
+                    provider.updateSelectedIndex(index);
+                    if (provider.selectedIndex == 0) {
+                      Navigator.pushNamed(context, RoutesName.search);
+                    } else if (provider.selectedIndex == 1) {
+                      Navigator.pushNamed(context, RoutesName.font);
+                    }
+                  },
+                );
+              }),
+            )
           : null,
       body: PageView.builder(
-        controller: pageController,
+          controller: pageController,
           scrollDirection: Axis.vertical,
           itemCount: 5,
           itemBuilder: (context, index) {
@@ -136,15 +133,15 @@ class HomeScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ))),
         Provider.of<BarsVisibility>(context).showBars
-            ? Container(
-          height: Utils.scrHeight * .052,
-          child: Row(
-            children: [
-              Text('data'),
-            ],
-          ),
-        ) : Container(),
-
+            ? SizedBox(
+                height: Utils.scrHeight * .052,
+                child: const Row(
+                  children: [
+                    Text('data'),
+                  ],
+                ),
+              )
+            : Container(),
         Positioned(
           bottom: -Utils.scrHeight * .01,
           left: Utils.scrHeight * .05,
@@ -159,15 +156,11 @@ class HomeScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
-            child: Text(
-              'ABCDEFGHI',
-              style: mediumTS(redContainerColor,fontSize: 20)
-            ),
+            child: Text('ABCDEFGHI',
+                style: mediumTS(redContainerColor, fontSize: 20)),
           ),
         )
       ],
     );
   }
 }
-
-

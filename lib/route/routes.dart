@@ -26,7 +26,7 @@ class Routes {
         );
       case RoutesName.font:
         return MaterialPageRoute(
-          builder: (context) => const FontScreen(),
+          builder: (context) => FontScreen(),
         );
       case RoutesName.bookmark:
         return MaterialPageRoute(
