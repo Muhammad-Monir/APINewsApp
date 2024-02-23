@@ -1,4 +1,5 @@
 import 'package:am_innn/provider/bottom_navigation_provider.dart';
+import 'package:am_innn/provider/obscure_provider.dart';
 import 'package:am_innn/provider/timer_provider.dart';
 import 'package:am_innn/route/routes.dart';
 import 'package:am_innn/route/routes_name.dart';
@@ -26,18 +27,19 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<BarsVisibility>(create: (_) => BarsVisibility()),
+        ChangeNotifierProvider<ObscureProvider>(create: (_) => ObscureProvider()),
         ChangeNotifierProvider<BottomNavigationProvider>(
             create: (_) => BottomNavigationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Api News App',
         theme: ThemeData(
           appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
           colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
           useMaterial3: true,
         ),
-        initialRoute: RoutesName.drawerScreen,
+        initialRoute: RoutesName.home,
         onGenerateRoute: Routes.generateRoute,
       ),
     );
