@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import '../../../route/routes_name.dart';
 
 class CustomWelcomeScreen extends StatelessWidget {
-  const CustomWelcomeScreen({super.key});
+  const CustomWelcomeScreen(
+      {super.key, required this.title, required this.description});
+
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +27,11 @@ class CustomWelcomeScreen extends StatelessWidget {
           Utils.showSvgPicture('welcome',
               height: Utils.scrHeight * .284, width: Utils.scrHeight * .284),
           SizedBox(height: Utils.scrHeight * .024),
-          Text('Thank you!',
+          Text(title,
               style: semiBoldTS(const Color(0xff4E617E), fontSize: 36)),
           SizedBox(height: Utils.scrHeight * .016),
           Text(
-              'By making your voice heard, you help us improve\n"API News App"',
+              description,
               textAlign: TextAlign.center,
               style: regularTS(homeTabTextColor, fontSize: 16)),
           SizedBox(height: Utils.scrHeight * .028),

@@ -2,19 +2,23 @@ import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:am_innn/utils/utils.dart';
 import 'package:am_innn/view/home/widgets/home_news_widgets.dart';
+import 'package:am_innn/view/story/story_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
 import '../../utils/color.dart';
+import '../font/font_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final PageController pageController = PageController();
+
+    final PageController hPageController = PageController();
+    final PageController vPageController = PageController();
     // Hide the status bar
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
@@ -104,13 +108,27 @@ class HomeScreen extends StatelessWidget {
               }),
             )
           : null,
-      body: PageView.builder(
-          controller: pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const NewsPage();
-          }),
+      body: PageView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          PageView.builder(
+              controller: hPageController,
+              allowImplicitScrolling: true,
+              pageSnapping: true,
+              scrollDirection: Axis.vertical,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return const NewsPage();
+              }),
+          PageView.builder(
+              controller: vPageController,
+              scrollDirection: Axis.vertical,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return const StoryScreen();
+              }),
+        ],
+      )
     );
   }
 

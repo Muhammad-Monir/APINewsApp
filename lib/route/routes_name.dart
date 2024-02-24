@@ -7,9 +7,12 @@ class RoutesName {
   static const String font = "/font";
   static const String bookmark = "/bookmark";
   static const String share = "/share";
+  static const String story = "/story";
   static const String feedBack = "/feedBack";
   static const String bottomNavigationBar = "/bottom-navigation-bar";
   static const String privacyPolicy = "/privacy-policy";
+  static const String forgotPassword = "/forgot-password";
+  static const String changePassword = "/change-password";
   static const String termsOfUses = "/terms-of-uses";
   static const String drawerScreen = "/drawer_screen";
 }
