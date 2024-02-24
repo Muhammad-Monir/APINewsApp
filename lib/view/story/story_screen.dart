@@ -21,6 +21,7 @@ class StoryScreen extends StatelessWidget {
         onPressed: () {},
         child: Container(
           child: Utils.showSvgPicture('share'),
+
         ),
       ),
       body: Column(
