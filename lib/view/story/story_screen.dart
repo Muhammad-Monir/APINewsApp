@@ -1,3 +1,4 @@
+import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/color.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:am_innn/utils/utils.dart';
@@ -11,6 +12,11 @@ class StoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF6F5F3),
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pushReplacementNamed(context, RoutesName.home);
+        },
+          icon: const Icon(Icons.arrow_back,color: Colors.black,),
+        ),
         backgroundColor: const Color(0xffF6F5F3),
           title: Text('Back', style: mediumTS(appBarColor, fontSize: 20))),
       floatingActionButton: FloatingActionButton(

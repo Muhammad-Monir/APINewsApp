@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:am_innn/provider/font_size_provider.dart';
 import 'package:am_innn/view/drawer/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,142 +26,146 @@ class NewsPage extends StatelessWidget {
             });
           }
         },
-        child: Column(
-          children: [
-            // Top Banner Image
-            Stack(
-              clipBehavior: Clip.none,
+        child: Consumer<FontSizeProvider>(
+          builder: (context, fontSize, child) {
+            return Column(
               children: [
-                Container(
-                    height: Utils.scrHeight * .335,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft:
-                                Radius.circular(Utils.scrHeight * .12))),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(Utils.scrHeight * .03),
-                            bottomRight:
-                                Radius.circular(Utils.scrHeight * .03)),
-                        child: Image.asset(
-                          'assets/images/banner_image.png',
-                          fit: BoxFit.cover,
-                        ))),
-                Provider.of<BarsVisibility>(context).showBars
-                    ? Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: Utils.scrHeight * .024,
-                        ),
-                        color: Colors.white,
-                        height: Utils.scrHeight * .09,
-                        child: Column(
-                          children: [
-                            SizedBox(height: Utils.scrHeight * .045),
-                            Row(
+                // Top Banner Image
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                        height: Utils.scrHeight * .335,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft:
+                                    Radius.circular(Utils.scrHeight * .12))),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(Utils.scrHeight * .03),
+                                bottomRight:
+                                    Radius.circular(Utils.scrHeight * .03)),
+                            child: Image.asset(
+                              'assets/images/banner_image.png',
+                              fit: BoxFit.cover,
+                            ))),
+                    Provider.of<BarsVisibility>(context).showBars
+                        ? Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Utils.scrHeight * .024,
+                            ),
+                            color: Colors.white,
+                            height: Utils.scrHeight * .09,
+                            child: Column(
                               children: [
-                                const HomeTabBar(),
-                                SizedBox(width: Utils.scrHeight * .014),
-                                const RefreshTabBar(),
-                                SizedBox(width: Utils.scrHeight * .014),
-                                const UnreadTabBar(),
-                                SizedBox(width: Utils.scrHeight * .014),
-                                const StartTabBar(),
+                                SizedBox(height: Utils.scrHeight * .045),
+                                Row(
+                                  children: [
+                                    const HomeTabBar(),
+                                    SizedBox(width: Utils.scrHeight * .014),
+                                    const RefreshTabBar(),
+                                    SizedBox(width: Utils.scrHeight * .014),
+                                    const UnreadTabBar(),
+                                    SizedBox(width: Utils.scrHeight * .014),
+                                    const StartTabBar(),
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
+                          )
+                        : Container(),
+                    Positioned(
+                      bottom: -Utils.scrHeight * .01,
+                      left: Utils.scrHeight * .05,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Utils.scrHeight * .005),
+                        width: Utils.scrHeight * .14,
+                        // height: 66,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                                width: 1, color: redContainerColor),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
-                      )
-                    : Container(),
-                Positioned(
-                  bottom: -Utils.scrHeight * .01,
-                  left: Utils.scrHeight * .05,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Utils.scrHeight * .005),
-                    width: Utils.scrHeight * .14,
-                    // height: 66,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                            width: 1, color: redContainerColor),
-                        borderRadius: BorderRadius.circular(4),
+                        child: Text('ABCDEFGHI',
+                            style: mediumTS(redContainerColor, fontSize: 20)),
                       ),
-                    ),
-                    child: Text('ABCDEFGHI',
-                        style: mediumTS(redContainerColor, fontSize: 20)),
+                    )
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: Utils.scrHeight * .02,
+                    horizontal: Utils.scrHeight * .024,
                   ),
-                )
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: Utils.scrHeight * .02,
-                horizontal: Utils.scrHeight * .024,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: Utils.scrHeight * .027),
-                  SizedBox(
-                    width: Utils.scrHeight * .342,
-                    child: Text(
-                      'Special ‘Aastha’ train to Ayodhya flagged off from Goa',
-                      style: semiBoldTS(appTextColor, fontSize: 19),
-                    ),
-                  ),
-                  SizedBox(height: Utils.scrHeight * .02),
-                  SizedBox(
-                    width: 342,
-                    child: Text(
-                      'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
-                      style: regularTS(appSecondTextColor, fontSize: 15),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.scrHeight * .05,
-                  ),
-                  SizedBox(
-                    width: Utils.scrHeight * .398,
-                    height: Utils.scrHeight * .02,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: Utils.scrHeight * .027),
+                      SizedBox(
+                        // width: Utils.scrHeight * .342,
+                        child: Text(
+                          'Special ‘Aastha’ train to Ayodhya flagged off from Goa',
+                          style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
+                        ),
+                      ),
+                      SizedBox(height: Utils.scrHeight * .02),
+                      SizedBox(
+                        // width: Utils.scrHeight * .342,
+                        child: Text(
+                          'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
+                          style: regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
+                        ),
+                      ),
+                      SizedBox(
+                        height: Utils.scrHeight * .04,
+                      ),
+                      SizedBox(
+                        width: Utils.scrHeight * .398,
+                        height: Utils.scrHeight * .02,
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                              'Source Link:',
-                              style: regularTS(appTextColor, fontSize: 14),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Source Link:',
+                                  style: regularTS(appTextColor, fontSize: 14),
+                                ),
+                                const SizedBox(width: 2),
+                                Text('https://indianexpress.com/',
+                                    style: regularTS(appThemeColor, fontSize: 14)),
+                              ],
                             ),
-                            const SizedBox(width: 2),
-                            Text('https://indianexpress.com/',
-                                style: regularTS(appThemeColor, fontSize: 14)),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: Utils.scrHeight * .02),
-                  GestureDetector(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: Utils.scrHeight * .054,
-                      child: Image.asset(
-                        'assets/images/floating_add.png',
-                        fit: BoxFit.cover,
                       ),
-                    ),
+                      SizedBox(height: Utils.scrHeight * .02),
+                      GestureDetector(
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: Utils.scrHeight * .054,
+                          child: Image.asset(
+                            'assets/images/floating_add.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          }
         ),
       ),
     );
