@@ -29,6 +29,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         children: [
           Text('How did we do', style: regularTS(feedbackColor, fontSize: 16)),
           SizedBox(height: Utils.scrHeight * .02),
+
+          // Rating Bar Part
           _buildRatingBar(),
           SizedBox(height: Utils.scrHeight * .04),
 
@@ -38,7 +40,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           // Feedback Button
           ActionButton(
             onTap: () {
-              getPopUp(context, (p0) => const CustomWelcomeScreen());
+              getPopUp(
+                  context,
+                  (p0) => const CustomWelcomeScreen(
+                        title: 'Thank you!',
+                        description:
+                            'By making your voice heard, you help us improve\n"API News App"',
+                      ));
             },
             buttonColor: appThemeColor,
             buttonName: 'Send Feedback',

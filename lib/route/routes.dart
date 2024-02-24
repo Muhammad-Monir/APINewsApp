@@ -10,8 +10,12 @@ import 'package:am_innn/view/privacy_policy/privacy_policy_screen.dart';
 import 'package:am_innn/view/register/register_screen.dart';
 import 'package:am_innn/view/search/search_screen.dart';
 import 'package:am_innn/view/share/share_screen.dart';
+import 'package:am_innn/view/story/story_screen.dart';
 import 'package:am_innn/view/terms_of_uses/terms_of_uses.dart';
 import 'package:flutter/material.dart';
+
+import '../view/change_password/change_password_screen.dart';
+import '../view/forgot_password/forgot_password_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -26,7 +30,7 @@ class Routes {
         );
       case RoutesName.font:
         return MaterialPageRoute(
-          builder: (context) => FontScreen(),
+          builder: (context) => const FontScreen(),
         );
       case RoutesName.bookmark:
         return MaterialPageRoute(
@@ -63,6 +67,18 @@ class Routes {
       case RoutesName.drawerScreen:
         return MaterialPageRoute(
           builder: (context) => const DrawerScreen(),
+        );
+      case RoutesName.forgotPassword:
+        return MaterialPageRoute(
+          builder: (context) => const ForgotPasswordScreen(),
+        );
+      case RoutesName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => const ChangePasswordScreen(),
+        );
+      case RoutesName.story:
+        return MaterialPageRoute(
+          builder: (context) => const StoryScreen(),
         );
 
       default:
