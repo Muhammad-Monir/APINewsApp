@@ -1,6 +1,7 @@
 import 'package:am_innn/utils/color.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../utils/utils.dart';
 
 class ShareScreen extends StatelessWidget {
@@ -70,6 +71,11 @@ class ShareScreen extends StatelessWidget {
                     style: regularTS(tabBarDividerColor, fontSize: 16)),
                 const Spacer(),
                 GestureDetector(
+                  onTap: () {
+                    _copyToClipboard('https://yourapplink.com');
+                    Utils.showSnackBar(context, 'Link copied to clipboard');
+                    Navigator.pop(context);
+                  },
                   child: Container(
                     height: Utils.scrHeight * .048,
                     width: Utils.scrHeight * .06,
@@ -111,6 +117,8 @@ class CustomSharePlatform extends StatelessWidget {
       ),
     );
   }
+}
 
-
+void _copyToClipboard(String text) {
+  Clipboard.setData(ClipboardData(text: text));
 }
