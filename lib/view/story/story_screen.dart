@@ -9,7 +9,9 @@ class StoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF6F5F3),
       appBar: AppBar(
+        backgroundColor: const Color(0xffF6F5F3),
           title: Text('Back', style: mediumTS(appBarColor, fontSize: 20))),
       floatingActionButton: FloatingActionButton(
         shape: OutlineInputBorder(
@@ -22,9 +24,8 @@ class StoryScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: [
-
-        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Utils.showImage('story')],
       ),
     );
   }
