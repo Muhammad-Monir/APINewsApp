@@ -95,7 +95,7 @@ class BottomNavigationMenu extends StatelessWidget {
 
   static final List<Widget> _screens = <Widget>[
     const SearchScreen(),
-    FontScreen(),
+    const FontScreen(),
     const BookMarksScreen(),
     const ShareScreen(),
   ];

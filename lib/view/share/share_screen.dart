@@ -1,4 +1,4 @@
-import 'package:am_innn/view/bottom_navigation/bottom_navigation_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class ShareScreen extends StatelessWidget {
