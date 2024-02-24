@@ -5,11 +5,10 @@ import 'package:am_innn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innn/view/story/story_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
 import '../../utils/color.dart';
-import '../font/font_screen.dart';
+import '../share/share_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -102,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                       } else if (provider.selectedIndex == 1) {
                         Navigator.pushNamed(context, RoutesName.font);
                       } else if (provider.selectedIndex == 3) {
-                        Navigator.pushNamed(context, RoutesName.share);
+                        getPopUp(context, (p0) => const ShareScreen());
                       }
                     },
                   );
