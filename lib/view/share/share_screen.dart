@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import '../../utils/utils.dart';
 
 class ShareScreen extends StatelessWidget {
-  const ShareScreen({super.key});
+  final VoidCallback? onExit;
+  const ShareScreen({super.key, this.onExit});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,8 @@ class ShareScreen extends StatelessWidget {
             const Spacer(),
             GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  if(onExit==null) return;
+                  onExit!();
                 },
                 child:
                     const Icon(Icons.close, size: 40, color: Color(0xff9DACC3)))
