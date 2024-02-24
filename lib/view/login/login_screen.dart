@@ -120,6 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   GestureDetector _buildForgotPassword() {
     return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, RoutesName.forgotPassword);
+      },
       child: Text('Forgot Password?',
           textAlign: TextAlign.end,
           style: regularTS(const Color(0xff2E8540),

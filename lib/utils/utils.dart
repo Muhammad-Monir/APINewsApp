@@ -28,7 +28,7 @@ class Utils {
   static Widget showImage(String imageName,
       {double? height, double? width}) {
     return Image.asset("assets/images/$imageName.png",
-        fit: BoxFit.contain, height: height, width: width);
+        fit: BoxFit.cover, height: height, width: width);
   }
 
 

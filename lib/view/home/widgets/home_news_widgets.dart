@@ -1,10 +1,7 @@
 import 'dart:async';
-
 import 'package:am_innn/view/drawer/drawer_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -60,8 +57,16 @@ class NewsPage extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(height: Utils.scrHeight * .045),
-                            const Row(
-                              children: [TabBarItem()],
+                            Row(
+                              children: [
+                                const HomeTabBar(),
+                                SizedBox(width: Utils.scrHeight * .014),
+                                const RefreshTabBar(),
+                                SizedBox(width: Utils.scrHeight * .014),
+                                const UnreadTabBar(),
+                                SizedBox(width: Utils.scrHeight * .014),
+                                const StartTabBar(),
+                              ],
                             ),
                           ],
                         ),
@@ -162,8 +167,8 @@ class NewsPage extends StatelessWidget {
   }
 }
 
-class TabBarItem extends StatelessWidget {
-  const TabBarItem({
+class HomeTabBar extends StatelessWidget {
+  const HomeTabBar({
     super.key,
   });
 
@@ -171,18 +176,93 @@ class TabBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Scaffold.of(context).openDrawer(),
-      child: Row(
-        children: [
-          Utils.showSvgPicture(
-            'home',
-            height: Utils.scrHeight * .022,
-            width: Utils.scrHeight * .022,
-          ),
-          SizedBox(width: Utils.scrHeight * .006),
-          Text('Home', style: regularTS(homeTabTextColor, fontSize: 15)),
-          SizedBox(width: Utils.scrHeight * .013),
-          Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-        ],
+      child: SizedBox(
+        child: Row(
+          children: [
+            Utils.showSvgPicture(
+              'home',
+              height: Utils.scrHeight * .022,
+              width: Utils.scrHeight * .022,
+            ),
+            SizedBox(width: Utils.scrHeight * .006),
+            Text('Home', style: regularTS(homeTabTextColor, fontSize: 15)),
+            SizedBox(width: Utils.scrHeight * .013),
+            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RefreshTabBar extends StatelessWidget {
+  const RefreshTabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: SizedBox(
+        child: Row(
+          children: [
+            Utils.showSvgPicture(
+              'refresh',
+              height: Utils.scrHeight * .022,
+              width: Utils.scrHeight * .022,
+            ),
+            SizedBox(width: Utils.scrHeight * .006),
+            Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
+            SizedBox(width: Utils.scrHeight * .013),
+            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class UnreadTabBar extends StatelessWidget {
+  const UnreadTabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: SizedBox(
+        child: Row(
+          children: [
+            Utils.showSvgPicture(
+              'unread',
+              height: Utils.scrHeight * .022,
+              width: Utils.scrHeight * .022,
+            ),
+            SizedBox(width: Utils.scrHeight * .006),
+            Text('Unread', style: regularTS(homeTabTextColor, fontSize: 15)),
+            SizedBox(width: Utils.scrHeight * .013),
+            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StartTabBar extends StatelessWidget {
+  const StartTabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: SizedBox(
+        child: Row(
+          children: [
+            Utils.showSvgPicture(
+              'start',
+              height: Utils.scrHeight * .022,
+              width: Utils.scrHeight * .022,
+            ),
+            SizedBox(width: Utils.scrHeight * .006),
+            Text('Start', style: regularTS(homeTabTextColor, fontSize: 15)),
+          ],
+        ),
       ),
     );
   }
