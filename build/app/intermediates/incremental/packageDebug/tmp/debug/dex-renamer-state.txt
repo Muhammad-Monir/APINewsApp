@@ -1,4 +1,4 @@
-#Sat Feb 24 12:00:32 BDT 2024
-base.0=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Sat Feb 24 12:27:03 BDT 2024
+base.0=D\:\\ApiNewsApp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
