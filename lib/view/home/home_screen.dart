@@ -20,11 +20,6 @@ class HomeScreen extends StatelessWidget {
     // Hide the status bar
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-        // appBar: Provider
-        //     .of<BarsVisibility>(context)
-        //     .showBars
-        //     ? AppBar(title: const Text('App Bar'))
-        //     : null,
         bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
             ? Theme(
                 data: Theme.of(context).copyWith(
@@ -135,56 +130,6 @@ class HomeScreen extends StatelessWidget {
                 }),
           ],
         ));
-  }
-
-  Stack _bannerImage(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-            height: Utils.scrHeight * .335,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(Utils.scrHeight * .12))),
-            child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(Utils.scrHeight * .03),
-                    bottomRight: Radius.circular(Utils.scrHeight * .03)),
-                child: Image.asset(
-                  'assets/images/banner_image.png',
-                  fit: BoxFit.cover,
-                ))),
-        Provider.of<BarsVisibility>(context).showBars
-            ? SizedBox(
-                height: Utils.scrHeight * .052,
-                child: const Row(
-                  children: [
-                    Text('data'),
-                  ],
-                ),
-              )
-            : Container(),
-        Positioned(
-          bottom: -Utils.scrHeight * .01,
-          left: Utils.scrHeight * .05,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .005),
-            width: Utils.scrHeight * .14,
-            // height: 66,
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(width: 1, color: redContainerColor),
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            child: Text('ABCDEFGHI',
-                style: mediumTS(redContainerColor, fontSize: 20)),
-          ),
-        )
-      ],
-    );
   }
 
   void getPopUp(
