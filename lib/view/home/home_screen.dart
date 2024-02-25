@@ -20,11 +20,6 @@ class HomeScreen extends StatelessWidget {
     // Hide the status bar
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
-        // appBar: Provider
-        //     .of<BarsVisibility>(context)
-        //     .showBars
-        //     ? AppBar(title: const Text('App Bar'))
-        //     : null,
         bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
             ? Theme(
                 data: Theme.of(context).copyWith(
@@ -136,8 +131,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ));
   }
-
-
 
   void getPopUp(
     BuildContext context,
