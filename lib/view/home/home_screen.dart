@@ -29,7 +29,8 @@ class HomeScreen extends StatelessWidget {
                 child: Consumer<BottomNavigationProvider>(
                     builder: (context, provider, child) {
                   return BottomNavigationBar(
-                    selectedLabelStyle: const TextStyle(color: appThemeColor),
+                    selectedLabelStyle:
+                        const TextStyle(color: appSecondTextColor),
                     unselectedLabelStyle:
                         const TextStyle(color: appSecondTextColor),
                     items: <BottomNavigationBarItem>[
@@ -46,31 +47,31 @@ class HomeScreen extends StatelessWidget {
                         label: 'Search',
                       ),
                       BottomNavigationBarItem(
-                        icon: provider.selectedIndex == 1
-                            ? Utils.showSvgPicture('selected_font',
-                                height: Utils.scrHeight * 0.024,
-                                width: Utils.scrHeight * 0.024)
-                            : Utils.showSvgPicture('font',
+                        icon:
+                            // provider.selectedIndex == 1
+                            //     ? Utils.showSvgPicture('selected_font',
+                            //         height: Utils.scrHeight * 0.024,
+                            //         width: Utils.scrHeight * 0.024)
+                            //     :
+                            Utils.showSvgPicture('font',
                                 height: Utils.scrHeight * 0.024,
                                 width: Utils.scrHeight * 0.024),
                         label: 'Font',
                       ),
                       BottomNavigationBarItem(
-                        icon: provider.selectedIndex == 2
-                            ? Stack(
-                                children: [
-                                  Utils.showSvgPicture('selected_bookmark',
-                                      height: Utils.scrHeight * 0.024,
-                                      width: Utils.scrHeight * 0.024),
-                                ],
-                              )
-                            : Stack(
-                                children: [
-                                  Utils.showSvgPicture('bookmark',
-                                      height: Utils.scrHeight * 0.024,
-                                      width: Utils.scrHeight * 0.024),
-                                ],
-                              ),
+                        icon:
+                            // provider.selectedIndex == 2
+                            // ? Stack(
+                            //     children: [
+                            //       Utils.showSvgPicture('selected_bookmark',
+                            //           height: Utils.scrHeight * 0.024,
+                            //           width: Utils.scrHeight * 0.024),
+                            //     ],
+                            //   )
+                            // :
+                            Utils.showSvgPicture('bookmark',
+                                height: Utils.scrHeight * 0.024,
+                                width: Utils.scrHeight * 0.024),
                         label: 'BookMark',
                       ),
                       BottomNavigationBarItem(
@@ -92,9 +93,11 @@ class HomeScreen extends StatelessWidget {
                     onTap: (index) {
                       provider.updateSelectedIndex(index);
                       if (provider.selectedIndex == 0) {
-                        Navigator.pushNamed(context, RoutesName.search);
+                        Navigator.pushNamed(
+                            context, RoutesName.bottomNavigationBar);
                       } else if (provider.selectedIndex == 1) {
-                        Navigator.pushNamed(context, RoutesName.font);
+                        Navigator.pushNamed(
+                            context, RoutesName.bottomNavigationBar);
                       } else if (provider.selectedIndex == 2) {
                         Navigator.pushNamed(context, RoutesName.bookmark);
                       } else if (provider.selectedIndex == 3) {
