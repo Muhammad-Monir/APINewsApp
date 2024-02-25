@@ -1,0 +1,1 @@
+ D:\\ApiNewsApp\\APINewsApp\\.dart_tool\\flutter_build\\c7e16753f465315c37f7120f272867a4\\native_assets.yaml: 

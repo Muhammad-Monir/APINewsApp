@@ -50,6 +50,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "dropdown_button2",
+      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/dropdown_button2-2.3.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -63,7 +69,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///C:/src/flutter/packages/flutter",
+      "rootUri": "file:///D:/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -74,8 +80,14 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "flutter_test",
-      "rootUri": "file:///C:/src/flutter/packages/flutter_test",
+      "rootUri": "file:///D:/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -219,7 +231,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///D:/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -332,7 +344,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-02-22T10:28:38.497800Z",
+  "generated": "2024-02-25T03:06:04.263736Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

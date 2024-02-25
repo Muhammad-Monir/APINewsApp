@@ -26,57 +26,55 @@ class BottomNavigationMenu extends StatelessWidget {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent),
             child: BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(
-                color: appThemeColor
-              ),
+              selectedLabelStyle: const TextStyle(color: appThemeColor),
               unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: provider.selectedIndex == 0
                       ? Utils.showSvgPicture('search_selected',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024)
                       : Utils.showSvgPicture('search',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024),
                   label: 'Search',
                 ),
                 BottomNavigationBarItem(
                   icon: provider.selectedIndex == 1
                       ? Utils.showSvgPicture('selected_font',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024)
                       : Utils.showSvgPicture('font',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024),
                   label: 'Font',
                 ),
                 BottomNavigationBarItem(
                   icon: provider.selectedIndex == 2
                       ? Stack(
-                    children: [
-                      Utils.showSvgPicture('selected_bookmark',
-                          height: Utils.scrHeight * 0.024,
-                          width: Utils.scrHeight * 0.024),
-                    ],
-                  )
+                          children: [
+                            Utils.showSvgPicture('selected_bookmark',
+                                height: Utils.scrHeight * 0.024,
+                                width: Utils.scrHeight * 0.024),
+                          ],
+                        )
                       : Stack(
-                    children: [
-                      Utils.showSvgPicture('bookmark',
-                          height: Utils.scrHeight * 0.024,
-                          width: Utils.scrHeight * 0.024),
-                    ],
-                  ),
+                          children: [
+                            Utils.showSvgPicture('bookmark',
+                                height: Utils.scrHeight * 0.024,
+                                width: Utils.scrHeight * 0.024),
+                          ],
+                        ),
                   label: 'BookMark',
                 ),
                 BottomNavigationBarItem(
                   icon: provider.selectedIndex == 3
                       ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024)
                       : Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
+                          height: Utils.scrHeight * 0.024,
+                          width: Utils.scrHeight * 0.024),
                   label: 'Share',
                 ),
               ],
@@ -96,9 +94,9 @@ class BottomNavigationMenu extends StatelessWidget {
   }
 
   static final List<Widget> _screens = <Widget>[
-     const SearchScreen(),
-     const FontScreen(),
-     const BookMarksScreen(),
-     const ShareScreen(),
+    const SearchScreen(),
+    const FontScreen(),
+    const BookMarksScreen(),
+    const ShareScreen(),
   ];
 }
