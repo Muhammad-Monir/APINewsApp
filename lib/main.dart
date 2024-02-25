@@ -1,3 +1,4 @@
+import 'package:am_innn/provider/bookmark_provider.dart';
 import 'package:am_innn/provider/bottom_navigation_provider.dart';
 import 'package:am_innn/provider/drop_down_provider.dart';
 import 'package:am_innn/provider/font_size_provider.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => BottomNavigationProvider()),
         ChangeNotifierProvider(create: (_) => FontSizeProvider()),
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
+        ChangeNotifierProvider(create: (_) => BookmarkProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

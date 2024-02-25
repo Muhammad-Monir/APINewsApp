@@ -27,9 +27,10 @@ class SearchScreen extends StatelessWidget {
             Expanded(
               child: GridView.count(
                 primary: false,
-                crossAxisSpacing: Utils.scrHeight * .01,
-                mainAxisSpacing: Utils.scrHeight * .01,
+                crossAxisSpacing: Utils.scrHeight * .014,
+                mainAxisSpacing: Utils.scrHeight * .014,
                 crossAxisCount: 2,
+                childAspectRatio: 1.5,
                 children: const <Widget>[
                   CustomCategoryItems(title: 'Politics'),
                   CustomCategoryItems(title: 'Health'),

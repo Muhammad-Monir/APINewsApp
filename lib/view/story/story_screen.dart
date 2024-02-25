@@ -2,6 +2,7 @@ import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/color.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:am_innn/utils/utils.dart';
+import 'package:am_innn/view/story/widgets/share_widgets.dart';
 import 'package:flutter/material.dart';
 
 class StoryScreen extends StatelessWidget {
@@ -19,12 +20,20 @@ class StoryScreen extends StatelessWidget {
         ),
         backgroundColor: const Color(0xffF6F5F3),
           title: Text('Back', style: mediumTS(appBarColor, fontSize: 20))),
+
+      // Share Icon Part
       floatingActionButton: FloatingActionButton(
         shape: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
         ),
-        onPressed: () {},
+        onPressed: () {
+          getPopUp(
+              context,
+                  (p0) => ShareWidget(onExit: () {
+                Navigator.pop(p0);
+              }));
+        },
         child: Container(
           child: Utils.showSvgPicture('share'),
 
@@ -35,5 +44,21 @@ class StoryScreen extends StatelessWidget {
         children: [Utils.showImage('story')],
       ),
     );
+  }
+
+  void getPopUp(
+      BuildContext context,
+      Widget Function(BuildContext) childBuilder,
+      ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true, // Prevent dismissal by tapping outside
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent, // Optional customization
+            // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+            child: childBuilder(context),
+          );
+        });
   }
 }

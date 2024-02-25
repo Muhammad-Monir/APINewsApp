@@ -100,8 +100,14 @@ class HomeScreen extends StatelessWidget {
                         Navigator.pushNamed(context, RoutesName.search);
                       } else if (provider.selectedIndex == 1) {
                         Navigator.pushNamed(context, RoutesName.font);
+                      } else if (provider.selectedIndex == 2) {
+                        Navigator.pushNamed(context, RoutesName.bookmark);
                       } else if (provider.selectedIndex == 3) {
-                        getPopUp(context, (p0) => const ShareScreen());
+                        getPopUp(
+                            context,
+                            (p0) => ShareScreen(onExit: () {
+                                  Navigator.pop(p0);
+                                }));
                       }
                     },
                   );
