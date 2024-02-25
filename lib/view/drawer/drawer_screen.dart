@@ -8,6 +8,8 @@ import 'package:am_innn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../share/share_screen.dart';
+
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({super.key});
 
@@ -66,11 +68,18 @@ class DrawerScreen extends StatelessWidget {
             builder: (context, state, child) => CustomDrawerItem(
               text: 'Notifications',
               svgName: 'notification',
-              isToggleable: true, // Mark as toggleable
+              isToggleable: true,
               switchProvider: Provider.of<NotificationProvider>(context),
             ),
           ),
-          const CustomDrawerItem(
+          CustomDrawerItem(
+              onTap: () {
+                getPopUp(
+                    context,
+                    (p0) => ShareScreen(onExit: () {
+                          Navigator.pop(p0);
+                        }));
+              },
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
@@ -114,6 +123,20 @@ class DrawerScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent,
+              child: childBuilder(context));
+        });
   }
 }
 
