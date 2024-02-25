@@ -2,13 +2,13 @@ import 'package:am_innn/utils/color.dart';
 import 'package:am_innn/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/utils.dart';
 
 class ShareScreen extends StatelessWidget {
   final VoidCallback? onExit;
+
   const ShareScreen({super.key, this.onExit});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ShareScreen extends StatelessWidget {
             const Spacer(),
             GestureDetector(
                 onTap: () {
-                  if(onExit==null) return;
+                  if (onExit == null) return;
                   onExit!();
                 },
                 child:
@@ -41,14 +41,39 @@ class ShareScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: Utils.scrHeight * .02,
                   vertical: Utils.scrHeight * .016),
-              child: const Row(
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CustomSharePlatform(icon: 'facebook2'),
-                    CustomSharePlatform(icon: 'instagram'),
-                    CustomSharePlatform(icon: 'linkedin'),
-                    CustomSharePlatform(icon: 'threats'),
-                    CustomSharePlatform(icon: 'telegram'),
+                    CustomSharePlatform(
+                      icon: 'facebook2',
+                      onTap: () {
+                        share(SocialMedia.facebook);
+                      },
+                    ),
+                    CustomSharePlatform(
+                      icon: 'instagram',
+                      onTap: () {
+                        share(SocialMedia.instagram);
+                      },
+                    ),
+                    CustomSharePlatform(
+                      icon: 'linkedin',
+                      onTap: () {
+                        share(SocialMedia.linkedIn);
+                      },
+                    ),
+                    CustomSharePlatform(
+                      icon: 'threats',
+                      onTap: () {
+                        share(SocialMedia.twitter);
+                      },
+                    ),
+                    CustomSharePlatform(
+                      icon: 'telegram',
+                      onTap: () {
+                        share(SocialMedia.telegram);
+                      },
+                    ),
                   ])),
           SizedBox(height: Utils.scrHeight * .02),
           Text('Or copy link',
@@ -118,6 +143,23 @@ class CustomSharePlatform extends StatelessWidget {
     );
   }
 }
+
+Future share(SocialMedia platform) async {
+  const String urlShare = 'https://yourapplink.com';
+  final urls = {
+    SocialMedia.facebook:
+        ('https://www.facebook.com/sharer/sharer.php?u=$urlShare'),
+    SocialMedia.instagram:
+        ('https://www.facebook.com/sharer/sharer.php?u=$urlShare'),
+    SocialMedia.linkedIn: ('linkedIn link'),
+    SocialMedia.twitter: ('twitter shareable link'),
+    SocialMedia.telegram: ('telegram shareable link'),
+  };
+  final url = urls[platform]!;
+  await launch(url);
+}
+
+enum SocialMedia { facebook, instagram, linkedIn, twitter, telegram }
 
 void _copyToClipboard(String text) {
   Clipboard.setData(ClipboardData(text: text));
