@@ -42,69 +42,69 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
-      //   PageView.builder(
-      //   controller: newsPageController,
-      //   allowImplicitScrolling: true,
-      //   pageSnapping: true,
-      //   scrollDirection: Axis.vertical,
-      //   itemCount: 5,
-      //   itemBuilder: (context, index) {
-      //     return AnimatedBuilder(
-      //       animation: newsPageController,
-      //       builder: (context, child) {
-      //         double value = 1.0;
-      //         if (newsPageController.position.haveDimensions) {
-      //           value = newsPageController.page! - index;
-      //           value = (1 - (value.abs() * 0.5)).clamp(0.2, 1.0);
-      //         }
-      //         // Calculate opacity based on the value
-      //         double opacity = value.clamp(0.0, 1.0);
-      //         // Calculate the scaling factor for the height and width
-      //         double scaleFactor = Curves.easeInOut.transform(value);
-      //         return Center(
-      //           child: Transform.scale(
-      //             scale: scaleFactor,
-      //             child: SizedBox(
-      //               child: NewsScreen(
-      //                 homeOnTap: () => Scaffold.of(context).openDrawer(),
-      //                 startOnTap: () {
-      //                   newsPageController.animateToPage(
-      //                     0,
-      //                     duration: const Duration(milliseconds: 500),
-      //                     curve: Curves.easeInOut,
-      //                   );
-      //                 },
-      //               ),
-      //             ),
-      //           ),
-      //         );
-      //       },
-      //     );
-      //   },
-      // ),
+        PageView.builder(
+        controller: newsPageController,
+        allowImplicitScrolling: true,
+        pageSnapping: true,
+        scrollDirection: Axis.vertical,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return AnimatedBuilder(
+            animation: newsPageController,
+            builder: (context, child) {
+              double value = 1.0;
+              if (newsPageController.position.haveDimensions) {
+                value = newsPageController.page! - index;
+                value = (1 - (value.abs() * 0.5)).clamp(0.2, 1.0);
+              }
+              // Calculate opacity based on the value
+              double opacity = value.clamp(0.0, 1.0);
+              // Calculate the scaling factor for the height and width
+              double scaleFactor = Curves.easeInOut.transform(value);
+              return Center(
+                child: Transform.scale(
+                  scale: scaleFactor,
+                  child: SizedBox(
+                    child: NewsScreen(
+                      homeOnTap: () => Scaffold.of(context).openDrawer(),
+                      startOnTap: () {
+                        newsPageController.animateToPage(
+                          0,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
 
 
 
 
-          PageView.builder(
-              controller: newsPageController,
-              allowImplicitScrolling: true,
-              pageSnapping: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                // News Screen
-                return NewsScreen(
-                  homeOnTap: () => Scaffold.of(context).openDrawer(),
-                  startOnTap: (){
-                    newsPageController.animateToPage(
-                      0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                );
-              }),
+          // PageView.builder(
+          //     controller: newsPageController,
+          //     allowImplicitScrolling: true,
+          //     pageSnapping: true,
+          //     scrollDirection: Axis.vertical,
+          //     itemCount: 5,
+          //     itemBuilder: (context, index) {
+          //       // News Screen
+          //       return NewsScreen(
+          //         homeOnTap: () => Scaffold.of(context).openDrawer(),
+          //         startOnTap: (){
+          //           newsPageController.animateToPage(
+          //             0,
+          //             duration: const Duration(milliseconds: 500),
+          //             curve: Curves.easeInOut,
+          //           );
+          //         },
+          //       );
+          //     }),
 
           // All Story for swipe horizontally
           PageView.builder(
