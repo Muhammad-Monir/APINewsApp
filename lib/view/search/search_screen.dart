@@ -4,11 +4,21 @@ import 'package:am_innn/utils/utils.dart';
 import 'package:am_innn/view/search/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+
+  bool isSelected = false;
+  int selectedIndex = -1;
+  @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Search For', style: mediumTS(appBarColor, fontSize: 24)),
@@ -25,23 +35,45 @@ class SearchScreen extends StatelessWidget {
             Text('Categories', style: semiBoldTS(appTextColor, fontSize: 20)),
             SizedBox(height: Utils.scrHeight * .016),
             Expanded(
-              child: GridView.count(
+              child:
+              GridView.builder(
                 primary: false,
-                crossAxisSpacing: Utils.scrHeight * .014,
-                mainAxisSpacing: Utils.scrHeight * .014,
-                crossAxisCount: 2,
-                childAspectRatio: 1.5,
-                children: const <Widget>[
-                  CustomCategoryItems(title: 'Politics'),
-                  CustomCategoryItems(title: 'Health'),
-                  CustomCategoryItems(title: 'Stocks'),
-                  CustomCategoryItems(title: 'Weather'),
-                  CustomCategoryItems(title: 'Crime'),
-                  CustomCategoryItems(title: 'shopping'),
-                  CustomCategoryItems(title: 'Sports'),
-                  CustomCategoryItems(title: 'Entertainment'),
-                ],
-              ),
+                padding: EdgeInsets.all(Utils.scrHeight * .014),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: Utils.scrHeight * .014,
+                  mainAxisSpacing: Utils.scrHeight * .014,
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.5,
+                ),
+                itemCount: Utils.categoriesName.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CustomCategoryItems(
+                      isSelected: index == selectedIndex,
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },title: Utils.categoriesName[index]);
+                },
+              )
+
+              // GridView.count(
+              //   primary: false,
+              //   crossAxisSpacing: Utils.scrHeight * .014,
+              //   mainAxisSpacing: Utils.scrHeight * .014,
+              //   crossAxisCount: 2,
+              //   childAspectRatio: 1.5,
+              //   children: <Widget>[
+              //     CustomCategoryItems(title: 'Politics',isSelected: isSelected,),
+              //     CustomCategoryItems(title: 'Health',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'Stocks',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'Weather',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'Crime',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'shopping',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'Sports',isSelected: isSelected),
+              //     CustomCategoryItems(title: 'Entertainment',isSelected: isSelected),
+              //   ],
+              // ),
             )
           ],
         ),
@@ -51,10 +83,11 @@ class SearchScreen extends StatelessWidget {
 }
 
 class CustomCategoryItems extends StatelessWidget {
-  const CustomCategoryItems({super.key, required this.title, this.onTap});
+  const CustomCategoryItems({super.key, required this.title, this.onTap, required this.isSelected});
 
   final String title;
   final VoidCallback? onTap;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +96,9 @@ class CustomCategoryItems extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: categoryColor,
+            color: isSelected ? Colors.blue : categoryColor,
             borderRadius: BorderRadius.circular(Utils.scrHeight * .014)),
-        child: Text(title, style: semiBoldTS(appThemeColor, fontSize: 14)),
+        child: Text(title, style: semiBoldTS(isSelected ? Colors.white : appThemeColor, fontSize: 14)),
       ),
     );
   }

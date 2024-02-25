@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 value = (1 - (value.abs() * 0.5)).clamp(0.2, 1.0);
               }
               // Calculate opacity based on the value
-              double opacity = value.clamp(0.0, 1.0);
+              // double opacity = value.clamp(0.0, 1.0);
               // Calculate the scaling factor for the height and width
               double scaleFactor = Curves.easeInOut.transform(value);
               return Center(

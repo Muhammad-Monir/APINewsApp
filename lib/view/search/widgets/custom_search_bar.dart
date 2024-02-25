@@ -59,7 +59,7 @@ class CustomSearchBar extends StatelessWidget {
               elevation: 0,
               direction: DropdownDirection.left,
               maxHeight: Utils.scrHeight * .35,
-              width: Utils.scrHeight * .250,
+              width: Utils.scrHeight * .42,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Utils.scrHeight * .015),
               ),

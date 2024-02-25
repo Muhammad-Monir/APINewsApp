@@ -29,11 +29,11 @@ class FontScreen extends StatelessWidget {
             ),
             FontSizeRadioButton(
               label: 'Medium',
-              fontSize: 1.05,
+              fontSize: 1.1,
             ),
             FontSizeRadioButton(
               label: 'Large',
-              fontSize: 1.1,
+              fontSize: 1.2,
             ),
           ],
         ),
