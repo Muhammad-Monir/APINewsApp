@@ -13,13 +13,14 @@ class BookmarkItem extends StatelessWidget {
     required this.svgName,
     required this.imageName,
     required this.title,
-    required this.time,
+    required this.time, this.onTap,
   });
 
   final String svgName;
   final String imageName;
   final String title;
   final String time;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +57,12 @@ class BookmarkItem extends StatelessWidget {
                 ),
               ),
             ),
-            Consumer<BookmarkProvider>(builder: (context, color, _) {
-              return GestureDetector(
-                onTap: () {
-                  color.toggleBookMarkColor();
-                },
-                child: color.isFavorite
-                    ? Utils.showSvgPicture('selected_bookmark',
-                    height: Utils.scrHeight * .020)
-                    : Utils.showSvgPicture(svgName,
-                    height: Utils.scrHeight * .020,
-                    width: Utils.scrHeight * .016),
-              );
-            }),
+            GestureDetector(
+              onTap: onTap,
+              child: Utils.showSvgPicture(svgName,
+                  height: Utils.scrHeight * .020,
+                  width: Utils.scrHeight * .016),
+            )
           ],
         ),
         SizedBox(height: Utils.scrHeight * .010),

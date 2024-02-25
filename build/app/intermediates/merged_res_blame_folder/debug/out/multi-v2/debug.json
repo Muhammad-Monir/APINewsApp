@@ -121,7 +121,7 @@
             "outputFile": "com.example.am_innn.app-merged_res-13:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\APINewsApp\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\ApiNewsApp\\APINewsApp\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -2012,7 +2012,7 @@
                     }
                 },
                 {
-                    "source": "D:\\APINewsApp\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\ApiNewsApp\\APINewsApp\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

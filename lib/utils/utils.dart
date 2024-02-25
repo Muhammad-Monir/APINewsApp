@@ -40,4 +40,16 @@ class Utils {
           duration: const Duration(seconds: 1)),
     );
   }
+
+  static List<String> categoriesName = [
+    'Politics',
+    'Health',
+    'Stocks',
+    'Weather',
+    'Crime',
+    'Shopping',
+    'Sports',
+    'Entertainment'
+  ];
+
 }

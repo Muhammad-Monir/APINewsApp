@@ -141,7 +141,7 @@ class NewsScreen extends StatelessWidget {
                 right: Utils.scrHeight * .02,
                 child: GestureDetector(
                   onTap: (){
-                    // provider.toggleBookMarkColor();
+                    provider.toggleBookMarkColor();
                     Navigator.pushNamed(context, RoutesName.login);
                   },
                   child: Container(

@@ -15,6 +15,7 @@ class DrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLogin = false;
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -40,10 +41,10 @@ class DrawerScreen extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .05),
 
           // User Information Part
-          _buildUserInformationPart(),
+          isLogin ? _buildUserInformationPart() : Container(),
 
           // Drawer Items Part
-          _buildDrawerItems(context),
+          _buildDrawerItems(context, isLogin: isLogin),
         ],
       ),
     );
@@ -59,19 +60,19 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  Padding _buildDrawerItems(BuildContext context) {
+  Padding _buildDrawerItems(BuildContext context, {bool isLogin = false}) {
     return Padding(
       padding: EdgeInsets.all(Utils.scrHeight * .02),
       child: Column(
         children: [
-          Consumer<NotificationProvider>(
+          isLogin ? Consumer<NotificationProvider>(
             builder: (context, state, child) => CustomDrawerItem(
               text: 'Notifications',
               svgName: 'notification',
               isToggleable: true,
               switchProvider: Provider.of<NotificationProvider>(context),
             ),
-          ),
+          ) : Container(),
           CustomDrawerItem(
               onTap: () {
                 getPopUp(
@@ -83,17 +84,17 @@ class DrawerScreen extends StatelessWidget {
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
-          const CustomDrawerItem(
+          isLogin ? const CustomDrawerItem(
               text: 'Rate this App',
               svgName: 'rating',
-              icon: Icons.arrow_forward_ios),
-          CustomDrawerItem(
+              icon: Icons.arrow_forward_ios) : Container(),
+          isLogin ? CustomDrawerItem(
               onTap: () {
                 Navigator.pushNamed(context, RoutesName.feedBack);
               },
               text: 'Feedback',
               svgName: 'feedback',
-              icon: Icons.arrow_forward_ios),
+              icon: Icons.arrow_forward_ios) : Container(),
           const CustomDrawerItem(
               text: 'Contact Us',
               svgName: 'contact_us',
@@ -115,9 +116,13 @@ class DrawerScreen extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .09),
 
           // Logout Button
-          const ActionButton(
+          isLogin ? const ActionButton(
             buttonColor: Color(0xffFFCFCC),
             textColor: Color(0xffFF3B30),
+            buttonName: 'Log Out',
+          ) : const ActionButton(
+            buttonColor: appThemeColor,
+            textColor: Colors.white,
             buttonName: 'Log Out',
           ),
         ],
