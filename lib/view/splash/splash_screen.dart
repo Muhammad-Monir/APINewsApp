@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
           () {
         Navigator.pushReplacementNamed(context, RoutesName.home);
       },
@@ -29,8 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Utils.showPngImage('logo',
-                height: Utils.scrHeight * .07, width: Utils.scrHeight * .25)
+           Container()
           ],
         ),
       ),
