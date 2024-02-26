@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.only(
             right: Utils.scrHeight * .054,
             left: Utils.scrHeight * .054,
-            bottom: Utils.scrHeight * .034),
+            bottom: Utils.scrHeight * .014),
         child: GestureDetector(
           child: SizedBox(
             width: double.infinity,

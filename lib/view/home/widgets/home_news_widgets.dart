@@ -66,9 +66,8 @@ class NewsScreen extends StatelessWidget {
           ),
           SizedBox(height: Utils.scrHeight * .02),
           SizedBox(
-            height: Utils.scrHeight * .25,
+            height: Utils.scrHeight * .3,
             child: ListView(
-              clipBehavior: Clip.none,
               padding: EdgeInsets.zero,
               children: [
                 Text(
@@ -104,12 +103,14 @@ class NewsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Source Link:',
+                    'Source Link : ',
                     style: regularTS(appTextColor, fontSize: 14),
                   ),
                   const SizedBox(width: 2),
                   GestureDetector(
-                    onTap: () => _launchURL('https://indianexpress.com/'),
+                    onTap: () async {
+                      await launchUrl(Uri.parse('https://indianexpress.com/'));
+                    },
                     child: Text('https://indianexpress.com/',
                         style: regularTS(appThemeColor, fontSize: 14)),
                   ),
@@ -120,14 +121,6 @@ class NewsScreen extends StatelessWidget {
         );
   }
 
-  // Function to launch the URL
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   Stack _imageBanner(
     BuildContext context,
