@@ -14,7 +14,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title, style: mediumTS(appBarColor, fontSize: 24)),
       leading: GestureDetector(
           onTap:(){
-            Navigator.pushReplacementNamed(context, RoutesName.home);
+            Navigator.pushReplacementNamed(context, RoutesName.home,);
           },child: const Icon(Icons.arrow_back,color: Colors.black,)),
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/utils.dart';
 import 'package:am_innn/view/home/widgets/home_news_widgets.dart';
@@ -53,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             animation: newsPageController,
             builder: (context, child) {
               double value = 1.0;
-              if (newsPageController.position.haveDimensions) {
+              if (newsPageController.position.hasContentDimensions) {
                 value = newsPageController.page! - index;
                 value = (1 - (value.abs() * 0.5)).clamp(0.2, 1.0);
               }
@@ -61,20 +63,20 @@ class _HomeScreenState extends State<HomeScreen> {
               // double opacity = value.clamp(0.0, 1.0);
               // Calculate the scaling factor for the height and width
               double scaleFactor = Curves.easeInOut.transform(value);
-              return Center(
-                child: Transform.scale(
-                  scale: scaleFactor,
-                  child: SizedBox(
-                    child: NewsScreen(
-                      homeOnTap: () => Scaffold.of(context).openDrawer(),
-                      startOnTap: () {
-                        newsPageController.animateToPage(
-                          0,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                    ),
+              return Transform.scale(
+                alignment: AlignmentDirectional.center,
+                scale: scaleFactor,
+                // scale: max(1 - (newsPageController.page! - index ), .5 ),
+                child: SizedBox(
+                  child: NewsScreen(
+                    homeOnTap: () => Scaffold.of(context).openDrawer(),
+                    startOnTap: () {
+                      newsPageController.animateToPage(
+                        0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      );
+                    },
                   ),
                 ),
               );
