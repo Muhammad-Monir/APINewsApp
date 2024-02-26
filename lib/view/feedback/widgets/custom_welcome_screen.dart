@@ -15,7 +15,7 @@ class CustomWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Utils.scrHeight * .57,
+      height: Utils.scrHeight * .6,
       width: Utils.scrHeight * .342,
       padding: EdgeInsets.symmetric(
           horizontal: Utils.scrHeight * .04, vertical: Utils.scrHeight * .02),
@@ -46,7 +46,7 @@ class CustomWelcomeScreen extends StatelessWidget {
               child: Center(
                   child: Text('Back to Home',
                       style: semiBoldTS(appThemeColor,
-                          fontSize: 16, isUnderline: true))))
+                          fontSize: 16, isUnderline: true)))),
         ],
       ),
     );

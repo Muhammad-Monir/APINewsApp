@@ -9,6 +9,7 @@ import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
+import '../../feedback/widgets/custom_welcome_screen.dart';
 
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
@@ -16,7 +17,8 @@ class NewsScreen extends StatelessWidget {
 
   const NewsScreen({
     super.key,
-    this.startOnTap, this.homeOnTap,
+    this.startOnTap,
+    this.homeOnTap,
   });
 
   @override
@@ -85,37 +87,36 @@ class NewsScreen extends StatelessWidget {
 
   SizedBox socialLinkSection() {
     return SizedBox(
-          width: Utils.scrHeight * .398,
-          height: Utils.scrHeight * .02,
-          child: Row(
+      width: Utils.scrHeight * .398,
+      height: Utils.scrHeight * .02,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Source Link : ',
-                    style: regularTS(appTextColor, fontSize: 14),
-                  ),
-                  const SizedBox(width: 2),
-                  GestureDetector(
-                    onTap: () async {
-                      await launchUrl(Uri.parse('https://indianexpress.com/'));
-                    },
-                    child: Text('https://indianexpress.com/',
-                        style: regularTS(appThemeColor, fontSize: 14)),
-                  ),
-                ],
+              Text(
+                'Source Link : ',
+                style: regularTS(appTextColor, fontSize: 14),
+              ),
+              const SizedBox(width: 2),
+              GestureDetector(
+                onTap: () async {
+                  await launchUrl(Uri.parse('https://indianexpress.com/'));
+                },
+                child: Text('https://indianexpress.com/',
+                    style: regularTS(appThemeColor, fontSize: 14)),
               ),
             ],
           ),
-        );
+        ],
+      ),
+    );
   }
-
 
   Stack _imageBanner(
     BuildContext context,
@@ -139,97 +140,119 @@ class NewsScreen extends StatelessWidget {
         ),
 
         // BookMark Button
-        Consumer<BookmarkProvider>(
-          builder: (context, provider, child) {
-            return Positioned(
+        Consumer<BookmarkProvider>(builder: (context, provider, child) {
+          return Positioned(
               top: Utils.scrHeight * .1,
-                right: Utils.scrHeight * .02,
-                child: GestureDetector(
-                  onTap: (){
-                    provider.toggleBookMarkColor();
-                    Navigator.pushNamed(context, RoutesName.login);
-                  },
-                  child: Container(
-                                width: Utils.scrHeight * .04,
-                                height: Utils.scrHeight * .04,
-                                padding: const EdgeInsets.all(8),
-                                decoration: ShapeDecoration(
-                  color: provider.isFavorite ? Colors.white.withOpacity(0) : Colors.white.withOpacity(0.3),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: Utils.scrHeight * .001,
-                      color: Colors.white,
+              right: Utils.scrHeight * .02,
+              child: GestureDetector(
+                onTap: () {
+                  getPopUp(
+                      context,
+                      (p0) => const CustomWelcomeScreen(
+                            title: 'Thank you!',
+                            description:
+                                'By making your voice heard, you help us improve\n"API News App"',
+                          ));
+                },
+                child: Container(
+                  width: Utils.scrHeight * .04,
+                  height: Utils.scrHeight * .04,
+                  padding: const EdgeInsets.all(8),
+                  decoration: ShapeDecoration(
+                    color: provider.isFavorite
+                        ? Colors.white.withOpacity(0)
+                        : Colors.white.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: Utils.scrHeight * .001,
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    borderRadius: BorderRadius.circular(30),
                   ),
-                                ),
-                                child: provider.isFavorite ? Utils.showSvgPicture('bookmarks', height: Utils.scrHeight * .020) : Utils.showSvgPicture('selected_bookmark', height: Utils.scrHeight * .020),
-                              ),
-                ));
-          }
-        )
+                  child: provider.isFavorite
+                      ? Utils.showSvgPicture('bookmarks',
+                          height: Utils.scrHeight * .020)
+                      : Utils.showSvgPicture('selected_bookmark',
+                          height: Utils.scrHeight * .020),
+                ),
+              ));
+        })
       ],
     );
   }
 
   Container topImageSection() {
     return Container(
-          height: Utils.scrHeight * .335,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Utils.scrHeight * .12))),
-          child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Utils.scrHeight * .03),
-                  bottomRight: Radius.circular(Utils.scrHeight * .03)),
-              child: Image.asset(
-                'assets/images/banner_image.png',
-                fit: BoxFit.cover,
-              )));
+        height: Utils.scrHeight * .335,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Utils.scrHeight * .12))),
+        child: ClipRRect(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Utils.scrHeight * .03),
+                bottomRight: Radius.circular(Utils.scrHeight * .03)),
+            child: Image.asset(
+              'assets/images/banner_image.png',
+              fit: BoxFit.cover,
+            )));
   }
 
   Container buildTabBar() {
     return Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: Utils.scrHeight * .024,
-              ),
-              color: Colors.white,
-              height: Utils.scrHeight * .09,
-              child: Column(
-                children: [
-                  SizedBox(height: Utils.scrHeight * .045),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: homeOnTap,
-                          child: const HomeTabBar()),
-                      const RefreshTabBar(),
-                      GestureDetector(
-                          onTap: startOnTap, child: const StartTabBar()),
-                    ],
-                  ),
-                ],
-              ),
-            );
+      padding: EdgeInsets.symmetric(
+        horizontal: Utils.scrHeight * .024,
+      ),
+      color: Colors.white,
+      height: Utils.scrHeight * .09,
+      child: Column(
+        children: [
+          SizedBox(height: Utils.scrHeight * .045),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(onTap: homeOnTap, child: const HomeTabBar()),
+              const RefreshTabBar(),
+              GestureDetector(onTap: startOnTap, child: const StartTabBar()),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Container _buildPromoCode() {
     return Container(
-          padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
-          // width: Utils.scrHeight * .14,
-          // height: 66,
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: redContainerColor),
-              borderRadius: BorderRadius.circular(4),
-            ),
-          ),
-          child: Text('ABCDEFGHI',
-              style: mediumTS(redContainerColor, fontSize: 20)),
-        );
+      padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
+      // width: Utils.scrHeight * .14,
+      // height: 66,
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 1, color: redContainerColor),
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+      child:
+          Text('ABCDEFGHI', style: mediumTS(redContainerColor, fontSize: 20)),
+    );
+  }
+
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true, // Prevent dismissal by tapping outside
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent, // Optional customization
+            // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+            child: childBuilder(context),
+          );
+        });
   }
 }
 
