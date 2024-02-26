@@ -120,7 +120,10 @@ class DrawerScreen extends StatelessWidget {
             buttonColor: Color(0xffFFCFCC),
             textColor: Color(0xffFF3B30),
             buttonName: 'Log Out',
-          ) : const ActionButton(
+          ) : ActionButton(
+            onTap: () {
+              Navigator.pushNamed(context, RoutesName.login);
+            },
             buttonColor: appThemeColor,
             textColor: Colors.white,
             buttonName: 'Log In',
