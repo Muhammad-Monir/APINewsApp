@@ -15,7 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 1),
           () {
-        Navigator.pushNamedAndRemoveUntil(context, RoutesName.home,(route) => false,);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RoutesName.home,
+                  (route) => false,
+            );
       },
     );
     super.initState();
@@ -29,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(),
+           Container()
           ],
         ),
       ),
