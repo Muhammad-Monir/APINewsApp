@@ -4,6 +4,9 @@ import 'package:am_innn/utils/utils.dart';
 import 'package:am_innn/view/search/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../common_widgets/action_button.dart';
+import '../../route/routes_name.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -74,6 +77,17 @@ class _SearchScreenState extends State<SearchScreen> {
               //     CustomCategoryItems(title: 'Entertainment',isSelected: isSelected),
               //   ],
               // ),
+            ),
+            ActionButton(
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.home);
+              },
+              buttonColor: appThemeColor,
+              textColor: Colors.white,
+              buttonName: 'Save & Continue',
+            ),
+            SizedBox(
+              height: Utils.scrHeight * .04,
             )
           ],
         ),

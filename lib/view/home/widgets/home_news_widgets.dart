@@ -79,7 +79,7 @@ class NewsScreen extends StatelessWidget {
             height: Utils.scrHeight * .02,
           ),
           socialLinkSection(),
-          SizedBox(height: Utils.scrHeight * .02),
+          // SizedBox(height: Utils.scrHeight * .02),
         ],
       ),
     );
