@@ -48,7 +48,7 @@ class BookmarkItem extends StatelessWidget {
                       child: Text(title,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: semiBoldTS(appTextColor, fontSize: 17)),
+                          style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
                     Text(time,

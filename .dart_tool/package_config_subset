@@ -100,8 +100,17 @@ file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/lib/
 nested
 2.12
+<<<<<<< HEAD
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/lib/
+=======
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/lib/
+page_flip
+2.18
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/page_flip-0.2.3/
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/page_flip-0.2.3/lib/
+>>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
 path
 3.0
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/
@@ -216,6 +225,7 @@ file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_w
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_windows-3.1.1/lib/
 vector_graphics
 2.17
+<<<<<<< HEAD
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.10+1/
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.10+1/lib/
 vector_graphics_codec
@@ -226,6 +236,18 @@ vector_graphics_compiler
 2.19
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.10+1/
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.10+1/lib/
+=======
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1/
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1/lib/
+vector_graphics_codec
+2.17
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1/
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1/lib/
+vector_graphics_compiler
+2.19
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1/
+file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1/lib/
+>>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
 vector_math
 2.14
 file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/

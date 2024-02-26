@@ -150,9 +150,9 @@ Future share(SocialMedia platform) async {
     SocialMedia.facebook:
         ('https://www.facebook.com/sharer/sharer.php?u=$urlShare'),
     SocialMedia.instagram:
-        ('https://www.facebook.com/sharer/sharer.php?u=$urlShare'),
-    SocialMedia.linkedIn: ('linkedIn link'),
-    SocialMedia.twitter: ('twitter shareable link'),
+        ('https://www.instagram.com/sharer.php?url=$urlShare'),
+    SocialMedia.linkedIn: ('https://www.linkedin.com/sharing/shareArtical?mini=true&url=$urlShare'),
+    SocialMedia.twitter: ('https://twitter.com/intent/tweet?url=$urlShare'),
     SocialMedia.telegram: ('telegram shareable link'),
   };
   final url = urls[platform]!;

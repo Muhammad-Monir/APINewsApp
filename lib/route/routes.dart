@@ -88,7 +88,11 @@ class Routes {
 
       default:
         return MaterialPageRoute(
+<<<<<<< HEAD
           builder: (context) => const SplashScreen(),
+=======
+          builder: (context) => const LoginScreen(),
+>>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
         );
     }
   }
