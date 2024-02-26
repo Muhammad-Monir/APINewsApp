@@ -177,7 +177,7 @@
     },
     {
       "name": "page_flip",
-      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/page_flip-0.2.3",
+      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/page_flip-0.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -357,31 +357,19 @@
     },
     {
       "name": "vector_graphics",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.10+1",
-=======
-      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
->>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
+      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_codec",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.10+1",
-=======
-      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
->>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
+      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_compiler",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.10+1",
-=======
-      "rootUri": "file:///C:/Users/bdCalling%20IT/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
->>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
+      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -428,11 +416,7 @@
       "languageVersion": "3.3"
     }
   ],
-<<<<<<< HEAD
-  "generated": "2024-02-26T09:38:47.626365Z",
-=======
-  "generated": "2024-02-26T09:34:02.146164Z",
->>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
+  "generated": "2024-02-26T09:59:29.726949Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }
