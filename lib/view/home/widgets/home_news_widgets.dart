@@ -27,7 +27,7 @@ class NewsScreen extends StatelessWidget {
         onTap: () {
           Provider.of<BarsVisibility>(context, listen: false).toggleBars();
           if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-            Timer(const Duration(seconds: 5), () {
+            Timer(const Duration(seconds: 3), () {
               Provider.of<BarsVisibility>(context, listen: false).hideBars();
             });
           }
@@ -67,19 +67,14 @@ class NewsScreen extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .02),
           SizedBox(
             height: Utils.scrHeight * .3,
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                Text(
-                  'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
-                  style: regularTS(appSecondTextColor,
-                      fontSize: 15 * fontSize.fontSize),
-                ),
-              ],
+            child: Text(
+              'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
+              style: regularTS(appSecondTextColor,
+                  fontSize: 15 * fontSize.fontSize),
             ),
           ),
           SizedBox(
-            height: Utils.scrHeight * .04,
+            height: Utils.scrHeight * .02,
           ),
           socialLinkSection(),
           SizedBox(height: Utils.scrHeight * .02),

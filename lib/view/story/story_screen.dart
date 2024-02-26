@@ -22,21 +22,24 @@ class StoryScreen extends StatelessWidget {
           title: Text('Back', style: mediumTS(appBarColor, fontSize: 20))),
 
       // Share Icon Part
-      floatingActionButton: FloatingActionButton(
-        shape: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
-        ),
-        onPressed: () {
-          getPopUp(
-              context,
-                  (p0) => ShareWidget(onExit: () {
-                Navigator.pop(p0);
-              }));
-        },
-        child: Container(
-          child: Utils.showSvgPicture('share'),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: Utils.scrHeight * .1),
+        child: FloatingActionButton(
+          shape: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
+          ),
+          onPressed: () {
+            getPopUp(
+                context,
+                    (p0) => ShareWidget(onExit: () {
+                  Navigator.pop(p0);
+                }));
+          },
+          child: Container(
+            child: Utils.showSvgPicture('share'),
 
+          ),
         ),
       ),
       body: Column(

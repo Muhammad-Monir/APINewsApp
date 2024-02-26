@@ -83,7 +83,7 @@ class Routes {
 
       default:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const LoginScreen(),
         );
     }
   }
