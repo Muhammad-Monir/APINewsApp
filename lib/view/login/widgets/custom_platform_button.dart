@@ -14,12 +14,23 @@ class PlatformButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: Utils.scrHeight * .065,
+        width: Utils.scrHeight * .065,
         padding: EdgeInsets.all(Utils.scrHeight * .02),
         margin: EdgeInsets.only(right: Utils.scrHeight * .02),
-        decoration:
-        const BoxDecoration(shape: BoxShape.circle, color: Colors.white70),
-        child: SvgPicture.asset('assets/icons/$icon.svg', fit: BoxFit.cover),
-      ),
+        decoration:  BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade200,
+                offset: const Offset(10.0, 10.0), //(x,y)
+                blurRadius: 10.0,
+              ),
+            ]
+        ),
+        child: SvgPicture.asset('assets/icons/$icon.svg', fit: BoxFit.contain),
+      )
     );
   }
 }

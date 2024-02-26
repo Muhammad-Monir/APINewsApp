@@ -2,10 +2,9 @@ import 'dart:async';
 import 'package:am_innn/provider/bookmark_provider.dart';
 import 'package:am_innn/provider/font_size_provider.dart';
 import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/view/drawer/drawer_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -67,11 +66,17 @@ class NewsScreen extends StatelessWidget {
           ),
           SizedBox(height: Utils.scrHeight * .02),
           SizedBox(
-            // width: Utils.scrHeight * .342,
-            child: Text(
-              'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
-              style: regularTS(appSecondTextColor,
-                  fontSize: 15 * fontSize.fontSize),
+            height: Utils.scrHeight * .25,
+            child: ListView(
+              clipBehavior: Clip.none,
+              padding: EdgeInsets.zero,
+              children: [
+                Text(
+                  'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
+                  style: regularTS(appSecondTextColor,
+                      fontSize: 15 * fontSize.fontSize),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -103,13 +108,25 @@ class NewsScreen extends StatelessWidget {
                     style: regularTS(appTextColor, fontSize: 14),
                   ),
                   const SizedBox(width: 2),
-                  Text('https://indianexpress.com/',
-                      style: regularTS(appThemeColor, fontSize: 14)),
+                  GestureDetector(
+                    onTap: () => _launchURL('https://indianexpress.com/'),
+                    child: Text('https://indianexpress.com/',
+                        style: regularTS(appThemeColor, fontSize: 14)),
+                  ),
                 ],
               ),
             ],
           ),
         );
+  }
+
+  // Function to launch the URL
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Stack _imageBanner(
@@ -195,16 +212,12 @@ class NewsScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: Utils.scrHeight * .045),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
                         onTap: homeOnTap,
                           child: const HomeTabBar()),
-                      // SizedBox(width: Utils.scrHeight * .014),
                       const RefreshTabBar(),
-                      // SizedBox(width: Utils.scrHeight * .014),
-                      // const UnreadTabBar(),
-                      // SizedBox(width: Utils.scrHeight * .014),
                       GestureDetector(
                           onTap: startOnTap, child: const StartTabBar()),
                     ],
@@ -324,7 +337,6 @@ class StartTabBar extends StatelessWidget {
             SizedBox(width: Utils.scrHeight * .006),
             Text('Start', style: regularTS(homeTabTextColor, fontSize: 15)),
             SizedBox(width: Utils.scrHeight * .013),
-            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
           ],
         ),
       ),

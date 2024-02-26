@@ -41,7 +41,7 @@ class DrawerScreen extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .05),
 
           // User Information Part
-          isLogin ? _buildUserInformationPart() : Container(),
+          isLogin ? buildUserInformationPart() : Container(),
 
           // Drawer Items Part
           _buildDrawerItems(context, isLogin: isLogin),
@@ -50,7 +50,7 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  Column _buildUserInformationPart() {
+  Column buildUserInformationPart() {
     return Column(
       children: [
         Text('am_innnn', style: mediumTS(appTextColor, fontSize: 24)),
@@ -123,7 +123,7 @@ class DrawerScreen extends StatelessWidget {
           ) : const ActionButton(
             buttonColor: appThemeColor,
             textColor: Colors.white,
-            buttonName: 'Log Out',
+            buttonName: 'Log In',
           ),
         ],
       ),
