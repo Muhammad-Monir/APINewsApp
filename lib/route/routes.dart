@@ -10,6 +10,7 @@ import 'package:am_innn/view/privacy_policy/privacy_policy_screen.dart';
 import 'package:am_innn/view/register/register_screen.dart';
 import 'package:am_innn/view/search/search_screen.dart';
 import 'package:am_innn/view/share/share_screen.dart';
+import 'package:am_innn/view/splash/splash_screen.dart';
 import 'package:am_innn/view/story/story_screen.dart';
 import 'package:am_innn/view/terms_of_uses/terms_of_uses.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,10 @@ class Routes {
       case RoutesName.home:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+      case RoutesName.splash:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
         );
       case RoutesName.search:
         return MaterialPageRoute(
@@ -83,7 +88,11 @@ class Routes {
 
       default:
         return MaterialPageRoute(
+<<<<<<< HEAD
+          builder: (context) => const SplashScreen(),
+=======
           builder: (context) => const LoginScreen(),
+>>>>>>> 97f5dc7acbe29c7e403080886f53b21098cb3637
         );
     }
   }
