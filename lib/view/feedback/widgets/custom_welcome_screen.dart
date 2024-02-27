@@ -44,7 +44,7 @@ class CustomWelcomeScreen extends StatelessWidget {
                 );
               },
               child: Center(
-                  child: Text('Back to Home',
+                  child: Text('Back To Home',
                       style: semiBoldTS(appThemeColor,
                           fontSize: 16, isUnderline: true)))),
         ],
