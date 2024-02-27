@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 #Tue Feb 27 10:28:02 BDT 2024
+=======
+<<<<<<< HEAD
+#Mon Feb 26 18:38:18 BDT 2024
+base.0=D\:\\ApiNewsApp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+=======
+#Mon Feb 26 17:29:20 BDT 2024
+>>>>>>> 95deb2a491f92693856d5e8020428051f1bd837b
 base.0=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+>>>>>>> f5a790cddbd4ddeaa1acd6e2051fce36217d200d
 path.0=classes.dex
 renamed.0=classes.dex

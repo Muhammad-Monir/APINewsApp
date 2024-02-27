@@ -1,8 +1,11 @@
+import 'dart:math' as math;
+import 'dart:math';
 import 'package:am_innn/route/routes_name.dart';
 import 'package:am_innn/utils/utils.dart';
 import 'package:am_innn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innn/view/story/story_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_flip/page_flip.dart';
 import 'package:provider/provider.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -17,16 +20,21 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   // final PageController newsPageController = PageController(initialPage: 0);
   final PageController storyPageController = PageController();
-
+  final _controller = GlobalKey<PageFlipWidgetState>();
   late PageController newsPageController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     newsPageController = PageController(initialPage: 0);
+    _animationController = AnimationController(
+      vsync: this,
+        duration: const Duration(microseconds: 100)
+    );
   }
 
   @override
@@ -41,6 +49,52 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
+
+
+
+          PageView.builder(
+            controller: newsPageController,
+            allowImplicitScrolling: true,
+            pageSnapping: true,
+            scrollDirection: Axis.vertical,
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return AnimatedBuilder(
+                animation: _animationController,
+                builder: (context, child) {
+                  double value = 1.0;
+                  if (newsPageController.position.hasContentDimensions) {
+                    value = newsPageController.page! - index;
+                    value = (1 - (value.abs() * 0.5)).clamp(0.0, 1.0);
+                  }
+                  double rotationAngle = value != 0 ? math.pi * value : 0.0; // Rotate only if value is not 0
+                  return Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001) // Apply perspective
+                      ..rotateY(_animationController.value * math.pi),
+                      // ..setEntry(3, 0, 0.0001),// perspective
+                      // ..rotateX(rotationAngle),
+                      // ..translate(0.0, 0.0, -200.0 * value), // Apply perspective translation
+                    alignment: FractionalOffset.center,
+                    child: SizedBox(
+                      child: NewsScreen(
+                        homeOnTap: () => Scaffold.of(context).openDrawer(),
+                        startOnTap: () {
+                          newsPageController.animateToPage(
+                            0,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+
+
           // PageView.builder(
           //   controller: newsPageController,
           //   allowImplicitScrolling: true,
@@ -82,27 +136,29 @@ class _HomeScreenState extends State<HomeScreen> {
           //   },
           // ),
 
-          PageView.builder(
-              controller: newsPageController,
-              // allowImplicitScrolling: true,
-              // pageSnapping: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                // News Screen
-                return NewsScreen(
-                  homeOnTap: () => Scaffold.of(context).openDrawer(),
-                  startOnTap: (){
-                    newsPageController.animateToPage(
-                      0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
-                );
-              }),
+          // PageView.builder(
+          //     controller: newsPageController,
+          //     // allowImplicitScrolling: true,
+          //     // pageSnapping: true,
+          //     scrollDirection: Axis.vertical,
+          //     itemCount: 5,
+          //     itemBuilder: (context, index) {
+          //       // News Screen
+          //       return NewsScreen(
+          //         homeOnTap: () => Scaffold.of(context).openDrawer(),
+          //         startOnTap: (){
+          //           newsPageController.animateToPage(
+          //             0,
+          //             duration: const Duration(milliseconds: 500),
+          //             curve: Curves.easeInOut,
+          //           );
+          //         },
+          //       );
+          //     }),
 
           // All Story for swipe horizontally
+
+
           PageView.builder(
               controller: storyPageController,
               scrollDirection: Axis.vertical,
@@ -220,6 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     newsPageController.dispose();
     storyPageController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 }
