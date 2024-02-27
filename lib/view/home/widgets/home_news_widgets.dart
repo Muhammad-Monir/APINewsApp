@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:am_innn/provider/bookmark_provider.dart';
 import 'package:am_innn/provider/font_size_provider.dart';
-import 'package:am_innn/route/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +8,7 @@ import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
-import '../../feedback/widgets/custom_welcome_screen.dart';
+import 'favorite_popup.dart';
 
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
@@ -148,10 +147,10 @@ class NewsScreen extends StatelessWidget {
                 onTap: () {
                   getPopUp(
                       context,
-                      (p0) => const CustomWelcomeScreen(
-                            title: 'Thank you!',
-                            description:
-                                'By making your voice heard, you help us improve\n"API News App"',
+                      (p0) => FavoritePopup(
+                            onExit: () {
+                              Navigator.pop(p0);
+                            },
                           ));
                 },
                 child: Container(
