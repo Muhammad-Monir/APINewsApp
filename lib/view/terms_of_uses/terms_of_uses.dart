@@ -1,8 +1,10 @@
-import 'package:am_innn/common_widgets/custom_divider.dart';
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../common_widgets/custom_divider.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
+import '../../utils/utils.dart';
 
 class TermsOfUses extends StatelessWidget {
   const TermsOfUses({super.key});

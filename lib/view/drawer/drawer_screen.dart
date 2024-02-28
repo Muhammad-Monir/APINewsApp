@@ -1,13 +1,14 @@
-import 'package:am_innn/common_widgets/action_button.dart';
-import 'package:am_innn/common_widgets/custom_divider.dart';
-import 'package:am_innn/provider/notification_provider.dart';
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../common_widgets/action_button.dart';
+import '../../common_widgets/custom_divider.dart';
+import '../../provider/notification_provider.dart';
+import '../../route/routes_name.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
+import '../../utils/utils.dart';
 import '../share/share_screen.dart';
 
 class DrawerScreen extends StatelessWidget {

@@ -1,12 +1,13 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/view/bookmarks/bookmarks_screen.dart';
-import 'package:am_innn/view/font/font_screen.dart';
-import 'package:am_innn/view/search/search_screen.dart';
-import 'package:am_innn/view/share/share_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../provider/bottom_navigation_provider.dart';
+import '../../utils/color.dart';
 import '../../utils/utils.dart';
+import '../bookmarks/bookmarks_screen.dart';
+import '../font/font_screen.dart';
+import '../search/search_screen.dart';
+import '../share/share_screen.dart';
 
 class BottomNavigationMenu extends StatelessWidget {
   const BottomNavigationMenu({super.key});

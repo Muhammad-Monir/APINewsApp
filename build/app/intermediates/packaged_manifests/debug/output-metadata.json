@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.am_innn",
+  "applicationId": "com.example.newsapp",
   "variantName": "debug",
   "elements": [
     {

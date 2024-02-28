@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.example.am_innn",
+  "applicationId": "com.example.newsapp",
   "variantName": "debug",
   "elements": []
 }

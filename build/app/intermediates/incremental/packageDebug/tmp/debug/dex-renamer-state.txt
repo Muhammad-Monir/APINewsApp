@@ -1,13 +1,19 @@
-<<<<<<< HEAD
-#Tue Feb 27 10:28:02 BDT 2024
-=======
-<<<<<<< HEAD
-#Mon Feb 26 18:38:18 BDT 2024
-base.0=D\:\\ApiNewsApp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-=======
-#Mon Feb 26 17:29:20 BDT 2024
->>>>>>> 95deb2a491f92693856d5e8020428051f1bd837b
-base.0=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
->>>>>>> f5a790cddbd4ddeaa1acd6e2051fce36217d200d
+#Wed Feb 28 14:29:20 BDT 2024
+base.0=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.4=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.5=C\:\\Users\\bdCalling IT\\Desktop\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
+path.1=0/classes.dex
+path.2=0/classes.dex
+path.3=8/classes.dex
+path.4=1/classes.dex
+path.5=classes2.dex
 renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
+renamed.4=classes5.dex
+renamed.5=classes6.dex

@@ -1,17 +1,18 @@
-import 'package:am_innn/provider/bookmark_provider.dart';
-import 'package:am_innn/provider/bottom_navigation_provider.dart';
-import 'package:am_innn/provider/drop_down_provider.dart';
-import 'package:am_innn/provider/font_size_provider.dart';
-import 'package:am_innn/provider/notification_provider.dart';
-import 'package:am_innn/provider/obscure_provider.dart';
-import 'package:am_innn/provider/timer_provider.dart';
-import 'package:am_innn/route/routes.dart';
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/utils.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
+import 'package:am_innnn/provider/bottom_navigation_provider.dart';
+import 'package:am_innnn/provider/drop_down_provider.dart';
+import 'package:am_innnn/provider/font_size_provider.dart';
+import 'package:am_innnn/provider/notification_provider.dart';
+import 'package:am_innnn/provider/obscure_provider.dart';
+import 'package:am_innnn/provider/timer_provider.dart';
+import 'package:am_innnn/route/routes.dart';
+import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/utils/color.dart';
+import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -52,3 +53,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

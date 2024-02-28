@@ -1,6 +1,6 @@
 
-import 'package:am_innn/route/routes_name.dart';
 import 'package:flutter/material.dart';
+import '../route/routes_name.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
 

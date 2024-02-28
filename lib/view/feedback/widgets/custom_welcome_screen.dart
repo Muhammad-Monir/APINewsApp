@@ -1,8 +1,8 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
-import 'package:flutter/material.dart';
 
+import '../../../utils/color.dart';
+import '../../../utils/styles.dart';
+import '../../../utils/utils.dart';
+import 'package:flutter/material.dart';
 import '../../../route/routes_name.dart';
 
 class CustomWelcomeScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class CustomWelcomeScreen extends StatelessWidget {
                 );
               },
               child: Center(
-                  child: Text('Back To Home',
+                  child: Text('Back to Home',
                       style: semiBoldTS(appThemeColor,
                           fontSize: 16, isUnderline: true)))),
         ],
