@@ -8,21 +8,21 @@ com.example.newsapp-jetified-window-java-1.0.0-beta04-6 C:\Users\bdCalling IT\.g
 com.example.newsapp-core-1.10.1-7 C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\res
 com.example.newsapp-browser-1.5.0-8 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\res
 com.example.newsapp-jetified-exoplayer-core-2.18.7-9 C:\Users\bdCalling IT\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\res
-com.example.newsapp-debug-10 C:\Users\bdCalling IT\Desktop\newsApp\android\app\src\debug\res
-com.example.newsapp-main-11 C:\Users\bdCalling IT\Desktop\newsApp\android\app\src\main\res
-com.example.newsapp-pngs-12 C:\Users\bdCalling IT\Desktop\newsApp\build\app\generated\res\pngs\debug
-com.example.newsapp-resValues-13 C:\Users\bdCalling IT\Desktop\newsApp\build\app\generated\res\resValues\debug
-com.example.newsapp-rs-14 C:\Users\bdCalling IT\Desktop\newsApp\build\app\generated\res\rs\debug
-com.example.newsapp-mergeDebugResources-15 C:\Users\bdCalling IT\Desktop\newsApp\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
-com.example.newsapp-mergeDebugResources-16 C:\Users\bdCalling IT\Desktop\newsApp\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
-com.example.newsapp-merged_res-17 C:\Users\bdCalling IT\Desktop\newsApp\build\app\intermediates\merged_res\debug
-com.example.newsapp-packaged_res-18 C:\Users\bdCalling IT\Desktop\newsApp\build\connectivity_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-19 C:\Users\bdCalling IT\Desktop\newsApp\build\geocoding_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-20 C:\Users\bdCalling IT\Desktop\newsApp\build\geolocator_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-21 C:\Users\bdCalling IT\Desktop\newsApp\build\package_info_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-22 C:\Users\bdCalling IT\Desktop\newsApp\build\path_provider_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-23 C:\Users\bdCalling IT\Desktop\newsApp\build\permission_handler_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-24 C:\Users\bdCalling IT\Desktop\newsApp\build\share_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-25 C:\Users\bdCalling IT\Desktop\newsApp\build\url_launcher_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-26 C:\Users\bdCalling IT\Desktop\newsApp\build\video_player_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-27 C:\Users\bdCalling IT\Desktop\newsApp\build\wakelock_plus\intermediates\packaged_res\debug
+com.example.newsapp-debug-10 D:\APINewsApp\android\app\src\debug\res
+com.example.newsapp-main-11 D:\APINewsApp\android\app\src\main\res
+com.example.newsapp-pngs-12 D:\APINewsApp\build\app\generated\res\pngs\debug
+com.example.newsapp-resValues-13 D:\APINewsApp\build\app\generated\res\resValues\debug
+com.example.newsapp-rs-14 D:\APINewsApp\build\app\generated\res\rs\debug
+com.example.newsapp-mergeDebugResources-15 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.newsapp-mergeDebugResources-16 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.newsapp-merged_res-17 D:\APINewsApp\build\app\intermediates\merged_res\debug
+com.example.newsapp-packaged_res-18 D:\APINewsApp\build\connectivity_plus\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-19 D:\APINewsApp\build\geocoding_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-20 D:\APINewsApp\build\geolocator_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-21 D:\APINewsApp\build\package_info_plus\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-22 D:\APINewsApp\build\path_provider_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-23 D:\APINewsApp\build\permission_handler_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-24 D:\APINewsApp\build\share_plus\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-25 D:\APINewsApp\build\url_launcher_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-26 D:\APINewsApp\build\video_player_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-27 D:\APINewsApp\build\wakelock_plus\intermediates\packaged_res\debug

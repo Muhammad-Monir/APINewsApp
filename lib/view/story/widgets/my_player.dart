@@ -1,3 +1,4 @@
+import 'package:am_innnn/utils/color.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -82,7 +83,7 @@ class _MyPlayerState extends State<MyPlayer> {
                         builder: (context, value, _) {
                           return Icon(
                             value ? Icons.play_arrow_rounded : Icons.pause,
-                            color: Colors.white,
+                            color: appThemeColor,
                           );
                         }),
                   ),
@@ -115,7 +116,7 @@ class _MyPlayerState extends State<MyPlayer> {
                         },
                         icon:  Icon(
                          value? Icons.volume_off: Icons.volume_up,
-                          color: Colors.white,
+                          color: appThemeColor,
                         ),
                       );
                     }
@@ -126,7 +127,7 @@ class _MyPlayerState extends State<MyPlayer> {
                     },
                     icon: const Icon(
                       Icons.fullscreen,
-                      color: Colors.white,
+                      color: appThemeColor,
                     ),
                   ),
                 ],
@@ -210,11 +211,11 @@ class _MyPlayerState extends State<MyPlayer> {
       videoPlayerController: videoController,
       autoPlay: true,
       looping: true,
-      aspectRatio: videoController.value.aspectRatio,
+        aspectRatio: 9 / 16,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,
-      controlsSafeAreaMinimum: EdgeInsets.all(20)
+      controlsSafeAreaMinimum: const EdgeInsets.all(20)
     );
 
     // Set up listeners and update UI as needed (similar to your initState logic)
