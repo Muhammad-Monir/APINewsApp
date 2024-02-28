@@ -8,6 +8,7 @@ import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
+import 'favorite_popup.dart';
 
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
@@ -161,7 +162,15 @@ class NewsScreen extends StatelessWidget {
               right: Utils.scrHeight * .02,
               child: GestureDetector(
                 onTap: () {
-                  provider.toggleBookMarkColor();
+
+                  // provider.toggleBookMarkColor();
+                    getPopUp(
+                        context,
+                            (p0) => FavoritePopup(
+                          onExit: () {
+                            Navigator.pop(p0);
+                          },
+                        ));
                   // getPopUp(
                   //     context,
                   //     (p0) => const CustomWelcomeScreen(
