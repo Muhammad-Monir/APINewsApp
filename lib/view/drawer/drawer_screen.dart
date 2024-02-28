@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
@@ -195,13 +193,12 @@ class CustomDrawerItem extends StatelessWidget {
                 isToggleable
                     ? Consumer<NotificationProvider>(
                         builder: (context, provider, child) => Switch(
-                          value: provider.isSwitchToggled,
-                          onChanged: (newValue) => provider.toggleSwitch(),
-                          activeColor: appThemeColor,
+                            value: provider.isSwitchToggled,
+                            onChanged: (newValue) => provider.toggleSwitch(),
+                            activeColor: appThemeColor,
                             activeTrackColor: const Color(0xffEBF3FF),
                             inactiveTrackColor: const Color(0xffB7C1D2),
-                            inactiveThumbColor: const Color(0xff4E617E)
-                        ),
+                            inactiveThumbColor: const Color(0xff4E617E)),
                       )
                     : icon != null
                         ? Icon(icon,
