@@ -1,4 +1,4 @@
-# weatherapp
+# newsapp
 
 A new Flutter project.
 
