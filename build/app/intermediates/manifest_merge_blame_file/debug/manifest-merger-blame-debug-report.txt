@@ -42,7 +42,7 @@
 28-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 29        android:debuggable="true"
 30        android:icon="@mipmap/ic_launcher"
-31        android:label="APINewsApp" >
+31        android:label="newsapp" >
 32        <activity
 33            android:name="com.example.newsapp.MainActivity"
 34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
