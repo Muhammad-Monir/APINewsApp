@@ -1,12 +1,14 @@
-import 'package:am_innn/common_widgets/action_button.dart';
-import 'package:am_innn/common_widgets/email_form_field.dart';
-import 'package:am_innn/common_widgets/password_form_field.dart';
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
-import 'package:am_innn/view/login/widgets/custom_platform_button.dart';
+
+import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../common_widgets/action_button.dart';
+import '../../common_widgets/email_form_field.dart';
+import '../../common_widgets/password_form_field.dart';
+import '../../route/routes_name.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
+import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

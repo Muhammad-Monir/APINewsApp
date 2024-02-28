@@ -1,8 +1,9 @@
-import 'package:am_innn/common_widgets/action_button.dart';
-import 'package:am_innn/common_widgets/email_form_field.dart';
-import 'package:am_innn/common_widgets/password_form_field.dart';
+
 import 'package:flutter/material.dart';
 
+import '../../common_widgets/action_button.dart';
+import '../../common_widgets/email_form_field.dart';
+import '../../common_widgets/password_form_field.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';

@@ -1,8 +1,9 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
 import '../../utils/utils.dart';
 
 class ShareScreen extends StatelessWidget {

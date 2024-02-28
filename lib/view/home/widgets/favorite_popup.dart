@@ -1,7 +1,8 @@
-import 'package:am_innn/common_widgets/action_button.dart';
-import 'package:am_innn/route/routes_name.dart';
+
 import 'package:flutter/material.dart';
 
+import '../../../common_widgets/action_button.dart';
+import '../../../route/routes_name.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -35,7 +36,7 @@ class FavoritePopup extends StatelessWidget {
                   onExit!();
                 },
                 child:
-                    const Icon(Icons.close, size: 40, color: Color(0xff9DACC3)))
+                const Icon(Icons.close, size: 40, color: Color(0xff9DACC3)))
           ]),
           SizedBox(height: Utils.scrHeight * .02),
           Text('Please Login to continue.',

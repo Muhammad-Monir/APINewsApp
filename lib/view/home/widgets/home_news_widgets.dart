@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:am_innn/provider/bookmark_provider.dart';
-import 'package:am_innn/provider/font_size_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../provider/bookmark_provider.dart';
+import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -44,6 +44,23 @@ class NewsScreen extends StatelessWidget {
             ],
           );
         }),
+      ),
+      // Showing Floating Add Banner
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+            right: Utils.scrHeight * .054,
+            left: Utils.scrHeight * .054,
+            bottom: Utils.scrHeight * .01),
+        child: GestureDetector(
+          child: SizedBox(
+            width: double.infinity,
+            height: Utils.scrHeight * .054,
+            child: Image.asset(
+              'assets/images/floating_add.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -145,13 +162,22 @@ class NewsScreen extends StatelessWidget {
               right: Utils.scrHeight * .02,
               child: GestureDetector(
                 onTap: () {
-                  getPopUp(
-                      context,
-                      (p0) => FavoritePopup(
-                            onExit: () {
-                              Navigator.pop(p0);
-                            },
-                          ));
+
+                  // provider.toggleBookMarkColor();
+                    getPopUp(
+                        context,
+                            (p0) => FavoritePopup(
+                          onExit: () {
+                            Navigator.pop(p0);
+                          },
+                        ));
+                  // getPopUp(
+                  //     context,
+                  //     (p0) => const CustomWelcomeScreen(
+                  //           title: 'Thank you!',
+                  //           description:
+                  //               'By making your voice heard, you help us improve\n"API News App"',
+                  //         ));
                 },
                 child: Container(
                   width: Utils.scrHeight * .04,

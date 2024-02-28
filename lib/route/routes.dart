@@ -1,29 +1,31 @@
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/view/bookmarks/bookmarks_screen.dart';
-import 'package:am_innn/view/bottom_navigation/bottom_navigation_bar.dart';
-import 'package:am_innn/view/feedback/feedback_screen.dart';
-import 'package:am_innn/view/drawer/drawer_screen.dart';
-import 'package:am_innn/view/font/font_screen.dart';
-import 'package:am_innn/view/home/home_screen.dart';
-import 'package:am_innn/view/login/login_screen.dart';
-import 'package:am_innn/view/privacy_policy/privacy_policy_screen.dart';
-import 'package:am_innn/view/register/register_screen.dart';
-import 'package:am_innn/view/search/search_screen.dart';
-import 'package:am_innn/view/share/share_screen.dart';
-import 'package:am_innn/view/splash/splash_screen.dart';
-import 'package:am_innn/view/story/story_screen.dart';
-import 'package:am_innn/view/terms_of_uses/terms_of_uses.dart';
+import 'package:am_innnn/route/routes_name.dart';
 import 'package:flutter/material.dart';
-
+import '../view/bookmarks/bookmarks_screen.dart';
+import '../view/bottom_navigation/bottom_navigation_bar.dart';
 import '../view/change_password/change_password_screen.dart';
+import '../view/drawer/drawer_screen.dart';
+import '../view/feedback/feedback_screen.dart';
+import '../view/font/font_screen.dart';
 import '../view/forgot_password/forgot_password_screen.dart';
+import '../view/home/home_screen.dart';
+import '../view/login/login_screen.dart';
+import '../view/privacy_policy/privacy_policy_screen.dart';
+import '../view/register/register_screen.dart';
+import '../view/search/search_screen.dart';
+import '../view/share/share_screen.dart';
+import '../view/splash/splash_screen.dart';
+import '../view/story/story_screen.dart';
+import '../view/terms_of_uses/terms_of_uses.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesName.home:
+        final List<String>? category = settings.arguments as List<String>?;
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) =>  HomeScreen(
+            category: category,
+          ),
         );
       case RoutesName.splash:
         return MaterialPageRoute(

@@ -1,9 +1,11 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import '../../../utils/color.dart';
+import '../../../utils/styles.dart';
+import '../../../utils/utils.dart';
 
 class CustomRichText extends StatelessWidget {
   const CustomRichText(

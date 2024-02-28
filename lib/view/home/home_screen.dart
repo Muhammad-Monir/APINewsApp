@@ -1,20 +1,21 @@
 import 'dart:math' as math;
 import 'dart:math';
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/utils/utils.dart';
-import 'package:am_innn/view/home/widgets/home_news_widgets.dart';
-import 'package:am_innn/view/story/story_screen.dart';
+import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:page_flip/page_flip.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
+import '../../route/routes_name.dart';
 import '../../utils/color.dart';
+import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../share/share_screen.dart';
+import '../story/story_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+   const HomeScreen({super.key, this.category});
+   final List<String>? category;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,22 +24,36 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   // final PageController newsPageController = PageController(initialPage: 0);
   final PageController storyPageController = PageController();
-  final _controller = GlobalKey<PageFlipWidgetState>();
+  // Animation Property
+  late Animation<double> flipAnim;
   late PageController newsPageController;
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    newsPageController = PageController(initialPage: 0);
     _animationController = AnimationController(
+      duration: const Duration(seconds: 1), // Adjust animation duration
       vsync: this,
-        duration: const Duration(microseconds: 100)
     );
+
+    flipAnim = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.slowMiddle,
+    ));
+
+    newsPageController = PageController();
+
+    newsPageController.addListener(() {
+      if (newsPageController.page != null) {
+        _animationController.value = (newsPageController.page! % 1);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: const DrawerScreen(),
       // Hide able BottomNavigationMenu
@@ -49,33 +64,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
-
-
-
           PageView.builder(
             controller: newsPageController,
-            allowImplicitScrolling: true,
-            pageSnapping: true,
             scrollDirection: Axis.vertical,
             itemCount: 5,
             itemBuilder: (context, index) {
               return AnimatedBuilder(
                 animation: _animationController,
                 builder: (context, child) {
-                  double value = 1.0;
-                  if (newsPageController.position.hasContentDimensions) {
-                    value = newsPageController.page! - index;
-                    value = (1 - (value.abs() * 0.5)).clamp(0.0, 1.0);
-                  }
-                  double rotationAngle = value != 0 ? math.pi * value : 0.0; // Rotate only if value is not 0
                   return Transform(
                     transform: Matrix4.identity()
-                      ..setEntry(3, 2, 0.001) // Apply perspective
-                      ..rotateY(_animationController.value * math.pi),
-                      // ..setEntry(3, 0, 0.0001),// perspective
-                      // ..rotateX(rotationAngle),
-                      // ..translate(0.0, 0.0, -200.0 * value), // Apply perspective translation
-                    alignment: FractionalOffset.center,
+                      ..setEntry(0, 2, 0.001)
+                      ..rotateX(2 * pi * flipAnim.value),
+                    alignment: Alignment.center,
                     child: SizedBox(
                       child: NewsScreen(
                         homeOnTap: () => Scaffold.of(context).openDrawer(),
@@ -168,24 +169,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
               }),
         ],
       ),
-
-      // Showing Floating Add Banner
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(
-            right: Utils.scrHeight * .054,
-            left: Utils.scrHeight * .054,
-            bottom: Utils.scrHeight * .01),
-        child: GestureDetector(
-          child: SizedBox(
-            width: double.infinity,
-            height: Utils.scrHeight * .054,
-            child: Image.asset(
-              'assets/images/floating_add.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ),
     );
   }
 
@@ -244,17 +227,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             } else if (provider.selectedIndex == 2) {
               Navigator.pushNamed(context, RoutesName.bookmark);
             } else if (provider.selectedIndex == 3) {
-              getPopUp(
-                  context,
-                  (p0) => ShareScreen(onExit: () {
-                        Navigator.pop(p0);
-                      }));
+              shareContent();
+              // getPopUp(
+              //     context,
+              //     (p0) => ShareScreen(onExit: () {
+              //           Navigator.pop(p0);
+              //         }));
             }
           },
         );
       }),
     );
   }
+
+  void shareContent() async {
+    try {
+      await Share.share('https://flutter.dev/');
+    } catch (e) {
+      Utils.showSnackBar(context, '$e');
+    }
+  }
+
 
   void getPopUp(
     BuildContext context,
