@@ -1,6 +1,8 @@
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../provider/timer_provider.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
@@ -8,6 +10,7 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BarsVisibility>(context).hideBars();
     const type = 'video';
 
     return Scaffold(

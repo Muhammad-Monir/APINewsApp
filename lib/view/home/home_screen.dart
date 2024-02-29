@@ -1,7 +1,7 @@
-import 'dart:math' as math;
-import 'dart:math';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../provider/bottom_navigation_provider.dart';
@@ -10,20 +10,21 @@ import '../../route/routes_name.dart';
 import '../../utils/color.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
-import '../share/share_screen.dart';
 import '../story/story_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-   const HomeScreen({super.key, this.category});
-   final List<String>? category;
+  const HomeScreen({super.key, this.category});
+
+  final List<String>? category;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // final PageController newsPageController = PageController(initialPage: 0);
   final PageController storyPageController = PageController();
+
   // Animation Property
   late Animation<double> flipAnim;
   late PageController newsPageController;
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(seconds: 1), // Adjust animation duration
+      duration: const Duration(microseconds: 100), // Adjust animation duration
       vsync: this,
     );
 
@@ -53,13 +54,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: const DrawerScreen(),
-      // Hide able BottomNavigationMenu
-      bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
-          ? _bottomNavigationMenu(context)
-          : null,
+      // // Hide able BottomNavigationMenu
+      // bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
+      //     ? _bottomNavigationMenu(context)
+      //     : null,
       body: PageView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -70,24 +70,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             itemCount: 5,
             itemBuilder: (context, index) {
               return AnimatedBuilder(
-                animation: _animationController,
+                animation: flipAnim,
                 builder: (context, child) {
                   return Transform(
-                    transform: Matrix4.identity()
-                      ..setEntry(0, 2, 0.001)
-                      ..rotateX(2 * pi * flipAnim.value),
-                    alignment: Alignment.center,
-                    child: SizedBox(
+                      transform: Matrix4.identity()
+                        ..setEntry(0, 3, 0.003)
+                      // ..setEntry(0, 2, 0.003)
+                      // ..setEntry(0, 2, 0.003)
+                      // ..setEntry(0, 2, 0.003)
+                        ..rotateX(-flipAnim.value * (3.14 / 2)),
+                      alignment: FractionalOffset.topCenter,
+                      // transform: Matrix4.identity()
+                      //   ..setEntry(0, 2, 0.001)
+                      //   ..rotateX(2 * pi * flipAnim.value),
+                      // alignment: Alignment.center,
+                      child: SizedBox(
                       child: NewsScreen(
-                        homeOnTap: () => Scaffold.of(context).openDrawer(),
-                        startOnTap: () {
-                          newsPageController.animateToPage(
-                            0,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                      ),
+                          homeOnTap: () => Scaffold.of(context).openDrawer(),
+                          startOnTap: () {
+                            newsPageController.animateToPage(
+                              0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
                     ),
                   );
                 },
@@ -165,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
               scrollDirection: Axis.vertical,
               itemCount: 5,
               itemBuilder: (context, index) {
+                Provider.of<BarsVisibility>(context).hideBars();
                 return const StoryScreen();
               }),
         ],
@@ -180,63 +188,63 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
           highlightColor: Colors.transparent),
       child: Consumer<BottomNavigationProvider>(
           builder: (context, provider, child) {
-        return BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('search',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('font',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Font',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('bookmark',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'BookMark',
-            ),
-            BottomNavigationBarItem(
-              icon: provider.selectedIndex == 3
-                  ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
-                  : Utils.showSvgPicture('share',
+            return BottomNavigationBar(
+              selectedLabelStyle: const TextStyle(color: appSecondTextColor),
+              unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Utils.showSvgPicture('search',
                       height: Utils.scrHeight * 0.024,
                       width: Utils.scrHeight * 0.024),
-              label: 'Share',
-            ),
-          ],
-          useLegacyColorScheme: false,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          currentIndex: provider.selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            provider.updateSelectedIndex(index);
-            if (provider.selectedIndex == 0) {
-              Navigator.pushNamed(context, RoutesName.search);
-            } else if (provider.selectedIndex == 1) {
-              Navigator.pushNamed(context, RoutesName.font);
-            } else if (provider.selectedIndex == 2) {
-              Navigator.pushNamed(context, RoutesName.bookmark);
-            } else if (provider.selectedIndex == 3) {
-              shareContent();
-              // getPopUp(
-              //     context,
-              //     (p0) => ShareScreen(onExit: () {
-              //           Navigator.pop(p0);
-              //         }));
-            }
-          },
-        );
-      }),
+                  label: 'Search',
+                ),
+                BottomNavigationBarItem(
+                  icon: Utils.showSvgPicture('font',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024),
+                  label: 'Font',
+                ),
+                BottomNavigationBarItem(
+                  icon: Utils.showSvgPicture('bookmark',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024),
+                  label: 'BookMark',
+                ),
+                BottomNavigationBarItem(
+                  icon: provider.selectedIndex == 3
+                      ? Utils.showSvgPicture('share',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024)
+                      : Utils.showSvgPicture('share',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024),
+                  label: 'Share',
+                ),
+              ],
+              useLegacyColorScheme: false,
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+              currentIndex: provider.selectedIndex,
+              type: BottomNavigationBarType.fixed,
+              onTap: (index) {
+                provider.updateSelectedIndex(index);
+                if (provider.selectedIndex == 0) {
+                  Navigator.pushNamed(context, RoutesName.search);
+                } else if (provider.selectedIndex == 1) {
+                  Navigator.pushNamed(context, RoutesName.font);
+                } else if (provider.selectedIndex == 2) {
+                  Navigator.pushNamed(context, RoutesName.bookmark);
+                } else if (provider.selectedIndex == 3) {
+                  shareContent();
+                  // getPopUp(
+                  //     context,
+                  //     (p0) => ShareScreen(onExit: () {
+                  //           Navigator.pop(p0);
+                  //         }));
+                }
+              },
+            );
+          }),
     );
   }
 
@@ -249,10 +257,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   }
 
 
-  void getPopUp(
-    BuildContext context,
-    Widget Function(BuildContext) childBuilder,
-  ) {
+  void getPopUp(BuildContext context,
+      Widget Function(BuildContext) childBuilder,) {
     showDialog(
         context: context,
         barrierDismissible: true, // Prevent dismissal by tapping outside
