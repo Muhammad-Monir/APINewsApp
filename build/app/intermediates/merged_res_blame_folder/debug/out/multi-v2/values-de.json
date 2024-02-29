@@ -4,7 +4,11 @@
             "outputFile": "com.example.newsapp-mergeDebugResources-15:/values-de/values-de.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-de\\values-de.xml",
+=======
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-de\\values-de.xml",
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +25,28 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\781e5567158e59d38ee2b89930f9808b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-de\\values.xml",
+=======
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\58aa1384bde170d075503b845cfcf44c\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-de\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "140",
+                        "endOffsets": "335"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "1848",
+                        "endColumns": "144",
+                        "endOffsets": "1988"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\781e5567158e59d38ee2b89930f9808b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-de\\values.xml",
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +63,28 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-de\\values-de.xml",
+=======
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-de\\values-de.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,196,270,342,419,486,583,674",
+                        "endColumns": "73,66,73,71,76,66,96,90,75",
+                        "endOffsets": "124,191,265,337,414,481,578,669,745"
+                    },
+                    "to": {
+                        "startLines": "28,29,30,31,32,33,34,35,36",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3241,3315,3382,3456,3528,3605,3672,3769,3860",
+                        "endColumns": "73,66,73,71,76,66,96,90,75",
+                        "endOffsets": "3310,3377,3451,3523,3600,3667,3764,3855,3931"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-de\\values-de.xml",
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -52,6 +98,7 @@
                         "startOffsets": "3137,3936,4037,4148",
                         "endColumns": "103,100,110,99",
                         "endOffsets": "3236,4032,4143,4243"
+<<<<<<< HEAD
                     }
                 },
                 {
@@ -86,6 +133,8 @@
                         "startOffsets": "3241,3315,3382,3456,3528,3605,3672,3769,3860",
                         "endColumns": "73,66,73,71,76,66,96,90,75",
                         "endOffsets": "3310,3377,3451,3523,3600,3667,3764,3855,3931"
+=======
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     }
                 }
             ]

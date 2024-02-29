@@ -9,6 +9,11 @@ import 'package:am_innnn/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+<<<<<<< HEAD
+=======
+import 'package:newsapp/main.dart';
+
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.

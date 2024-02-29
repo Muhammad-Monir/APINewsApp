@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+=======
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
@@ -17,7 +23,7 @@ class DrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLogin = true;
+    bool isLogin = false;
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -79,18 +85,24 @@ class DrawerScreen extends StatelessWidget {
               : Container(),
           CustomDrawerItem(
               onTap: () async {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                 try {
                   await Share.share('https://flutter.dev/');
                 } catch (e) {
                   Utils.showSnackBar(context, '$e');
                 }
+<<<<<<< HEAD
 
                 // getPopUp(
                 //     context,
                 //     (p0) => ShareScreen(onExit: () {
                 //           Navigator.pop(p0);
                 //         }));
+=======
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
               },
               text: 'App Share',
               svgName: 'drawer_share',
@@ -203,13 +215,12 @@ class CustomDrawerItem extends StatelessWidget {
                 isToggleable
                     ? Consumer<NotificationProvider>(
                         builder: (context, provider, child) => Switch(
-                          value: provider.isSwitchToggled,
-                          onChanged: (newValue) => provider.toggleSwitch(),
-                          activeColor: appThemeColor,
+                            value: provider.isSwitchToggled,
+                            onChanged: (newValue) => provider.toggleSwitch(),
+                            activeColor: appThemeColor,
                             activeTrackColor: const Color(0xffEBF3FF),
                             inactiveTrackColor: const Color(0xffB7C1D2),
-                            inactiveThumbColor: const Color(0xff4E617E)
-                        ),
+                            inactiveThumbColor: const Color(0xff4E617E)),
                       )
                     : icon != null
                         ? Icon(icon,
