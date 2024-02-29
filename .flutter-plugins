@@ -1,4 +1,39 @@
 # This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
+connectivity_plus=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\connectivity_plus-4.0.2\\
+geocoding=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geocoding-2.1.0\\
+geocoding_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geocoding_android-2.1.2\\
+geocoding_ios=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geocoding_ios-2.1.0\\
+geolocator=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator-10.1.0\\
+geolocator_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_android-4.3.1\\
+geolocator_apple=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_apple-2.3.2\\
+geolocator_web=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_web-2.2.0\\
+geolocator_windows=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geolocator_windows-0.2.1\\
+package_info_plus=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\package_info_plus-4.2.0\\
+path_provider=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider-2.1.1\\
+path_provider_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_android-2.2.0\\
+path_provider_foundation=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_foundation-2.3.1\\
+path_provider_linux=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_linux-2.2.1\\
+path_provider_windows=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\path_provider_windows-2.2.1\\
+permission_handler=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler-11.3.0\\
+permission_handler_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_android-12.0.5\\
+permission_handler_apple=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_apple-9.4.0\\
+permission_handler_html=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_html-0.1.1\\
+permission_handler_windows=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\permission_handler_windows-0.2.1\\
+share_plus=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\share_plus-7.2.2\\
+url_launcher=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher-6.2.5\\
+url_launcher_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_android-6.2.2\\
+url_launcher_ios=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_ios-6.2.5\\
+url_launcher_linux=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_linux-3.1.1\\
+url_launcher_macos=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_macos-3.1.0\\
+url_launcher_web=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_web-2.3.0\\
+url_launcher_windows=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\url_launcher_windows-3.1.1\\
+video_player=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player-2.8.2\\
+video_player_android=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player_android-2.4.12\\
+video_player_avfoundation=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player_avfoundation-2.5.6\\
+video_player_web=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player_web-2.2.0\\
+wakelock_plus=C:\\Users\\bdCalling\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\wakelock_plus-1.1.4\\
+=======
 connectivity_plus=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\connectivity_plus-4.0.2\\
 geocoding=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geocoding-2.1.0\\
 geocoding_android=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\geocoding_android-2.1.2\\
@@ -32,3 +67,4 @@ video_player_android=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted
 video_player_avfoundation=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player_avfoundation-2.5.6\\
 video_player_web=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\video_player_web-2.2.0\\
 wakelock_plus=C:\\Users\\bdCalling IT\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\wakelock_plus-1.1.4\\
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736

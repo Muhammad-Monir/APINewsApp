@@ -48,8 +48,12 @@ class StoryScreen extends StatelessWidget {
           if (type == 'video')
             const Expanded(
               child: SizedBox(
+<<<<<<< HEAD
+                  child: AspectRatio(aspectRatio: 1, child: MyPlayer())),
+=======
                 width: double.infinity,
                   child: AspectRatio(aspectRatio: 9/19, child: MyPlayer())),
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
             ),
           // Assuming MyPlayer widget is for displaying videos
           if (type == 'image') Utils.showImage('story'),

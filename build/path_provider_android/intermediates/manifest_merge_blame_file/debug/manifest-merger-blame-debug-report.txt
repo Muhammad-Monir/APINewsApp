@@ -4,8 +4,14 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="16"
+<<<<<<< HEAD
+6-->C:\Users\bdCalling\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.0\android\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="16" />
+7-->C:\Users\bdCalling\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.0\android\src\main\AndroidManifest.xml
+=======
 6-->C:\Users\bdCalling IT\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.0\android\src\main\AndroidManifest.xml
 7        android:targetSdkVersion="16" />
 7-->C:\Users\bdCalling IT\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.0\android\src\main\AndroidManifest.xml
+>>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 8
 9</manifest>
