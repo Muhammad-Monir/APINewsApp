@@ -4,11 +4,7 @@
             "outputFile": "com.example.newsapp-mergeDebugResources-15:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\58aa1384bde170d075503b845cfcf44c\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-zh-rTW\\values.xml",
-=======
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\58aa1384bde170d075503b845cfcf44c\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-zh-rTW\\values.xml",
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -25,11 +21,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
-=======
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-zh-rTW\\values-zh-rTW.xml",
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -46,7 +38,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -65,9 +56,6 @@
                 },
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-zh-rTW\\values-zh-rTW.xml",
-=======
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-zh-rTW\\values-zh-rTW.xml",
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -84,28 +72,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\781e5567158e59d38ee2b89930f9808b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-zh-rTW\\values.xml",
-=======
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-zh-rTW\\values-zh-rTW.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,139,231,332",
-                        "endColumns": "83,91,100,92",
-                        "endOffsets": "134,226,327,420"
-                    },
-                    "to": {
-                        "startLines": "27,37,38,39",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "2535,3178,3270,3371",
-                        "endColumns": "83,91,100,92",
-                        "endOffsets": "2614,3265,3366,3459"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\781e5567158e59d38ee2b89930f9808b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-zh-rTW\\values.xml",
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

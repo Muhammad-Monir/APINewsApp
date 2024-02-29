@@ -26,7 +26,6 @@
 18-->[:connectivity_plus] D:\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
 19
 20    <permission
-<<<<<<< HEAD
 20-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 21        android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 21-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
@@ -36,26 +35,11 @@
 24    <uses-permission android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 24-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
 24-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
-=======
-20-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
-21        android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-21-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
-22        android:protectionLevel="signature" />
-22-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
-23
-24    <uses-permission android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-24-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
-24-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 25
 26    <application
 27        android:name="android.app.Application"
 28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-<<<<<<< HEAD
 28-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
-=======
-28-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 29        android:debuggable="true"
 30        android:icon="@mipmap/ic_launcher"
 31        android:label="newsapp" >
@@ -151,7 +135,6 @@
 98-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
 99
 100        <uses-library
-<<<<<<< HEAD
 100-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
 101            android:name="androidx.window.extensions"
 101-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
@@ -179,35 +162,6 @@
 113-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\bdCalling\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
 114            android:value="@integer/google_play_services_version" />
 114-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\bdCalling\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
-=======
-100-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-101            android:name="androidx.window.extensions"
-101-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-102            android:required="false" />
-102-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-103        <uses-library
-103-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-104            android:name="androidx.window.sidecar"
-104-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-105            android:required="false" />
-105-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-106
-107        <activity
-107-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\781e5567158e59d38ee2b89930f9808b\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
-108            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-108-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\781e5567158e59d38ee2b89930f9808b\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
-109            android:exported="false"
-109-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\781e5567158e59d38ee2b89930f9808b\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
-110            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-110-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\781e5567158e59d38ee2b89930f9808b\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
-111
-112        <meta-data
-112-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
-113            android:name="com.google.android.gms.version"
-113-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
-114            android:value="@integer/google_play_services_version" />
-114-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 115    </application>
 116
 117</manifest>

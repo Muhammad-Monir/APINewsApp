@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-
-=======
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
@@ -85,24 +77,11 @@ class DrawerScreen extends StatelessWidget {
               : Container(),
           CustomDrawerItem(
               onTap: () async {
-<<<<<<< HEAD
-
-=======
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
                 try {
                   await Share.share('https://flutter.dev/');
                 } catch (e) {
                   Utils.showSnackBar(context, '$e');
                 }
-<<<<<<< HEAD
-
-                // getPopUp(
-                //     context,
-                //     (p0) => ShareScreen(onExit: () {
-                //           Navigator.pop(p0);
-                //         }));
-=======
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
               },
               text: 'App Share',
               svgName: 'drawer_share',
