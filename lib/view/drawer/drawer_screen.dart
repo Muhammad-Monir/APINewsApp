@@ -1,13 +1,12 @@
-import 'package:am_innn/common_widgets/action_button.dart';
-import 'package:am_innn/common_widgets/custom_divider.dart';
-import 'package:am_innn/provider/notification_provider.dart';
-import 'package:am_innn/route/routes_name.dart';
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../../common_widgets/action_button.dart';
+import '../../common_widgets/custom_divider.dart';
+import '../../provider/notification_provider.dart';
+import '../../route/routes_name.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
+import '../../utils/utils.dart';
 import '../share/share_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -15,7 +14,7 @@ class DrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLogin = true;
+    bool isLogin = false;
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -194,13 +193,12 @@ class CustomDrawerItem extends StatelessWidget {
                 isToggleable
                     ? Consumer<NotificationProvider>(
                         builder: (context, provider, child) => Switch(
-                          value: provider.isSwitchToggled,
-                          onChanged: (newValue) => provider.toggleSwitch(),
-                          activeColor: appThemeColor,
+                            value: provider.isSwitchToggled,
+                            onChanged: (newValue) => provider.toggleSwitch(),
+                            activeColor: appThemeColor,
                             activeTrackColor: const Color(0xffEBF3FF),
                             inactiveTrackColor: const Color(0xffB7C1D2),
-                            inactiveThumbColor: const Color(0xff4E617E)
-                        ),
+                            inactiveThumbColor: const Color(0xff4E617E)),
                       )
                     : icon != null
                         ? Icon(icon,

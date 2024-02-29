@@ -1,8 +1,9 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
-import 'package:am_innn/utils/utils.dart';
-import 'package:am_innn/view/privacy_policy/widgets/custom_rich_text.dart';
+
+import 'package:am_innnn/view/privacy_policy/widgets/custom_rich_text.dart';
 import 'package:flutter/material.dart';
+import '../../utils/color.dart';
+import '../../utils/styles.dart';
+import '../../utils/utils.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});

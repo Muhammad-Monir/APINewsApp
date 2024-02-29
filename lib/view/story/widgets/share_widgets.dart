@@ -1,6 +1,7 @@
-import 'package:am_innn/utils/color.dart';
-import 'package:am_innn/utils/styles.dart';
+
 import 'package:flutter/material.dart';
+import '../../../utils/color.dart';
+import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 
 class ShareWidget extends StatelessWidget {
