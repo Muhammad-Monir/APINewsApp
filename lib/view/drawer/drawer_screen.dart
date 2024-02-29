@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
@@ -75,12 +76,12 @@ class DrawerScreen extends StatelessWidget {
                 )
               : Container(),
           CustomDrawerItem(
-              onTap: () {
-                getPopUp(
-                    context,
-                    (p0) => ShareScreen(onExit: () {
-                          Navigator.pop(p0);
-                        }));
+              onTap: () async {
+                try {
+                  await Share.share('https://flutter.dev/');
+                } catch (e) {
+                  Utils.showSnackBar(context, '$e');
+                }
               },
               text: 'App Share',
               svgName: 'drawer_share',
