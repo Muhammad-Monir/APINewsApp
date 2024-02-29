@@ -1,6 +1,8 @@
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../provider/timer_provider.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
@@ -8,6 +10,7 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<BarsVisibility>(context).hideBars();
     const type = 'video';
 
     return Scaffold(
@@ -48,12 +51,8 @@ class StoryScreen extends StatelessWidget {
           if (type == 'video')
             const Expanded(
               child: SizedBox(
-<<<<<<< HEAD
-                  child: AspectRatio(aspectRatio: 1, child: MyPlayer())),
-=======
                 width: double.infinity,
                   child: AspectRatio(aspectRatio: 9/19, child: MyPlayer())),
->>>>>>> 451c069ba7449e259bf4cc80e2d11e622e364736
             ),
           // Assuming MyPlayer widget is for displaying videos
           if (type == 'image') Utils.showImage('story'),
