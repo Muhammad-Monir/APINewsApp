@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -17,15 +16,15 @@ import 'favorite_popup.dart';
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
-  final String image;
-  final String newsDec;
+  final String? image;
+  final String? newsDec;
   final String sourceLink;
   final String newsTitle;
 
   const NewsScreen({
     super.key,
     this.startOnTap,
-    this.homeOnTap, required this.image, required this.newsDec, required this.sourceLink, required this.newsTitle,
+    this.homeOnTap, this.image, required this.newsDec, required this.sourceLink, required this.newsTitle,
   });
 
   @override
@@ -174,7 +173,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             height: Utils.scrHeight * .3,
             child: Text(
-             newsDec,
+              Utils.truncateText(newsDec!,55),
               style: regularTS(appSecondTextColor,
                   fontSize: 15 * fontSize.fontSize),
             ),
@@ -196,7 +195,7 @@ class NewsScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -208,12 +207,15 @@ class NewsScreen extends StatelessWidget {
                 style: regularTS(appTextColor, fontSize: 14),
               ),
               const SizedBox(width: 2),
-              GestureDetector(
-                onTap: () async {
-                  await launchUrl(Uri.parse(sourceLink));
-                },
-                child: Text(sourceLink,
-                    style: regularTS(appThemeColor, fontSize: 14)),
+              SizedBox(
+                width: Utils.scrHeight * .28,
+                child: GestureDetector(
+                  onTap: () async {
+                    await launchUrl(Uri.parse(sourceLink));
+                  },
+                  child: Text(sourceLink,
+                      style: regularTS(appThemeColor, fontSize: 14)),
+                ),
               ),
             ],
           ),
@@ -305,10 +307,14 @@ class NewsScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(Utils.scrHeight * .03),
                 bottomRight: Radius.circular(Utils.scrHeight * .03)),
-            child: Image.network(
-              image,
+            child: image != null ? Image.network(
+              image!,
               fit: BoxFit.cover,
-            )));
+            ) : Image.asset(
+              'assets/images/banner_image.png',
+              fit: BoxFit.cover,
+            )
+        ));
   }
 
   Container buildTabBar() {
