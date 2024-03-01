@@ -20,7 +20,7 @@ import '../story/story_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.category});
 
-  final List<String>? category;
+  final String? category;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
