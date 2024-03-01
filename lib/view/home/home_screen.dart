@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             itemCount: 5,
             itemBuilder: (context, index) {
               return AnimatedBuilder(
-                animation: _animationController,
+                animation: flipAnim,
                 builder: (context, child) {
                   return Transform(
                       // transform: Matrix4.identity()
@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ..setEntry(0, 2, 0.001)
                         ..rotateX(2 * pi * flipAnim.value),
                       alignment: Alignment.center,
-                      child: SizedBox(
+
+                    child: SizedBox(
                       child: NewsScreen(
                           homeOnTap: () => Scaffold.of(context).openDrawer(),
                           startOnTap: () {
