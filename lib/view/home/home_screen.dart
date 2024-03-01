@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
@@ -10,10 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../model/news_model.dart';
-import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
-import '../../route/routes_name.dart';
-import '../../utils/color.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../story/story_screen.dart';
@@ -21,7 +17,7 @@ import '../story/story_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.category});
 
-  final String? category;
+  final String? category ;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -39,9 +35,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
+
+    print(widget.category);
     super.initState();
 
-    fetchAllNews = NewsData.fetchAllNews();
+    // fetchAllNews = NewsData.fetchAllNews();
+
+    // fetchNews();
 
     _animationController = AnimationController(
       duration: const Duration(microseconds: 100), // Adjust animation duration
@@ -62,6 +62,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
+  Future<NewsModel> fetchNews() async {
+    if(widget.category == null){
+      fetchAllNews =  NewsData.fetchAllNews();
+    }else{
+      fetchAllNews = NewsData.fetchAllNews(category: widget.category);
+    }
+
+    return fetchAllNews;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           // All news with Vertical Scroll view
 
           FutureBuilder<NewsModel>(
-            future: fetchAllNews,
+            future: fetchNews(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text('${snapshot.error}');
@@ -183,8 +193,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           //       );
           //     }),
 
-          // All Story for swipe horizontally
 
+          // All Story for swipe horizontally
           PageView.builder(
               controller: storyPageController,
               scrollDirection: Axis.vertical,

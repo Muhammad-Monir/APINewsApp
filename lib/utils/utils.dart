@@ -25,12 +25,10 @@ class Utils {
   }
 
   // show images
-  static Widget showImage(String imageName,
-      {double? height, double? width}) {
+  static Widget showImage(String imageName, {double? height, double? width}) {
     return Image.asset("assets/images/$imageName.png",
         fit: BoxFit.cover, height: height, width: width);
   }
-
 
   static void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -41,7 +39,7 @@ class Utils {
     );
   }
 
-   static String truncateText(String text, int maxLength) {
+  static String truncateText(String text, int maxLength) {
     final words = text.split(' ');
     if (words.length <= maxLength) {
       return text;
@@ -50,16 +48,13 @@ class Utils {
     return '${truncatedWords.join(' ')}...';
   }
 
-
   static List<String> categoriesName = [
-    'Politics',
-    'Health',
-    'Stocks',
-    'Weather',
-    'Crime',
-    'Shopping',
-    'Sports',
-    'Entertainment'
+    'business',
+    'entertainment',
+    'general',
+    'health',
+    'science',
+    'sports',
+    'technology'
   ];
-
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -16,6 +17,7 @@ import 'favorite_popup.dart';
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
+  final VoidCallback? refreshOnTap;
   final String? image;
   final String? newsDec;
   final String sourceLink;
@@ -24,7 +26,12 @@ class NewsScreen extends StatelessWidget {
   const NewsScreen({
     super.key,
     this.startOnTap,
-    this.homeOnTap, this.image, required this.newsDec, required this.sourceLink, required this.newsTitle,
+    this.homeOnTap,
+    this.image,
+    required this.newsDec,
+    required this.sourceLink,
+    required this.newsTitle,
+    this.refreshOnTap,
   });
 
   @override
@@ -173,7 +180,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             height: Utils.scrHeight * .3,
             child: Text(
-              Utils.truncateText(newsDec!,55),
+              Utils.truncateText(newsDec!, 55),
               style: regularTS(appSecondTextColor,
                   fontSize: 15 * fontSize.fontSize),
             ),
@@ -307,14 +314,15 @@ class NewsScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(Utils.scrHeight * .03),
                 bottomRight: Radius.circular(Utils.scrHeight * .03)),
-            child: image != null ? Image.network(
-              image!,
-              fit: BoxFit.cover,
-            ) : Image.asset(
-              'assets/images/banner_image.png',
-              fit: BoxFit.cover,
-            )
-        ));
+            child: image != null
+                ? Image.network(
+                    image!,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/images/banner_image.png',
+                    fit: BoxFit.cover,
+                  )));
   }
 
   Container buildTabBar() {
@@ -331,7 +339,8 @@ class NewsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(onTap: homeOnTap, child: const HomeTabBar()),
-              const RefreshTabBar(),
+              GestureDetector(
+                  onTap: refreshOnTap, child: const RefreshTabBar()),
               GestureDetector(onTap: startOnTap, child: const StartTabBar()),
             ],
           ),
@@ -404,21 +413,19 @@ class RefreshTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        child: Row(
-          children: [
-            Utils.showSvgPicture(
-              'refresh',
-              height: Utils.scrHeight * .022,
-              width: Utils.scrHeight * .022,
-            ),
-            SizedBox(width: Utils.scrHeight * .006),
-            Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
-            SizedBox(width: Utils.scrHeight * .013),
-            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-          ],
-        ),
+    return SizedBox(
+      child: Row(
+        children: [
+          Utils.showSvgPicture(
+            'refresh',
+            height: Utils.scrHeight * .022,
+            width: Utils.scrHeight * .022,
+          ),
+          SizedBox(width: Utils.scrHeight * .006),
+          Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
+          SizedBox(width: Utils.scrHeight * .013),
+          Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
+        ],
       ),
     );
   }
