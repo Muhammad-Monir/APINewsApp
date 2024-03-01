@@ -16,11 +16,15 @@ import 'favorite_popup.dart';
 class NewsScreen extends StatelessWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
+  final String image;
+  final String newsDec;
+  final String sourceLink;
+  final String newsTitle;
 
   const NewsScreen({
     super.key,
     this.startOnTap,
-    this.homeOnTap,
+    this.homeOnTap, required this.image, required this.newsDec, required this.sourceLink, required this.newsTitle,
   });
 
   @override
@@ -163,7 +167,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             // width: Utils.scrHeight * .342,
             child: Text(
-              'Special ‘Aastha’ train to Ayodhya flagged off from Goa',
+              newsTitle,
               style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
             ),
           ),
@@ -171,7 +175,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             height: Utils.scrHeight * .3,
             child: Text(
-              'A special “Aastha” train carrying around 2,000 pilgrims to Ayodhya in Uttar Pradesh has been flagged off from Goa.\n Chief Minister Pramod Sawant, state BJP president Sadanand Shet Tanavade and other MLAs were present at the flagging off ceremony held on Monday evening at Thivim railway station in North Goa district.\n\n',
+             newsDec,
               style: regularTS(appSecondTextColor,
                   fontSize: 15 * fontSize.fontSize),
             ),
@@ -207,9 +211,9 @@ class NewsScreen extends StatelessWidget {
               const SizedBox(width: 2),
               GestureDetector(
                 onTap: () async {
-                  await launchUrl(Uri.parse('https://indianexpress.com/'));
+                  await launchUrl(Uri.parse(sourceLink));
                 },
-                child: Text('https://indianexpress.com/',
+                child: Text(sourceLink,
                     style: regularTS(appThemeColor, fontSize: 14)),
               ),
             ],
@@ -303,8 +307,8 @@ class NewsScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(Utils.scrHeight * .03),
                 bottomRight: Radius.circular(Utils.scrHeight * .03)),
-            child: Image.asset(
-              'assets/images/banner_image.png',
+            child: Image.network(
+              image,
               fit: BoxFit.cover,
             )));
   }
