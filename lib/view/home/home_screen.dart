@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
 import '../../route/routes_name.dart';
@@ -31,10 +34,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> flipAnim;
   late PageController newsPageController;
   late AnimationController _animationController;
+   late Future<NewsModel> fetchAllNews;
 
   @override
   void initState() {
     super.initState();
+
+    fetchAllNews = NewsData.fetchAllNews();
+
     _animationController = AnimationController(
       duration: const Duration(microseconds: 100), // Adjust animation duration
       vsync: this,
@@ -58,50 +65,59 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerScreen(),
-      // // Hide able BottomNavigationMenu
-      // bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
-      //     ? _bottomNavigationMenu(context)
-      //     : null,
       body: PageView(
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
-          PageView.builder(
-            controller: newsPageController,
-            scrollDirection: Axis.vertical,
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return AnimatedBuilder(
-                animation: flipAnim,
-                builder: (context, child) {
-                  return Transform(
-                      // transform: Matrix4.identity()
-                      //   ..setEntry(0, 3, 0.003)
-                      // // ..setEntry(0, 2, 0.003)
-                      // // ..setEntry(0, 2, 0.003)
-                      // // ..setEntry(0, 2, 0.003)
-                      //   ..rotateX(-flipAnim.value * (3.14 / 2)),
-                      // alignment: FractionalOffset.topCenter,
-                      transform: Matrix4.identity()
-                        ..setEntry(0, 2, 0.001)
-                        ..rotateX(2 * pi * flipAnim.value),
-                      alignment: Alignment.center,
 
-                    child: SizedBox(
-                      child: NewsScreen(
-                          homeOnTap: () => Scaffold.of(context).openDrawer(),
-                          startOnTap: () {
-                            newsPageController.animateToPage(
-                              0,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOut,
-                            );
-                          },
-                        ),
-                    ),
-                  );
-                },
-              );
+          FutureBuilder<NewsModel>(
+            future: fetchAllNews,
+            builder: (context,snapshot) {
+              if(snapshot.hasError){
+                return Text('${snapshot.error}');
+              }if(snapshot.hasData){
+                List<Articles> data = snapshot.data!.articles!;
+                return PageView.builder(
+                  controller: newsPageController,
+                  scrollDirection: Axis.vertical,
+                  itemCount: snapshot.data!.articles!.length,
+                  itemBuilder: (context, index) {
+
+                    return AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return Transform(
+                          // transform: Matrix4.identity()
+                          //   ..setEntry(0, 3, 0.003)
+                          // // ..setEntry(0, 2, 0.003)
+                          // // ..setEntry(0, 2, 0.003)
+                          // // ..setEntry(0, 2, 0.003)
+                          //   ..rotateX(-flipAnim.value * (3.14 / 2)),
+                          // alignment: FractionalOffset.topCenter,
+                          transform: Matrix4.identity()
+                            ..setEntry(0, 2, 0.001)
+                            ..rotateX(2 * pi * flipAnim.value),
+                          alignment: Alignment.center,
+                          child: SizedBox(
+                            child: NewsScreen(
+                              homeOnTap: () => Scaffold.of(context).openDrawer(),
+                              startOnTap: () {
+                                newsPageController.animateToPage(
+                                  0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                );
+                              }, image: snapshot.data!.articles![index].urlToImage!, newsDec: snapshot.data!.articles![index].description!, sourceLink: snapshot.data!.articles![index].url!, newsTitle: snapshot.data!.articles![index].title!,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              }else{
+                return const Center(child: CircularProgressIndicator(),);
+              }
             },
           ),
 
@@ -180,74 +196,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               }),
         ],
       ),
-    );
-  }
-
-  Theme _bottomNavigationMenu(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent),
-      child: Consumer<BottomNavigationProvider>(
-          builder: (context, provider, child) {
-            return BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-              unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('search',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('font',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'Font',
-                ),
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('bookmark',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'BookMark',
-                ),
-                BottomNavigationBarItem(
-                  icon: provider.selectedIndex == 3
-                      ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
-                      : Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'Share',
-                ),
-              ],
-              useLegacyColorScheme: false,
-              showSelectedLabels: true,
-              showUnselectedLabels: true,
-              currentIndex: provider.selectedIndex,
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) {
-                provider.updateSelectedIndex(index);
-                if (provider.selectedIndex == 0) {
-                  Navigator.pushNamed(context, RoutesName.search);
-                } else if (provider.selectedIndex == 1) {
-                  Navigator.pushNamed(context, RoutesName.font);
-                } else if (provider.selectedIndex == 2) {
-                  Navigator.pushNamed(context, RoutesName.bookmark);
-                } else if (provider.selectedIndex == 3) {
-                  shareContent();
-                  // getPopUp(
-                  //     context,
-                  //     (p0) => ShareScreen(onExit: () {
-                  //           Navigator.pop(p0);
-                  //         }));
-                }
-              },
-            );
-          }),
     );
   }
 
