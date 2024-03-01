@@ -1,4 +1,4 @@
-import 'package:am_innnn/view/search/widgets/custom_search_bar.dart';
+import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:flutter/material.dart';
 import '../../common_widgets/action_button.dart';
 import '../../route/routes_name.dart';
@@ -15,6 +15,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   String? selectedCategory;
+  final _searchController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,57 +29,70 @@ class _SearchScreenState extends State<SearchScreen> {
           horizontal: Utils.scrHeight * .024,
           vertical: Utils.scrHeight * .016,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomSearchBar(hint: 'Search news'),
-            SizedBox(height: Utils.scrHeight * .024),
-            Text('Categories', style: semiBoldTS(appTextColor, fontSize: 20)),
-            SizedBox(height: Utils.scrHeight * .016),
-            Expanded(
-              child: GridView.builder(
-                primary: false,
-                padding: EdgeInsets.all(Utils.scrHeight * .014),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: Utils.scrHeight * .014,
-                  mainAxisSpacing: Utils.scrHeight * .014,
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.5,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              EmailFormField(
+                  emailController: _searchController, hintText: 'Search news', validate: false,),
+              SizedBox(height: Utils.scrHeight * .024),
+              Text('Categories', style: semiBoldTS(appTextColor, fontSize: 20)),
+              SizedBox(height: Utils.scrHeight * .016),
+              Expanded(
+                child: GridView.builder(
+                  primary: false,
+                  padding: EdgeInsets.all(Utils.scrHeight * .014),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: Utils.scrHeight * .014,
+                    mainAxisSpacing: Utils.scrHeight * .014,
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.5,
+                  ),
+                  itemCount: Utils.categoriesName.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CustomCategoryItems(
+                      isSelected: selectedCategory == Utils.categoriesName[index],
+                      onTap: () {
+                        print(
+                            'Selected category: ${Utils.categoriesName[index]}');
+                        setState(() {
+                          selectedCategory = Utils.categoriesName[index];
+                        });
+                      },
+                      title: Utils.categoriesName[index],
+                    );
+                  },
                 ),
-                itemCount: Utils.categoriesName.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CustomCategoryItems(
-                    isSelected: selectedCategory == Utils.categoriesName[index],
-                    onTap: () {
-                      print('Selected category: ${Utils.categoriesName[index]}');
-                      setState(() {
-                        selectedCategory = Utils.categoriesName[index];
-                      });
-                    },
-                    title: Utils.categoriesName[index],
-                  );
-                },
               ),
-            ),
-            ActionButton(
-              onTap: () {
-                if (selectedCategory != null) {
-                  print('Selected category: $selectedCategory');
-                  // Navigate to next page with selected category
-                  Navigator.pushNamed(context, RoutesName.home, arguments: selectedCategory);
-                } else {
-                  // Show an error message or handle the case where no category is selected
-                }
-              },
-              buttonColor: appThemeColor,
-              textColor: Colors.white,
-              buttonName: 'Save & Continue',
-            ),
-            SizedBox(height: Utils.scrHeight * .04),
-          ],
+              ActionButton(
+                onTap: () {
+                  if (_formKey.currentState!.validate() && selectedCategory != null) {
+                    print('Selected category: $selectedCategory');
+                    print('Select search: ${_searchController.text}');
+                    // Navigate to next page with selected category
+                    Navigator.pushNamed(context, RoutesName.home,
+                        arguments: selectedCategory);
+                  } else {
+                    // Show an error message or handle the case where no category is selected
+                  }
+                },
+                buttonColor: appThemeColor,
+                textColor: Colors.white,
+                buttonName: 'Save & Continue',
+              ),
+              SizedBox(height: Utils.scrHeight * .04),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 }
 
