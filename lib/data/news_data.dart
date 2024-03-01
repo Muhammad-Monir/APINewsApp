@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import '../model/news_model.dart';
-import '../utils/utils.dart';
 
 class NewsData {
   static Future<NewsModel> fetchAllNews() async {
