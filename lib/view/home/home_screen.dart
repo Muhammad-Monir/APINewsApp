@@ -69,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
+
           FutureBuilder<NewsModel>(
             future: fetchAllNews,
             builder: (context,snapshot) {
@@ -117,7 +118,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               }else{
                 return const Center(child: CircularProgressIndicator(),);
               }
-
             },
           ),
 

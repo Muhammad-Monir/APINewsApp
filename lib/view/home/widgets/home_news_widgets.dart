@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -74,8 +75,6 @@ class NewsScreen extends StatelessWidget {
           ? _bottomNavigationMenu(context)
           : null,
     );
-
-
   }
 
   Theme _bottomNavigationMenu(BuildContext context) {
@@ -86,63 +85,63 @@ class NewsScreen extends StatelessWidget {
           highlightColor: Colors.transparent),
       child: Consumer<BottomNavigationProvider>(
           builder: (context, provider, child) {
-            return BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-              unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('search',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('font',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'Font',
-                ),
-                BottomNavigationBarItem(
-                  icon: Utils.showSvgPicture('bookmark',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-                  label: 'BookMark',
-                ),
-                BottomNavigationBarItem(
-                  icon: provider.selectedIndex == 3
-                      ? Utils.showSvgPicture('share',
+        return BottomNavigationBar(
+          selectedLabelStyle: const TextStyle(color: appSecondTextColor),
+          unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('search',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('font',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'Font',
+            ),
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('bookmark',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'BookMark',
+            ),
+            BottomNavigationBarItem(
+              icon: provider.selectedIndex == 3
+                  ? Utils.showSvgPicture('share',
                       height: Utils.scrHeight * 0.024,
                       width: Utils.scrHeight * 0.024)
-                      : Utils.showSvgPicture('share',
+                  : Utils.showSvgPicture('share',
                       height: Utils.scrHeight * 0.024,
                       width: Utils.scrHeight * 0.024),
-                  label: 'Share',
-                ),
-              ],
-              useLegacyColorScheme: false,
-              showSelectedLabels: true,
-              showUnselectedLabels: true,
-              currentIndex: provider.selectedIndex,
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) {
-                provider.updateSelectedIndex(index);
-                if (provider.selectedIndex == 0) {
-                  Navigator.pushNamed(context, RoutesName.search);
-                } else if (provider.selectedIndex == 1) {
-                  Navigator.pushNamed(context, RoutesName.font);
-                } else if (provider.selectedIndex == 2) {
-                  Navigator.pushNamed(context, RoutesName.bookmark);
-                } else if (provider.selectedIndex == 3) {
-                  shareContent(context);
-                  // getPopUp(
-                  //     context,
-                  //     (p0) => ShareScreen(onExit: () {
-                  //           Navigator.pop(p0);
-                  //         }));
-                }
-              },
-            );
-          }),
+              label: 'Share',
+            ),
+          ],
+          useLegacyColorScheme: false,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          currentIndex: provider.selectedIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            provider.updateSelectedIndex(index);
+            if (provider.selectedIndex == 0) {
+              Navigator.pushNamed(context, RoutesName.search);
+            } else if (provider.selectedIndex == 1) {
+              Navigator.pushNamed(context, RoutesName.font);
+            } else if (provider.selectedIndex == 2) {
+              Navigator.pushNamed(context, RoutesName.bookmark);
+            } else if (provider.selectedIndex == 3) {
+              shareContent(context);
+              // getPopUp(
+              //     context,
+              //     (p0) => ShareScreen(onExit: () {
+              //           Navigator.pop(p0);
+              //         }));
+            }
+          },
+        );
+      }),
     );
   }
 
@@ -251,15 +250,14 @@ class NewsScreen extends StatelessWidget {
               right: Utils.scrHeight * .02,
               child: GestureDetector(
                 onTap: () {
-
                   // provider.toggleBookMarkColor();
-                    getPopUp(
-                        context,
-                            (p0) => FavoritePopup(
-                          onExit: () {
-                            Navigator.pop(p0);
-                          },
-                        ));
+                  getPopUp(
+                      context,
+                      (p0) => FavoritePopup(
+                            onExit: () {
+                              Navigator.pop(p0);
+                            },
+                          ));
                   // getPopUp(
                   //     context,
                   //     (p0) => const CustomWelcomeScreen(
