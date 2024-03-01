@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(seconds: 1), // Adjust animation duration
+      duration: const Duration(microseconds: 100), // Adjust animation duration
       vsync: this,
     );
 
@@ -70,13 +70,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             itemCount: 5,
             itemBuilder: (context, index) {
               return AnimatedBuilder(
-                animation: _animationController,
+                animation: flipAnim,
                 builder: (context, child) {
                   return Transform(
                     transform: Matrix4.identity()
-                      ..setEntry(0, 2, 0.001)
-                      ..rotateX(2 * pi * flipAnim.value),
-                    alignment: Alignment.center,
+                      ..setEntry(0, 3, 0.003)
+                    // ..setEntry(0, 2, 0.003)
+                    // ..setEntry(0, 2, 0.003)
+                    // ..setEntry(0, 2, 0.003)
+                      ..rotateX(-flipAnim.value * (3.14 / 2)),
+                    alignment: FractionalOffset.topCenter,
+                    // transform: Matrix4.identity()
+                    //   ..setEntry(0, 2, 0.001)
+                    //   ..rotateX(2 * pi * flipAnim.value),
+                    // alignment: Alignment.center,
                     child: SizedBox(
                       child: NewsScreen(
                         homeOnTap: () => Scaffold.of(context).openDrawer(),
