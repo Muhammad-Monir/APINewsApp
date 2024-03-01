@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:am_innnn/data/news_data.dart';
+import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> flipAnim;
   late PageController newsPageController;
   late AnimationController _animationController;
-   late Future<NewsModel> fetchAllNews;
+  late Future<NewsModel> fetchAllNews;
 
   @override
   void initState() {
@@ -72,42 +73,40 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
           FutureBuilder<NewsModel>(
             future: fetchAllNews,
-            builder: (context,snapshot) {
-              if(snapshot.hasError){
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
                 return Text('${snapshot.error}');
-              }if(snapshot.hasData){
+              }
+              if (snapshot.hasData) {
                 List<Articles> data = snapshot.data!.articles!;
                 return PageView.builder(
                   controller: newsPageController,
                   scrollDirection: Axis.vertical,
-                  itemCount: snapshot.data!.articles!.length,
+                  itemCount: data.length,
                   itemBuilder: (context, index) {
-
                     return AnimatedBuilder(
                       animation: _animationController,
                       builder: (context, child) {
                         return Transform(
-                          // transform: Matrix4.identity()
-                          //   ..setEntry(0, 3, 0.003)
-                          // // ..setEntry(0, 2, 0.003)
-                          // // ..setEntry(0, 2, 0.003)
-                          // // ..setEntry(0, 2, 0.003)
-                          //   ..rotateX(-flipAnim.value * (3.14 / 2)),
-                          // alignment: FractionalOffset.topCenter,
                           transform: Matrix4.identity()
                             ..setEntry(0, 2, 0.001)
                             ..rotateX(2 * pi * flipAnim.value),
                           alignment: Alignment.center,
                           child: SizedBox(
                             child: NewsScreen(
-                              homeOnTap: () => Scaffold.of(context).openDrawer(),
+                              homeOnTap: () =>
+                                  Scaffold.of(context).openDrawer(),
                               startOnTap: () {
                                 newsPageController.animateToPage(
                                   0,
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeInOut,
                                 );
-                              }, image: snapshot.data!.articles![index].urlToImage!, newsDec: snapshot.data!.articles![index].description!, sourceLink: snapshot.data!.articles![index].url!, newsTitle: snapshot.data!.articles![index].title!,
+                              },
+                              image: data[index].urlToImage ?? ApiUrl.imageNotFound,
+                              newsDec: data[index].description ??  'News Description Not Found',
+                              sourceLink: data[index].url ??  'Url Not Found',
+                              newsTitle: data[index].title ??  'News Title Not Found',
                             ),
                           ),
                         );
@@ -115,12 +114,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     );
                   },
                 );
-              }else{
-                return const Center(child: CircularProgressIndicator(),);
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
             },
           ),
-
 
           // PageView.builder(
           //   controller: newsPageController,
@@ -185,7 +185,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
           // All Story for swipe horizontally
 
-
           PageView.builder(
               controller: storyPageController,
               scrollDirection: Axis.vertical,
@@ -207,9 +206,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
-
-  void getPopUp(BuildContext context,
-      Widget Function(BuildContext) childBuilder,) {
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
     showDialog(
         context: context,
         barrierDismissible: true, // Prevent dismissal by tapping outside

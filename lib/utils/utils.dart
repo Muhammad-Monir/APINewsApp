@@ -41,6 +41,16 @@ class Utils {
     );
   }
 
+   static String truncateText(String text, int maxLength) {
+    final words = text.split(' ');
+    if (words.length <= maxLength) {
+      return text;
+    }
+    final truncatedWords = words.sublist(0, maxLength);
+    return '${truncatedWords.join(' ')}...';
+  }
+
+
   static List<String> categoriesName = [
     'Politics',
     'Health',
