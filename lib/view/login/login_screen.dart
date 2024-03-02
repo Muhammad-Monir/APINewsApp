@@ -61,7 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Login Button
-            const ActionButton(
+            ActionButton(
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.verifyAccount);
+              },
                 buttonColor: appThemeColor, buttonName: 'Log In'),
             SizedBox(height: Utils.scrHeight * .03),
 
@@ -150,12 +153,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Email Address or Mobile Number',
+        Text('Email Address',
             style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         EmailFormField(
             emailController: _emailController,
-            hintText: 'Enter email or Mobile Number'),
+            hintText: 'Enter email'),
         SizedBox(height: Utils.scrHeight * .02),
       ],
     );
