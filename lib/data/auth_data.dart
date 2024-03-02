@@ -187,6 +187,33 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  // Logout User
+  Future<void> logoutUser(String authToken) async {
+    final url = Uri.parse(ApiUrl.logoutUrl);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Logout successful, you can handle the response accordingly
+        print('Logout successful');
+      } else {
+        // Handle other status codes or errors
+        throw Exception('Logout failed - ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle http errors or exceptions
+      print('Error during logout: $error');
+      throw Exception('Error during logout');
+    }
+  }
+
   _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
