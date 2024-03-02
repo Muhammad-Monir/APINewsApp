@@ -232,6 +232,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   void _logOut() async {
     await _authProvider.logoutUser(_authToken).then((value) {
       AuthService.clearSessionData();
+      AuthService.clearUserId();
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.home,
