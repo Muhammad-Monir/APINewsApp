@@ -9,6 +9,8 @@ class ApiUrl{
   static String appBaseUrl = 'http://newsapp.reigeeky.com/';
   static String loginUrl = '${appBaseUrl}api/login';
   static String profileUrl = '${appBaseUrl}api/user';
+  static String registerUrl = '${appBaseUrl}api/register';
+  static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
 
 
 }

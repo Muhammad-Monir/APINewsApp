@@ -11,8 +11,8 @@ class AuthProvider with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-
-  Future<void> login(String email, String password, BuildContext context) async {
+  Future<void> login(
+      String email, String password, BuildContext context) async {
     try {
       _isLoading = true;
       notifyListeners();
@@ -37,7 +37,7 @@ class AuthProvider with ChangeNotifier {
           AuthService.saveSessionData(data["token"]);
           Utils.showSnackBar(context, data["message"]);
           _navigateToHome(context);
-      } else  {
+      } else {
         // If the request was unsuccessful, throw an error
         throw Exception('Failed to login');
       }
@@ -48,11 +48,91 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  _navigateToHome(BuildContext context){
+  // Register User
+  Future<Map<String, dynamic>> registerUser({
+    required String username,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required String phone,
+  }) async {
+    try {
+      _isLoading = true;
+      final response = await http.post(
+        Uri.parse(ApiUrl.registerUrl),
+        body: {
+          'username': username,
+          'email': email,
+          'password': password,
+          'confirm_password': confirmPassword,
+          'phone': phone,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        _isLoading = false;
+        return {'success': true};
+      } else if (response.statusCode == 403) {
+        final Map<String, dynamic> errorResponse = json.decode(response.body);
+        return {'success': false, 'errors': errorResponse['message']};
+      } else {
+        return {
+          'success': false,
+          'errors': {'unknown': 'Unknown error'}
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'errors': {'network': 'Network error'}
+      };
+    }
+  }
+
+  // User Account Verify
+  Future<Map<String, dynamic>?> accountVerify({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      _isLoading = true;
+
+      final response = await http.post(
+        Uri.parse(ApiUrl.accountVerifyUrl),
+        body: {
+          'email': email,
+          'otp': otp,
+        },
+      );
+
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        // Use the data as needed
+        print('API Response: $data');
+
+        return data; // Return the parsed data
+      } else {
+        // If the request was not successful, handle the error
+        print('Error ${response.statusCode}: ${response.reasonPhrase}');
+        print('Error Body: ${response.body}');
+        return null; // Return null to indicate an error
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the request
+      print('Error: $error');
+      return null; // Return null to indicate an error
+    }
+  }
+
+
+  _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
       RoutesName.bottomNavigationBar,
-          (route) => false,
+      (route) => false,
     );
-}
+  }
 }

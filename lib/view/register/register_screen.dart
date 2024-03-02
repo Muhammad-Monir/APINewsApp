@@ -1,12 +1,14 @@
+import 'package:am_innnn/route/routes_name.dart';
 import 'package:flutter/material.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
+import '../../data/auth_data.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
 import '../login/widgets/custom_platform_button.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -22,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
   final _phoneNumberController = TextEditingController();
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -160,6 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Text('Username', style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         EmailFormField(
+          textInputType: TextInputType.text,
             emailController: _userNameController, hintText: 'Enter username'),
         SizedBox(height: Utils.scrHeight * .02)
       ],
@@ -176,13 +180,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  void _registerUser() {
+  void _registerUser() async {
     if (_formKey.currentState!.validate()) {
       final String userName = _userNameController.text;
       final String email = _emailController.text;
       final String password = _passwordController.text;
       final String repeatPassword = _repeatPasswordController.text;
       final String phoneNumber = _phoneNumberController.text;
+
+      try {
+        await _authProvider.registerUser(
+          username: userName,
+          email: email,
+          password: password,
+          confirmPassword: repeatPassword,
+          phone: phoneNumber,
+        ).then((value) {
+          Utils.showSnackBar(context, 'Registration Successful');
+          Navigator.pushReplacementNamed(context, RoutesName.verifyAccount, arguments: _emailController.text);
+        });
+
+      } catch (e) {
+        // Handle network errors or other exceptions
+        print('Registration failed with an exception: $e');
+        Utils.showSnackBar(context, 'Registration failed. Please try again.');
+      }
     }
   }
+
 }
