@@ -5,8 +5,10 @@ class ApiUrl{
   static String newsBaseUrl = 'https://newsapi.org/v2';
   static String allNewsCategoryUrl = '$newsBaseUrl/top-headlines?language=en&apiKey=$apiKey';
   static String allNewsUrl = '$newsBaseUrl/top-headlines?language=en&apiKey=$apiKey';
+  static String searchUrl = '$newsBaseUrl/everything?apiKey=$apiKey';
   static String appBaseUrl = 'http://newsapp.reigeeky.com/';
   static String loginUrl = '${appBaseUrl}api/login';
+  static String profileUrl = '${appBaseUrl}api/user';
   static String registerUrl = '${appBaseUrl}api/register';
   static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
   static String accountForgotUrl = "${appBaseUrl}api/forgot-password";

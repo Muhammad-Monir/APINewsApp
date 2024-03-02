@@ -1,12 +1,11 @@
 import 'dart:async';
-
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
+import '../../data/news_data.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
 import '../../utils/color.dart';
@@ -22,27 +21,29 @@ class DrawerScreen extends StatefulWidget {
 
 class _DrawerScreenState extends State<DrawerScreen> {
   bool _isLogin = false;
+  String _authToken = '';
 
   @override
   void initState() {
     isLoggedIn();
+    NewsData.userProfile(_authToken, context);
     super.initState();
   }
 
-   Future<void> isLoggedIn() async {
+  Future<void> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
-    setState((){
+    String? authToken = prefs.getString('token');
+    setState(() {
       _isLogin = isLogin;
+      _authToken = authToken!;
     });
     print(_isLogin);
   }
 
   @override
-Widget build(BuildContext context)  {
-
-
+  Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -114,7 +115,7 @@ Widget build(BuildContext context)  {
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
           isLogin
-              ?  CustomDrawerItem(
+              ? CustomDrawerItem(
                   text: 'Rate this App',
                   svgName: 'rating',
                   icon: Icons.arrow_forward_ios)
