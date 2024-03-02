@@ -1,3 +1,4 @@
+import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/bottom_navigation_provider.dart';
 import 'package:am_innnn/provider/drop_down_provider.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FontSizeProvider()),
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

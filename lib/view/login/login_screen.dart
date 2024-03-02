@@ -1,7 +1,8 @@
 
+import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
@@ -61,8 +62,22 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Login Button
-            const ActionButton(
-                buttonColor: appThemeColor, buttonName: 'Log In'),
+             Consumer<AuthProvider>(
+               builder: (context,provider, child) {
+                 return ActionButton(
+                  onTap: (){
+                    if(_formKey.currentState!.validate()){
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
+                      Provider.of<AuthProvider>(context, listen: false)
+                          .login(email, password,context).then((value){
+                            Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
+                      });
+                    }
+                  },
+                    buttonColor: appThemeColor, buttonName: 'Log In');
+               }
+             ),
             SizedBox(height: Utils.scrHeight * .03),
 
             // Or Login Other Platform

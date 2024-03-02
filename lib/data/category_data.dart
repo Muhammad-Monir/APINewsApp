@@ -22,5 +22,4 @@ class NewsData {
       throw Exception(e.toString());
     }
   }
-
 }
