@@ -9,7 +9,6 @@ import '../../utils/styles.dart';
 import '../../utils/utils.dart';
 import '../login/widgets/custom_platform_button.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -163,8 +162,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Text('Username', style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         EmailFormField(
-          textInputType: TextInputType.text,
-            emailController: _userNameController, hintText: 'Enter username'),
+            textInputType: TextInputType.text,
+            emailController: _userNameController,
+            hintText: 'Enter username'),
         SizedBox(height: Utils.scrHeight * .02)
       ],
     );
@@ -189,17 +189,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final String phoneNumber = _phoneNumberController.text;
 
       try {
-        await _authProvider.registerUser(
+        await _authProvider
+            .registerUser(
           username: userName,
           email: email,
           password: password,
           confirmPassword: repeatPassword,
           phone: phoneNumber,
-        ).then((value) {
+        )
+            .then((value) {
           Utils.showSnackBar(context, 'Registration Successful');
-          Navigator.pushReplacementNamed(context, RoutesName.verifyAccount, arguments: _emailController.text);
+          Navigator.pushReplacementNamed(context, RoutesName.verifyAccount,
+              arguments: _emailController.text);
         });
-
       } catch (e) {
         // Handle network errors or other exceptions
         print('Registration failed with an exception: $e');
@@ -207,5 +209,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
     }
   }
-
 }

@@ -1,8 +1,10 @@
+import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/view/change_password/change_password_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
-import '../../route/routes_name.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -17,6 +19,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               buttonColor: appThemeColor,
               buttonName: 'Send Email',
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.changePassword);
+                _sendMail();
               },
             )
           ],
@@ -75,5 +78,37 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void dispose() {
     _emailController.dispose();
     super.dispose();
+  }
+
+  void _sendMail() async {
+    if (_formKey.currentState!.validate()) {
+      final String email = _emailController.text;
+      try {
+        final Map<String, dynamic>? result =
+            await _authProvider.forgotPassword(email);
+
+        if (result != null) {
+          if (result["status"] == false) {
+            Utils.showSnackBar(
+                context, 'Error: ${result['message']['email'][0]}');
+          } else {
+            Utils.showSnackBar(
+                context, 'Password reset instructions sent to $email');
+            String uniqueString = result["data"]["unique_string"];
+            Navigator.pushNamed(context, RoutesName.changePassword,
+                arguments: CombineEmailOtp(
+                    email: _emailController.text, uniqueString: uniqueString));
+            // You can navigate to a success screen or take other actions here
+          }
+        } else {
+          Utils.showSnackBar(context,
+              'Failed to send password reset instructions. Please try again.');
+        }
+      } catch (e) {
+        print('Error: $e');
+        Utils.showSnackBar(context,
+            'Failed to send password reset instructions. Please try again.');
+      }
+    }
   }
 }

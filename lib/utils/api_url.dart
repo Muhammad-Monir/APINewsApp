@@ -11,6 +11,8 @@ class ApiUrl{
   static String profileUrl = '${appBaseUrl}api/user';
   static String registerUrl = '${appBaseUrl}api/register';
   static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
+  static String accountForgotUrl = "${appBaseUrl}api/forgot-password";
+  static String accountResetUrl = "${appBaseUrl}api/reset-password";
 
 
 }

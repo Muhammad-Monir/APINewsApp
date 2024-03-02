@@ -104,8 +104,31 @@ class AuthProvider with ChangeNotifier {
           'otp': otp,
         },
       );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        print('API Response: $data');
 
-      // Check if the request was successful (status code 200)
+        return data;
+      } else {
+        print('Error ${response.statusCode}: ${response.reasonPhrase}');
+        print('Error Body: ${response.body}');
+        return null;
+      }
+    } catch (error) {
+      print('Error: $error');
+      return null;
+    }
+  }
+
+  // Forgot Password
+  Future<Map<String, dynamic>?> forgotPassword(String email) async {
+    try {
+      _isLoading = true;
+      final response = await http.post(
+        Uri.parse(ApiUrl.accountForgotUrl),
+        body: {'email': email},
+      );
+
       if (response.statusCode == 200) {
         // Parse the JSON response
         final Map<String, dynamic> data = json.decode(response.body);
@@ -127,6 +150,43 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  // Reset Password
+  Future<Map<String, dynamic>?> resetPassword({
+    required String email,
+    required String uniqueString,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    try {
+      _isLoading = true;
+      final response = await http.post(
+        Uri.parse(ApiUrl.accountResetUrl),
+        body: {
+          'email': email,
+          'unique_string': uniqueString,
+          'password': password,
+          'confirm_password': confirmPassword,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        final Map<String, dynamic> data = json.decode(response.body);
+        // Use the data as needed
+        print('API Response: $data');
+        return data;
+      } else {
+        // If the request was not successful, handle the error
+        print('Error ${response.statusCode}: ${response.reasonPhrase}');
+        print('Error Body: ${response.body}');
+        return null;
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the request
+      print('Error: $error');
+      return null;
+    }
+  }
 
   _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(

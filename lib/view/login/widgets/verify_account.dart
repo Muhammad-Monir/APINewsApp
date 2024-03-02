@@ -92,23 +92,30 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
 
   void _verifyAccount() async {
     if (_formKey.currentState!.validate()) {
-      final String otp = _otpController.text;
+      final String enteredOtp = _otpController.text;
       try {
-        await _authProvider
-            .accountVerify(email: widget.email, otp: otp)
-            .then((value) {
+        final Map<String, dynamic>? result = await _authProvider.accountVerify(
+            email: widget.email, otp: enteredOtp);
+
+        if (result != null && result["status"] == true) {
+          // Account verification successful
           Utils.showSnackBar(context, 'Account Verify Successful');
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.login,
             (route) => false,
           );
-        });
+        } else {
+          Utils.showSnackBar(context,
+              'Account Verification Failed. Please check your OTP and try again.');
+        }
       } catch (e) {
-        // Handle network errors or other exceptions
-        print('Registration failed with an exception: $e');
-        Utils.showSnackBar(context, 'Registration failed. Please try again.');
+        print('Account verification failed with an exception: $e');
+        Utils.showSnackBar(
+            context, 'Account Verification Failed. Please try again.');
       }
+    } else {
+      Utils.showSnackBar(context, 'Please enter a valid OTP.');
     }
   }
 }
