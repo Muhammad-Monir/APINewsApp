@@ -12,6 +12,7 @@ class ApiUrl{
   // User api
   static String appBaseUrl = 'http://newsapp.reigeeky.com/';
   static String loginUrl = '${appBaseUrl}api/login';
+  static String logoutUrl = '${appBaseUrl}api/logout';
   static String userProfileUrl = '${appBaseUrl}api/user';
   static String registerUrl = '${appBaseUrl}api/register';
   static String accountVerifyUrl = "${appBaseUrl}api/account-verify";

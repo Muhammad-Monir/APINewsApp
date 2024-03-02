@@ -1,15 +1,16 @@
 import 'dart:async';
+import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:am_innnn/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
-import '../../data/news_data.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
 import '../../utils/color.dart';
@@ -26,6 +27,7 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   bool _isLogin = false;
   String _authToken = '';
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   void initState() {
@@ -193,12 +195,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
           SizedBox(height: Utils.scrHeight * .09),
 
           // Logout Button
-          isLogin
-              ? const ActionButton(
-            buttonColor: Color(0xffFFCFCC),
-            textColor: Color(0xffFF3B30),
-            buttonName: 'Log Out',
-          )
+          _isLogin
+              ? ActionButton(
+                  onTap: () {
+                    _logOut();
+                  },
+                  buttonColor: const Color(0xffFFCFCC),
+                  textColor: const Color(0xffFF3B30),
+                  buttonName: 'Log Out',
+                )
               : ActionButton(
             onTap: () {
               Navigator.pushNamed(context, RoutesName.login);
@@ -222,6 +227,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
               backgroundColor: Colors.transparent,
               child: childBuilder(context));
         });
+  }
+
+  void _logOut() async {
+    await _authProvider.logoutUser(_authToken).then((value) {
+      AuthService.clearSessionData();
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RoutesName.home,
+            (route) => false,
+      );
+    });
   }
 }
 
