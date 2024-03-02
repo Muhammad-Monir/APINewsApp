@@ -51,8 +51,19 @@ class EmailFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(Utils.scrHeight * .015),
         ),
       ),
-      validator: validate ? _validateEmail : null,
+      validator: validate ? _getValidator(textInputType) : null,
     );
+  }
+
+  String? Function(String?) _getValidator(TextInputType type) {
+    switch (type) {
+      case TextInputType.emailAddress:
+        return _validateEmail;
+      case TextInputType.phone:
+        return _validatePhoneNumber;
+      default:
+        return _validateText;
+    }
   }
 
   String? _validateEmail(String? value) {
@@ -64,6 +75,24 @@ class EmailFormField extends StatelessWidget {
     }
     return null;
   }
+
+  String? _validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    if (!RegExp(r'^\d+$').hasMatch(value)) {
+      return 'Please enter a valid phone number';
+    }
+    return null;
+  }
+
+  String? _validateText(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field cannot be empty';
+    }
+    return null;
+  }
+
 
   bool _isValidEmail(String email) {
     // Regular expression pattern for validating email addresses

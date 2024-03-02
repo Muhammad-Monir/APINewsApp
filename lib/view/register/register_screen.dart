@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../common_widgets/action_button.dart';
@@ -22,6 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +50,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             // Email Part
             _buildEmailPart(),
 
+            // Phone Number
+            buildPhoneNumberPart(),
+
             // Password Part
             _buildPasswordPart(),
 
@@ -57,8 +60,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _buildRepeatPasswordPart(),
 
             // Register User
-            const ActionButton(
-                buttonColor: appThemeColor, buttonName: 'Register'),
+            ActionButton(
+                onTap: () {
+                  _registerUser();
+                },
+                buttonColor: appThemeColor,
+                buttonName: 'Register'),
             SizedBox(height: Utils.scrHeight * .03),
 
             // Register Other Platform
@@ -66,6 +73,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Column buildPhoneNumberPart() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Phone Number', style: regularTS(loginTextColor, fontSize: 16)),
+        SizedBox(height: Utils.scrHeight * .01),
+        EmailFormField(
+            textInputType: TextInputType.phone,
+            emailController: _phoneNumberController,
+            hintText: 'Enter Phone Number'),
+        SizedBox(height: Utils.scrHeight * .02)
+      ],
     );
   }
 
@@ -111,7 +133,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Text('Password', style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         PasswordFormField(
-            passwordController: _passwordController, hintText: 'hintText'),
+            passwordController: _passwordController,
+            hintText: 'Enter password'),
         SizedBox(height: Utils.scrHeight * .02),
       ],
     );
@@ -121,8 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Email Address or Phone Number',
-            style: regularTS(loginTextColor, fontSize: 16)),
+        Text('Email Address', style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         EmailFormField(
             emailController: _emailController, hintText: 'Enter email'),
@@ -150,6 +172,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _repeatPasswordController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
+  }
+
+  void _registerUser() {
+    if (_formKey.currentState!.validate()) {
+      final String userName = _userNameController.text;
+      final String email = _emailController.text;
+      final String password = _passwordController.text;
+      final String repeatPassword = _repeatPasswordController.text;
+      final String phoneNumber = _phoneNumberController.text;
+    }
   }
 }

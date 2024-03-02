@@ -1,4 +1,5 @@
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
 import '../view/bottom_navigation/bottom_navigation_bar.dart';
@@ -23,7 +24,7 @@ class Routes {
       case RoutesName.home:
         final String? category = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (context) =>  HomeScreen(
+          builder: (context) => HomeScreen(
             category: category,
           ),
         );
@@ -82,6 +83,10 @@ class Routes {
       case RoutesName.changePassword:
         return MaterialPageRoute(
           builder: (context) => const ChangePasswordScreen(),
+        );
+      case RoutesName.verifyAccount:
+        return MaterialPageRoute(
+          builder: (context) => const VerifyAccountScreen(),
         );
       case RoutesName.story:
         return MaterialPageRoute(
