@@ -1,12 +1,18 @@
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
+import 'dart:typed_data';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../provider/timer_provider.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
-  final String?  imageUrl;
+  final String? imageUrl;
+
   const StoryScreen({super.key, this.imageUrl});
 
   @override
@@ -53,8 +59,8 @@ class StoryScreen extends StatelessWidget {
           if (type == 'video')
             const Expanded(
               child: SizedBox(
-                width: double.infinity,
-                  child: AspectRatio(aspectRatio: 9/19, child: MyPlayer())),
+                  width: double.infinity,
+                  child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer())),
             ),
           // Assuming MyPlayer widget is for displaying videos
           if (type == 'image') Image.network(imageUrl!),
@@ -71,18 +77,36 @@ class StoryScreen extends StatelessWidget {
     );
   }
 
-  void shareContent(BuildContext context) async {
+  Future<void> shareContent(BuildContext context) async {
     try {
-      await Share.share('https://flutter.dev/');
+      const String type = 'image';
+
+      if (type == 'image' && imageUrl != null) {
+        final response = await http.get(Uri.parse(imageUrl!));
+
+        if (response.statusCode == 200) {
+          final Uint8List bytes = response.bodyBytes;
+          final appDocDir = await getApplicationDocumentsDirectory();
+          final file = File('${appDocDir.path}/image.jpg');
+
+          await file.writeAsBytes(bytes);
+          await Share.shareFiles([file.path]);
+        } else {
+          throw Exception('Failed to load image');
+        }
+      } else if (type == 'video' && imageUrl != null) {
+        // You may need to handle video sharing if necessary
+      } else if (type == 'text') {
+        await Share.share('Your text story');
+      }
     } catch (e) {
+      print(e);
       Utils.showSnackBar(context, '$e');
     }
   }
 
-  void getPopUp(
-    BuildContext context,
-    Widget Function(BuildContext) childBuilder,
-  ) {
+  void getPopUp(BuildContext context,
+      Widget Function(BuildContext) childBuilder,) {
     showDialog(
         context: context,
         barrierDismissible: true, // Prevent dismissal by tapping outside

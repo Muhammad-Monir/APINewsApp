@@ -50,6 +50,7 @@ dependencies:
   share_plus: ^7.2.2
   http:
   shared_preferences:
+  path_provider:
 
 
 dev_dependencies:
