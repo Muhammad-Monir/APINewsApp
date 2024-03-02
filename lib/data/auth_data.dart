@@ -15,6 +15,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> login(String email, String password, BuildContext context) async {
     try {
       _isLoading = true;
+      notifyListeners();
       // Make a POST request to your login API endpoint
       final response = await http.post(
         Uri.parse(ApiUrl.loginUrl),
@@ -31,13 +32,11 @@ class AuthProvider with ChangeNotifier {
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         _isLoading = false;
+        notifyListeners();
         final Map<String, dynamic> data = jsonDecode(response.body);
-        print('if${response.body}');
-        if(data["status"] == "true"){
           AuthService.saveSessionData(data["token"]);
           Utils.showSnackBar(context, data["message"]);
           _navigateToHome(context);
-        }
       } else  {
         // If the request was unsuccessful, throw an error
         throw Exception('Failed to login');
@@ -45,7 +44,7 @@ class AuthProvider with ChangeNotifier {
     } catch (error) {
       // Handle errors, e.g., display an error message
       Utils.showSnackBar(context, "$error");
-      throw error;
+      rethrow;
     }
   }
 

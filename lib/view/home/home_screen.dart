@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
+import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +67,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if(widget.category == null){
       fetchAllNews =  NewsData.fetchAllNews();
     }else{
-      fetchAllNews = NewsData.fetchAllNews(category: widget.category);
+      // fetchAllNews = NewsData.fetchAllNews(category: widget.category);
+      fetchAllNews = NewsData.searchNews(searchText: widget.category);
     }
 
     return fetchAllNews;
@@ -87,41 +91,59 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               }
               if (snapshot.hasData) {
                 List<Articles> data = snapshot.data!.articles!;
-                return PageView.builder(
-                  controller: newsPageController,
-                  scrollDirection: Axis.vertical,
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    return AnimatedBuilder(
-                      animation: _animationController,
-                      builder: (context, child) {
-                        return Transform(
-                          transform: Matrix4.identity()
-                            ..setEntry(0, 2, 0.001)
-                            ..rotateX(2 * pi * flipAnim.value),
-                          alignment: Alignment.center,
-                          child: SizedBox(
-                            child: NewsScreen(
-                              homeOnTap: () =>
-                                  Scaffold.of(context).openDrawer(),
-                              startOnTap: () {
-                                newsPageController.animateToPage(
-                                  0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeInOut,
-                                );
-                              },
-                              image: data[index].urlToImage ?? ApiUrl.imageNotFound,
-                              newsDec: data[index].description ??  'News Description Not Found',
-                              sourceLink: data[index].url ??  'Url Not Found',
-                              newsTitle: data[index].title ??  'News Title Not Found',
+                if(data.isNotEmpty){
+                  return PageView.builder(
+                    controller: newsPageController,
+                    scrollDirection: Axis.vertical,
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return Transform(
+                            transform: Matrix4.identity()
+                              ..setEntry(0, 2, 0.001)
+                              ..rotateX(2 * pi * flipAnim.value),
+                            alignment: Alignment.center,
+                            child: SizedBox(
+                              child: NewsScreen(
+                                homeOnTap: () =>
+                                    Scaffold.of(context).openDrawer(),
+                                startOnTap: () {
+                                  newsPageController.animateToPage(
+                                    0,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                image: data[index].urlToImage ?? ApiUrl.imageNotFound,
+                                newsDec: data[index].description ??  'News Description Not Found',
+                                sourceLink: data[index].url ??  'Url Not Found',
+                                newsTitle: data[index].title ??  'News Title Not Found',
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
+                          );
+                        },
+                      );
+                    },
+                  );
+                }else{
+                  return  Center(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('No News Found '),
+                      SizedBox(height: Utils.scrHeight * .03,),
+                      SizedBox(
+                        width: Utils.scrHeight * .2,
+                        child: ActionButton(buttonColor: appThemeColor,buttonName: 'Try Again',onTap: (){
+                          Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
+                        },),
+                      )
+                    ],
+                  ),);
+                }
+
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),
