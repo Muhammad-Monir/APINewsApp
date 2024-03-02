@@ -6,12 +6,14 @@ import '../../provider/timer_provider.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
-  const StoryScreen({super.key});
+  final String?  imageUrl;
+  const StoryScreen({super.key, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     Provider.of<BarsVisibility>(context).hideBars();
-    const type = 'video';
+    const type = 'image';
+    print(imageUrl);
 
     return Scaffold(
       backgroundColor: const Color(0xffF6F5F3),
@@ -55,7 +57,7 @@ class StoryScreen extends StatelessWidget {
                   child: AspectRatio(aspectRatio: 9/19, child: MyPlayer())),
             ),
           // Assuming MyPlayer widget is for displaying videos
-          if (type == 'image') Utils.showImage('story'),
+          if (type == 'image') Image.network(imageUrl!),
           // Assuming showImage method is for displaying images
           if (type == 'text')
             const Center(

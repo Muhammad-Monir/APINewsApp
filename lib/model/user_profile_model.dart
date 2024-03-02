@@ -30,14 +30,14 @@ class Data {
   String? username;
   String? email;
   String? phone;
-  String? avatar;
-  String? coverPhoto;
+  dynamic avatar;
+  dynamic coverPhoto;
   String? role;
   String? status;
-  String? emailVerifiedAt;
+  dynamic emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
-  String? deletedAt;
+  dynamic deletedAt;
 
   Data(
       {this.id,
