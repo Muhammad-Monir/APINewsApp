@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/bottom_navigation_provider.dart';
@@ -14,7 +15,7 @@ import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 import 'favorite_popup.dart';
 
-class NewsScreen extends StatelessWidget {
+class NewsScreen extends StatefulWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
   final VoidCallback? refreshOnTap;
@@ -33,6 +34,31 @@ class NewsScreen extends StatelessWidget {
     required this.newsTitle,
     this.refreshOnTap,
   });
+
+  @override
+  State<NewsScreen> createState() => _NewsScreenState();
+}
+
+class _NewsScreenState extends State<NewsScreen> {
+
+
+  bool _isLogin = false;
+
+  @override
+  void initState() {
+    isLoggedIn();
+    super.initState();
+  }
+
+  Future<void> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Check if the session data exists
+    bool isLogin = prefs.containsKey('token');
+    setState(() {
+      _isLogin = isLogin;
+    });
+    print(_isLogin);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +198,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             // width: Utils.scrHeight * .342,
             child: Text(
-              newsTitle,
+              widget.newsTitle,
               style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
             ),
           ),
@@ -180,7 +206,7 @@ class NewsScreen extends StatelessWidget {
           SizedBox(
             height: Utils.scrHeight * .3,
             child: Text(
-              Utils.truncateText(newsDec!, 55),
+              Utils.truncateText(widget.newsDec!, 55),
               style: regularTS(appSecondTextColor,
                   fontSize: 15 * fontSize.fontSize),
             ),
@@ -218,9 +244,9 @@ class NewsScreen extends StatelessWidget {
                 width: Utils.scrHeight * .28,
                 child: GestureDetector(
                   onTap: () async {
-                    await launchUrl(Uri.parse(sourceLink));
+                    await launchUrl(Uri.parse(widget.sourceLink));
                   },
-                  child: Text(sourceLink,
+                  child: Text(widget.sourceLink,
                       style: regularTS(appThemeColor, fontSize: 14)),
                 ),
               ),
@@ -259,7 +285,7 @@ class NewsScreen extends StatelessWidget {
               right: Utils.scrHeight * .02,
               child: GestureDetector(
                 onTap: () {
-                  // provider.toggleBookMarkColor();
+                  _isLogin ? provider.toggleBookMarkColor() :
                   getPopUp(
                       context,
                       (p0) => FavoritePopup(
@@ -267,13 +293,6 @@ class NewsScreen extends StatelessWidget {
                               Navigator.pop(p0);
                             },
                           ));
-                  // getPopUp(
-                  //     context,
-                  //     (p0) => const CustomWelcomeScreen(
-                  //           title: 'Thank you!',
-                  //           description:
-                  //               'By making your voice heard, you help us improve\n"API News App"',
-                  //         ));
                 },
                 child: Container(
                   width: Utils.scrHeight * .04,
@@ -314,9 +333,9 @@ class NewsScreen extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(Utils.scrHeight * .03),
                 bottomRight: Radius.circular(Utils.scrHeight * .03)),
-            child: image != null
+            child: widget.image != null
                 ? Image.network(
-                    image!,
+                    widget.image!,
                     fit: BoxFit.cover,
                   )
                 : Image.asset(
@@ -338,10 +357,10 @@ class NewsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(onTap: homeOnTap, child: const HomeTabBar()),
+              GestureDetector(onTap: widget.homeOnTap, child: const HomeTabBar()),
               GestureDetector(
-                  onTap: refreshOnTap, child: const RefreshTabBar()),
-              GestureDetector(onTap: startOnTap, child: const StartTabBar()),
+                  onTap: widget.refreshOnTap, child: const RefreshTabBar()),
+              GestureDetector(onTap: widget.startOnTap, child: const StartTabBar()),
             ],
           ),
         ],

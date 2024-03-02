@@ -67,15 +67,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               ActionButton(
                 onTap: () {
-                  if (_formKey.currentState!.validate() && selectedCategory != null) {
                     print('Selected category: $selectedCategory');
                     print('Select search: ${_searchController.text}');
                     // Navigate to next page with selected category
                     Navigator.pushNamed(context, RoutesName.home,
-                        arguments: selectedCategory);
-                  } else {
-                    // Show an error message or handle the case where no category is selected
-                  }
+                        arguments:  _searchController.text);
                 },
                 buttonColor: appThemeColor,
                 textColor: Colors.white,
