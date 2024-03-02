@@ -49,6 +49,7 @@ dependencies:
   video_player:
   share_plus: ^7.2.2
   http:
+  shared_preferences:
 
 
 dev_dependencies:

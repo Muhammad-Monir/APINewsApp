@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:am_innnn/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
@@ -8,14 +12,37 @@ import '../../route/routes_name.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
-import '../share/share_screen.dart';
 
-class DrawerScreen extends StatelessWidget {
+class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    bool isLogin = false;
+  State<DrawerScreen> createState() => _DrawerScreenState();
+}
+
+class _DrawerScreenState extends State<DrawerScreen> {
+  bool _isLogin = false;
+
+  @override
+  void initState() {
+    isLoggedIn();
+    super.initState();
+  }
+
+   Future<void> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Check if the session data exists
+    bool isLogin = prefs.containsKey('token');
+    setState((){
+      _isLogin = isLogin;
+    });
+    print(_isLogin);
+  }
+
+  @override
+Widget build(BuildContext context)  {
+
+
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -41,10 +68,10 @@ class DrawerScreen extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .05),
 
           // User Information Part
-          isLogin ? buildUserInformationPart() : Container(),
+          _isLogin ? buildUserInformationPart() : Container(),
 
           // Drawer Items Part
-          _buildDrawerItems(context, isLogin: isLogin),
+          _buildDrawerItems(context, isLogin: _isLogin),
         ],
       ),
     );
@@ -87,7 +114,7 @@ class DrawerScreen extends StatelessWidget {
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
           isLogin
-              ? const CustomDrawerItem(
+              ?  CustomDrawerItem(
                   text: 'Rate this App',
                   svgName: 'rating',
                   icon: Icons.arrow_forward_ios)
