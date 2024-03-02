@@ -28,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    getToken();
     super.initState();
   }
 
@@ -86,10 +85,13 @@ class _LoginScreenState extends State<LoginScreen> {
                  return ActionButton(
                   onTap: (){
                     if(_formKey.currentState!.validate()){
+                      getToken();
                       final email = _emailController.text;
                       final password = _passwordController.text;
                       Provider.of<AuthProvider>(context, listen: false)
                           .login(email, password,context).then((value){
+                            print('auth token to login $_authToken');
+                            Future.delayed(Duration(seconds: 2));
                             UserData.getUserId(_authToken);
                             Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
                       });
