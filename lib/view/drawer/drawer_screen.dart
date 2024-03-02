@@ -36,6 +36,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     setState((){
       _isLogin = isLogin;
     });
+    print(_isLogin);
   }
 
   @override

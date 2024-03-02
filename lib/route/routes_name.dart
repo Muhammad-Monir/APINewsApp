@@ -15,5 +15,6 @@ class RoutesName {
   static const String changePassword = "/change-password";
   static const String termsOfUses = "/terms-of-uses";
   static const String drawerScreen = "/drawer_screen";
+  static const String verifyAccount = "/verify_account";
 }
 
