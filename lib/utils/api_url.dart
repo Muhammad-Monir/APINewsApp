@@ -9,6 +9,8 @@ class ApiUrl{
   static String loginUrl = '${appBaseUrl}api/login';
   static String registerUrl = '${appBaseUrl}api/register';
   static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
+  static String accountForgotUrl = "${appBaseUrl}api/forgot-password";
+  static String accountResetUrl = "${appBaseUrl}api/reset-password";
 
 
 }
