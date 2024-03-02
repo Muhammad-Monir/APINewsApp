@@ -67,6 +67,11 @@
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />
+
+        <activity
+            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <!--
            Declares a provider which allows us to store files to share in
            '.../caches/share_plus' and grant the receiving action access
@@ -91,11 +96,6 @@
                 <action android:name="EXTRA_CHOSEN_COMPONENT" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <uses-library
             android:name="androidx.window.extensions"

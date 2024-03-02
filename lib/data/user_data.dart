@@ -1,13 +1,120 @@
 import 'dart:convert';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../model/bookmark_model.dart';
-import '../route/routes_name.dart';
 import '../services/auth_service.dart';
-import '../utils/utils.dart';
+
+class UserData{
+  // Get profile data
+  static Future<ProfileModel> userProfile(String authToken) async {
+    try {
+      final response = await http.get(
+        Uri.parse(ApiUrl.userProfileUrl),
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 36|e6Lvo2IdS51yEAMJ66z45HnPMCKpO1znYte2LoQ1efbb063b'
+        },
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return ProfileModel.fromJson(data);
+      } else  {
+        // If the request was unsuccessful, throw an error
+        throw Exception('code  ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle errors, display an error message
+      throw Exception('Exception : $error');
+    }
+  }
+  
+  // Save user id
+  static Future<void> getUserId(String authToken) async {
+    try {
+      final response = await http.get(
+        Uri.parse(ApiUrl.userProfileUrl),
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 36|e6Lvo2IdS51yEAMJ66z45HnPMCKpO1znYte2LoQ1efbb063b'
+        },
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        print(data['data']['id']);
+        AuthService.saveUserId(data['data']['id']);
+      } else  {
+        // If the request was unsuccessful, throw an error
+        throw Exception('code  ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle errors, display an error message
+      throw Exception('Exception : $error');
+    }
+  }
+
+  // Add to bookmark
+  static Future<BookMarkModel> addBookMark(String? authToken, String? userId) async {
+    try {
+      final response = await http.post(
+        Uri.parse('http://newsapp.reigeeky.com/api/bookmark_news/8'),
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        return BookMarkModel.fromJson(data);
+      } else  {
+        // If the request was unsuccessful, throw an error
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      // Handle errors, display an error message
+      throw Exception(error);
+    }
+  }
+
+
+  // Get All bookmark
+  static Future<BookMarkModel> fetchBookMark(String? authToken) async {
+    try {
+      final response = await http.get(
+        Uri.parse('http://newsapp.reigeeky.com/api/bookmark_news/8'),
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        return BookMarkModel.fromJson(data);
+      } else  {
+        // If the request was unsuccessful, throw an error
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      // Handle errors, display an error message
+      throw Exception(error);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // class UserProvider with ChangeNotifier {
 //   bool _isLoading = false;
@@ -57,67 +164,3 @@ import '../utils/utils.dart';
 //   }
 // }
 
-
-
-class UserData{
-  static Future<ProfileModel> userProfile(String? authToken) async {
-    print(authToken);
-
-    try {
-      // Make a POST request to your login API endpoint
-      // print('on inside api$authToken');
-      final response = await http.get(
-        Uri.parse(ApiUrl.userProfileUrl),
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $authToken'
-        },
-      );
-
-      // Check if the request was successful (status code 200)
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        print(data);
-        return ProfileModel.fromJson(data);
-      } else  {
-        // If the request was unsuccessful, throw an error
-        throw Exception(response.statusCode);
-      }
-    } catch (error) {
-      // Handle errors, display an error message
-      print(error.toString());
-      throw Exception(error);
-    }
-  }
-
-
-  static Future<BookMarkModel> fetchBookMark(String? authToken) async {
-    print(authToken);
-
-    try {
-      // Make a POST request to your login API endpoint
-      // print('on inside api$authToken');
-      final response = await http.get(
-        Uri.parse('http://newsapp.reigeeky.com/api/bookmark_news/8'),
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $authToken'
-        },
-      );
-
-      // Check if the request was successful (status code 200)
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        print(data);
-        return BookMarkModel.fromJson(data);
-      } else  {
-        // If the request was unsuccessful, throw an error
-        throw Exception(response.statusCode);
-      }
-    } catch (error) {
-      // Handle errors, display an error message
-      print(error.toString());
-      throw Exception(error);
-    }
-  }
-}

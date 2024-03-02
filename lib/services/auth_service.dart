@@ -8,14 +8,18 @@ class AuthService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Save session data (e.g., token)
     await prefs.setString('token', responseData);
-    print( 'share pre token ${prefs.getString('token')}');
     // You can save additional session data if needed
+  }
+  static Future<void> saveUserId(int userId) async {
+    print('saveUserId');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Save session data (e.g., token)
+    await prefs.setInt('id', userId);
   }
 
   static Future<bool> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
-    print( 'share pre token ${prefs.getString('token')}');
     return prefs.containsKey('token');
   }
 
@@ -26,10 +30,23 @@ class AuthService {
     // You can remove additional session data if needed
   }
 
+  static Future<void> clearUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Remove the token
+    await prefs.remove('id');
+    // You can remove additional session data if needed
+  }
+
   static Future<String?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Retrieve token from SharedPreferences
     return prefs.getString('token');
+  }
+
+  static Future<int?> getUserID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Retrieve token from SharedPreferences
+    return prefs.getInt('id');
   }
 
 

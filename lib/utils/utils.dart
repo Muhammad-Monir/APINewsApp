@@ -58,3 +58,7 @@ class Utils {
     'technology'
   ];
 }
+
+class userInfo{
+
+}

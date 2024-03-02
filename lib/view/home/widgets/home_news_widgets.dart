@@ -103,9 +103,9 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
       ),
 
-      bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
-          ? _bottomNavigationMenu(context)
-          : null,
+      // bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
+      //     ? _bottomNavigationMenu(context)
+      //     : null,
     );
   }
 

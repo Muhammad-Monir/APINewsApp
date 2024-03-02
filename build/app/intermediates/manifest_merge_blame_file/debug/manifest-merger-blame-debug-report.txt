@@ -85,6 +85,56 @@
 68            android:exported="false"
 68-->[:geolocator_android] D:\newsapp\APINewsApp\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 69            android:foregroundServiceType="location" />
+<<<<<<< HEAD
+69-->[:geolocator_android] D:\APINewsApp\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-53
+70
+71        <activity
+71-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+72            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+72-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+73            android:exported="false"
+73-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+74            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+74-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+75        <!--
+76           Declares a provider which allows us to store files to share in
+77           '.../caches/share_plus' and grant the receiving action access
+78        -->
+79        <provider
+79-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
+80            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+80-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
+81            android:authorities="com.example.newsapp.flutter.share_provider"
+81-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
+82            android:exported="false"
+82-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+83            android:grantUriPermissions="true" >
+83-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
+84            <meta-data
+84-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-22:68
+85                android:name="android.support.FILE_PROVIDER_PATHS"
+85-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:21:17-67
+86                android:resource="@xml/flutter_share_file_paths" />
+86-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:22:17-65
+87        </provider>
+88        <!--
+89           This manifest declared broadcast receiver allows us to use an explicit
+90           Intent when creating a PendingItent to be informed of the user's choice
+91        -->
+92        <receiver
+92-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
+93            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+93-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
+94            android:exported="false" >
+94-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
+95            <intent-filter>
+95-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
+96                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+96-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
+96-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
+97            </intent-filter>
+98        </receiver>
+=======
 69-->[:geolocator_android] D:\newsapp\APINewsApp\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-53
 70        <!--
 71           Declares a provider which allows us to store files to share in
@@ -133,6 +183,7 @@
 97-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
 98            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 98-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+>>>>>>> ca9952e6d9478d503f3ee8a0bf7d187f6f723fb2
 99
 100        <uses-library
 100-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
