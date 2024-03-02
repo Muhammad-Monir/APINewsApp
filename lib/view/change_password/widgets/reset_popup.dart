@@ -1,21 +1,17 @@
+import 'package:flutter/material.dart';
 
+import '../../../route/routes_name.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
-import 'package:flutter/material.dart';
-import '../../../route/routes_name.dart';
 
-class CustomWelcomeScreen extends StatelessWidget {
-  const CustomWelcomeScreen(
-      {super.key, required this.title, required this.description});
-
-  final String title;
-  final String description;
+class ResetPopup extends StatelessWidget {
+  const ResetPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Utils.scrHeight * .6,
+      height: Utils.scrHeight * .3,
       width: Utils.scrHeight * .342,
       padding: EdgeInsets.symmetric(
           horizontal: Utils.scrHeight * .04, vertical: Utils.scrHeight * .02),
@@ -24,14 +20,11 @@ class CustomWelcomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(Utils.scrHeight * .02)),
       child: Column(
         children: [
-          Utils.showSvgPicture('welcome',
-              height: Utils.scrHeight * .284, width: Utils.scrHeight * .284),
-          SizedBox(height: Utils.scrHeight * .024),
-          Text(title,
+          Text('Congrats!',
               style: semiBoldTS(const Color(0xff4E617E), fontSize: 36)),
           SizedBox(height: Utils.scrHeight * .016),
           Text(
-              description,
+              'You have successfully changed your password. Please use the new password when logging in.',
               textAlign: TextAlign.center,
               style: regularTS(homeTabTextColor, fontSize: 16)),
           SizedBox(height: Utils.scrHeight * .028),
@@ -39,12 +32,12 @@ class CustomWelcomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  RoutesName.home,
-                  (route) => false,
+                  RoutesName.login,
+                      (route) => false,
                 );
               },
               child: Center(
-                  child: Text('Back To Home',
+                  child: Text('Back To Login',
                       style: semiBoldTS(appThemeColor,
                           fontSize: 16, isUnderline: true)))),
         ],

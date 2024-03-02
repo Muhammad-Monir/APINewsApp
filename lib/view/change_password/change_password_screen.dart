@@ -1,4 +1,7 @@
+import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/view/change_password/widgets/reset_popup.dart';
 import 'package:flutter/material.dart';
+
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/password_form_field.dart';
 import '../../utils/color.dart';
@@ -7,7 +10,9 @@ import '../../utils/utils.dart';
 import '../feedback/widgets/custom_welcome_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
+  const ChangePasswordScreen({super.key, required this.emailOtp});
+
+  final CombineEmailOtp emailOtp;
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
@@ -18,6 +23,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _resetCodeController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final AuthProvider _authProvider = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             ]),
 
             // Reset Code Part
-            _buildResetCodeSection(),
+            // _buildResetCodeSection(),
 
             // New Password Part
             _buildNewPasswordSection(),
@@ -52,13 +58,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               buttonColor: appThemeColor,
               buttonName: 'Change Password',
               onTap: () {
-                getPopUp(
-                    context,
-                    (p0) => const CustomWelcomeScreen(
-                          title: 'Congrats!',
-                          description:
-                              'You have successfully change password.Please use the new password when logging in.',
-                        ));
+                _changePassword();
               },
             ),
           ],
@@ -152,4 +152,58 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           );
         });
   }
+
+  void _changePassword() async {
+    if (_formKey.currentState!.validate()) {
+      final String email = widget.emailOtp.email;
+      final String uniqueString = widget.emailOtp.uniqueString;
+      final String newPassword = _newPasswordController.text;
+      final String confirmPassword = _confirmPasswordController.text;
+
+      try {
+        final Map<String, dynamic>? result = await _authProvider.resetPassword(
+          email: email,
+          uniqueString: uniqueString,
+          password: newPassword,
+          confirmPassword: confirmPassword,
+        );
+
+        if (result != null) {
+          if (result["status"] == false) {
+            // Handle error
+            Map<String, dynamic> errors = result['message'];
+            errors.forEach((field, messages) {
+              Utils.showSnackBar(context, '$field: ${messages[0]}');
+            });
+          } else {
+            // Handle success
+            Utils.showSnackBar(context, 'Password reset successful');
+            Navigator.pop(context); // Close the current screen
+            getPopUp(
+              context,
+              (p0) => const ResetPopup(),
+            );
+            // You can navigate to a success screen or take other actions here
+          }
+        } else {
+          Utils.showSnackBar(
+            context,
+            'Failed to reset password. Please try again.',
+          );
+        }
+      } catch (e) {
+        print('Error: $e');
+        Utils.showSnackBar(
+          context,
+          'Failed to reset password. Please try again.',
+        );
+      }
+    }
+  }
+}
+
+class CombineEmailOtp {
+  String email, uniqueString;
+
+  CombineEmailOtp({required this.email, required this.uniqueString});
 }

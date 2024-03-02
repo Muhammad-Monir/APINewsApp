@@ -16,6 +16,9 @@ class ApiUrl{
   static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
   static String storyUrl = "${appBaseUrl}api/story-board";
   static String bookmarkUrl = "${appBaseUrl}api/bookmark_news/8";
+  static String accountForgotUrl = "${appBaseUrl}api/forgot-password";
+  static String accountResetUrl = "${appBaseUrl}api/reset-password";
+
 
 
 }

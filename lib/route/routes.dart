@@ -81,8 +81,11 @@ class Routes {
           builder: (context) => const ForgotPasswordScreen(),
         );
       case RoutesName.changePassword:
+        final uniqueString = settings.arguments as CombineEmailOtp;
         return MaterialPageRoute(
-          builder: (context) => const ChangePasswordScreen(),
+          builder: (context) => ChangePasswordScreen(
+            emailOtp: uniqueString,
+          ),
         );
       case RoutesName.verifyAccount:
         final String email = settings.arguments as String;
