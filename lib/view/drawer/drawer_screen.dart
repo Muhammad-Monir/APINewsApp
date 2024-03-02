@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:am_innnn/data/user_data.dart';
+import 'package:am_innnn/model/user_profile_model.dart';
+import 'package:am_innnn/utils/api_url.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -27,7 +30,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   void initState() {
     isLoggedIn();
-    UserData.fetchBookMark(_authToken);
     super.initState();
   }
 
@@ -40,8 +42,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
       _isLogin = isLogin;
       _authToken = authToken!;
     });
-    print(_isLogin);
-    print('my authentication token$_authToken');
   }
 
   @override
@@ -59,19 +59,58 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 child: Utils.showImage('pic'),
               ),
               Positioned(
-                left: 120,
-                bottom: -40,
-                child: SizedBox(
-                    child: Utils.showImage('profile_image',
-                        height: Utils.scrHeight * .096,
-                        width: Utils.scrHeight * .096)),
+                  left: Utils.scrHeight * .12,
+                  bottom: -Utils.scrHeight * .045,
+                  child: _isLogin
+                      ? FutureBuilder<ProfileModel>(
+                      future: UserData.userProfile(_authToken),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final data = snapshot.data!;
+                          return SizedBox(
+                              child: ClipOval(
+                                child: Image.network('${ApiUrl.appBaseUrl}${data.data!.avatar}',
+                                height: Utils.scrHeight * .096,
+                                width: Utils.scrHeight * .096,fit: BoxFit.cover,),
+                              ));
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.hasError.toString()),
+                          );
+                        } else {
+                          return Center(
+                            child: Container(),
+                          );
+                        }
+                      }) : SizedBox(
+                      child: Utils.showImage('profile_image',
+                          height: Utils.scrHeight * .096,
+                          width: Utils.scrHeight * .096))
               ),
             ],
           ),
           SizedBox(height: Utils.scrHeight * .05),
 
           // User Information Part
-          _isLogin ? buildUserInformationPart() : Container(),
+          _isLogin
+              ? FutureBuilder<ProfileModel>(
+              future: UserData.userProfile(_authToken),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data!;
+                  return buildUserInformationPart(
+                      data.data!.username, data.data!.email);
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.hasError.toString()),
+                  );
+                } else {
+                  return Center(
+                    child: Container(),
+                  );
+                }
+              })
+              : Container(),
 
           // Drawer Items Part
           _buildDrawerItems(context, isLogin: _isLogin),
@@ -80,11 +119,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 
-  Column buildUserInformationPart() {
+  Column buildUserInformationPart(String? userName, String? email) {
     return Column(
       children: [
-        Text('am_innnn', style: mediumTS(appTextColor, fontSize: 24)),
-        Text('@am_innnn',
+        Text(userName ?? 'User Name',
+            style: mediumTS(appTextColor, fontSize: 24)),
+        Text(email ?? 'Email',
             style: regularTS(const Color(0xff8E99A9), fontSize: 14)),
       ],
     );
@@ -97,13 +137,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
         children: [
           isLogin
               ? Consumer<NotificationProvider>(
-                  builder: (context, state, child) => CustomDrawerItem(
-                    text: 'Notifications',
-                    svgName: 'notification',
-                    isToggleable: true,
-                    switchProvider: Provider.of<NotificationProvider>(context),
-                  ),
-                )
+            builder: (context, state, child) =>
+                CustomDrawerItem(
+                  text: 'Notifications',
+                  svgName: 'notification',
+                  isToggleable: true,
+                  switchProvider: Provider.of<NotificationProvider>(context),
+                ),
+          )
               : Container(),
           CustomDrawerItem(
               onTap: () async {
@@ -117,19 +158,19 @@ class _DrawerScreenState extends State<DrawerScreen> {
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
           isLogin
-              ? CustomDrawerItem(
-                  text: 'Rate this App',
-                  svgName: 'rating',
-                  icon: Icons.arrow_forward_ios)
+              ? const CustomDrawerItem(
+              text: 'Rate this App',
+              svgName: 'rating',
+              icon: Icons.arrow_forward_ios)
               : Container(),
           isLogin
               ? CustomDrawerItem(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.feedBack);
-                  },
-                  text: 'Feedback',
-                  svgName: 'feedback',
-                  icon: Icons.arrow_forward_ios)
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.feedBack);
+              },
+              text: 'Feedback',
+              svgName: 'feedback',
+              icon: Icons.arrow_forward_ios)
               : Container(),
           const CustomDrawerItem(
               text: 'Contact Us',
@@ -154,27 +195,25 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // Logout Button
           isLogin
               ? const ActionButton(
-                  buttonColor: Color(0xffFFCFCC),
-                  textColor: Color(0xffFF3B30),
-                  buttonName: 'Log Out',
-                )
+            buttonColor: Color(0xffFFCFCC),
+            textColor: Color(0xffFF3B30),
+            buttonName: 'Log Out',
+          )
               : ActionButton(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.login);
-                  },
-                  buttonColor: appThemeColor,
-                  textColor: Colors.white,
-                  buttonName: 'Log In',
-                ),
+            onTap: () {
+              Navigator.pushNamed(context, RoutesName.login);
+            },
+            buttonColor: appThemeColor,
+            textColor: Colors.white,
+            buttonName: 'Log In',
+          ),
         ],
       ),
     );
   }
 
-  void getPopUp(
-    BuildContext context,
-    Widget Function(BuildContext) childBuilder,
-  ) {
+  void getPopUp(BuildContext context,
+      Widget Function(BuildContext) childBuilder,) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -194,14 +233,13 @@ class CustomDrawerItem extends StatelessWidget {
   final VoidCallback? onTap;
   final NotificationProvider? switchProvider;
 
-  const CustomDrawerItem(
-      {super.key,
-      required this.text,
-      this.icon,
-      required this.svgName,
-      this.onTap,
-      this.isToggleable = false,
-      this.switchProvider});
+  const CustomDrawerItem({super.key,
+    required this.text,
+    this.icon,
+    required this.svgName,
+    this.onTap,
+    this.isToggleable = false,
+    this.switchProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -223,19 +261,20 @@ class CustomDrawerItem extends StatelessWidget {
                 const Spacer(),
                 isToggleable
                     ? Consumer<NotificationProvider>(
-                        builder: (context, provider, child) => Switch(
-                            value: provider.isSwitchToggled,
-                            onChanged: (newValue) => provider.toggleSwitch(),
-                            activeColor: appThemeColor,
-                            activeTrackColor: const Color(0xffEBF3FF),
-                            inactiveTrackColor: const Color(0xffB7C1D2),
-                            inactiveThumbColor: const Color(0xff4E617E)),
-                      )
+                  builder: (context, provider, child) =>
+                      Switch(
+                          value: provider.isSwitchToggled,
+                          onChanged: (newValue) => provider.toggleSwitch(),
+                          activeColor: appThemeColor,
+                          activeTrackColor: const Color(0xffEBF3FF),
+                          inactiveTrackColor: const Color(0xffB7C1D2),
+                          inactiveThumbColor: const Color(0xff4E617E)),
+                )
                     : icon != null
-                        ? Icon(icon,
-                            size: Utils.scrHeight * .016,
-                            color: homeTabTextColor)
-                        : const SizedBox.shrink(),
+                    ? Icon(icon,
+                    size: Utils.scrHeight * .016,
+                    color: homeTabTextColor)
+                    : const SizedBox.shrink(),
               ],
             ),
             SizedBox(height: Utils.scrHeight * .01),

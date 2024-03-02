@@ -50,6 +50,7 @@ dependencies:
   share_plus: ^7.2.2
   http:
   shared_preferences:
+  cached_network_image:
 
 
 dev_dependencies:

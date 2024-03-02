@@ -1,7 +1,10 @@
 import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/data/news_data.dart';
+import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
@@ -21,6 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  String _authToken = '';
+
+  @override
+  void initState() {
+    getToken();
+    super.initState();
+  }
+
+  Future<void> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // set authToken
+    String? authToken = prefs.getString('token');
+    setState(() {
+      _authToken = authToken!;
+    });
+  }
 
   @override
   void dispose() {
@@ -71,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       final password = _passwordController.text;
                       Provider.of<AuthProvider>(context, listen: false)
                           .login(email, password,context).then((value){
+                            UserData.getUserId(_authToken);
                             Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
                       });
                     }

@@ -35,14 +35,12 @@ class NewsData {
           : Uri.parse('${ApiUrl.searchUrl}&q=$searchText'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
-        print(jsonDecode(response.body));
         return NewsModel.fromJson(jsonDecode(response.body));
       } else {
         // If the server did not return a 200 OK response, throw an exception
         throw Exception('Failed to load news');
       }
     } catch (e) {
-      print(e.toString());
       throw Exception(e.toString());
     }
   }
@@ -59,13 +57,11 @@ class NewsData {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        print(data);
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load profile: ${response.statusCode}');
       }
     } catch (error) {
-      print('Error fetching profile: $error');
       rethrow;
     }
   }
