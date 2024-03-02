@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:am_innnn/data/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,7 +27,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   void initState() {
     isLoggedIn();
-    NewsData.userProfile(_authToken, context);
+    UserData.fetchBookMark(_authToken);
     super.initState();
   }
 
@@ -40,6 +41,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
       _authToken = authToken!;
     });
     print(_isLogin);
+    print('my authentication token$_authToken');
   }
 
   @override

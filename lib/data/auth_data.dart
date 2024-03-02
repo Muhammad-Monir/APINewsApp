@@ -34,9 +34,9 @@ class AuthProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         final Map<String, dynamic> data = jsonDecode(response.body);
-          AuthService.saveSessionData(data["token"]);
-          Utils.showSnackBar(context, data["message"]);
-          _navigateToHome(context);
+        AuthService.saveSessionData(data["token"]);
+        Utils.showSnackBar(context, data["message"]);
+        _navigateToHome(context);
       } else {
         // If the request was unsuccessful, throw an error
         throw Exception('Failed to login');
@@ -132,7 +132,6 @@ class AuthProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         // Parse the JSON response
         final Map<String, dynamic> data = json.decode(response.body);
-
         // Use the data as needed
         print('API Response: $data');
 

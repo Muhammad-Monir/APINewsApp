@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
+import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/color.dart';
@@ -33,16 +34,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late PageController newsPageController;
   late AnimationController _animationController;
   late Future<NewsModel> fetchAllNews;
+  late Future<StoryModel> fetchStroy;
 
   @override
   void initState() {
-
-    print(widget.category);
-    super.initState();
-
-    // fetchAllNews = NewsData.fetchAllNews();
-
-    // fetchNews();
+    fetchStroy = NewsData.fetchStory();
 
     _animationController = AnimationController(
       duration: const Duration(microseconds: 100), // Adjust animation duration
@@ -61,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _animationController.value = (newsPageController.page! % 1);
       }
     });
+
+    super.initState();
   }
 
   Future<NewsModel> fetchNews() async {
@@ -215,14 +213,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
 
           // All Story for swipe horizontally
-          PageView.builder(
-              controller: storyPageController,
-              scrollDirection: Axis.vertical,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                Provider.of<BarsVisibility>(context).hideBars();
-                return const StoryScreen();
-              }),
+          FutureBuilder<StoryModel>(
+            future: fetchStroy,
+            builder: (context,snapshot) {
+              if(snapshot.hasData){
+                final data = snapshot.data!.story!.data;
+                print(data);
+                return PageView.builder(
+                    controller: storyPageController,
+                    scrollDirection: Axis.vertical,
+                    itemCount: data!.length,
+                    itemBuilder: (context, index) {
+                      print(data[index].image);
+                      Provider.of<BarsVisibility>(context).hideBars();
+                      return  StoryScreen(imageUrl: data[index].image ?? ApiUrl.imageNotFound);
+                    });
+              }else if(snapshot.hasError){
+                return Center(child: Text(snapshot.hasError.toString()),);
+              }else {
+                return const Center(child: CircularProgressIndicator(),);
+              }
+
+            }
+          ),
         ],
       ),
     );

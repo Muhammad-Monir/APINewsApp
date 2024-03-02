@@ -95,8 +95,11 @@ class Routes {
           ),
         );
       case RoutesName.story:
+        final String? imageUrl = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (context) => const StoryScreen(),
+          builder: (context) => StoryScreen(
+            imageUrl: imageUrl,
+          ),
         );
 
       default:
