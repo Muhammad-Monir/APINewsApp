@@ -85,8 +85,11 @@ class Routes {
           builder: (context) => const ChangePasswordScreen(),
         );
       case RoutesName.verifyAccount:
+        final String email = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const VerifyAccountScreen(),
+          builder: (context) => VerifyAccountScreen(
+            email: email,
+          ),
         );
       case RoutesName.story:
         return MaterialPageRoute(

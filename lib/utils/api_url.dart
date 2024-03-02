@@ -7,6 +7,8 @@ class ApiUrl{
   static String allNewsUrl = '$newsBaseUrl/top-headlines?language=en&apiKey=$apiKey';
   static String appBaseUrl = 'http://newsapp.reigeeky.com/';
   static String loginUrl = '${appBaseUrl}api/login';
+  static String registerUrl = '${appBaseUrl}api/register';
+  static String accountVerifyUrl = "${appBaseUrl}api/account-verify";
 
 
 }
