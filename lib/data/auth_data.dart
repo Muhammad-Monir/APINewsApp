@@ -16,7 +16,6 @@ class AuthProvider with ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      // Make a POST request to your login API endpoint
       final response = await http.post(
         Uri.parse(ApiUrl.loginUrl),
         headers: <String, String>{
@@ -29,7 +28,6 @@ class AuthProvider with ChangeNotifier {
         }),
       );
 
-      // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         _isLoading = false;
         notifyListeners();
@@ -38,11 +36,9 @@ class AuthProvider with ChangeNotifier {
         Utils.showSnackBar(context, data["message"]);
         _navigateToHome(context);
       } else {
-        // If the request was unsuccessful, throw an error
         throw Exception('Failed to login');
       }
     } catch (error) {
-      // Handle errors, e.g., display an error message
       Utils.showSnackBar(context, "$error");
       rethrow;
     }
@@ -130,22 +126,17 @@ class AuthProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        // Parse the JSON response
         final Map<String, dynamic> data = json.decode(response.body);
-        // Use the data as needed
         print('API Response: $data');
-
-        return data; // Return the parsed data
+        return data;
       } else {
-        // If the request was not successful, handle the error
         print('Error ${response.statusCode}: ${response.reasonPhrase}');
         print('Error Body: ${response.body}');
-        return null; // Return null to indicate an error
+        return null;
       }
     } catch (error) {
-      // Handle any errors that occurred during the request
       print('Error: $error');
-      return null; // Return null to indicate an error
+      return null;
     }
   }
 
@@ -169,19 +160,15 @@ class AuthProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        // Parse the JSON response
         final Map<String, dynamic> data = json.decode(response.body);
-        // Use the data as needed
         print('API Response: $data');
         return data;
       } else {
-        // If the request was not successful, handle the error
         print('Error ${response.statusCode}: ${response.reasonPhrase}');
         print('Error Body: ${response.body}');
         return null;
       }
     } catch (error) {
-      // Handle any errors that occurred during the request
       print('Error: $error');
       return null;
     }
@@ -201,14 +188,11 @@ class AuthProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        // Logout successful, you can handle the response accordingly
         print('Logout successful');
       } else {
-        // Handle other status codes or errors
         throw Exception('Logout failed - ${response.statusCode}');
       }
     } catch (error) {
-      // Handle http errors or exceptions
       print('Error during logout: $error');
       throw Exception('Error during logout');
     }
