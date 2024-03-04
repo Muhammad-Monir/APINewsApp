@@ -93,115 +93,126 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
-
-          FutureBuilder<NewsModel>(
-            future: fetchNews(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(child: Text('${snapshot.error}'));
-              }
-              if (snapshot.hasData) {
-                List<Articles> data = snapshot.data!.articles!;
-                if (data.isNotEmpty) {
-                  return PageView.builder(
-                    controller: newsPageController,
-                    scrollDirection: Axis.vertical,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return AnimatedBuilder(
-                        animation: _animationController,
-                        builder: (context, child) {
-                          return Transform(
-                            transform: Matrix4.identity()
-                              ..setEntry(0, 2, 0.001)
-                              ..rotateX(2 * pi * flipAnim.value),
-                            alignment: Alignment.center,
-                            child: !_isRefresh ? SizedBox(
-                              child: NewsScreen(
-                                homeOnTap: () =>
-                                    Scaffold.of(context).openDrawer(),
-                                startOnTap: () {
-                                  newsPageController.animateToPage(
-                                    0,
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut,
-                                  );
-                                },
-                                refreshOnTap: () {
-                                  _refreshData();
-                                },
-                                image: data[index].urlToImage ??
-                                    ApiUrl.imageNotFound,
-                                newsDec: data[index].description ??
-                                    'News Description Not Found',
-                                sourceLink: data[index].url ?? 'Url Not Found',
-                                newsTitle: data[index].title ??
-                                    'News Title Not Found',
-                              ) ,
-                            ): const Center(child: CircularProgressIndicator()),
-                          );
-                        },
-                      );
-                    },
-                  );
-                } else {
-                  return Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Spacer(),
-                        const Text('No News Found '),
-                        SizedBox(height: Utils.scrHeight * .03,),
-                        SizedBox(
-                          width: Utils.scrHeight * .2,
-                          child: ActionButton(buttonColor: appThemeColor,
-                            buttonName: 'Try Again',
-                            onTap: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, RoutesName.home, (route) => false);
-                            },),
-                        ),
-                        const Spacer(),
-                      ],
-                    ),);
-                }
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ),
+          _newsSection(),
 
 
           // All Story for swipe horizontally
-          FutureBuilder<StoryModel>(
-            future: fetchStory,
-            builder: (context,snapshot) {
-              if (snapshot.hasData) {
-                final data = snapshot.data!.story!.data;
-                return PageView.builder(
-                    controller: storyPageController,
-                    scrollDirection: Axis.vertical,
-                    itemCount: data!.length,
-                    itemBuilder: (context, index) {
-                      Provider.of<BarsVisibility>(context).hideBars();
-                      return StoryScreen(
-                          imageUrl: '${ApiUrl.appBaseUrl}${data[index]
-                              .image}' ?? ApiUrl.imageNotFound);
-                    });
-              } else if (snapshot.hasError) {
-                return Center(child: Text(snapshot.hasError.toString()),);
-              } else {
-                return const Center(child: CircularProgressIndicator(),);
-              }
-            }
-          ),
+          _storySection(),
         ],
       ),
 
     );
+  }
+
+  FutureBuilder<NewsModel> _newsSection() {
+    return FutureBuilder<NewsModel>(
+          future: fetchNews(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('${snapshot.error}'));
+            }
+            if (snapshot.hasData) {
+              List<Articles> data = snapshot.data!.articles!;
+              if (data.isNotEmpty) {
+                return PageView.builder(
+                  controller: newsPageController,
+                  scrollDirection: Axis.vertical,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return Transform(
+                          transform: Matrix4.identity()
+                            ..setEntry(0, 2, 0.001)
+                            ..rotateX(2 * pi * flipAnim.value),
+                          alignment: Alignment.center,
+                          child: !_isRefresh ? SizedBox(
+                            child: NewsScreen(
+                              homeOnTap: () =>
+                                  Scaffold.of(context).openDrawer(),
+                              startOnTap: () {
+                                newsPageController.animateToPage(
+                                  0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              refreshOnTap: () {
+                                _refreshData();
+                              },
+                              image: data[index].urlToImage ??
+                                  ApiUrl.imageNotFound,
+                              newsDec: data[index].description ??
+                                  'News Description Not Found',
+                              sourceLink: data[index].url ?? 'Url Not Found',
+                              newsTitle: data[index].title ??
+                                  'News Title Not Found',
+                            ) ,
+                          ): const Center(child: CircularProgressIndicator()),
+                        );
+                      },
+                    );
+                  },
+                );
+              } else {
+                return _errorSection(context);
+              }
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        );
+  }
+
+  Center _errorSection(BuildContext context) {
+    return Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(),
+                      const Text('No News Found '),
+                      SizedBox(height: Utils.scrHeight * .03,),
+                      SizedBox(
+                        width: Utils.scrHeight * .2,
+                        child: ActionButton(buttonColor: appThemeColor,
+                          buttonName: 'Try Again',
+                          onTap: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, RoutesName.home, (route) => false);
+                          },),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),);
+  }
+
+  FutureBuilder<StoryModel> _storySection() {
+    return FutureBuilder<StoryModel>(
+          future: fetchStory,
+          builder: (context,snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!.story!.data;
+              return PageView.builder(
+                  controller: storyPageController,
+                  scrollDirection: Axis.vertical,
+                  itemCount: data!.length,
+                  itemBuilder: (context, index) {
+                    Provider.of<BarsVisibility>(context).hideBars();
+                    return StoryScreen(
+                        imageUrl: '${ApiUrl.appBaseUrl}${data[index]
+                            .image}' ?? ApiUrl.imageNotFound);
+                  });
+            } else if (snapshot.hasError) {
+              return Center(child: Text(snapshot.hasError.toString()),);
+            } else {
+              return const Center(child: CircularProgressIndicator(),);
+            }
+          }
+        );
   }
 
   Theme _bottomNavigationMenu(BuildContext context) {
