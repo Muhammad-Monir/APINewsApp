@@ -295,7 +295,9 @@ class _NewsScreenState extends State<NewsScreen> {
                   if (_isLogin) {
                     // provider.toggleIsFavorite();
                     // provider.isFavorite ?
-                    UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
+                    UserData.addBookMark(_authToken, userId.toString(),
+                            widget.newsTitle, widget.image)
+                        .then((value) {
                       // provider.toggleIsFavorite();
                     });
                   } else {
@@ -345,14 +347,17 @@ class _NewsScreenState extends State<NewsScreen> {
                 bottomLeft: Radius.circular(Utils.scrHeight * .12))),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(Utils.scrHeight * .03),
-              bottomRight: Radius.circular(Utils.scrHeight * .03)),
+            bottomLeft: Radius.circular(Utils.scrHeight * .012),
+            bottomRight: Radius.circular(Utils.scrHeight * .012),
+          ),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             fadeInDuration: const Duration(seconds: 2),
             imageUrl: widget.image!,
-            errorWidget: (context, url, error) =>
-                Image.network(ApiUrl.imageNotFound),
+            errorWidget: (context, url, error) => Image.network(
+              ApiUrl.imageNotFound,
+              width: double.infinity,
+            ),
           ),
         ));
   }

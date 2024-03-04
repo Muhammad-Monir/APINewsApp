@@ -73,14 +73,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               return SizedBox(
                                 height: Utils.scrHeight * .096,
                                 width: Utils.scrHeight * .096,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
+                                child: ClipOval(
+                                  // borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
                                   child: CachedNetworkImage(
                                     fit: BoxFit.cover,
                                     fadeInDuration: const Duration(seconds: 2),
                                     imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
                                     errorWidget: (context, url, error) =>
-                                        Image.network(ApiUrl.imageNotFound),
+                                        Utils.showImage('profile_image'),
                                   )
                                 ),
                               );
