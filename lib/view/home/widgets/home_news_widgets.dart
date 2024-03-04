@@ -6,10 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
-import '../../../provider/bottom_navigation_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
-import '../../../route/routes_name.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -89,22 +87,7 @@ class _NewsScreenState extends State<NewsScreen> {
         }),
       ),
       // Showing Floating Add Banner
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(
-            right: Utils.scrHeight * .054,
-            left: Utils.scrHeight * .054,
-            bottom: Utils.scrHeight * .01),
-        child: GestureDetector(
-          child: SizedBox(
-            width: double.infinity,
-            height: Utils.scrHeight * .054,
-            child: Image.asset(
-              'assets/images/floating_add.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: _floatingActionButton(),
 
       // bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
       //     ? _bottomNavigationMenu(context)
@@ -112,73 +95,92 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Theme _bottomNavigationMenu(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent),
-      child: Consumer<BottomNavigationProvider>(
-          builder: (context, provider, child) {
-        return BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('search',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('font',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Font',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('bookmark',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'BookMark',
-            ),
-            BottomNavigationBarItem(
-              icon: provider.selectedIndex == 3
-                  ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
-                  : Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-              label: 'Share',
-            ),
-          ],
-          useLegacyColorScheme: false,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          currentIndex: provider.selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            provider.updateSelectedIndex(index);
-            if (provider.selectedIndex == 0) {
-              Navigator.pushNamed(context, RoutesName.search);
-            } else if (provider.selectedIndex == 1) {
-              Navigator.pushNamed(context, RoutesName.font);
-            } else if (provider.selectedIndex == 2) {
-              Navigator.pushNamed(context, RoutesName.bookmark);
-            } else if (provider.selectedIndex == 3) {
-              shareContent(context);
-              // getPopUp(
-              //     context,
-              //     (p0) => ShareScreen(onExit: () {
-              //           Navigator.pop(p0);
-              //         }));
-            }
-          },
-        );
-      }),
+  Padding _floatingActionButton() {
+    return Padding(
+      padding: EdgeInsets.only(
+          right: Utils.scrHeight * .054,
+          left: Utils.scrHeight * .054,
+          bottom: Utils.scrHeight * .01),
+      child: GestureDetector(
+        child: SizedBox(
+          width: double.infinity,
+          height: Utils.scrHeight * .054,
+          child: Image.asset(
+            'assets/images/floating_add.png',
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
+
+  // Theme _bottomNavigationMenu(BuildContext context) {
+  //   return Theme(
+  //     data: Theme.of(context).copyWith(
+  //         canvasColor: Colors.white,
+  //         splashColor: Colors.transparent,
+  //         highlightColor: Colors.transparent),
+  //     child: Consumer<BottomNavigationProvider>(
+  //         builder: (context, provider, child) {
+  //       return BottomNavigationBar(
+  //         selectedLabelStyle: const TextStyle(color: appSecondTextColor),
+  //         unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
+  //         items: <BottomNavigationBarItem>[
+  //           BottomNavigationBarItem(
+  //             icon: Utils.showSvgPicture('search',
+  //                 height: Utils.scrHeight * 0.024,
+  //                 width: Utils.scrHeight * 0.024),
+  //             label: 'Search',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Utils.showSvgPicture('font',
+  //                 height: Utils.scrHeight * 0.024,
+  //                 width: Utils.scrHeight * 0.024),
+  //             label: 'Font',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Utils.showSvgPicture('bookmark',
+  //                 height: Utils.scrHeight * 0.024,
+  //                 width: Utils.scrHeight * 0.024),
+  //             label: 'BookMark',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: provider.selectedIndex == 3
+  //                 ? Utils.showSvgPicture('share',
+  //                     height: Utils.scrHeight * 0.024,
+  //                     width: Utils.scrHeight * 0.024)
+  //                 : Utils.showSvgPicture('share',
+  //                     height: Utils.scrHeight * 0.024,
+  //                     width: Utils.scrHeight * 0.024),
+  //             label: 'Share',
+  //           ),
+  //         ],
+  //         useLegacyColorScheme: false,
+  //         showSelectedLabels: true,
+  //         showUnselectedLabels: true,
+  //         currentIndex: provider.selectedIndex,
+  //         type: BottomNavigationBarType.fixed,
+  //         onTap: (index) {
+  //           provider.updateSelectedIndex(index);
+  //           if (provider.selectedIndex == 0) {
+  //             Navigator.pushNamed(context, RoutesName.search);
+  //           } else if (provider.selectedIndex == 1) {
+  //             Navigator.pushNamed(context, RoutesName.font);
+  //           } else if (provider.selectedIndex == 2) {
+  //             Navigator.pushNamed(context, RoutesName.bookmark);
+  //           } else if (provider.selectedIndex == 3) {
+  //             shareContent(context);
+  //             // getPopUp(
+  //             //     context,
+  //             //     (p0) => ShareScreen(onExit: () {
+  //             //           Navigator.pop(p0);
+  //             //         }));
+  //           }
+  //         },
+  //       );
+  //     }),
+  //   );
+  // }
 
   void shareContent(BuildContext context) async {
     try {
