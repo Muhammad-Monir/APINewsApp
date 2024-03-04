@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
@@ -303,9 +304,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 if (_isLogin) {
                   provider.toggleIsFavorite();
                   // provider.isFavorite ?
-                  // UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
-                  //   // provider.toggleIsFavorite();
-                  // });
+                  UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
+                    // provider.toggleIsFavorite();
+                  });
                 } else {
                   getPopUp(
                       context,
