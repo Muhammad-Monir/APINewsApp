@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../common_widgets/custom_divider.dart';
+import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -32,7 +34,15 @@ class BookmarkItem extends StatelessWidget {
                 width: Utils.scrHeight * .09,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
-                    child: Image.network(imageName!,fit: BoxFit.cover,))),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      fadeInDuration: const Duration(seconds: 2),
+                      imageUrl: imageName!,
+                      errorWidget: (context, url, error) =>
+                          Image.network(ApiUrl.imageNotFound),
+                    ),
+                )
+            ),
             SizedBox(width: Utils.scrHeight * .01),
             Expanded(
               child: Padding(

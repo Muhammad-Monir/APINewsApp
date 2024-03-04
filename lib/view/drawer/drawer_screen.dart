@@ -4,6 +4,7 @@ import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -70,13 +71,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             if (snapshot.hasData) {
                               final data = snapshot.data!;
                               return SizedBox(
-                                child: ClipOval(
-                                  child: Image.network(
-                                    '${ApiUrl.appBaseUrl}${data.data!.avatar}',
-                                    height: Utils.scrHeight * .096,
-                                    width: Utils.scrHeight * .096,
+                                height: Utils.scrHeight * .096,
+                                width: Utils.scrHeight * .096,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
+                                  child: CachedNetworkImage(
                                     fit: BoxFit.cover,
-                                  ),
+                                    fadeInDuration: const Duration(seconds: 2),
+                                    imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
+                                    errorWidget: (context, url, error) =>
+                                        Image.network(ApiUrl.imageNotFound),
+                                  )
                                 ),
                               );
                             } else if (snapshot.hasError) {
