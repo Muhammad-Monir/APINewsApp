@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _detectLocation();
+    // _detectLocation();
 
     Future.delayed(
       const Duration(seconds: 1),
@@ -41,21 +41,21 @@ class _SplashScreenState extends State<SplashScreen> {
     print(_country);
   }
 
-  void _detectLocation() async {
-    try{
-      final position = await determinePosition();
-      setNewLocation(position.latitude, position.longitude);
-
-      List<Placemark> countryName = await placemarkFromCoordinates(
-          position.latitude, position.longitude);
-      if (countryName != null && countryName.isNotEmpty) {
-        _country = countryName[0].country!;
-        print(_country);
-      }
-    }catch(e){
-      print(e.toString());
-    }
-  }
+  // void _detectLocation() async {
+  //   try{
+  //     final position = await determinePosition();
+  //     setNewLocation(position.latitude, position.longitude);
+  //
+  //     List<Placemark> countryName = await placemarkFromCoordinates(
+  //         position.latitude, position.longitude);
+  //     if (countryName != null && countryName.isNotEmpty) {
+  //       _country = countryName[0].country!;
+  //       print(_country);
+  //     }
+  //   }catch(e){
+  //     print(e.toString());
+  //   }
+  // }
 
 
   @override
