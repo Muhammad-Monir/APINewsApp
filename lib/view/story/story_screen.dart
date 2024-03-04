@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
@@ -8,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../provider/timer_provider.dart';
+import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
@@ -62,13 +64,18 @@ class StoryScreen extends StatelessWidget {
                   width: double.infinity,
                   child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer())),
             ),
-          // Assuming MyPlayer widget is for displaying videos
-          if (type == 'image') Image.network(imageUrl!),
-          // Assuming showImage method is for displaying images
+          if (type == 'image')
+            CachedNetworkImage(
+              fadeInDuration: const Duration(seconds: 2),
+              imageUrl: imageUrl!,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) =>
+                  Image.network(ApiUrl.imageNotFound),
+            ),
           if (type == 'text')
             const Center(
               child: Text(
-                'Your text story', // Placeholder text for text stories
+                'Your text story',
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
             ),
@@ -95,7 +102,6 @@ class StoryScreen extends StatelessWidget {
           throw Exception('Failed to load image');
         }
       } else if (type == 'video' && imageUrl != null) {
-        // You may need to handle video sharing if necessary
       } else if (type == 'text') {
         await Share.share('Your text story');
       }
@@ -105,14 +111,16 @@ class StoryScreen extends StatelessWidget {
     }
   }
 
-  void getPopUp(BuildContext context,
-      Widget Function(BuildContext) childBuilder,) {
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
     showDialog(
         context: context,
-        barrierDismissible: true, // Prevent dismissal by tapping outside
+        barrierDismissible: true,
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor: Colors.transparent, // Optional customization
+            backgroundColor: Colors.transparent,
             // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
             child: childBuilder(context),
           );
