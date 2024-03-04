@@ -351,8 +351,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 bottomLeft: Radius.circular(Utils.scrHeight * .12))),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(Utils.scrHeight * .03),
-              bottomRight: Radius.circular(Utils.scrHeight * .03)),
+            bottomLeft: Radius.circular(Utils.scrHeight * .012),
+            bottomRight: Radius.circular(Utils.scrHeight * .012),
+          ),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: widget.image!,
