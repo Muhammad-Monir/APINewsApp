@@ -196,12 +196,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           builder: (context,snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data!.story!.data;
+              if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
+                Timer(const Duration(seconds: 1), () {
+                  Provider.of<BarsVisibility>(context, listen: false).hideBars();
+                });
+              }
               return PageView.builder(
                   controller: storyPageController,
                   scrollDirection: Axis.vertical,
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
-                    Provider.of<BarsVisibility>(context).hideBars();
                     return StoryScreen(
                         imageUrl: '${ApiUrl.appBaseUrl}${data[index]
                             .image}');

@@ -19,9 +19,7 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<BarsVisibility>(context).hideBars();
     const type = 'image';
-    print(imageUrl);
 
     return Scaffold(
       backgroundColor: const Color(0xffF6F5F3),
