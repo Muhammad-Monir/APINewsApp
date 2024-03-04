@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.newsapp-mergeDebugResources-15:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.example.newsapp-mergeDebugResources-13:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-en-rAU\\values-en-rAU.xml",
