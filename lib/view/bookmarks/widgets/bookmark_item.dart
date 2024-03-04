@@ -13,7 +13,8 @@ class BookmarkItem extends StatelessWidget {
     required this.svgName,
     this.imageName,
     this.title,
-    this.time, this.onTap,
+    this.time,
+    this.onTap,
   });
 
   final String svgName;
@@ -33,14 +34,14 @@ class BookmarkItem extends StatelessWidget {
                 height: Utils.scrHeight * .1,
                 width: Utils.scrHeight * .09,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: imageName!,
-                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          Image.network(ApiUrl.imageNotFound),
-                    ),
+                  borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: imageName!,
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        Image.network(ApiUrl.imageNotFound),
+                  ),
                 )
             ),
             SizedBox(width: Utils.scrHeight * .01),
@@ -59,7 +60,10 @@ class BookmarkItem extends StatelessWidget {
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    Text(DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(time!)) ?? '',
+                    Text(
+                        DateFormat('dd MMM yyyy hh:mm a')
+                                .format(DateTime.parse(time!)) ??
+                            '',
                         style: regularTS(homeTabTextColor, fontSize: 13)),
                   ],
                 ),

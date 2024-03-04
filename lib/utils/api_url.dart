@@ -5,8 +5,8 @@ class ApiUrl {
   static String defaultProfile =
       'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg';
 
-  // static String apiKey = '30099d4c210a4289b8bc9a9e6430ecb1';
-  static String apiKey = '3f07d20249324058985a865638e6190c';
+  static String apiKey = '30099d4c210a4289b8bc9a9e6430ecb1';
+  // static String apiKey = '3f07d20249324058985a865638e6190c';
   static String newsBaseUrl = 'https://newsapi.org/v2';
   static String allNewsCategoryUrl =
       '$newsBaseUrl/top-headlines?language=en&apiKey=$apiKey';
