@@ -4,6 +4,9 @@
             "outputFile": "com.example.newsapp-mergeDebugResources-13:/values-pa/values-pa.xml",
             "map": [
                 {
+<<<<<<< HEAD
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-pa\\values-pa.xml",
+=======
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-pa\\values-pa.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
@@ -22,6 +25,7 @@
                 },
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-pa\\values-pa.xml",
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -38,7 +42,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-pa\\values-pa.xml",
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-pa\\values-pa.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,126,191,268,334,409,475,574,670",
+                        "endColumns": "70,64,76,65,74,65,98,95,84",
+                        "endOffsets": "121,186,263,329,404,470,569,665,750"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "893,964,1029,1106,1172,1247,1313,1412,1508",
+                        "endColumns": "70,64,76,65,74,65,98,95,84",
+                        "endOffsets": "959,1024,1101,1167,1242,1308,1407,1503,1588"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-pa\\values-pa.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

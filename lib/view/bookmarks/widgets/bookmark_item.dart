@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../../../common_widgets/custom_divider.dart';
-import '../../../provider/bookmark_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -11,15 +9,15 @@ class BookmarkItem extends StatelessWidget {
   const BookmarkItem({
     super.key,
     required this.svgName,
-    required this.imageName,
-    required this.title,
-    required this.time, this.onTap,
+    this.imageName,
+    this.title,
+    this.time, this.onTap,
   });
 
   final String svgName;
-  final String imageName;
-  final String title;
-  final String time;
+  final String? imageName;
+  final String? title;
+  final String? time;
   final VoidCallback? onTap;
 
   @override
@@ -34,7 +32,7 @@ class BookmarkItem extends StatelessWidget {
                 width: Utils.scrHeight * .09,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
-                    child: Utils.showImage(imageName))),
+                    child: Image.network(imageName!,fit: BoxFit.cover,))),
             SizedBox(width: Utils.scrHeight * .01),
             Expanded(
               child: Padding(
@@ -45,13 +43,13 @@ class BookmarkItem extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: Utils.scrHeight * .25,
-                      child: Text(title,
+                      child: Text(title ?? '',
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    Text(time,
+                    Text(DateFormat('dd MMM yyyy hh:mm a').format(DateTime.parse(time!)) ?? '',
                         style: regularTS(homeTabTextColor, fontSize: 13)),
                   ],
                 ),

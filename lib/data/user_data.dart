@@ -57,21 +57,28 @@ class UserData{
   }
 
   // Add to bookmark
-  static Future<BookMarkModel> addBookMark(String? authToken, String? userId) async {
+  static Future<void> addBookMark(String? authToken, String userId,String title,String? image) async {
     try {
       final response = await http.post(
-        Uri.parse('http://newsapp.reigeeky.com/api/bookmark_news/8'),
+        Uri.parse(ApiUrl.addBookMark),
         headers:{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
+        body: jsonEncode(<String, dynamic>{
+          'user_id': userId,
+          'title': title,
+          'image': image!,
+        }),
       );
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        return BookMarkModel.fromJson(data);
+        print(response.statusCode);
+        // return BookMarkModel.fromJson(data);
       } else  {
         // If the request was unsuccessful, throw an error
+        print(response.statusCode);
         throw Exception(response.statusCode);
       }
     } catch (error) {
@@ -82,10 +89,10 @@ class UserData{
 
 
   // Get All bookmark
-  static Future<BookMarkModel> fetchBookMark(String? authToken) async {
+  static Future<BookMarkModel> fetchBookMark(String? authToken, String userId) async {
     try {
       final response = await http.get(
-        Uri.parse('http://newsapp.reigeeky.com/api/bookmark_news/8'),
+        Uri.parse('${ApiUrl.allBookMark}$userId'),
         headers:{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
@@ -94,6 +101,7 @@ class UserData{
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
+        print('bookmark data: $data');
         return BookMarkModel.fromJson(data);
       } else  {
         // If the request was unsuccessful, throw an error

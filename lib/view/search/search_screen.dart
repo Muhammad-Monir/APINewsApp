@@ -71,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     print('Select search: ${_searchController.text}');
                     // Navigate to next page with selected category
                     Navigator.pushNamed(context, RoutesName.home,
-                        arguments:  _searchController.text);
+                        arguments:  selectedCategory);
                 },
                 buttonColor: appThemeColor,
                 textColor: Colors.white,

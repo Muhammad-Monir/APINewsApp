@@ -3,7 +3,6 @@ import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:am_innnn/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +43,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
       _isLogin = isLogin;
       _authToken = authToken!;
     });
+    print('in drower : $_authToken');
   }
 
   @override
