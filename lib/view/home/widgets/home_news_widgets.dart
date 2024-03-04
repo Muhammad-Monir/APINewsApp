@@ -6,8 +6,10 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../provider/bookmark_provider.dart';
+import '../../../provider/bottom_navigation_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
+import '../../../route/routes_name.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -70,7 +72,7 @@ class _NewsScreenState extends State<NewsScreen> {
         onTap: () {
           Provider.of<BarsVisibility>(context, listen: false).toggleBars();
           if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-            Timer(const Duration(seconds: 2), () {
+            Timer(const Duration(seconds: 3), () {
               Provider.of<BarsVisibility>(context, listen: false).hideBars();
             });
           }
@@ -88,7 +90,11 @@ class _NewsScreenState extends State<NewsScreen> {
         }),
       ),
 
-
+      // bottomNavigationBar: Provider
+      //     .of<BarsVisibility>(context)
+      //     .showBars
+      //     ? _bottomNavigationMenu(context)
+      //     : null,
       // Showing Floating Add Banner
       floatingActionButton: _floatingActionButton(),
     );
@@ -114,73 +120,73 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  // Theme _bottomNavigationMenu(BuildContext context) {
-  //   return Theme(
-  //     data: Theme.of(context).copyWith(
-  //         canvasColor: Colors.white,
-  //         splashColor: Colors.transparent,
-  //         highlightColor: Colors.transparent),
-  //     child: Consumer<BottomNavigationProvider>(
-  //         builder: (context, provider, child) {
-  //       return BottomNavigationBar(
-  //         selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-  //         unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-  //         items: <BottomNavigationBarItem>[
-  //           BottomNavigationBarItem(
-  //             icon: Utils.showSvgPicture('search',
-  //                 height: Utils.scrHeight * 0.024,
-  //                 width: Utils.scrHeight * 0.024),
-  //             label: 'Search',
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: Utils.showSvgPicture('font',
-  //                 height: Utils.scrHeight * 0.024,
-  //                 width: Utils.scrHeight * 0.024),
-  //             label: 'Font',
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: Utils.showSvgPicture('bookmark',
-  //                 height: Utils.scrHeight * 0.024,
-  //                 width: Utils.scrHeight * 0.024),
-  //             label: 'BookMark',
-  //           ),
-  //           BottomNavigationBarItem(
-  //             icon: provider.selectedIndex == 3
-  //                 ? Utils.showSvgPicture('share',
-  //                     height: Utils.scrHeight * 0.024,
-  //                     width: Utils.scrHeight * 0.024)
-  //                 : Utils.showSvgPicture('share',
-  //                     height: Utils.scrHeight * 0.024,
-  //                     width: Utils.scrHeight * 0.024),
-  //             label: 'Share',
-  //           ),
-  //         ],
-  //         useLegacyColorScheme: false,
-  //         showSelectedLabels: true,
-  //         showUnselectedLabels: true,
-  //         currentIndex: provider.selectedIndex,
-  //         type: BottomNavigationBarType.fixed,
-  //         onTap: (index) {
-  //           provider.updateSelectedIndex(index);
-  //           if (provider.selectedIndex == 0) {
-  //             Navigator.pushNamed(context, RoutesName.search);
-  //           } else if (provider.selectedIndex == 1) {
-  //             Navigator.pushNamed(context, RoutesName.font);
-  //           } else if (provider.selectedIndex == 2) {
-  //             Navigator.pushNamed(context, RoutesName.bookmark);
-  //           } else if (provider.selectedIndex == 3) {
-  //             shareContent(context);
-  //             // getPopUp(
-  //             //     context,
-  //             //     (p0) => ShareScreen(onExit: () {
-  //             //           Navigator.pop(p0);
-  //             //         }));
-  //           }
-  //         },
-  //       );
-  //     }),
-  //   );
-  // }
+  Theme _bottomNavigationMenu(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+          canvasColor: Colors.white,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent),
+      child: Consumer<BottomNavigationProvider>(
+          builder: (context, provider, child) {
+        return BottomNavigationBar(
+          selectedLabelStyle: const TextStyle(color: appSecondTextColor),
+          unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('search',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('font',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'Font',
+            ),
+            BottomNavigationBarItem(
+              icon: Utils.showSvgPicture('bookmark',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'BookMark',
+            ),
+            BottomNavigationBarItem(
+              icon: provider.selectedIndex == 3
+                  ? Utils.showSvgPicture('share',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024)
+                  : Utils.showSvgPicture('share',
+                      height: Utils.scrHeight * 0.024,
+                      width: Utils.scrHeight * 0.024),
+              label: 'Share',
+            ),
+          ],
+          useLegacyColorScheme: false,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          currentIndex: provider.selectedIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            provider.updateSelectedIndex(index);
+            if (provider.selectedIndex == 0) {
+              Navigator.pushNamed(context, RoutesName.search);
+            } else if (provider.selectedIndex == 1) {
+              Navigator.pushNamed(context, RoutesName.font);
+            } else if (provider.selectedIndex == 2) {
+              Navigator.pushNamed(context, RoutesName.bookmark);
+            } else if (provider.selectedIndex == 3) {
+              shareContent(context);
+              // getPopUp(
+              //     context,
+              //     (p0) => ShareScreen(onExit: () {
+              //           Navigator.pop(p0);
+              //         }));
+            }
+          },
+        );
+      }),
+    );
+  }
 
   // Share Content Function
   void shareContent(BuildContext context) async {
@@ -265,7 +271,8 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  // Top Image Banner
+  // Top Image Banner with promo code
+
   Stack _imageBanner(
     BuildContext context,
   ) {
@@ -348,11 +355,13 @@ class _NewsScreenState extends State<NewsScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(Utils.scrHeight * .12))),
+                bottomLeft: Radius.circular(Utils.scrHeight * .12),
+                bottomRight: Radius.circular(Utils.scrHeight * .12),
+            )),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(Utils.scrHeight * .012),
-            bottomRight: Radius.circular(Utils.scrHeight * .012),
+            bottomLeft: Radius.circular(Utils.scrHeight * .022),
+            bottomRight: Radius.circular(Utils.scrHeight * .022),
           ),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
