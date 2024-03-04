@@ -23,7 +23,45 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\9a249567dcb8025899915ed9a2426636\\transformed\\lifecycle-runtime-2.3.1\\res\\values\\values.xml",
+=======
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,113,179,242,304,375,447,515,582,661",
+                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
+                        "endOffsets": "108,174,237,299,370,442,510,577,656,725"
+                    },
+                    "to": {
+                        "startLines": "13,14,15,16,21,22,108,118,119,120",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "611,669,735,798,1123,1194,6468,7182,7249,7328",
+                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
+                        "endOffsets": "664,730,793,855,1189,1261,6531,7244,7323,7392"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,187,252,316,393,458,548,632",
+                        "endColumns": "69,61,64,63,76,64,89,83,68",
+                        "endOffsets": "120,182,247,311,388,453,543,627,696"
+                    },
+                    "to": {
+                        "startLines": "109,110,111,112,113,114,115,116,117",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6536,6606,6668,6733,6797,6874,6939,7029,7113",
+                        "endColumns": "69,61,64,63,76,64,89,83,68",
+                        "endOffsets": "6601,6663,6728,6792,6869,6934,7024,7108,7177"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\9a249567dcb8025899915ed9a2426636\\transformed\\lifecycle-runtime-2.3.1\\res\\values\\values.xml",
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -40,7 +78,11 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "D:\\APINewsApp\\android\\app\\src\\main\\res\\values\\styles.xml",
+=======
+                    "source": "D:\\newsapp\\APINewsApp\\android\\app\\src\\main\\res\\values\\styles.xml",
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -75,6 +117,7 @@
                         "endLines": "7,8,9,10,80,147,151,268,280,288",
                         "endColumns": "11,59,51,44,59,24,24,24,24,24",
                         "endOffsets": "289,349,401,446,4910,8905,9036,13083,13523,13832"
+<<<<<<< HEAD
                     }
                 },
                 {
@@ -109,6 +152,8 @@
                         "startOffsets": "611,669,735,798,1123,1194,6468,7182,7249,7328",
                         "endColumns": "57,65,62,61,70,71,67,66,78,68",
                         "endOffsets": "664,730,793,855,1189,1261,6531,7244,7323,7392"
+=======
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     }
                 }
             ]

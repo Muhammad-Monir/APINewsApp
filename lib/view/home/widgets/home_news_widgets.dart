@@ -444,19 +444,21 @@ class RefreshTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
-        children: [
-          Utils.showSvgPicture(
-            'refresh',
-            height: Utils.scrHeight * .022,
-            width: Utils.scrHeight * .022,
-          ),
-          SizedBox(width: Utils.scrHeight * .006),
-          Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
-          SizedBox(width: Utils.scrHeight * .013),
-          Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-        ],
+    return GestureDetector(
+      child: SizedBox(
+        child: Row(
+          children: [
+            Utils.showSvgPicture(
+              'refresh',
+              height: Utils.scrHeight * .022,
+              width: Utils.scrHeight * .022,
+            ),
+            SizedBox(width: Utils.scrHeight * .006),
+            Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
+            SizedBox(width: Utils.scrHeight * .013),
+            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
+          ],
+        ),
       ),
     );
   }

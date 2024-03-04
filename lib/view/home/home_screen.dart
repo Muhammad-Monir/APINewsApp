@@ -30,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final PageController storyPageController = PageController();
+  bool _isRefresh = false;
 
   // Animation Property
   late Animation<double> flipAnim;
@@ -70,9 +71,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<NewsModel> fetchNews() async {
-    if(widget.category == null){
-      fetchAllNews =  NewsData.fetchAllNews();
-    }else{
+    if (widget.category == null) {
+      fetchAllNews = NewsData.fetchAllNews();
+    } else {
       // fetchAllNews = NewsData.fetchAllNews(category: widget.category);
       fetchAllNews = NewsData.searchNews(searchText: widget.category);
     }
@@ -82,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
+      bottomNavigationBar: Provider
+          .of<BarsVisibility>(context)
+          .showBars
           ? _bottomNavigationMenu(context)
           : null,
       drawer: const DrawerScreen(),
@@ -99,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               }
               if (snapshot.hasData) {
                 List<Articles> data = snapshot.data!.articles!;
-                if(data.isNotEmpty){
+                if (data.isNotEmpty) {
                   return PageView.builder(
                     controller: newsPageController,
                     scrollDirection: Axis.vertical,
@@ -113,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ..setEntry(0, 2, 0.001)
                               ..rotateX(2 * pi * flipAnim.value),
                             alignment: Alignment.center,
-                            child: SizedBox(
+                            child: !_isRefresh ? SizedBox(
                               child: NewsScreen(
                                 homeOnTap: () =>
                                     Scaffold.of(context).openDrawer(),
@@ -124,37 +127,45 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     curve: Curves.easeInOut,
                                   );
                                 },
-                                image: data[index].urlToImage ?? ApiUrl.imageNotFound,
-                                newsDec: data[index].description ??  'News Description Not Found',
-                                sourceLink: data[index].url ??  'Url Not Found',
-                                newsTitle: data[index].title ??  'News Title Not Found',
-                              ),
-                            ),
+                                refreshOnTap: () {
+                                  _refreshData();
+                                },
+                                image: data[index].urlToImage ??
+                                    ApiUrl.imageNotFound,
+                                newsDec: data[index].description ??
+                                    'News Description Not Found',
+                                sourceLink: data[index].url ?? 'Url Not Found',
+                                newsTitle: data[index].title ??
+                                    'News Title Not Found',
+                              ) ,
+                            ): const Center(child: CircularProgressIndicator()),
                           );
                         },
                       );
                     },
                   );
-                }else{
-                  return  Center(
+                } else {
+                  return Center(
                     child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      const Text('No News Found '),
-                      SizedBox(height: Utils.scrHeight * .03,),
-                      SizedBox(
-                        width: Utils.scrHeight * .2,
-                        child: ActionButton(buttonColor: appThemeColor,buttonName: 'Try Again',onTap: (){
-                          Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
-                        },),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),);
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(),
+                        const Text('No News Found '),
+                        SizedBox(height: Utils.scrHeight * .03,),
+                        SizedBox(
+                          width: Utils.scrHeight * .2,
+                          child: ActionButton(buttonColor: appThemeColor,
+                            buttonName: 'Try Again',
+                            onTap: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, RoutesName.home, (route) => false);
+                            },),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),);
                 }
-
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),
@@ -168,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           FutureBuilder<StoryModel>(
             future: fetchStory,
             builder: (context,snapshot) {
-              if(snapshot.hasData){
+              if (snapshot.hasData) {
                 final data = snapshot.data!.story!.data;
                 return PageView.builder(
                     controller: storyPageController,
@@ -176,22 +187,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     itemCount: data!.length,
                     itemBuilder: (context, index) {
                       Provider.of<BarsVisibility>(context).hideBars();
-                      return  StoryScreen(imageUrl: '${ApiUrl.appBaseUrl}${data[index].image}' ?? ApiUrl.imageNotFound);
+                      return StoryScreen(
+                          imageUrl: '${ApiUrl.appBaseUrl}${data[index]
+                              .image}' ?? ApiUrl.imageNotFound);
                     });
-              }else if(snapshot.hasError){
+              } else if (snapshot.hasError) {
                 return Center(child: Text(snapshot.hasError.toString()),);
-              }else {
+              } else {
                 return const Center(child: CircularProgressIndicator(),);
               }
-
             }
           ),
         ],
       ),
 
     );
-
-
   }
 
   Theme _bottomNavigationMenu(BuildContext context) {
@@ -265,14 +275,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
+  // Add the _refreshData method
+  void _refreshData() async {
+    if (_isRefresh) {
+      return;
+    }
+    setState(() {
+      _isRefresh = true;
+    });
 
-  @override
-  void dispose() {
-    newsPageController.dispose();
-    storyPageController.dispose();
-    _animationController.dispose();
-    super.dispose();
+    try {
+      newsPageController.jumpToPage(0);
+      await fetchNews();
+      setState(() {
+        _isRefresh = false;
+      });
+    } catch (error) {
+      print('Error during refresh: $error');
+      setState(() {
+        _isRefresh = false;
+      });
+    }
   }
+
 
   void animation() {
     _animationController = AnimationController(
@@ -293,4 +318,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
     });
   }
+  @override
+  void dispose() {
+    newsPageController.dispose();
+    storyPageController.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
 }
+
+
+

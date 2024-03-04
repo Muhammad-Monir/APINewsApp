@@ -21,7 +21,28 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-kk\\values-kk.xml",
+=======
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-kk\\values-kk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,120,184,252,316,401,488,585,681",
+                        "endColumns": "64,63,67,63,84,86,96,95,77",
+                        "endOffsets": "115,179,247,311,396,483,580,676,754"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "869,934,998,1066,1130,1215,1302,1399,1495",
+                        "endColumns": "64,63,67,63,84,86,96,95,77",
+                        "endOffsets": "929,993,1061,1125,1210,1297,1394,1490,1568"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-kk\\values-kk.xml",
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -35,6 +56,7 @@
                         "startOffsets": "769,1573,1677,1785",
                         "endColumns": "99,103,107,104",
                         "endOffsets": "864,1672,1780,1885"
+<<<<<<< HEAD
                     }
                 },
                 {
@@ -52,6 +74,8 @@
                         "startOffsets": "869,934,998,1066,1130,1215,1302,1399,1495",
                         "endColumns": "64,63,67,63,84,86,96,95,77",
                         "endOffsets": "929,993,1061,1125,1210,1297,1394,1490,1568"
+=======
+>>>>>>> b8c3c608aa5469996fda9694ce927777c8f8634e
                     }
                 }
             ]
