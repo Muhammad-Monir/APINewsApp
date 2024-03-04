@@ -57,26 +57,28 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data!.data;
-
-              return ListView.builder(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Utils.scrHeight * .024,
-                    vertical: Utils.scrHeight * .024),
-                itemCount: data!.length,
-                itemBuilder: (context, index) {
-                  return BookmarkItem(
-                      onTap: () {
-                        // provider.toggleIsFavorite();
+              return data!.isNotEmpty
+                  ? ListView.builder(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Utils.scrHeight * .024,
+                          vertical: Utils.scrHeight * .024),
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return BookmarkItem(
+                            onTap: () {
+                              // provider.toggleIsFavorite();
+                            },
+                            svgName: 'selected_bookmark',
+                            // provider.isFavorite
+                            //     ? 'selected_bookmark'
+                            //     : 'bookmark',
+                            imageName:
+                                data[index].image ?? ApiUrl.imageNotFound,
+                            title: data[index].title!,
+                            time: data[index].createdAt!);
                       },
-                      svgName: 'selected_bookmark',
-                      // provider.isFavorite
-                      //     ? 'selected_bookmark'
-                      //     : 'bookmark',
-                      imageName: data[index].image ?? ApiUrl.imageNotFound,
-                      title: data[index].title!,
-                      time: data[index].createdAt!);
-                },
-              );
+                    )
+                  : const Center(child: Text('Data not found'));
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(snapshot.hasError.toString()),

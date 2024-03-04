@@ -55,12 +55,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
         padding: EdgeInsets.symmetric(
             horizontal: Utils.scrHeight * .00, vertical: Utils.scrWidth * .0),
         children: [
-
           // Drawer Header Section
           Stack(
             clipBehavior: Clip.none,
             children: [
-
               // Drawer Top Image
               Container(
                 child: Utils.showImage('pic'),
@@ -133,16 +131,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
     return SizedBox(
       height: Utils.scrHeight * .096,
       width: Utils.scrHeight * .096,
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
+      child: ClipOval(
+          // borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
           child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                Image.network(ApiUrl.imageNotFound),
-          )),
+        fit: BoxFit.cover,
+        fadeInDuration: const Duration(seconds: 2),
+        imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
+        errorWidget: (context, url, error) => Utils.showImage('profile_image'),
+      )),
     );
   }
 
