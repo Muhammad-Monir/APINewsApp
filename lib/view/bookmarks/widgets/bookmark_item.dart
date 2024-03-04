@@ -36,8 +36,8 @@ class BookmarkItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      fadeInDuration: const Duration(seconds: 2),
                       imageUrl: imageName!,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
                           Image.network(ApiUrl.imageNotFound),
                     ),

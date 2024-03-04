@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
@@ -50,6 +49,7 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
+  // Check Is Login or Not
   Future<void> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
@@ -66,7 +66,6 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: const DrawerScreen(),
       body: GestureDetector(
         onTap: () {
           Provider.of<BarsVisibility>(context, listen: false).toggleBars();
@@ -88,15 +87,14 @@ class _NewsScreenState extends State<NewsScreen> {
           );
         }),
       ),
+
+
       // Showing Floating Add Banner
       floatingActionButton: _floatingActionButton(),
-
-      // bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
-      //     ? _bottomNavigationMenu(context)
-      //     : null,
     );
   }
 
+  // Showing Floating Add Banner
   Padding _floatingActionButton() {
     return Padding(
       padding: EdgeInsets.only(
@@ -184,6 +182,7 @@ class _NewsScreenState extends State<NewsScreen> {
   //   );
   // }
 
+  // Share Content Function
   void shareContent(BuildContext context) async {
     try {
       await Share.share('https://flutter.dev/');
@@ -192,6 +191,7 @@ class _NewsScreenState extends State<NewsScreen> {
     }
   }
 
+  // News Section to Show News Data
   Container _newsSection(FontSizeProvider fontSize) {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -228,6 +228,7 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
+  // Social Link Section
   SizedBox socialLinkSection() {
     return SizedBox(
       width: Utils.scrHeight * .398,
@@ -264,6 +265,7 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
+  // Top Image Banner
   Stack _imageBanner(
     BuildContext context,
   ) {
@@ -286,54 +288,58 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
 
         // BookMark Button
-        Consumer<BookmarkProvider>(builder: (context, provider, child) {
-          return Positioned(
-              top: Utils.scrHeight * .1,
-              right: Utils.scrHeight * .02,
-              child: GestureDetector(
-                onTap: () {
-                  if (_isLogin) {
-                    // provider.toggleIsFavorite();
-                    // provider.isFavorite ?
-                    UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
-                      // provider.toggleIsFavorite();
-                    });
-                  } else {
-                    getPopUp(
-                        context,
-                        (p0) => FavoritePopup(
-                              onExit: () {
-                                Navigator.pop(p0);
-                              },
-                            ));
-                  }
-                },
-                child: Container(
-                  width: Utils.scrHeight * .04,
-                  height: Utils.scrHeight * .04,
-                  padding: const EdgeInsets.all(8),
-                  decoration: ShapeDecoration(
-                    color: provider.isFavorite
-                        ? Colors.white.withOpacity(0)
-                        : Colors.white.withOpacity(0.3),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        width: Utils.scrHeight * .001,
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: provider.isFavorite
-                      ? Utils.showSvgPicture('bookmarks',
-                          height: Utils.scrHeight * .020)
-                      : Utils.showSvgPicture('selected_bookmark',
-                          height: Utils.scrHeight * .020),
-                ),
-              ));
-        })
+        _addToBookmark()
       ],
     );
+  }
+
+  Consumer<BookmarkProvider> _addToBookmark() {
+    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
+        return Positioned(
+            top: Utils.scrHeight * .1,
+            right: Utils.scrHeight * .02,
+            child: GestureDetector(
+              onTap: () {
+                if (_isLogin) {
+                  provider.toggleIsFavorite();
+                  // provider.isFavorite ?
+                  // UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
+                  //   // provider.toggleIsFavorite();
+                  // });
+                } else {
+                  getPopUp(
+                      context,
+                      (p0) => FavoritePopup(
+                            onExit: () {
+                              Navigator.pop(p0);
+                            },
+                          ));
+                }
+              },
+              child: Container(
+                width: Utils.scrHeight * .04,
+                height: Utils.scrHeight * .04,
+                padding: const EdgeInsets.all(8),
+                decoration: ShapeDecoration(
+                  color: provider.isFavorite
+                      ? Colors.white.withOpacity(0)
+                      : Colors.white.withOpacity(0.3),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: Utils.scrHeight * .001,
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: provider.isFavorite
+                    ? Utils.showSvgPicture('bookmarks',
+                        height: Utils.scrHeight * .020)
+                    : Utils.showSvgPicture('selected_bookmark',
+                        height: Utils.scrHeight * .020),
+              ),
+            ));
+      });
   }
 
   Container topImageSection() {
@@ -349,8 +355,8 @@ class _NewsScreenState extends State<NewsScreen> {
               bottomRight: Radius.circular(Utils.scrHeight * .03)),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
-            fadeInDuration: const Duration(seconds: 2),
             imageUrl: widget.image!,
+            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) =>
                 Image.network(ApiUrl.imageNotFound),
           ),

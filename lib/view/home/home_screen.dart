@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     Provider.of<BarsVisibility>(context).hideBars();
                     return StoryScreen(
                         imageUrl: '${ApiUrl.appBaseUrl}${data[index]
-                            .image}' ?? ApiUrl.imageNotFound);
+                            .image}');
                   });
             } else if (snapshot.hasError) {
               return Center(child: Text(snapshot.hasError.toString()),);

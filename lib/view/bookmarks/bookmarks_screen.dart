@@ -39,7 +39,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     setState(() {
       _isLogin = isLogin;
       _authToken = authToken!;
-      userId =id;
+      userId = id;
     });
   }
 
@@ -47,104 +47,70 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Bookmarks', style: largeTS(appBarColor))),
-        body: _isLogin
-            ? Consumer<BookmarkProvider>(builder: (context, provider, child) {
-                return FutureBuilder<BookMarkModel>(
-                    future: UserData.fetchBookMark(_authToken,userId.toString()),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final data = snapshot.data!.data;
+        body: _isLogin ? _allBookMark() : _ifNotLogin(context));
+  }
 
-                        return ListView.builder(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Utils.scrHeight * .024,
-                              vertical: Utils.scrHeight * .024),
-                          itemCount: data!.length,
-                          itemBuilder: (context, index) {
-                            print(data[index].title);
-                            return BookmarkItem(
-                                onTap: () {
-                                  // provider.toggleIsFavorite();
-                                },
-                                svgName: 'selected_bookmark',
-                                // provider.isFavorite
-                                //     ? 'selected_bookmark'
-                                //     : 'bookmark',
-                                imageName:
-                                    data[index].image ?? ApiUrl.imageNotFound,
-                                title: data[index].title!,
-                                time: data[index].createdAt!);
-                          },
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text(snapshot.hasError.toString()),
-                        );
-                      } else {
-                        return Center(
-                          child: Container(),
-                        );
-                      }
-                    });
-              })
-            : Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'You Are not Login! Please Login First',
-                      style: semiBoldTS(appTextColor),
-                    ),
-                    SizedBox(height: Utils.scrHeight * .02),
-                    ActionButton(
-                      width: Utils.scrHeight * .25,
-                      buttonName: 'Login',
+  Consumer<BookmarkProvider> _allBookMark() {
+    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
+      return FutureBuilder<BookMarkModel>(
+          future: UserData.fetchBookMark(_authToken, userId.toString()),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!.data;
+
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Utils.scrHeight * .024,
+                    vertical: Utils.scrHeight * .024),
+                itemCount: data!.length,
+                itemBuilder: (context, index) {
+                  return BookmarkItem(
                       onTap: () {
-                        Navigator.pushNamed(context, RoutesName.login);
+                        // provider.toggleIsFavorite();
                       },
-                      buttonColor: appThemeColor,
-                    )
-                  ],
-                ),
-              ));
+                      svgName: 'selected_bookmark',
+                      // provider.isFavorite
+                      //     ? 'selected_bookmark'
+                      //     : 'bookmark',
+                      imageName: data[index].image ?? ApiUrl.imageNotFound,
+                      title: data[index].title!,
+                      time: data[index].createdAt!);
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.hasError.toString()),
+              );
+            } else {
+              return Center(
+                child: Container(),
+              );
+            }
+          });
+    });
+  }
+
+  Center _ifNotLogin(BuildContext context) {
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'You Are not Login! Please Login First',
+            style: semiBoldTS(appTextColor),
+          ),
+          SizedBox(height: Utils.scrHeight * .02),
+          ActionButton(
+            width: Utils.scrHeight * .25,
+            buttonName: 'Login',
+            onTap: () {
+              Navigator.pushNamed(context, RoutesName.login);
+            },
+            buttonColor: appThemeColor,
+          )
+        ],
+      ),
+    );
   }
 }
-// FutureBuilder<BookMarkModel>(
-// future: UserData.fetchBookMark(_authToken),
-// builder: (context, snapshot) {
-// if (snapshot.hasData) {
-// final data = snapshot.data!.data;
-//
-// return ListView.builder(
-// padding: EdgeInsets.symmetric(
-// horizontal: Utils.scrHeight * .024,
-// vertical: Utils.scrHeight * .024),
-// itemCount: data!.length,
-// itemBuilder: (context, index) {
-// print(data[index].title);
-// return Consumer<BookmarkProvider>(
-// builder: (context, provider, child) {
-// return BookmarkItem(
-// onTap: () {
-// provider.toggleIsFavorite();
-// },
-// svgName: provider.isFavorite
-// ? 'selected_bookmark'
-//     : 'bookmark',
-// imageName: data[index].image!,
-// title: data[index].title! ,
-// time: data[index].createdAt!);
-// });
-// },
-// );
-// } else if (snapshot.hasError) {
-// return Center(
-// child: Text(snapshot.hasError.toString()),
-// );
-// } else {
-// return Center(
-// child: Container(),
-// );
-// }
-// })
