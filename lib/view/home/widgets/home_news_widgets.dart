@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -10,6 +11,7 @@ import '../../../provider/bottom_navigation_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
 import '../../../route/routes_name.dart';
+import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -340,18 +342,16 @@ class _NewsScreenState extends State<NewsScreen> {
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(Utils.scrHeight * .12))),
         child: ClipRRect(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(Utils.scrHeight * .03),
-                bottomRight: Radius.circular(Utils.scrHeight * .03)),
-            child: widget.image != null
-                ? Image.network(
-                    widget.image!,
-                    fit: BoxFit.cover,
-                  )
-                : Image.asset(
-                    'assets/images/banner_image.png',
-                    fit: BoxFit.cover,
-                  )));
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(Utils.scrHeight * .03),
+              bottomRight: Radius.circular(Utils.scrHeight * .03)),
+          child: CachedNetworkImage(
+            fadeInDuration: const Duration(seconds: 2),
+            imageUrl: widget.image!,
+            errorWidget: (context, url, error) =>
+                Image.network(ApiUrl.imageNotFound),
+          ),
+        ));
   }
 
   Container buildTabBar() {

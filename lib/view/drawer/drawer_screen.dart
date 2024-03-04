@@ -65,30 +65,34 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   bottom: -Utils.scrHeight * .045,
                   child: _isLogin
                       ? FutureBuilder<ProfileModel>(
-                      future: UserData.userProfile(_authToken),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          final data = snapshot.data!;
-                          return SizedBox(
-                              child: ClipOval(
-                                child: Image.network('${ApiUrl.appBaseUrl}${data.data!.avatar}',
-                                height: Utils.scrHeight * .096,
-                                width: Utils.scrHeight * .096,fit: BoxFit.cover,),
-                              ));
-                        } else if (snapshot.hasError) {
-                          return Center(
-                            child: Text(snapshot.hasError.toString()),
-                          );
-                        } else {
-                          return Center(
-                            child: Container(),
-                          );
-                        }
-                      }) : SizedBox(
-                      child: Utils.showImage('profile_image',
-                          height: Utils.scrHeight * .096,
-                          width: Utils.scrHeight * .096))
-              ),
+                          future: UserData.userProfile(_authToken),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final data = snapshot.data!;
+                              return SizedBox(
+                                child: ClipOval(
+                                  child: Image.network(
+                                    '${ApiUrl.appBaseUrl}${data.data!.avatar}',
+                                    height: Utils.scrHeight * .096,
+                                    width: Utils.scrHeight * .096,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                child: Text(snapshot.hasError.toString()),
+                              );
+                            } else {
+                              return Center(
+                                child: Container(),
+                              );
+                            }
+                          })
+                      : SizedBox(
+                          child: Utils.showImage('profile_image',
+                              height: Utils.scrHeight * .096,
+                              width: Utils.scrHeight * .096))),
             ],
           ),
           SizedBox(height: Utils.scrHeight * .05),
@@ -96,22 +100,22 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // User Information Part
           _isLogin
               ? FutureBuilder<ProfileModel>(
-              future: UserData.userProfile(_authToken),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data!;
-                  return buildUserInformationPart(
-                      data.data!.username, data.data!.email);
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.hasError.toString()),
-                  );
-                } else {
-                  return Center(
-                    child: Container(),
-                  );
-                }
-              })
+                  future: UserData.userProfile(_authToken),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final data = snapshot.data!;
+                      return buildUserInformationPart(
+                          data.data!.username, data.data!.email);
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.hasError.toString()),
+                      );
+                    } else {
+                      return Center(
+                        child: Container(),
+                      );
+                    }
+                  })
               : Container(),
 
           // Drawer Items Part
@@ -139,14 +143,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
         children: [
           isLogin
               ? Consumer<NotificationProvider>(
-            builder: (context, state, child) =>
-                CustomDrawerItem(
-                  text: 'Notifications',
-                  svgName: 'notification',
-                  isToggleable: true,
-                  switchProvider: Provider.of<NotificationProvider>(context),
-                ),
-          )
+                  builder: (context, state, child) => CustomDrawerItem(
+                    text: 'Notifications',
+                    svgName: 'notification',
+                    isToggleable: true,
+                    switchProvider: Provider.of<NotificationProvider>(context),
+                  ),
+                )
               : Container(),
           CustomDrawerItem(
               onTap: () async {
@@ -161,18 +164,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
               icon: Icons.arrow_forward_ios),
           isLogin
               ? const CustomDrawerItem(
-              text: 'Rate this App',
-              svgName: 'rating',
-              icon: Icons.arrow_forward_ios)
+                  text: 'Rate this App',
+                  svgName: 'rating',
+                  icon: Icons.arrow_forward_ios)
               : Container(),
           isLogin
               ? CustomDrawerItem(
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.feedBack);
-              },
-              text: 'Feedback',
-              svgName: 'feedback',
-              icon: Icons.arrow_forward_ios)
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.feedBack);
+                  },
+                  text: 'Feedback',
+                  svgName: 'feedback',
+                  icon: Icons.arrow_forward_ios)
               : Container(),
           const CustomDrawerItem(
               text: 'Contact Us',
@@ -205,20 +208,22 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   buttonName: 'Log Out',
                 )
               : ActionButton(
-            onTap: () {
-              Navigator.pushNamed(context, RoutesName.login);
-            },
-            buttonColor: appThemeColor,
-            textColor: Colors.white,
-            buttonName: 'Log In',
-          ),
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.login);
+                  },
+                  buttonColor: appThemeColor,
+                  textColor: Colors.white,
+                  buttonName: 'Log In',
+                ),
         ],
       ),
     );
   }
 
-  void getPopUp(BuildContext context,
-      Widget Function(BuildContext) childBuilder,) {
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -236,7 +241,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.home,
-            (route) => false,
+        (route) => false,
       );
     });
   }
@@ -250,13 +255,14 @@ class CustomDrawerItem extends StatelessWidget {
   final VoidCallback? onTap;
   final NotificationProvider? switchProvider;
 
-  const CustomDrawerItem({super.key,
-    required this.text,
-    this.icon,
-    required this.svgName,
-    this.onTap,
-    this.isToggleable = false,
-    this.switchProvider});
+  const CustomDrawerItem(
+      {super.key,
+      required this.text,
+      this.icon,
+      required this.svgName,
+      this.onTap,
+      this.isToggleable = false,
+      this.switchProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -278,20 +284,19 @@ class CustomDrawerItem extends StatelessWidget {
                 const Spacer(),
                 isToggleable
                     ? Consumer<NotificationProvider>(
-                  builder: (context, provider, child) =>
-                      Switch(
-                          value: provider.isSwitchToggled,
-                          onChanged: (newValue) => provider.toggleSwitch(),
-                          activeColor: appThemeColor,
-                          activeTrackColor: const Color(0xffEBF3FF),
-                          inactiveTrackColor: const Color(0xffB7C1D2),
-                          inactiveThumbColor: const Color(0xff4E617E)),
-                )
+                        builder: (context, provider, child) => Switch(
+                            value: provider.isSwitchToggled,
+                            onChanged: (newValue) => provider.toggleSwitch(),
+                            activeColor: appThemeColor,
+                            activeTrackColor: const Color(0xffEBF3FF),
+                            inactiveTrackColor: const Color(0xffB7C1D2),
+                            inactiveThumbColor: const Color(0xff4E617E)),
+                      )
                     : icon != null
-                    ? Icon(icon,
-                    size: Utils.scrHeight * .016,
-                    color: homeTabTextColor)
-                    : const SizedBox.shrink(),
+                        ? Icon(icon,
+                            size: Utils.scrHeight * .016,
+                            color: homeTabTextColor)
+                        : const SizedBox.shrink(),
               ],
             ),
             SizedBox(height: Utils.scrHeight * .01),
