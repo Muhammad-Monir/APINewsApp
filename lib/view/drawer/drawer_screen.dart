@@ -4,13 +4,13 @@ import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/view/drawer/widget/custom_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
-import '../../common_widgets/custom_divider.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
 import '../../utils/color.dart';
@@ -55,45 +55,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
         padding: EdgeInsets.symmetric(
             horizontal: Utils.scrHeight * .00, vertical: Utils.scrWidth * .0),
         children: [
+
+          // Drawer Header Section
           Stack(
             clipBehavior: Clip.none,
             children: [
+
+              // Drawer Top Image
               Container(
                 child: Utils.showImage('pic'),
               ),
+
+              // Profile Image Section
               Positioned(
                   left: Utils.scrHeight * .12,
                   bottom: -Utils.scrHeight * .045,
                   child: _isLogin
-                      ? FutureBuilder<ProfileModel>(
-                          future: UserData.userProfile(_authToken),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              final data = snapshot.data!;
-                              return SizedBox(
-                                height: Utils.scrHeight * .096,
-                                width: Utils.scrHeight * .096,
-                                child: ClipOval(
-                                  // borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
-                                  child: CachedNetworkImage(
-                                    fit: BoxFit.cover,
-                                    fadeInDuration: const Duration(seconds: 2),
-                                    imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
-                                    errorWidget: (context, url, error) =>
-                                        Utils.showImage('profile_image'),
-                                  )
-                                ),
-                              );
-                            } else if (snapshot.hasError) {
-                              return Center(
-                                child: Text(snapshot.hasError.toString()),
-                              );
-                            } else {
-                              return Center(
-                                child: Container(),
-                              );
-                            }
-                          })
+                      ? _drawerHeaderSection()
                       : SizedBox(
                           child: Utils.showImage('profile_image',
                               height: Utils.scrHeight * .096,
@@ -103,30 +81,68 @@ class _DrawerScreenState extends State<DrawerScreen> {
           SizedBox(height: Utils.scrHeight * .05),
 
           // User Information Part
-          _isLogin
-              ? FutureBuilder<ProfileModel>(
-                  future: UserData.userProfile(_authToken),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final data = snapshot.data!;
-                      return buildUserInformationPart(
-                          data.data!.username, data.data!.email);
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.hasError.toString()),
-                      );
-                    } else {
-                      return Center(
-                        child: Container(),
-                      );
-                    }
-                  })
-              : Container(),
+          _isLogin ? _userInfoSection() : Container(),
 
           // Drawer Items Part
           _buildDrawerItems(context, isLogin: _isLogin),
         ],
       ),
+    );
+  }
+
+  FutureBuilder<ProfileModel> _userInfoSection() {
+    return FutureBuilder<ProfileModel>(
+        future: UserData.userProfile(_authToken),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!;
+            return buildUserInformationPart(
+                data.data!.username, data.data!.email);
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.hasError.toString()),
+            );
+          } else {
+            return Center(
+              child: Container(),
+            );
+          }
+        });
+  }
+
+  FutureBuilder<ProfileModel> _drawerHeaderSection() {
+    return FutureBuilder<ProfileModel>(
+        future: UserData.userProfile(_authToken),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!;
+            return _profileImage(data);
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.hasError.toString()),
+            );
+          } else {
+            return Center(
+              child: Container(),
+            );
+          }
+        });
+  }
+
+  SizedBox _profileImage(ProfileModel data) {
+    return SizedBox(
+      height: Utils.scrHeight * .096,
+      width: Utils.scrHeight * .096,
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
+          child: CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>
+                Image.network(ApiUrl.imageNotFound),
+          )),
     );
   }
 
@@ -249,66 +265,5 @@ class _DrawerScreenState extends State<DrawerScreen> {
         (route) => false,
       );
     });
-  }
-}
-
-class CustomDrawerItem extends StatelessWidget {
-  final String text;
-  final IconData? icon;
-  final String svgName;
-  final bool isToggleable;
-  final VoidCallback? onTap;
-  final NotificationProvider? switchProvider;
-
-  const CustomDrawerItem(
-      {super.key,
-      required this.text,
-      this.icon,
-      required this.svgName,
-      this.onTap,
-      this.isToggleable = false,
-      this.switchProvider});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: Utils.scrHeight * .016,
-            vertical: Utils.scrHeight * .016),
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Utils.showSvgPicture(svgName),
-                SizedBox(width: Utils.scrHeight * .016),
-                Text(text, style: mediumTS(homeTabTextColor)),
-                const Spacer(),
-                isToggleable
-                    ? Consumer<NotificationProvider>(
-                        builder: (context, provider, child) => Switch(
-                            value: provider.isSwitchToggled,
-                            onChanged: (newValue) => provider.toggleSwitch(),
-                            activeColor: appThemeColor,
-                            activeTrackColor: const Color(0xffEBF3FF),
-                            inactiveTrackColor: const Color(0xffB7C1D2),
-                            inactiveThumbColor: const Color(0xff4E617E)),
-                      )
-                    : icon != null
-                        ? Icon(icon,
-                            size: Utils.scrHeight * .016,
-                            color: homeTabTextColor)
-                        : const SizedBox.shrink(),
-              ],
-            ),
-            SizedBox(height: Utils.scrHeight * .01),
-            const CustomDivider()
-          ],
-        ),
-      ),
-    );
   }
 }

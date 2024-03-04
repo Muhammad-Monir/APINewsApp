@@ -25,19 +25,6 @@ class StoryScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xffF6F5F3),
-      // appBar: AppBar(
-      //     leading: IconButton(
-      //       onPressed: () {
-      //         Navigator.pushReplacementNamed(context, RoutesName.home);
-      //       },
-      //       icon: const Icon(
-      //         Icons.arrow_back,
-      //         color: Colors.black,
-      //       ),
-      //     ),
-      //     backgroundColor: const Color(0xffF6F5F3),
-      //     title: Text('Back', style: mediumTS(appBarColor, fontSize: 20))),
-
       // Share Icon Part
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: Utils.scrHeight * .06),
@@ -58,20 +45,24 @@ class StoryScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Show Story Video
           if (type == 'video')
             const Expanded(
               child: SizedBox(
                   width: double.infinity,
                   child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer())),
             ),
+
+          // Show Story Image
           if (type == 'image')
             CachedNetworkImage(
-              fadeInDuration: const Duration(seconds: 2),
               imageUrl: imageUrl!,
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) =>
                   Image.network(ApiUrl.imageNotFound),
             ),
+
+          // Show Story Image
           if (type == 'text')
             const Center(
               child: Text(

@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BookmarkProvider with ChangeNotifier {
-  bool isFavorite = true;
+  bool _isFavorite = true;
 
+  bool get isFavorite => _isFavorite;
 
   void toggleIsFavorite(){
-    isFavorite = !isFavorite;
+    _isFavorite = !_isFavorite;
     notifyListeners();
   }
 }
