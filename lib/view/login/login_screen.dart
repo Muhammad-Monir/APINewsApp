@@ -24,24 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  String _authToken = '';
 
-  @override
-  void initState() {
-    getToken();
-    print("in state $_authToken");
-    super.initState();
-  }
-
-  Future<void> getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // set authToken
-    String? authToken = prefs.getString('token');
-    setState(() {
-      _authToken = authToken!;
-      print("in gettoken : $_authToken");
-    });
-  }
 
   @override
   void dispose() {
@@ -88,7 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
                  return ActionButton(
                   onTap: (){
                     if(_formKey.currentState!.validate()){
-                      getToken();
                       final email = _emailController.text;
                       final password = _passwordController.text;
                       Provider.of<AuthProvider>(context, listen: false)

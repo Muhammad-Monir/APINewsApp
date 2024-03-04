@@ -52,6 +52,8 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
+
+
   // Check Is Login or Not
   Future<void> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
