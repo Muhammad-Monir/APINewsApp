@@ -20,6 +20,8 @@ class ApiUrl{
   static String bookmarkUrl = "${appBaseUrl}api/bookmark_news/8";
   static String accountForgotUrl = "${appBaseUrl}api/forgot-password";
   static String accountResetUrl = "${appBaseUrl}api/reset-password";
+  static String addBookMark = "${appBaseUrl}api/bookmark_news/add";
+  static String allBookMark = "${appBaseUrl}api/bookmark_news/";
 
 
 

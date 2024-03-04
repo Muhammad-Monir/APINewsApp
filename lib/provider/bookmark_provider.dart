@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class BookmarkProvider with ChangeNotifier {
   bool isFavorite = true;
 
-  void toggleBookMarkColor(){
+
+  void toggleIsFavorite(){
     isFavorite = !isFavorite;
     notifyListeners();
   }
