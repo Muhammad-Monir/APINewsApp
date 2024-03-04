@@ -10,6 +10,8 @@ import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../data/user_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -27,7 +29,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  // final PageController newsPageController = PageController(initialPage: 0);
   final PageController storyPageController = PageController();
   bool _isRefresh = false;
 
@@ -35,32 +36,38 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> flipAnim;
   late PageController newsPageController;
   late AnimationController _animationController;
+
   late Future<NewsModel> fetchAllNews;
-  late Future<StoryModel> fetchStroy;
+  late Future<StoryModel> fetchStory;
+  bool _isLogin = false;
+  String _authToken = '';
 
   @override
   void initState() {
-    fetchStroy = NewsData.fetchStory();
-
-    _animationController = AnimationController(
-      duration: const Duration(microseconds: 100), // Adjust animation duration
-      vsync: this,
-    );
-
-    flipAnim = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.slowMiddle,
-    ));
-
-    newsPageController = PageController();
-
-    newsPageController.addListener(() {
-      if (newsPageController.page != null) {
-        _animationController.value = (newsPageController.page! % 1);
-      }
-    });
-
+    isLoggedIn();
+    fetchStory = NewsData.fetchStory();
+    animation();
     super.initState();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+    if(_isLogin) {
+      UserData.getUserId(_authToken);
+    }
+    super.didChangeDependencies();
+  }
+
+  Future<void> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Check if the session data exists
+    bool isLogin = prefs.containsKey('token');
+    String? authToken = prefs.getString('token');
+    setState(() {
+      _isLogin = isLogin;
+      _authToken = authToken!;
+    });
   }
 
   Future<NewsModel> fetchNews() async {
@@ -70,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       // fetchAllNews = NewsData.fetchAllNews(category: widget.category);
       fetchAllNews = NewsData.searchNews(searchText: widget.category);
     }
-
     return fetchAllNews;
   }
 
@@ -171,26 +177,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
           // All Story for swipe horizontally
           FutureBuilder<StoryModel>(
-              future: fetchStroy,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data!.story!.data;
-                  return PageView.builder(
-                      controller: storyPageController,
-                      scrollDirection: Axis.vertical,
-                      itemCount: data!.length,
-                      itemBuilder: (context, index) {
-                        Provider.of<BarsVisibility>(context).hideBars();
-                        return StoryScreen(
-                            imageUrl: '${ApiUrl.appBaseUrl}${data[index]
-                                .image}' ?? ApiUrl.imageNotFound);
-                      });
-                } else if (snapshot.hasError) {
-                  return Center(child: Text(snapshot.hasError.toString()),);
-                } else {
-                  return const Center(child: CircularProgressIndicator(),);
-                }
+            future: fetchStory,
+            builder: (context,snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data!.story!.data;
+                return PageView.builder(
+                    controller: storyPageController,
+                    scrollDirection: Axis.vertical,
+                    itemCount: data!.length,
+                    itemBuilder: (context, index) {
+                      Provider.of<BarsVisibility>(context).hideBars();
+                      return StoryScreen(
+                          imageUrl: '${ApiUrl.appBaseUrl}${data[index]
+                              .image}' ?? ApiUrl.imageNotFound);
+                    });
+              } else if (snapshot.hasError) {
+                return Center(child: Text(snapshot.hasError.toString()),);
+              } else {
+                return const Center(child: CircularProgressIndicator(),);
               }
+            }
           ),
         ],
       ),
@@ -254,11 +260,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Navigator.pushNamed(context, RoutesName.bookmark);
                 } else if (provider.selectedIndex == 3) {
                   shareContent(context);
-                  // getPopUp(
-                  //     context,
-                  //     (p0) => ShareScreen(onExit: () {
-                  //           Navigator.pop(p0);
-                  //         }));
                 }
               },
             );
@@ -297,11 +298,35 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
-    @override
-    void dispose() {
-      newsPageController.dispose();
-      storyPageController.dispose();
-      _animationController.dispose();
-      super.dispose();
-    }
+
+  void animation() {
+    _animationController = AnimationController(
+      duration: const Duration(microseconds: 100), // Adjust animation duration
+      vsync: this,
+    );
+
+    flipAnim = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.slowMiddle,
+    ));
+
+    newsPageController = PageController();
+
+    newsPageController.addListener(() {
+      if (newsPageController.page != null) {
+        _animationController.value = (newsPageController.page! % 1);
+      }
+    });
+  }
+  @override
+  void dispose() {
+    newsPageController.dispose();
+    storyPageController.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
 }
+
+
+

@@ -12,8 +12,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   // late Position _currentPosition;
-  String _country = '';
-  double latitude=0.0,longitude=0.0;
+  // String _country = '';
+  // double latitude=0.0,longitude=0.0;
 
   @override
   void initState() {
@@ -33,13 +33,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
 
-  setNewLocation(double let,double lng){
-    longitude=lng;
-    latitude=let;
-    print(longitude);
-    print(latitude);
-    print(_country);
-  }
+  // setNewLocation(double let,double lng){
+  //   longitude=lng;
+  //   latitude=let;
+  //   print(longitude);
+  //   print(latitude);
+  //   print(_country);
+  // }
 
   // void _detectLocation() async {
   //   try{

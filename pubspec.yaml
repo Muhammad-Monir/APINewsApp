@@ -52,6 +52,7 @@ dependencies:
   shared_preferences:
   cached_network_image:
   path_provider:
+  intl:
 
 
 dev_dependencies:

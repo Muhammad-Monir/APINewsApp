@@ -28,6 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    getToken();
+    print("in state $_authToken");
     super.initState();
   }
 
@@ -37,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String? authToken = prefs.getString('token');
     setState(() {
       _authToken = authToken!;
+      print("in gettoken : $_authToken");
     });
   }
 
@@ -90,9 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       final password = _passwordController.text;
                       Provider.of<AuthProvider>(context, listen: false)
                           .login(email, password,context).then((value){
-                            print('auth token to login $_authToken');
-                            Future.delayed(Duration(seconds: 2));
-                            UserData.getUserId(_authToken);
                             Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
                       });
                     }

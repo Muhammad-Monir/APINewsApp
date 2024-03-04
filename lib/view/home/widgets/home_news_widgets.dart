@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/bottom_navigation_provider.dart';
 import '../../../provider/font_size_provider.dart';
@@ -40,9 +40,9 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-
-
   bool _isLogin = false;
+  String _authToken = '';
+  int? userId;
 
   @override
   void initState() {
@@ -54,10 +54,13 @@ class _NewsScreenState extends State<NewsScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
+    String? authToken = prefs.getString('token');
+    int? id = prefs.getInt('id');
     setState(() {
       _isLogin = isLogin;
+      _authToken = authToken!;
+      userId = id!;
     });
-    print(_isLogin);
   }
 
   @override
@@ -285,14 +288,21 @@ class _NewsScreenState extends State<NewsScreen> {
               right: Utils.scrHeight * .02,
               child: GestureDetector(
                 onTap: () {
-                  _isLogin ? provider.toggleBookMarkColor() :
-                  getPopUp(
-                      context,
-                      (p0) => FavoritePopup(
-                            onExit: () {
-                              Navigator.pop(p0);
-                            },
-                          ));
+                  if (_isLogin) {
+                    // provider.toggleIsFavorite();
+                    // provider.isFavorite ?
+                    UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
+                      provider.toggleIsFavorite();
+                    });
+                  } else {
+                    getPopUp(
+                        context,
+                        (p0) => FavoritePopup(
+                              onExit: () {
+                                Navigator.pop(p0);
+                              },
+                            ));
+                  }
                 },
                 child: Container(
                   width: Utils.scrHeight * .04,
@@ -357,10 +367,12 @@ class _NewsScreenState extends State<NewsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(onTap: widget.homeOnTap, child: const HomeTabBar()),
+              GestureDetector(
+                  onTap: widget.homeOnTap, child: const HomeTabBar()),
               GestureDetector(
                   onTap: widget.refreshOnTap, child: const RefreshTabBar()),
-              GestureDetector(onTap: widget.startOnTap, child: const StartTabBar()),
+              GestureDetector(
+                  onTap: widget.startOnTap, child: const StartTabBar()),
             ],
           ),
         ],
