@@ -136,7 +136,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           child: CachedNetworkImage(
         fit: BoxFit.cover,
         fadeInDuration: const Duration(seconds: 2),
-        imageUrl: '${ApiUrl.appBaseUrl}${data.data!.avatar}',
+        imageUrl: '${ApiUrl.baseUrl}${data.data!.avatar}',
         errorWidget: (context, url, error) => Utils.showImage('profile_image'),
       )),
     );

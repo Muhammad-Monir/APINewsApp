@@ -67,39 +67,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.didChangeDependencies();
   }
 
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    String? authToken = prefs.getString('token');
-    setState(() {
-      _isLogin = isLogin;
-      _authToken = authToken!;
-    });
-  }
-
-  Future<NewsModel> fetchNews() async {
-    if (widget.category == null) {
-      fetchAllNews = NewsData.fetchAllNews();
-    } else {
-      setState(() {
-         searchCategory = widget.category!['selectedCategory'];
-         searchText = widget.category!['searchText'];
-      });
-      dev.log('Select search: $searchCategory');
-      dev.log('Select search: $searchText');
-      if(searchText == null || searchText.isEmpty){
-        fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
-      }else if(searchCategory == null || searchCategory.isEmpty){
-        fetchAllNews = NewsData.searchText(searchTitle: searchText);
-      }else{
-        fetchAllNews = NewsData.filter(category: searchCategory, searchTitle: searchText);
-      }
-
-    }
-    return fetchAllNews;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
                     return StoryScreen(
-                        imageUrl: '${ApiUrl.appBaseUrl}${data[index]
+                        imageUrl: '${ApiUrl.baseUrl}${data[index]
                             .image}');
                   });
             } else if (snapshot.hasError) {
@@ -300,6 +267,40 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             );
           }),
     );
+  }
+
+
+  Future<void> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Check if the session data exists
+    bool isLogin = prefs.containsKey('token');
+    String? authToken = prefs.getString('token');
+    setState(() {
+      _isLogin = isLogin;
+      _authToken = authToken!;
+    });
+  }
+
+  Future<NewsModel> fetchNews() async {
+    if (widget.category == null) {
+      fetchAllNews = NewsData.fetchAllNews();
+    } else {
+      setState(() {
+        searchCategory = widget.category!['selectedCategory'];
+        searchText = widget.category!['searchText'];
+      });
+      dev.log('Select search: $searchCategory');
+      dev.log('Select search: $searchText');
+      if(searchText == null || searchText.isEmpty){
+        fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
+      }else if(searchCategory == null || searchCategory.isEmpty){
+        fetchAllNews = NewsData.searchText(searchTitle: searchText);
+      }else{
+        fetchAllNews = NewsData.filter(category: searchCategory, searchTitle: searchText);
+      }
+
+    }
+    return fetchAllNews;
   }
 
   void shareContent(BuildContext context) async {
