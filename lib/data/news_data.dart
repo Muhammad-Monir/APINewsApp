@@ -11,12 +11,14 @@ class NewsData {
   static Future<NewsModel> fetchAllNews({String? category}) async {
     try {
       final response = await http.get(category == null
-          ? Uri.parse(ApiUrl.allNewsUrl)
-          : Uri.parse('${ApiUrl.allNewsUrl}&category=$category'));
+          ? Uri.parse(ApiUrl.newsEndPoint)
+          : Uri.parse('${ApiUrl.newsEndPoint}&category=$category'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         // print(jsonDecode(response.body));
-        return NewsModel.fromJson(jsonDecode(response.body));
+        final Map<String, dynamic> data = json.decode(response.body);
+        print(data);
+        return NewsModel.fromJson(data);
       } else {
         // If the server did not return a 200 OK response, throw an exception
         throw Exception('Failed to load news');

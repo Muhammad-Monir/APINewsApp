@@ -27,4 +27,9 @@ class ApiUrl {
   static String accountResetUrl = "${appBaseUrl}api/reset-password";
   static String addBookMark = "${appBaseUrl}api/bookmark_news/add";
   static String allBookMark = "${appBaseUrl}api/bookmark_news/";
+
+  // New API URL
+  static String appNewBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
+  static String newsEndPoint = '$appNewBaseUrl/news';
+
 }
