@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -65,23 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Login Button
-
-             Consumer<AuthProvider>(
-               builder: (context,provider, child) {
-                 return ActionButton(
-                  onTap: (){
-                    if(_formKey.currentState!.validate()){
-                      final email = _emailController.text;
-                      final password = _passwordController.text;
-                      Provider.of<AuthProvider>(context, listen: false)
-                          .login(email, password,context).then((value){
-                            Navigator.pushNamedAndRemoveUntil(context, RoutesName.home, (route) => false);
-                      });
-                    }
-                  },
-                    buttonColor: appThemeColor, buttonName: 'Log In');
-               }
-             ),
+            loginButton(),
             SizedBox(height: Utils.scrHeight * .03),
 
             // Or Login Other Platform
@@ -93,6 +76,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Consumer<AuthProvider> loginButton() {
+    return Consumer<AuthProvider>(builder: (context, provider, child) {
+      return ActionButton(
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              final email = _emailController.text;
+              final password = _passwordController.text;
+              Provider.of<AuthProvider>(context, listen: false)
+                  .login(email, password, context)
+                  .then((value) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutesName.home, (route) => false);
+              });
+            }
+          },
+          buttonColor: appThemeColor,
+          buttonName: 'Log In');
+    });
   }
 
   Row _buildRegisterPart() {
@@ -169,12 +172,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Email Address',
-            style: regularTS(loginTextColor, fontSize: 16)),
+        Text('Email Address', style: regularTS(loginTextColor, fontSize: 16)),
         SizedBox(height: Utils.scrHeight * .01),
         EmailFormField(
-            emailController: _emailController,
-            hintText: 'Enter email'),
+            emailController: _emailController, hintText: 'Enter email'),
         SizedBox(height: Utils.scrHeight * .02),
       ],
     );
