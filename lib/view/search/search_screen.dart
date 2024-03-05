@@ -1,4 +1,5 @@
 import 'package:am_innnn/common_widgets/email_form_field.dart';
+import 'package:am_innnn/view/search/widgets/category_item.dart';
 import 'package:flutter/material.dart';
 import '../../common_widgets/action_button.dart';
 import '../../route/routes_name.dart';
@@ -34,37 +35,19 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Search Filed for search by title
               EmailFormField(
                   emailController: _searchController, hintText: 'Search news', validate: false,),
               SizedBox(height: Utils.scrHeight * .024),
               Text('Categories', style: semiBoldTS(appTextColor, fontSize: 20)),
               SizedBox(height: Utils.scrHeight * .016),
+
+              // Select Category for search by category
               Expanded(
-                child: GridView.builder(
-                  primary: false,
-                  padding: EdgeInsets.all(Utils.scrHeight * .014),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: Utils.scrHeight * .014,
-                    mainAxisSpacing: Utils.scrHeight * .014,
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.5,
-                  ),
-                  itemCount: Utils.categoriesName.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CustomCategoryItems(
-                      isSelected: selectedCategory == Utils.categoriesName[index],
-                      onTap: () {
-                        print(
-                            'Selected category: ${Utils.categoriesName[index]}');
-                        setState(() {
-                          selectedCategory = Utils.categoriesName[index];
-                        });
-                      },
-                      title: Utils.categoriesName[index],
-                    );
-                  },
-                ),
+                child: selectCategorySection(),
               ),
+
+              // Search button
               ActionButton(
                 onTap: () {
                     print('Selected category: $selectedCategory');
@@ -85,6 +68,33 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  GridView selectCategorySection() {
+    return GridView.builder(
+                primary: false,
+                padding: EdgeInsets.all(Utils.scrHeight * .014),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: Utils.scrHeight * .014,
+                  mainAxisSpacing: Utils.scrHeight * .014,
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.5,
+                ),
+                itemCount: Utils.categoriesName.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CustomCategoryItems(
+                    isSelected: selectedCategory == Utils.categoriesName[index],
+                    onTap: () {
+                      print(
+                          'Selected category: ${Utils.categoriesName[index]}');
+                      setState(() {
+                        selectedCategory = Utils.categoriesName[index];
+                      });
+                    },
+                    title: Utils.categoriesName[index],
+                  );
+                },
+              );
+  }
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -92,36 +102,4 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-class CustomCategoryItems extends StatelessWidget {
-  const CustomCategoryItems({
-    Key? key,
-    required this.title,
-    this.onTap,
-    required this.isSelected,
-  }) : super(key: key);
 
-  final String title;
-  final VoidCallback? onTap;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : categoryColor,
-          borderRadius: BorderRadius.circular(Utils.scrHeight * .014),
-        ),
-        child: Text(
-          title,
-          style: semiBoldTS(
-            isSelected ? Colors.white : appThemeColor,
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-}
