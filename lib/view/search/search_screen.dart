@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String? selectedCategory;
+  String? selectedCategory = '';
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,16 @@ class _SearchScreenState extends State<SearchScreen> {
               // Search button
               ActionButton(
                 onTap: () {
-                    print('Selected category: $selectedCategory');
-                    print('Select search: ${_searchController.text}');
+                    log('Selected category: $selectedCategory');
+                    log('Select search: ${_searchController.text}');
+                    Map<String, dynamic> filter = {
+                      'selectedCategory': selectedCategory,
+                      'searchText': _searchController.text,
+                    };
+                    log('Select search: $filter');
                     // Navigate to next page with selected category
                     Navigator.pushNamed(context, RoutesName.home,
-                        arguments:  selectedCategory);
+                        arguments:  filter);
                 },
                 buttonColor: appThemeColor,
                 textColor: Colors.white,
@@ -83,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return CustomCategoryItems(
                     isSelected: selectedCategory == Utils.categoriesName[index],
                     onTap: () {
-                      print(
+                      log(
                           'Selected category: ${Utils.categoriesName[index]}');
                       setState(() {
                         selectedCategory = Utils.categoriesName[index];

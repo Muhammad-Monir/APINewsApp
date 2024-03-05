@@ -1,10 +1,7 @@
 import 'package:am_innnn/data/auth_data.dart';
-import 'package:am_innnn/data/news_data.dart';
-import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
