@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               return Center(child: Text('${snapshot.error}'));
             }
             if (snapshot.hasData) {
-              List<Articles> data = snapshot.data!.articles!;
+              final data = snapshot.data!.data!;
               if (data.isNotEmpty) {
                 return PageView.builder(
                   controller: newsPageController,
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               refreshOnTap: () {
                                 _refreshData();
                               },
-                              image: data[index].urlToImage ??
+                              image: data[index].featuredImage ??
                                   ApiUrl.imageNotFound,
                               newsDec: data[index].description ??
                                   'News Description Not Found',
@@ -316,7 +316,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   void animation() {
     _animationController = AnimationController(
-      duration: const Duration(microseconds: 100), // Adjust animation duration
+      duration: const Duration(seconds: 2), // Adjust animation duration
       vsync: this,
     );
 
