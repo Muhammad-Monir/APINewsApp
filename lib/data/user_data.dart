@@ -10,7 +10,7 @@ class UserData{
   static Future<ProfileModel> userProfile(String authToken) async {
     try {
       final response = await http.get(
-        Uri.parse(ApiUrl.userProfileUrl),
+        Uri.parse(ApiUrl.newUserProfileUrl),
         headers:{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'

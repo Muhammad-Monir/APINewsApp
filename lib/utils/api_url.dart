@@ -37,4 +37,5 @@ class ApiUrl {
   static String newForgotPasswordUrl = '$appNewBaseUrl/forgot-password';
   static String newResetPasswordUrl = '$appNewBaseUrl/reset-password';
   static String newVerifyAccountUrl = '$appNewBaseUrl/account-verify';
+  static String newUserProfileUrl = '$appNewBaseUrl/profile/details';
 }
