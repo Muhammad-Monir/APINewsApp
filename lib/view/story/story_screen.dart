@@ -1,14 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../provider/timer_provider.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
@@ -95,7 +93,7 @@ class StoryScreen extends StatelessWidget {
         await Share.share('Your text story');
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
       Utils.showSnackBar(context, '$e');
     }
   }

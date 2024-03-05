@@ -43,7 +43,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   bool _isLogin = false;
-  String _authToken = '';
+  late String _authToken;
   int? userId;
 
   @override
@@ -311,7 +311,7 @@ class _NewsScreenState extends State<NewsScreen> {
             child: GestureDetector(
               onTap: () {
                 if (_isLogin) {
-                  provider.toggleIsFavorite();
+                  // provider.toggleIsFavorite();
                   // provider.isFavorite ?
                   UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
                     // provider.toggleIsFavorite();

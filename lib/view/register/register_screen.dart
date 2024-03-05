@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:flutter/material.dart';
 import '../../common_widgets/action_button.dart';
@@ -204,7 +206,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       } catch (e) {
         // Handle network errors or other exceptions
-        print('Registration failed with an exception: $e');
+        log('Registration failed with an exception: $e');
         Utils.showSnackBar(context, 'Registration failed. Please try again.');
       }
     }

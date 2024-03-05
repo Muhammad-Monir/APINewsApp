@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
@@ -22,7 +23,7 @@ import '../story/story_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.category});
 
-  final String? category ;
+  final Map<String,dynamic>? category ;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,10 +38,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late PageController newsPageController;
   late AnimationController _animationController;
 
+  // API Property
   late Future<NewsModel> fetchAllNews;
   late Future<StoryModel> fetchStory;
+
+  // Login Check and Token Property
   bool _isLogin = false;
   String _authToken = '';
+
+  // Filter Category
+  late  String searchCategory;
+  late  String searchText;
 
   @override
   void initState() {
@@ -74,8 +82,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (widget.category == null) {
       fetchAllNews = NewsData.fetchAllNews();
     } else {
-      // fetchAllNews = NewsData.fetchAllNews(category: widget.category);
-      fetchAllNews = NewsData.searchNews(searchText: widget.category);
+      setState(() {
+         searchCategory = widget.category!['selectedCategory'];
+         searchText = widget.category!['searchText'];
+      });
+      dev.log('Select search: $searchCategory');
+      dev.log('Select search: $searchText');
+      if(searchText == null || searchText.isEmpty){
+        fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
+      }else if(searchCategory == null || searchCategory.isEmpty){
+        fetchAllNews = NewsData.searchText(searchTitle: searchText);
+      }else{
+        fetchAllNews = NewsData.filter(category: searchCategory, searchTitle: searchText);
+      }
+
     }
     return fetchAllNews;
   }
@@ -306,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _isRefresh = false;
       });
     } catch (error) {
-      print('Error during refresh: $error');
+      dev.log('Error during refresh: $error');
       setState(() {
         _isRefresh = false;
       });

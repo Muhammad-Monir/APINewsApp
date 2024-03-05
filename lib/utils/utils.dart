@@ -59,6 +59,4 @@ class Utils {
   ];
 }
 
-class userInfo{
 
-}
