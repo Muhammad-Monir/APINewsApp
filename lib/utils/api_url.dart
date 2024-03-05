@@ -31,5 +31,10 @@ class ApiUrl {
   // New API URL
   static String appNewBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
   static String newsEndPoint = '$appNewBaseUrl/news';
-
+  static String newLoginUrl = '$appNewBaseUrl/login';
+  static String newLogOutUrl = '$appNewBaseUrl/logout';
+  static String newRegisterUrl = '$appNewBaseUrl/register';
+  static String newForgotPasswordUrl = '$appNewBaseUrl/forgot-password';
+  static String newResetPasswordUrl = '$appNewBaseUrl/reset-password';
+  static String newVerifyAccountUrl = '$appNewBaseUrl/account-verify';
 }
