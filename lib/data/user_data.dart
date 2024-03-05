@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +20,7 @@ class UserData{
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print(data);
+        log(data.toString());
         return ProfileModel.fromJson(data);
       } else  {
         // If the request was unsuccessful, throw an error
@@ -44,7 +45,7 @@ class UserData{
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print(data['data']['id']);
+        log(data['data']['id']);
         AuthService.saveUserId(data['data']['id']);
       } else  {
         // If the request was unsuccessful, throw an error

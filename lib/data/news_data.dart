@@ -9,8 +9,8 @@ class NewsData {
   static Future<NewsModel> fetchAllNews({String? category}) async {
     try {
       final response = await http.get(category == null
-          ? Uri.parse(ApiUrl.newsEndPoint)
-          : Uri.parse('${ApiUrl.newsEndPoint}?category=$category'));
+          ? Uri.parse(ApiUrl.allNewsUrl)
+          : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
@@ -28,7 +28,7 @@ class NewsData {
   static Future<NewsModel> searchText({String? searchTitle}) async {
     try {
       final response =
-          await http.get(Uri.parse('${ApiUrl.newsEndPoint}?title=$searchTitle'));
+          await http.get(Uri.parse('${ApiUrl.allNewsUrl}?title=$searchTitle'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
@@ -45,7 +45,7 @@ class NewsData {
   static Future<NewsModel> filter({String? searchTitle, String? category}) async {
     try {
       final response =
-          await http.get(Uri.parse('${ApiUrl.newsEndPoint}?category=$category&title=$searchTitle'));
+          await http.get(Uri.parse('${ApiUrl.allNewsUrl}?category=$category&title=$searchTitle'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
