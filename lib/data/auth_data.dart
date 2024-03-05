@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class AuthProvider with ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       final response = await http.post(
-        Uri.parse(ApiUrl.loginUrl),
+        Uri.parse(ApiUrl.newLoginUrl),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -27,7 +28,7 @@ class AuthProvider with ChangeNotifier {
           'password': password,
         }),
       );
-
+      log('login : ${response.body}');
       if (response.statusCode == 200) {
         _isLoading = false;
         notifyListeners();
@@ -55,7 +56,7 @@ class AuthProvider with ChangeNotifier {
     try {
       _isLoading = true;
       final response = await http.post(
-        Uri.parse(ApiUrl.registerUrl),
+        Uri.parse(ApiUrl.newRegisterUrl),
         body: {
           'username': username,
           'email': email,
@@ -94,7 +95,7 @@ class AuthProvider with ChangeNotifier {
       _isLoading = true;
 
       final response = await http.post(
-        Uri.parse(ApiUrl.accountVerifyUrl),
+        Uri.parse(ApiUrl.newVerifyAccountUrl),
         body: {
           'email': email,
           'otp': otp,
@@ -102,16 +103,16 @@ class AuthProvider with ChangeNotifier {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print('API Response: $data');
+        log('API Response: $data');
 
         return data;
       } else {
-        print('Error ${response.statusCode}: ${response.reasonPhrase}');
-        print('Error Body: ${response.body}');
+        log('Error ${response.statusCode}: ${response.reasonPhrase}');
+        log('Error Body: ${response.body}');
         return null;
       }
     } catch (error) {
-      print('Error: $error');
+      log('Error: $error');
       return null;
     }
   }
@@ -121,21 +122,21 @@ class AuthProvider with ChangeNotifier {
     try {
       _isLoading = true;
       final response = await http.post(
-        Uri.parse(ApiUrl.accountForgotUrl),
+        Uri.parse(ApiUrl.newForgotPasswordUrl),
         body: {'email': email},
       );
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print('API Response: $data');
+        log('API Response: $data');
         return data;
       } else {
-        print('Error ${response.statusCode}: ${response.reasonPhrase}');
-        print('Error Body: ${response.body}');
+        log('Error ${response.statusCode}: ${response.reasonPhrase}');
+        log('Error Body: ${response.body}');
         return null;
       }
     } catch (error) {
-      print('Error: $error');
+      log('Error: $error');
       return null;
     }
   }
@@ -150,7 +151,7 @@ class AuthProvider with ChangeNotifier {
     try {
       _isLoading = true;
       final response = await http.post(
-        Uri.parse(ApiUrl.accountResetUrl),
+        Uri.parse(ApiUrl.newResetPasswordUrl),
         body: {
           'email': email,
           'unique_string': uniqueString,
@@ -161,22 +162,22 @@ class AuthProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print('API Response: $data');
+        log('API Response: $data');
         return data;
       } else {
-        print('Error ${response.statusCode}: ${response.reasonPhrase}');
-        print('Error Body: ${response.body}');
+        log('Error ${response.statusCode}: ${response.reasonPhrase}');
+        log('Error Body: ${response.body}');
         return null;
       }
     } catch (error) {
-      print('Error: $error');
+      log('Error: $error');
       return null;
     }
   }
 
   // Logout User
   Future<void> logoutUser(String authToken) async {
-    final url = Uri.parse(ApiUrl.logoutUrl);
+    final url = Uri.parse(ApiUrl.newLogOutUrl);
 
     try {
       final response = await http.post(
@@ -188,12 +189,12 @@ class AuthProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        print('Logout successful');
+        log('Logout successful');
       } else {
         throw Exception('Logout failed - ${response.statusCode}');
       }
     } catch (error) {
-      print('Error during logout: $error');
+      log('Error during logout: $error');
       throw Exception('Error during logout');
     }
   }

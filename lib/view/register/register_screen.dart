@@ -201,8 +201,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         )
             .then((value) {
           Utils.showSnackBar(context, 'Registration Successful');
-          Navigator.pushReplacementNamed(context, RoutesName.verifyAccount,
-              arguments: _emailController.text);
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutesName.login, (route) => false);
         });
       } catch (e) {
         // Handle network errors or other exceptions
