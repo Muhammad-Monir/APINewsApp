@@ -1,15 +1,17 @@
 class StoryModel {
   bool? status;
   String? message;
-  Story? story;
+  Storyboard? storyboard;
   int? code;
 
-  StoryModel({this.status, this.message, this.story, this.code});
+  StoryModel({this.status, this.message, this.storyboard, this.code});
 
   StoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    story = json['story'] != null ? Story.fromJson(json['story']) : null;
+    storyboard = json['storyboard'] != null
+        ? Storyboard.fromJson(json['storyboard'])
+        : null;
     code = json['code'];
   }
 
@@ -17,15 +19,15 @@ class StoryModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['message'] = message;
-    if (story != null) {
-      data['story'] = story!.toJson();
+    if (storyboard != null) {
+      data['storyboard'] = storyboard!.toJson();
     }
     data['code'] = code;
     return data;
   }
 }
 
-class Story {
+class Storyboard {
   int? currentPage;
   List<Data>? data;
   String? firstPageUrl;
@@ -40,7 +42,7 @@ class Story {
   int? to;
   int? total;
 
-  Story(
+  Storyboard(
       {this.currentPage,
         this.data,
         this.firstPageUrl,
@@ -55,7 +57,7 @@ class Story {
         this.to,
         this.total});
 
-  Story.fromJson(Map<String, dynamic> json) {
+  Storyboard.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -108,7 +110,7 @@ class Data {
   int? id;
   String? title;
   String? image;
-  dynamic video;
+  String? video;
   String? status;
   String? createdAt;
   String? updatedAt;

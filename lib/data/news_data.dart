@@ -63,12 +63,11 @@ class NewsData {
   static Future<StoryModel> fetchStory() async {
     try {
       final response = await http.get(
-        Uri.parse(ApiUrl.storyUrl),
+        Uri.parse(ApiUrl.newStoryUrl),
         headers: {
           'Content-Type': 'application/json',
         },
       );
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         return StoryModel.fromJson(data);

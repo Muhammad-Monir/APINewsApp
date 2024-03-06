@@ -3,22 +3,23 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:http/http.dart' as http;
-import 'dart:typed_data';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
+
 class StoryScreen extends StatelessWidget {
   final String? imageUrl;
+  final String? videoUrl;
 
-  const StoryScreen({super.key, this.imageUrl});
+  const StoryScreen({super.key, this.imageUrl, this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
-    const type = 'image';
+    log(imageUrl!);
+    log(videoUrl!);
 
     return Scaffold(
       backgroundColor: const Color(0xffF6F5F3),
@@ -42,25 +43,27 @@ class StoryScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
           // Show Story Video
-          if (type == 'video')
-            const Expanded(
+          if (imageUrl == '')
+             Expanded(
               child: SizedBox(
                   width: double.infinity,
-                  child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer())),
+                  child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer(t: '${ApiUrl.imageBaseUrl}$videoUrl',))),
             ),
 
           // Show Story Image
-          if (type == 'image')
+          if (videoUrl == '')
             CachedNetworkImage(
-              imageUrl: imageUrl!,
+              imageUrl: '${ApiUrl.imageBaseUrl}$imageUrl',
+              // imageUrl: imageUrl!,
               placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) =>
                   Image.network(ApiUrl.imageNotFound),
             ),
 
-          // Show Story Text
-          if (type == 'text')
+          // Show Story Image
+          if(videoUrl == '' && imageUrl == '')
             const Center(
               child: Text(
                 'Your text story',
@@ -74,11 +77,9 @@ class StoryScreen extends StatelessWidget {
 
   Future<void> shareContent(BuildContext context) async {
     try {
-      const String type = 'image';
-
       // Image Share Part
-      if (type == 'image' && imageUrl != null) {
-        final File? cachedImage = await downloadImage(imageUrl!);
+      if (videoUrl == '') {
+        final File? cachedImage = await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
 
         if (cachedImage != null) {
           await Share.shareFiles([cachedImage.path], text: 'Sharing image');
@@ -88,11 +89,12 @@ class StoryScreen extends StatelessWidget {
       }
 
       // Video Share Part
-      else if (type == 'video' && imageUrl != null) {
+      else if (imageUrl == '' ) {
+        await Share.share('${ApiUrl.imageBaseUrl}$videoUrl');
       }
 
       // Text Share Part
-      else if (type == 'text') {
+      else if (imageUrl == '' && videoUrl == '') {
         await Share.share('Your text story');
       }
     } catch (e) {
