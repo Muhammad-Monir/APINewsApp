@@ -6,13 +6,13 @@ import 'package:http/http.dart' as http;
 import '../model/bookmark_model.dart';
 import '../services/auth_service.dart';
 
-class UserData{
+class UserData {
   // Get profile data
   static Future<ProfileModel> userProfile(String authToken) async {
     try {
       final response = await http.get(
         Uri.parse(ApiUrl.newUserProfileUrl),
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -22,7 +22,7 @@ class UserData{
         final Map<String, dynamic> data = json.decode(response.body);
         log(data.toString());
         return ProfileModel.fromJson(data);
-      } else  {
+      } else {
         // If the request was unsuccessful, throw an error
         throw Exception('code  ${response.statusCode}');
       }
@@ -31,13 +31,13 @@ class UserData{
       throw Exception('Exception : $error');
     }
   }
-  
+
   // Save user id
   static Future<void> getUserId(String authToken) async {
     try {
       final response = await http.get(
         Uri.parse(ApiUrl.userProfileUrl),
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -47,7 +47,7 @@ class UserData{
         final Map<String, dynamic> data = json.decode(response.body);
         log(data['data']['id']);
         AuthService.saveUserId(data['data']['id']);
-      } else  {
+      } else {
         // If the request was unsuccessful, throw an error
         throw Exception('code  ${response.statusCode}');
       }
@@ -58,11 +58,12 @@ class UserData{
   }
 
   // Add to bookmark
-  static Future<void> addBookMark(String? authToken, String userId,String title,String? image) async {
+  static Future<void> addBookMark(
+      String? authToken, String userId, String title, String? image) async {
     try {
       final response = await http.post(
-        Uri.parse(ApiUrl.addBookMark),
-        headers:{
+        Uri.parse("${ApiUrl.newAddBookMark}/$userId"),
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -76,7 +77,7 @@ class UserData{
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         // return BookMarkModel.fromJson(data);
-      } else  {
+      } else {
         // If the request was unsuccessful, throw an error
         throw Exception(response.statusCode);
       }
@@ -86,13 +87,13 @@ class UserData{
     }
   }
 
-
   // Get All bookmark
-  static Future<BookMarkModel> fetchBookMark(String? authToken, String userId) async {
+  static Future<BookMarkModel> fetchBookMark(
+      String? authToken, String userId) async {
     try {
       final response = await http.get(
         Uri.parse('${ApiUrl.allBookMark}$userId'),
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -101,7 +102,7 @@ class UserData{
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         return BookMarkModel.fromJson(data);
-      } else  {
+      } else {
         // If the request was unsuccessful, throw an error
         throw Exception(response.statusCode);
       }
@@ -111,4 +112,3 @@ class UserData{
     }
   }
 }
-
