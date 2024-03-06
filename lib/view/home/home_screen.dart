@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           future: fetchNews(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(child: Text('${snapshot.error}'));
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasData) {
               final data = snapshot.data!.data!;
