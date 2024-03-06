@@ -1,4 +1,5 @@
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
@@ -22,7 +23,8 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesName.home:
-        final Map<String, dynamic>? category = settings.arguments as Map<String,dynamic>?;
+        final Map<String, dynamic>? category =
+            settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (context) => HomeScreen(
             category: category,
@@ -79,6 +81,10 @@ class Routes {
       case RoutesName.forgotPassword:
         return MaterialPageRoute(
           builder: (context) => const ForgotPasswordScreen(),
+        );
+      case RoutesName.editProfile:
+        return MaterialPageRoute(
+          builder: (context) => const EditProfileScreen(),
         );
       case RoutesName.changePassword:
         final uniqueString = settings.arguments as CombineEmailOtp;
