@@ -123,7 +123,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                             //     ? 'selected_bookmark'
                             //     : 'bookmark',
                             imageName:
-                                data[index].image ?? ApiUrl.imageNotFound,
+                                data[index].featuredImage ?? ApiUrl.imageNotFound,
                             title: data[index].title!,
                             time: data[index].createdAt!);
                       },
