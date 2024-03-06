@@ -82,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           // All news with Vertical Scroll view
           _newsSection(),
 
-
           // All Story for swipe horizontally
           _storySection(),
         ],
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           future: fetchNews(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(child: Text('${snapshot.error}'));
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasData) {
               final data = snapshot.data!.data!;
@@ -182,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           future: fetchStory,
           builder: (context,snapshot) {
             if (snapshot.hasData) {
-              final data = snapshot.data!.story!.data;
+              final data = snapshot.data!.storyboard!.data;
+
               if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
                 Timer(const Duration(seconds: 1), () {
                   Provider.of<BarsVisibility>(context, listen: false).hideBars();
@@ -193,9 +193,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   scrollDirection: Axis.vertical,
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
+                    dev.log('image:${ApiUrl.imageBaseUrl}${data[index].image}');
+                    dev.log('video: ${ApiUrl.imageBaseUrl}${data[index].video}');
                     return StoryScreen(
-                        imageUrl: '${ApiUrl.baseUrl}${data[index]
-                            .image}');
+                        imageUrl:data[index].image ?? '',
+                      videoUrl: data[index].video ?? '',
+                    );
                   });
             } else if (snapshot.hasError) {
               return Center(child: Text(snapshot.hasError.toString()),);

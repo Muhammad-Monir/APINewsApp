@@ -32,6 +32,7 @@ class ApiUrl {
 
   // New API URL
   static String newBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
+  static String imageBaseUrl = 'http://192.168.40.38/Am_inn/public/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
   static String newLogOutUrl = '$newBaseUrl/logout';

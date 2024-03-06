@@ -14,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'data/user_data.dart';
-
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -52,10 +50,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
           useMaterial3: true,
         ),
-        initialRoute: RoutesName.splash,
+        initialRoute: RoutesName.home,
         onGenerateRoute: Routes.generateRoute,
-
-
       ),
     );
   }
