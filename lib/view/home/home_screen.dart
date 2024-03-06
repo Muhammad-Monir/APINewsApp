@@ -59,13 +59,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
 
-  @override
-  void didChangeDependencies() {
-    if(_isLogin) {
-      UserData.getUserId(_authToken);
-    }
-    super.didChangeDependencies();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //
+  //   if(_isLogin) {
+  //     UserData.fetchBookMark(_authToken);
+  //     // UserData.getUserId(_authToken);
+  //   }
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           alignment: Alignment.center,
                           child: !_isRefresh ? SizedBox(
                             child: NewsScreen(
+                              newsId: data[index].id!,
                               homeOnTap: () =>
                                   Scaffold.of(context).openDrawer(),
                               startOnTap: () {

@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -11,7 +13,7 @@ class AuthService {
     // You can save additional session data if needed
   }
   static Future<void> saveUserId(int userId) async {
-    print('saveUserId');
+    log('saveUserId');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Save session data (e.g., token)
     await prefs.setInt('id', userId);

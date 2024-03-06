@@ -1,13 +1,12 @@
+
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/model/bookmark_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/view/bookmarks/widgets/bookmark_item.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/user_data.dart';
-import '../../provider/bookmark_provider.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -22,7 +21,8 @@ class BookMarksScreen extends StatefulWidget {
 class _BookMarksScreenState extends State<BookMarksScreen> {
   bool _isLogin = false;
   String _authToken = '';
-  int? userId;
+  // int? userId;
+  late Future<BookmarkModel> fetchAllBookMark;
 
   @override
   void initState() {
@@ -30,18 +30,24 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     super.initState();
   }
 
+  Future<BookmarkModel> fetchBookMark() async {
+    fetchAllBookMark = UserData.fetchBookMark(_authToken);
+    return fetchAllBookMark;
+  }
+
   Future<void> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
     String? authToken = prefs.getString('token');
-    int? id = prefs.getInt('id');
+    // int? id = prefs.getInt('id');
     setState(() {
       _isLogin = isLogin;
       _authToken = authToken!;
-      userId = id;
+      // userId = id;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +56,51 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
         body: _isLogin ? _allBookMark() : _ifNotLogin(context));
   }
 
-  Consumer<BookmarkProvider> _allBookMark() {
-    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
-      return FutureBuilder<BookMarkModel>(
-          future: UserData.fetchBookMark(_authToken, userId.toString()),
+  FutureBuilder<BookmarkModel> _allBookMark() {
+    // return Consumer<BookmarkProvider>(builder: (context, provider, child) {
+      return
+
+
+      //   StreamBuilder<BookmarkModel>(
+      //   stream: UserData.fetchBookMarkStream(_authToken),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //       final data = snapshot.data!.data;
+      //       return data!.isNotEmpty
+      //           ? ListView.builder(
+      //         padding: EdgeInsets.symmetric(
+      //             horizontal: Utils.scrHeight * .024,
+      //             vertical: Utils.scrHeight * .024),
+      //         itemCount: data.length,
+      //         itemBuilder: (context, index) {
+      //           return BookmarkItem(
+      //             onTap: () {
+      //               UserData.addBookMark(_authToken, data[index].id.toString()).then((value) {
+      //                 Utils.showSnackBar(context, value);
+      //               });
+      //             },
+      //             svgName: 'selected_bookmark',
+      //             imageName: data[index].featuredImage ?? ApiUrl.imageNotFound,
+      //             title: data[index].title!,
+      //             time: data[index].createdAt!,
+      //           );
+      //         },
+      //       )
+      //           : const Center(child: Text('Data not found'));
+      //     } else if (snapshot.hasError) {
+      //       return Center(
+      //         child: Text(snapshot.error.toString()),
+      //       );
+      //     } else {
+      //       return Center(
+      //         child: Container(),
+      //       );
+      //     }
+      //   },
+      // );
+
+      FutureBuilder<BookmarkModel>(
+          future: fetchBookMark(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data!.data;
@@ -66,7 +113,10 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                       itemBuilder: (context, index) {
                         return BookmarkItem(
                             onTap: () {
-                              // provider.toggleIsFavorite();
+                              UserData.addBookMark(_authToken, data[index].id.toString()).then((value) {
+                                Utils.showSnackBar(context, value);
+                                fetchBookMark();
+                              });
                             },
                             svgName: 'selected_bookmark',
                             // provider.isFavorite
@@ -89,7 +139,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
               );
             }
           });
-    });
+    // });
   }
 
   Center _ifNotLogin(BuildContext context) {
