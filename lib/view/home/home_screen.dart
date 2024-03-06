@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../data/user_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -42,9 +41,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Future<NewsModel> fetchAllNews;
   late Future<StoryModel> fetchStory;
 
+
   // Login Check and Token Property
-  bool _isLogin = false;
-  String _authToken = '';
+  // bool _isLogin = false;
+  // String _authToken = '';
 
   // Filter Category
   late  String searchCategory;
@@ -52,22 +52,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    isLoggedIn();
+    // isLoggedIn();
     fetchStory = NewsData.fetchStory();
     animation();
     super.initState();
   }
 
-
-  // @override
-  // void didChangeDependencies() {
-  //
-  //   if(_isLogin) {
-  //     UserData.fetchBookMark(_authToken);
-  //     // UserData.getUserId(_authToken);
-  //   }
-  //   super.didChangeDependencies();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -276,16 +266,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
 
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    String? authToken = prefs.getString('token');
-    setState(() {
-      _isLogin = isLogin;
-      _authToken = authToken!;
-    });
-  }
+  // Future<void> isLoggedIn() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // Check if the session data exists
+  //   bool isLogin = prefs.containsKey('token');
+  //   String? authToken = prefs.getString('token');
+  //   setState(() {
+  //     _isLogin = isLogin;
+  //     _authToken = authToken!;
+  //   });
+  // }
 
   Future<NewsModel> fetchNews() async {
     if (widget.category == null) {

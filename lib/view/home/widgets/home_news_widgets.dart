@@ -46,6 +46,7 @@ class _NewsScreenState extends State<NewsScreen> {
   bool _isLogin = false;
   late String _authToken;
   int? userId;
+  bool isFav = false;
 
   @override
   void initState() {
@@ -93,13 +94,6 @@ class _NewsScreenState extends State<NewsScreen> {
           );
         }),
       ),
-
-      // bottomNavigationBar: Provider
-      //     .of<BarsVisibility>(context)
-      //     .showBars
-      //     ? _bottomNavigationMenu(context)
-      //     : null,
-      // Showing Floating Add Banner
       floatingActionButton: _floatingActionButton(),
     );
   }
@@ -299,7 +293,8 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
 
         // BookMark Button
-        _addToBookmark()
+        if (_isLogin)
+          _addToBookmark()
       ],
     );
   }
@@ -312,10 +307,16 @@ class _NewsScreenState extends State<NewsScreen> {
             child: GestureDetector(
               onTap: () {
                 if (_isLogin) {
-                  // provider.toggleIsFavorite();
                   // provider.isFavorite ?
                   UserData.addBookMark(_authToken, widget.newsId.toString()).then((value){
                     Utils.showSnackBar(context, value);
+                    if (value == 'Bookmark added successfully'){
+                      setState(() {
+                        isFav = true;
+                      });
+                    } else if (value == 'Bookmark Remove successfully'){
+                      isFav = true;
+                    }
                     // provider.toggleIsFavorite();
                   });
                 } else {
@@ -333,7 +334,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 height: Utils.scrHeight * .04,
                 padding: const EdgeInsets.all(8),
                 decoration: ShapeDecoration(
-                  color: provider.isFavorite
+                  color: !isFav
                       ? Colors.white.withOpacity(0)
                       : Colors.white.withOpacity(0.3),
                   shape: RoundedRectangleBorder(
@@ -344,7 +345,7 @@ class _NewsScreenState extends State<NewsScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: provider.isFavorite
+                child: !isFav
                     ? Utils.showSvgPicture('bookmarks',
                         height: Utils.scrHeight * .020)
                     : Utils.showSvgPicture('selected_bookmark',
