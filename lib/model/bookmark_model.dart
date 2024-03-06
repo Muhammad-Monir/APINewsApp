@@ -1,12 +1,12 @@
-class BookMarkModel {
+class BookmarkModel {
   bool? status;
   String? message;
   List<Data>? data;
   int? code;
 
-  BookMarkModel({this.status, this.message, this.data, this.code});
+  BookmarkModel({this.status, this.message, this.data, this.code});
 
-  BookMarkModel.fromJson(Map<String, dynamic> json) {
+  BookmarkModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
@@ -32,37 +32,81 @@ class BookMarkModel {
 
 class Data {
   int? id;
-  String? userId;
   String? title;
-  String? image;
+  String? description;
+  String? url;
+  String? featuredImage;
+  String? source;
+  String? author;
+  String? category;
+  dynamic image;
+  dynamic video;
+  String? isTop;
+  int? languageId;
+  String? content;
+  String? status;
   String? createdAt;
   String? updatedAt;
+  dynamic deletedAt;
 
   Data(
       {this.id,
-        this.userId,
         this.title,
+        this.description,
+        this.url,
+        this.featuredImage,
+        this.source,
+        this.author,
+        this.category,
         this.image,
+        this.video,
+        this.isTop,
+        this.languageId,
+        this.content,
+        this.status,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+        this.deletedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    userId = json['user_id'];
     title = json['title'];
+    description = json['description'];
+    url = json['url'];
+    featuredImage = json['featured_image'];
+    source = json['source'];
+    author = json['author'];
+    category = json['category'];
     image = json['image'];
+    video = json['video'];
+    isTop = json['is_top'];
+    languageId = json['language_id'];
+    content = json['content'];
+    status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['user_id'] = userId;
     data['title'] = title;
+    data['description'] = description;
+    data['url'] = url;
+    data['featured_image'] = featuredImage;
+    data['source'] = source;
+    data['author'] = author;
+    data['category'] = category;
     data['image'] = image;
+    data['video'] = video;
+    data['is_top'] = isTop;
+    data['language_id'] = languageId;
+    data['content'] = content;
+    data['status'] = status;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

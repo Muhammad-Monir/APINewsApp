@@ -44,7 +44,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
       _isLogin = isLogin;
       _authToken = authToken!;
     });
-    print('in drower : $_authToken');
   }
 
   @override

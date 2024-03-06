@@ -25,6 +25,7 @@ class NewsScreen extends StatefulWidget {
   final String? newsDec;
   final String sourceLink;
   final String newsTitle;
+  final int newsId;
 
   const NewsScreen({
     super.key,
@@ -34,7 +35,7 @@ class NewsScreen extends StatefulWidget {
     required this.newsDec,
     required this.sourceLink,
     required this.newsTitle,
-    this.refreshOnTap,
+    this.refreshOnTap, required this.newsId,
   });
 
   @override
@@ -60,11 +61,11 @@ class _NewsScreenState extends State<NewsScreen> {
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
     String? authToken = prefs.getString('token');
-    int? id = prefs.getInt('id');
+    // int? id = prefs.getInt('id');
     setState(() {
       _isLogin = isLogin;
       _authToken = authToken!;
-      userId = id!;
+      // userId = id!;
     });
   }
 
@@ -313,7 +314,8 @@ class _NewsScreenState extends State<NewsScreen> {
                 if (_isLogin) {
                   // provider.toggleIsFavorite();
                   // provider.isFavorite ?
-                  UserData.addBookMark(_authToken, userId.toString(), widget.newsTitle, widget.image).then((value){
+                  UserData.addBookMark(_authToken, widget.newsId.toString()).then((value){
+                    Utils.showSnackBar(context, value);
                     // provider.toggleIsFavorite();
                   });
                 } else {
