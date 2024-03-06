@@ -51,6 +51,7 @@ dependencies:
   http:
   shared_preferences:
   cached_network_image:
+  flutter_cache_manager:
   path_provider:
   intl:
 

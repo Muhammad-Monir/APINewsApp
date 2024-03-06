@@ -1,11 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:http/http.dart' as http;
-import 'dart:typed_data';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
@@ -78,23 +77,24 @@ class StoryScreen extends StatelessWidget {
 
   Future<void> shareContent(BuildContext context) async {
     try {
-      const String type = 'image';
+      // Image Share Part
+      if (videoUrl == '') {
+        final File? cachedImage = await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
 
-      if (type == 'image' && imageUrl != null) {
-        final response = await http.get(Uri.parse(imageUrl!));
-
-        if (response.statusCode == 200) {
-          final Uint8List bytes = response.bodyBytes;
-          final appDocDir = await getApplicationDocumentsDirectory();
-          final file = File('${appDocDir.path}/image.jpg');
-
-          await file.writeAsBytes(bytes);
-          await Share.shareFiles([file.path]);
+        if (cachedImage != null) {
+          await Share.shareFiles([cachedImage.path], text: 'Sharing image');
         } else {
-          throw Exception('Failed to load image');
+          throw Exception('Failed to load or download image');
         }
-      } else if (type == 'video' && imageUrl != null) {
-      } else if (type == 'text') {
+      }
+
+      // Video Share Part
+      else if (imageUrl == '' ) {
+        await Share.share('${ApiUrl.imageBaseUrl}$videoUrl');
+      }
+
+      // Text Share Part
+      else if (imageUrl == '' && videoUrl == '') {
         await Share.share('Your text story');
       }
     } catch (e) {
@@ -117,5 +117,15 @@ class StoryScreen extends StatelessWidget {
             child: childBuilder(context),
           );
         });
+  }
+}
+
+Future<File?> downloadImage(String imageUrl) async {
+  try {
+    final File file = await DefaultCacheManager().getSingleFile(imageUrl);
+    return file;
+  } catch (e) {
+    log('Error downloading image: $e');
+    return null;
   }
 }

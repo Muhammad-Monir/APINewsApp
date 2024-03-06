@@ -4,7 +4,24 @@
             "outputFile": "com.example.newsapp-mergeDebugResources-13:/values-th/values-th.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-th\\values-th.xml",
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-th\\values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,131,194,262,330,407,480,571,657",
+                        "endColumns": "75,62,67,67,76,72,90,85,78",
+                        "endOffsets": "126,189,257,325,402,475,566,652,731"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "873,949,1012,1080,1148,1225,1298,1389,1475",
+                        "endColumns": "75,62,67,67,76,72,90,85,78",
+                        "endOffsets": "944,1007,1075,1143,1220,1293,1384,1470,1549"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-th\\values-th.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-th\\values-th.xml",
+                    "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-th\\values-th.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -35,23 +52,6 @@
                         "startOffsets": "55,151,254,352,450,553,658,1862",
                         "endColumns": "95,102,97,97,102,104,111,100",
                         "endOffsets": "146,249,347,445,548,653,765,1958"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-th\\values-th.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,131,194,262,330,407,480,571,657",
-                        "endColumns": "75,62,67,67,76,72,90,85,78",
-                        "endOffsets": "126,189,257,325,402,475,566,652,731"
-                    },
-                    "to": {
-                        "startLines": "10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "873,949,1012,1080,1148,1225,1298,1389,1475",
-                        "endColumns": "75,62,67,67,76,72,90,85,78",
-                        "endOffsets": "944,1007,1075,1143,1220,1293,1384,1470,1549"
                     }
                 }
             ]
