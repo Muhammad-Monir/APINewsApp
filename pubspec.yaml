@@ -54,6 +54,7 @@ dependencies:
   flutter_cache_manager:
   path_provider:
   intl:
+  image_picker:
 
 
 dev_dependencies:

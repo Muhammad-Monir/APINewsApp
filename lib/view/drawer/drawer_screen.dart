@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
@@ -7,6 +8,7 @@ import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/view/drawer/widget/custom_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +30,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   bool _isLogin = false;
   String _authToken = '';
   final AuthProvider _authProvider = AuthProvider();
+  String? localImagePath;
 
   @override
   void initState() {
@@ -73,6 +76,32 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           child: Utils.showImage('profile_image',
                               height: Utils.scrHeight * .096,
                               width: Utils.scrHeight * .096))),
+              // Edit Profile
+              _isLogin
+                  ?Positioned(
+                left: Utils.scrHeight * .196,
+                bottom: -Utils.scrHeight * .034,
+                child: GestureDetector(
+                  onTap: () {
+                    log('click');
+                    Navigator.pushNamed(context, RoutesName.editProfile);
+                    // _getImage();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: Colors.black,
+                          width: Utils.scrHeight *
+                              .001), // Customize the color and width
+                    ),
+                    child: const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 14,
+                        child: Icon(Icons.edit, size: 20, color: Colors.black)),
+                  ),
+                ),
+              ): const SizedBox()
             ],
           ),
           SizedBox(height: Utils.scrHeight * .05),
@@ -260,5 +289,63 @@ class _DrawerScreenState extends State<DrawerScreen> {
         (route) => false,
       );
     });
+  }
+
+  void _getImage() async {
+    final imageSource = await showModalBottomSheet<ImageSource>(
+      scrollControlDisabledMaxHeightRatio: double.infinity,
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: Utils.scrHeight * .04),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, ImageSource.camera); // Fixed here
+                },
+                child: const Column(
+                  children: [
+                    Icon(Icons.camera_alt_outlined,
+                        size: 40, color: Colors.blue),
+                    Text('Take a photo',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context, ImageSource.gallery);
+                },
+                child: const Column(
+                  children: [
+                    Icon(Icons.photo, size: 40, color: Colors.blue),
+                    Text('Choose from gallery',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (imageSource != null) {
+      final pickedFile = await ImagePicker().pickImage(source: imageSource);
+      if (pickedFile != null) {
+        setState(() {
+          localImagePath = pickedFile.path;
+        });
+      }
+    }
   }
 }
