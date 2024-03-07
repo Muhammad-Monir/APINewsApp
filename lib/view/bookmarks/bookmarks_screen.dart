@@ -21,7 +21,6 @@ class BookMarksScreen extends StatefulWidget {
 class _BookMarksScreenState extends State<BookMarksScreen> {
   bool _isLogin = false;
   String _authToken = '';
-  // int? userId;
   late Future<BookmarkModel> fetchAllBookMark;
   BookMarkDataStream bookMarkDataStream = BookMarkDataStream();
 
@@ -60,7 +59,6 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
   }
 
   StreamBuilder<BookmarkModel> _allBookMark() {
-    // return Consumer<BookmarkProvider>(builder: (context, provider, child) {
     return StreamBuilder<BookmarkModel>(
       stream: bookMarkDataStream.broadCastStream,
       builder: (context, AsyncSnapshot<BookmarkModel> snapshot) {
@@ -102,48 +100,6 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
         }
       },
     );
-
-    // FutureBuilder<BookmarkModel>(
-    //     future: fetchBookMark(),
-    //     builder: (context, snapshot) {
-    //       if (snapshot.hasData) {
-    //         final data = snapshot.data!.data;
-    //         return data!.isNotEmpty
-    //             ? ListView.builder(
-    //                 padding: EdgeInsets.symmetric(
-    //                     horizontal: Utils.scrHeight * .024,
-    //                     vertical: Utils.scrHeight * .024),
-    //                 itemCount: data.length,
-    //                 itemBuilder: (context, index) {
-    //                   return BookmarkItem(
-    //                       onTap: () {
-    //                         UserData.addBookMark(_authToken, data[index].id.toString()).then((value) {
-    //                           Utils.showSnackBar(context, value);
-    //                           fetchBookMark();
-    //                         });
-    //                       },
-    //                       svgName: 'selected_bookmark',
-    //                       // provider.isFavorite
-    //                       //     ? 'selected_bookmark'
-    //                       //     : 'bookmark',
-    //                       imageName:
-    //                           data[index].featuredImage ?? ApiUrl.imageNotFound,
-    //                       title: data[index].title!,
-    //                       time: data[index].createdAt!);
-    //                 },
-    //               )
-    //             : const Center(child: Text('Data not found'));
-    //       } else if (snapshot.hasError) {
-    //         return Center(
-    //           child: Text(snapshot.hasError.toString()),
-    //         );
-    //       } else {
-    //         return Center(
-    //           child: Container(),
-    //         );
-    //       }
-    //     });
-    // });
   }
 
   Center _ifNotLogin(BuildContext context) {
