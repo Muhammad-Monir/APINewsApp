@@ -200,15 +200,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   svgName: 'rating',
                   icon: Icons.arrow_forward_ios)
               : Container(),
-          isLogin
-              ? CustomDrawerItem(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.feedBack);
-                  },
-                  text: 'Feedback',
-                  svgName: 'feedback',
-                  icon: Icons.arrow_forward_ios)
-              : Container(),
+          // isLogin
+          //     ? CustomDrawerItem(
+          //         onTap: () {
+          //           Navigator.pushNamed(context, RoutesName.feedBack);
+          //         },
+          //         text: 'Feedback',
+          //         svgName: 'feedback',
+          //         icon: Icons.arrow_forward_ios)
+          //     : Container(),
           const CustomDrawerItem(
               text: 'Contact Us',
               svgName: 'contact_us',
@@ -227,7 +227,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'Privacy & Policy',
               svgName: 'privacy&policy',
               icon: Icons.arrow_forward_ios),
-          SizedBox(height: Utils.scrHeight * .09),
+          SizedBox(height: Utils.scrHeight * .074),
 
           // Logout Button
           _isLogin
