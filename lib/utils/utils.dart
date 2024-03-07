@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
-
+import 'package:flutter_svg/svg.dart';
 class Utils {
   static late double scrHeight;
   static late double scrWidth;
