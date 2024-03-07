@@ -1,15 +1,15 @@
 class NewsModel {
   bool? success;
-  List<Data>? data;
+  List<NewesData>? data;
 
   NewsModel({this.success, this.data});
 
   NewsModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <NewesData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(NewesData.fromJson(v));
       });
     }
   }
@@ -24,7 +24,7 @@ class NewsModel {
   }
 }
 
-class Data {
+class NewesData {
   int? id;
   String? title;
   String? description;
@@ -43,7 +43,7 @@ class Data {
   String? updatedAt;
   dynamic deletedAt;
 
-  Data(
+  NewesData(
       {this.id,
         this.title,
         this.description,
@@ -62,7 +62,7 @@ class Data {
         this.updatedAt,
         this.deletedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  NewesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];

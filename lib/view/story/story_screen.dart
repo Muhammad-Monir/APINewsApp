@@ -9,7 +9,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
-
 class StoryScreen extends StatelessWidget {
   final String? imageUrl;
   final String? videoUrl;
@@ -18,68 +17,74 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(imageUrl!);
-    log(videoUrl!);
+    log('story screen image ${imageUrl!}');
+    log('story screen video ${videoUrl!}');
 
     return Scaffold(
-      backgroundColor: const Color(0xffF6F5F3),
-      // Share Icon Part
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: Utils.scrHeight * .06),
-        child: FloatingActionButton(
-          shape: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
-          ),
-          onPressed: () {
-            shareContent(context);
-          },
-          child: Container(
-            child: Utils.showSvgPicture('share'),
+        backgroundColor: const Color(0xffF6F5F3),
+        // Share Icon Part
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+          child: FloatingActionButton(
+            shape: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
+            ),
+            onPressed: () {
+              shareContent(context);
+            },
+            child: Container(
+              child: Utils.showSvgPicture('share'),
+            ),
           ),
         ),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-          // Show Story Video
-          if (imageUrl == '')
-             Expanded(
-              child: SizedBox(
-                  width: double.infinity,
-                  child: AspectRatio(aspectRatio: 9 / 19, child: MyPlayer(t: '${ApiUrl.imageBaseUrl}$videoUrl',))),
-            ),
-
-          // Show Story Image
-          if (videoUrl == '')
-            CachedNetworkImage(
-              imageUrl: '${ApiUrl.imageBaseUrl}$imageUrl',
-              // imageUrl: imageUrl!,
-              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) =>
-                  Image.network(ApiUrl.imageNotFound),
-            ),
-
-          // Show Story Image
-          if(videoUrl == '' && imageUrl == '')
-            const Center(
-              child: Text(
-                'Your text story',
-                style: TextStyle(fontSize: 20, color: Colors.black),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Show Story Video
+            if (imageUrl == '')
+              Expanded(
+                child: SizedBox(
+                    width: double.infinity,
+                    child: AspectRatio(
+                        aspectRatio: 2,
+                        child: MyPlayer(
+                          t: '${ApiUrl.imageBaseUrl}$videoUrl',
+                        ))),
               ),
-            ),
-        ],
-      ),
-    );
+
+            // Show Story Image
+            if (videoUrl == '')
+              SizedBox(
+                child: CachedNetworkImage(
+                  imageUrl: '${ApiUrl.imageBaseUrl}$imageUrl',
+                  // imageUrl: imageUrl!,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      Image.network(ApiUrl.imageNotFound),
+                ),
+              ),
+
+            // Show Story Image
+            if (videoUrl == '' && imageUrl == '')
+              const Center(
+                child: Text(
+                  'Your text story',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+              ),
+          ],
+        ));
   }
 
   Future<void> shareContent(BuildContext context) async {
     try {
       // Image Share Part
       if (videoUrl == '') {
-        final File? cachedImage = await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
+        final File? cachedImage =
+            await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
 
         if (cachedImage != null) {
           await Share.shareFiles([cachedImage.path], text: 'Sharing image');
@@ -89,7 +94,7 @@ class StoryScreen extends StatelessWidget {
       }
 
       // Video Share Part
-      else if (imageUrl == '' ) {
+      else if (imageUrl == '') {
         await Share.share('${ApiUrl.imageBaseUrl}$videoUrl');
       }
 

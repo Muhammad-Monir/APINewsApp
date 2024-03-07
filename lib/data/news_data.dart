@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../model/news_model.dart';
 
 class NewsData {
+  // static bool isLastPage = false;
   static Future<NewsModel> fetchAllNews({String? category}) async {
     try {
       final response = await http.get(category == null
@@ -42,10 +43,12 @@ class NewsData {
       throw Exception(e.toString());
     }
   }
-  static Future<NewsModel> filter({String? searchTitle, String? category}) async {
+
+  static Future<NewsModel> filter(
+      {String? searchTitle, String? category}) async {
     try {
-      final response =
-          await http.get(Uri.parse('${ApiUrl.allNewsUrl}?category=$category&title=$searchTitle'));
+      final response = await http.get(Uri.parse(
+          '${ApiUrl.allNewsUrl}?category=$category&title=$searchTitle'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
@@ -60,16 +63,51 @@ class NewsData {
     }
   }
 
+  // static Future<List<Data>> fetchStory(int page) async {
+  //   if (!isLastPage) {
+  //     try {
+  //       log('call get story');
+  //       final response = await http.get(
+  //         Uri.parse('${ApiUrl.newStoryUrl}?page=$page'),
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       );
+  //       if (response.statusCode == 200) {
+  //         final Map<String, dynamic> data = jsonDecode(response.body);
+  //         log(data['storyboard']['next_page_url'].toString());
+  //         isLastPage =
+  //             data['storyboard']['next_page_url'] == null ? true : false;
+  //         log(data.toString());
+  //         // Extract 'data' field and convert it to a list of Data objects
+  //         final List<dynamic> jsonDataList = data['storyboard']['data'];
+  //         final List<Data> dataList =
+  //             jsonDataList.map((json) => Data.fromJson(json)).toList();
+  //         log('dataList  : ${dataList.toString()}');
+  //         return dataList;
+  //       } else {
+  //         throw Exception('Failed to load Story: ${response.statusCode}');
+  //       }
+  //     } catch (error) {
+  //       rethrow;
+  //     }
+  //   } else {
+  //     throw Exception('Failed to load Story: ${4545}');
+  //   }
+  // }
+
   static Future<StoryModel> fetchStory() async {
     try {
+      log('call get story');
       final response = await http.get(
-        Uri.parse(ApiUrl.newStoryUrl),
+        Uri.parse('${ApiUrl.newStoryUrl}?page=1'),
         headers: {
           'Content-Type': 'application/json',
         },
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load Story: ${response.statusCode}');

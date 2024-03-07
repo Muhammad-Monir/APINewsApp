@@ -42,11 +42,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
-    String? authToken = prefs.getString('token');
     setState(() {
       _isLogin = isLogin;
-      _authToken = authToken!;
     });
+    if (_isLogin) {
+      String? authToken = prefs.getString('token');
+      setState(() {
+        _authToken = authToken!;
+      });
+    }
   }
 
   @override
@@ -76,32 +80,35 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           child: Utils.showImage('profile_image',
                               height: Utils.scrHeight * .096,
                               width: Utils.scrHeight * .096))),
+
               // Edit Profile
               _isLogin
-                  ?Positioned(
-                left: Utils.scrHeight * .196,
-                bottom: -Utils.scrHeight * .034,
-                child: GestureDetector(
-                  onTap: () {
-                    log('click');
-                    Navigator.pushNamed(context, RoutesName.editProfile);
-                    // _getImage();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.black,
-                          width: Utils.scrHeight *
-                              .001), // Customize the color and width
-                    ),
-                    child: const CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 14,
-                        child: Icon(Icons.edit, size: 20, color: Colors.black)),
-                  ),
-                ),
-              ): const SizedBox()
+                  ? Positioned(
+                      left: Utils.scrHeight * .196,
+                      bottom: -Utils.scrHeight * .034,
+                      child: GestureDetector(
+                        onTap: () {
+                          log('click');
+                          Navigator.pushNamed(context, RoutesName.editProfile);
+                          // _getImage();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: Colors.black,
+                                width: Utils.scrHeight *
+                                    .001), // Customize the color and width
+                          ),
+                          child: const CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 14,
+                              child: Icon(Icons.edit,
+                                  size: 20, color: Colors.black)),
+                        ),
+                      ),
+                    )
+                  : const SizedBox()
             ],
           ),
           SizedBox(height: Utils.scrHeight * .05),
