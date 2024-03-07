@@ -7,7 +7,6 @@ import '../../common_widgets/password_form_field.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
-import '../feedback/widgets/custom_welcome_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key, required this.emailOtp});
