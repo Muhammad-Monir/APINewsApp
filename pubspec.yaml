@@ -55,6 +55,7 @@ dependencies:
   path_provider:
   intl:
   image_picker:
+  infinite_scroll_pagination:
 
 
 dev_dependencies:

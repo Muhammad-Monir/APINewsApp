@@ -44,7 +44,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   bool _isLogin = false;
-  late String _authToken;
+  late String _authToken = '';
   int? userId;
   bool isFav = false;
 
@@ -61,13 +61,16 @@ class _NewsScreenState extends State<NewsScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
-    String? authToken = prefs.getString('token');
-    // int? id = prefs.getInt('id');
     setState(() {
       _isLogin = isLogin;
-      _authToken = authToken!;
-      // userId = id!;
     });
+    if(_isLogin){
+      String? authToken = await prefs.getString('token');
+      setState(() {
+      _authToken = authToken!;
+    
+    });
+    }
   }
 
   @override

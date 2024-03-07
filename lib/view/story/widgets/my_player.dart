@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:am_innnn/utils/color.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/src/helpers/utils.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-
 import '../../../utils/styles.dart';
 
 /// Stateful widget to fetch and then display video content.shakib
@@ -33,34 +31,38 @@ class _MyPlayerState extends State<MyPlayer> {
   // final t = 'https://192.168.40.38/Am_inn/public/uploads/meme_videos/asdgasdg-bz3tyg76nd1hbpv6wsugcqajascenm.mp4';
   @override
   void initState() {
-    log('my player${widget.t!}');
+    log('my player:     ${widget.t!}');
     super.initState();
-    _videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(widget.t!))
-          ..initialize().then((value) {
-            setState(() {
-              _chewieController = _setUpPlayer(_videoPlayerController);
+    try {
+      _videoPlayerController =
+          VideoPlayerController.networkUrl(Uri.parse(widget.t!))
+            ..initialize().then((value) {
+              setState(() {
+                _chewieController = _setUpPlayer(_videoPlayerController);
+              });
             });
-          });
-    WakelockPlus.enable();
+      WakelockPlus.enable();
+    } catch (e) {
+      log('Error initializing video: $e');
+    }
   }
 
   Widget _buildCustomControls() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // VideoProgressIndicator(
-          //   _videoPlayerController,
-          //   allowScrubbing: true,
-          //   colors: const VideoProgressColors(
-          //     playedColor: Colors.white,
-          //     bufferedColor: Colors.grey,
-          //     backgroundColor: Colors.transparent,
-          //   ),
-          // ),
+          VideoProgressIndicator(
+            _videoPlayerController,
+            allowScrubbing: true,
+            colors: const VideoProgressColors(
+              playedColor: Colors.blue,
+              bufferedColor: Colors.grey,
+              backgroundColor: Colors.transparent,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -214,8 +216,8 @@ class _MyPlayerState extends State<MyPlayer> {
       videoPlayerController: videoController,
       autoPlay: true,
       looping: true,
-      aspectRatio: 9 / 19,
-      // aspectRatio: videoController.value.aspectRatio,
+      // aspectRatio: 2,
+      aspectRatio: videoController.value.aspectRatio,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,

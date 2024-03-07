@@ -8,7 +8,6 @@ import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/view/drawer/widget/custom_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,11 +41,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Check if the session data exists
     bool isLogin = prefs.containsKey('token');
-    String? authToken = prefs.getString('token');
     setState(() {
       _isLogin = isLogin;
-      _authToken = authToken!;
     });
+    if (_isLogin) {
+      String? authToken = prefs.getString('token');
+      setState(() {
+        _authToken = authToken!;
+      });
+    }
   }
 
   @override
