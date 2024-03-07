@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import '../../route/routes_name.dart';
-import '../../services/locations_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,17 +19,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(
       const Duration(seconds: 1),
-          () {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              RoutesName.home,
-                  (route) => false,
-            );
+      () {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RoutesName.home,
+          (route) => false,
+        );
       },
     );
     super.initState();
   }
-
 
   // setNewLocation(double let,double lng){
   //   longitude=lng;
@@ -57,7 +54,6 @@ class _SplashScreenState extends State<SplashScreen> {
   //   }
   // }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,9 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-           Container()
-          ],
+          children: [Container()],
         ),
       ),
     );

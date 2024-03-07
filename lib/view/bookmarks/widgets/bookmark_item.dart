@@ -38,12 +38,12 @@ class BookmarkItem extends StatelessWidget {
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: imageName!,
-                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
                         Image.network(ApiUrl.imageNotFound),
                   ),
-                )
-            ),
+                )),
             SizedBox(width: Utils.scrHeight * .01),
             Expanded(
               child: Padding(
@@ -62,8 +62,7 @@ class BookmarkItem extends StatelessWidget {
                     SizedBox(height: Utils.scrHeight * .004),
                     Text(
                         DateFormat('dd MMM yyyy hh:mm a')
-                                .format(DateTime.parse(time!)) ??
-                            '',
+                            .format(DateTime.parse(time!)),
                         style: regularTS(homeTabTextColor, fontSize: 13)),
                   ],
                 ),

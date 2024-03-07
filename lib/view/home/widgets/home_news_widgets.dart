@@ -35,7 +35,8 @@ class NewsScreen extends StatefulWidget {
     required this.newsDec,
     required this.sourceLink,
     required this.newsTitle,
-    this.refreshOnTap, required this.newsId,
+    this.refreshOnTap,
+    required this.newsId,
   });
 
   @override
@@ -54,8 +55,6 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
   }
 
-
-
   // Check Is Login or Not
   Future<void> isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -64,12 +63,11 @@ class _NewsScreenState extends State<NewsScreen> {
     setState(() {
       _isLogin = isLogin;
     });
-    if(_isLogin){
+    if (_isLogin) {
       String? authToken = await prefs.getString('token');
       setState(() {
-      _authToken = authToken!;
-    
-    });
+        _authToken = authToken!;
+      });
     }
   }
 
@@ -118,74 +116,6 @@ class _NewsScreenState extends State<NewsScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Theme _bottomNavigationMenu(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent),
-      child: Consumer<BottomNavigationProvider>(
-          builder: (context, provider, child) {
-        return BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('search',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('font',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Font',
-            ),
-            BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('bookmark',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'BookMark',
-            ),
-            BottomNavigationBarItem(
-              icon: provider.selectedIndex == 3
-                  ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
-                  : Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-              label: 'Share',
-            ),
-          ],
-          useLegacyColorScheme: false,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          currentIndex: provider.selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            provider.updateSelectedIndex(index);
-            if (provider.selectedIndex == 0) {
-              Navigator.pushNamed(context, RoutesName.search);
-            } else if (provider.selectedIndex == 1) {
-              Navigator.pushNamed(context, RoutesName.font);
-            } else if (provider.selectedIndex == 2) {
-              Navigator.pushNamed(context, RoutesName.bookmark);
-            } else if (provider.selectedIndex == 3) {
-              shareContent(context);
-              // getPopUp(
-              //     context,
-              //     (p0) => ShareScreen(onExit: () {
-              //           Navigator.pop(p0);
-              //         }));
-            }
-          },
-        );
-      }),
     );
   }
 
@@ -296,66 +226,66 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
 
         // BookMark Button
-        if (_isLogin)
-          _addToBookmark()
+        if (_isLogin) _addToBookmark()
       ],
     );
   }
 
   Consumer<BookmarkProvider> _addToBookmark() {
     return Consumer<BookmarkProvider>(builder: (context, provider, child) {
-        return Positioned(
-            top: Utils.scrHeight * .1,
-            right: Utils.scrHeight * .02,
-            child: GestureDetector(
-              onTap: () {
-                if (_isLogin) {
-                  // provider.isFavorite ?
-                  UserData.addBookMark(_authToken, widget.newsId.toString()).then((value){
-                    Utils.showSnackBar(context, value);
-                    if (value == 'Bookmark added successfully'){
-                      setState(() {
-                        isFav = true;
-                      });
-                    } else if (value == 'Bookmark Remove successfully'){
+      return Positioned(
+          top: Utils.scrHeight * .1,
+          right: Utils.scrHeight * .02,
+          child: GestureDetector(
+            onTap: () {
+              if (_isLogin) {
+                // provider.isFavorite ?
+                UserData.addBookMark(_authToken, widget.newsId.toString())
+                    .then((value) {
+                  Utils.showSnackBar(context, value);
+                  if (value == 'Bookmark added successfully') {
+                    setState(() {
                       isFav = true;
-                    }
-                    // provider.toggleIsFavorite();
-                  });
-                } else {
-                  getPopUp(
-                      context,
-                      (p0) => FavoritePopup(
-                            onExit: () {
-                              Navigator.pop(p0);
-                            },
-                          ));
-                }
-              },
-              child: Container(
-                width: Utils.scrHeight * .04,
-                height: Utils.scrHeight * .04,
-                padding: const EdgeInsets.all(8),
-                decoration: ShapeDecoration(
-                  color: !isFav
-                      ? Colors.white.withOpacity(0)
-                      : Colors.white.withOpacity(0.3),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: Utils.scrHeight * .001,
-                      color: Colors.white,
-                    ),
-                    borderRadius: BorderRadius.circular(30),
+                    });
+                  } else if (value == 'Bookmark Remove successfully') {
+                    isFav = true;
+                  }
+                  // provider.toggleIsFavorite();
+                });
+              } else {
+                getPopUp(
+                    context,
+                    (p0) => FavoritePopup(
+                          onExit: () {
+                            Navigator.pop(p0);
+                          },
+                        ));
+              }
+            },
+            child: Container(
+              width: Utils.scrHeight * .04,
+              height: Utils.scrHeight * .04,
+              padding: const EdgeInsets.all(8),
+              decoration: ShapeDecoration(
+                color: !isFav
+                    ? Colors.white.withOpacity(0)
+                    : Colors.white.withOpacity(0.3),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: Utils.scrHeight * .001,
+                    color: Colors.white,
                   ),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                child: !isFav
-                    ? Utils.showSvgPicture('bookmarks',
-                        height: Utils.scrHeight * .020)
-                    : Utils.showSvgPicture('selected_bookmark',
-                        height: Utils.scrHeight * .020),
               ),
-            ));
-      });
+              child: !isFav
+                  ? Utils.showSvgPicture('bookmarks',
+                      height: Utils.scrHeight * .020)
+                  : Utils.showSvgPicture('selected_bookmark',
+                      height: Utils.scrHeight * .020),
+            ),
+          ));
+    });
   }
 
   Container topImageSection() {
@@ -364,9 +294,9 @@ class _NewsScreenState extends State<NewsScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(Utils.scrHeight * .12),
-                bottomRight: Radius.circular(Utils.scrHeight * .12),
-            )),
+          bottomLeft: Radius.circular(Utils.scrHeight * .12),
+          bottomRight: Radius.circular(Utils.scrHeight * .12),
+        )),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(Utils.scrHeight * .022),
@@ -375,7 +305,8 @@ class _NewsScreenState extends State<NewsScreen> {
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: widget.image!,
-            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) =>
                 Image.network(ApiUrl.imageNotFound),
           ),
