@@ -13,33 +13,33 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:2:5-66
-15-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:2:22-64
+15-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:2:5-66
+15-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:2:22-64
 16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-16-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:3:5-79
-16-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:3:22-76
+16-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:3:5-79
+16-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:3:22-76
 17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:4:5-81
-17-->D:\APINewsApp\android\app\src\main\AndroidManifest.xml:4:22-78
+17-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:4:5-81
+17-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:4:22-78
 18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-18-->[:connectivity_plus] D:\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
-18-->[:connectivity_plus] D:\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+18-->[:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+18-->[:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
 19
 20    <permission
-20-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+20-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 21        android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-21-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+21-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
 22        android:protectionLevel="signature" />
-22-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+22-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
 23
 24    <uses-permission android:name="com.example.newsapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-24-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
-24-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+24-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+24-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
 25
 26    <application
 27        android:name="android.app.Application"
 28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-28-->[androidx.core:core:1.10.1] C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+28-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 29        android:debuggable="true"
 30        android:icon="@mipmap/ic_launcher"
 31        android:label="newsapp"
@@ -78,134 +78,134 @@
 64            android:value="2" />
 65
 66        <provider
-66-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+66-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 67            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-67-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+67-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 68            android:authorities="com.example.newsapp.flutter.image_provider"
-68-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+68-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 69            android:exported="false"
-69-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+69-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 70            android:grantUriPermissions="true" >
-70-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+70-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 71            <meta-data
-71-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+71-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 72                android:name="android.support.FILE_PROVIDER_PATHS"
-72-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+72-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 73                android:resource="@xml/flutter_image_picker_file_paths" />
-73-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+73-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 74        </provider>
 75
 76        <activity
-76-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+76-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
 77            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-77-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+77-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
 78            android:exported="false"
-78-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+78-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
 79            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-79-->[:url_launcher_android] D:\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+79-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
 80        <!--
 81           Declares a provider which allows us to store files to share in
 82           '.../caches/share_plus' and grant the receiving action access
 83        -->
 84        <provider
-84-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
+84-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
 85            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-85-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
+85-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
 86            android:authorities="com.example.newsapp.flutter.share_provider"
-86-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
+86-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
 87            android:exported="false"
-87-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+87-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
 88            android:grantUriPermissions="true" >
-88-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
+88-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
 89            <meta-data
-89-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+89-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 90                android:name="android.support.FILE_PROVIDER_PATHS"
-90-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+90-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 91                android:resource="@xml/flutter_share_file_paths" />
-91-->[:image_picker_android] D:\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+91-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 92        </provider>
 93        <!--
 94           This manifest declared broadcast receiver allows us to use an explicit
 95           Intent when creating a PendingItent to be informed of the user's choice
 96        -->
 97        <receiver
-97-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
+97-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
 98            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-98-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
+98-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
 99            android:exported="false" >
-99-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
+99-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
 100            <intent-filter>
-100-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
+100-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
 101                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-101-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
-101-->[:share_plus] D:\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
+101-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
+101-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
 102            </intent-filter>
 103        </receiver>
 104
 105        <uses-library
-105-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+105-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
 106            android:name="androidx.window.extensions"
-106-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+106-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
 107            android:required="false" />
-107-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+107-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
 108        <uses-library
-108-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+108-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
 109            android:name="androidx.window.sidecar"
-109-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+109-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
 110            android:required="false" />
-110-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+110-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
 111
 112        <provider
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
+112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
 113            android:name="androidx.startup.InitializationProvider"
-113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
 114            android:authorities="com.example.newsapp.androidx-startup"
-114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
 115            android:exported="false" >
-115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
+115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
 116            <meta-data
-116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
 117                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
 118                android:value="androidx.startup" />
-118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
 119        </provider>
 120
 121        <receiver
-121-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+121-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
 122            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-122-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+122-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
 123            android:directBootAware="false"
-123-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+123-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
 124            android:enabled="true"
-124-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+124-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
 125            android:exported="true"
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
 126            android:permission="android.permission.DUMP" >
-126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
 127            <intent-filter>
-127-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+127-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
 128                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
 129            </intent-filter>
 130            <intent-filter>
-130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
 131                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
 132            </intent-filter>
 133            <intent-filter>
-133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
 134                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
 135            </intent-filter>
 136            <intent-filter>
-136-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+136-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
 137                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
 138            </intent-filter>
 139        </receiver>
 140    </application>
