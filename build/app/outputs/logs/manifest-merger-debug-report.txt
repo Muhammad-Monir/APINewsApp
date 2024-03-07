@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:5:5-36:19
+INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:7:5-38:19
 MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-19:19
 MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-19:19
 MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-14:19
@@ -22,11 +22,11 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\bd
 	android:name
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
 manifest
-ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
-MERGED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
+ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
+INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
+MERGED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -78,15 +78,15 @@ INJECTED from D:\newsapp\APINewsApp\android\app\src\debug\AndroidManifest.xml:1:
 INJECTED from D:\newsapp\APINewsApp\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 	package
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
+		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
+		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-37:12
+		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 		INJECTED from D:\newsapp\APINewsApp\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -104,6 +104,14 @@ uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:4:5-81
 	android:name
 		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:4:22-78
+uses-permission#android.permission.CAMERA
+ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:5:22-62
+uses-permission#android.permission.GALLERY
+ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:6:22-63
 uses-sdk
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
