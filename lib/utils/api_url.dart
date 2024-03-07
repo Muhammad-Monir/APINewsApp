@@ -44,6 +44,7 @@ class ApiUrl {
   static String newStoryUrl = "$newBaseUrl/story-board";
   static String newAddBookMark = "$newBaseUrl/bookmark_news/add";
   static String newAllBookMark = "$newBaseUrl/bookmark_news/";
+  static String newUserUpdateUrl = "$newBaseUrl/user/update";
 
 
 }

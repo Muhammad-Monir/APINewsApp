@@ -4,7 +4,7 @@ import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
 import '../model/bookmark_model.dart';
-import '../services/auth_service.dart';
+import 'dart:io';
 
 class UserData {
   // Get profile data
@@ -81,11 +81,9 @@ class UserData {
         return data["message"];
         // return BookMarkModel.fromJson(data);
       } else {
-        // If the request was unsuccessful, throw an error
         throw Exception(response.statusCode);
       }
     } catch (error) {
-      // Handle errors, display an error message
       throw Exception(error);
     }
   }
@@ -103,17 +101,14 @@ class UserData {
         },
       );
       log(response.statusCode.toString());
-      // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
         log(data.toString());
         return BookmarkModel.fromJson(data);
       } else  {
-        // If the request was unsuccessful, throw an error
         throw Exception(response.statusCode);
       }
     } catch (error) {
-      // Handle errors, display an error message
       throw Exception(error);
     }
   }
@@ -141,5 +136,47 @@ class UserData {
     }
   }
 
+  // Update User Information
+  Future<Map<String, dynamic>?> updateProfile({
+    required String userName,
+    required String image,
+    String? authToken,
+  }) async {
+    try {
+      final http.MultipartRequest request = http.MultipartRequest(
+        'POST',
+        Uri.parse(ApiUrl.newUserUpdateUrl),
+      );
 
+      if (image.isNotEmpty) {
+        final File imageFile = File(image);
+        final http.MultipartFile imageMultipartFile =
+        await http.MultipartFile.fromPath('avatar', imageFile.path);
+        request.files.add(imageMultipartFile);
+      }
+
+      request.fields['username'] = userName;
+
+      request.headers['Content-Type'] = 'multipart/form-data';
+      request.headers['Authorization'] = 'Bearer $authToken';
+
+      final http.Response response = await http.Response.fromStream(
+        await request.send(),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        log('API Response: $data');
+
+        return data;
+      } else {
+        log('Error ${response.statusCode}: ${response.reasonPhrase}');
+        log('Error Body: ${response.body}');
+        return null;
+      }
+    } catch (error) {
+      log('Error: $error');
+      return null;
+    }
+  }
 }
