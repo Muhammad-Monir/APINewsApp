@@ -178,7 +178,7 @@ class _NewsScreenState extends State<NewsScreen> {
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Source Link : ',
@@ -192,6 +192,7 @@ class _NewsScreenState extends State<NewsScreen> {
                     await launchUrl(Uri.parse(widget.sourceLink));
                   },
                   child: Text(widget.sourceLink,
+                      overflow: TextOverflow.ellipsis,
                       style: regularTS(appThemeColor, fontSize: 14)),
                 ),
               ),

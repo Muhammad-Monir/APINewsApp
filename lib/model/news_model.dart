@@ -36,7 +36,7 @@ class NewesData {
   dynamic image;
   dynamic video;
   String? isTop;
-  int? languageId;
+  String? languageId;
   String? content;
   String? status;
   String? createdAt;
@@ -45,22 +45,22 @@ class NewesData {
 
   NewesData(
       {this.id,
-        this.title,
-        this.description,
-        this.url,
-        this.featuredImage,
-        this.source,
-        this.author,
-        this.category,
-        this.image,
-        this.video,
-        this.isTop,
-        this.languageId,
-        this.content,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt});
+      this.title,
+      this.description,
+      this.url,
+      this.featuredImage,
+      this.source,
+      this.author,
+      this.category,
+      this.image,
+      this.video,
+      this.isTop,
+      this.languageId,
+      this.content,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt});
 
   NewesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

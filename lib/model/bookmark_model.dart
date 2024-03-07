@@ -42,7 +42,7 @@ class Data {
   dynamic image;
   dynamic video;
   String? isTop;
-  int? languageId;
+  String? languageId;
   String? content;
   String? status;
   String? createdAt;
@@ -51,22 +51,22 @@ class Data {
 
   Data(
       {this.id,
-        this.title,
-        this.description,
-        this.url,
-        this.featuredImage,
-        this.source,
-        this.author,
-        this.category,
-        this.image,
-        this.video,
-        this.isTop,
-        this.languageId,
-        this.content,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt});
+      this.title,
+      this.description,
+      this.url,
+      this.featuredImage,
+      this.source,
+      this.author,
+      this.category,
+      this.image,
+      this.video,
+      this.isTop,
+      this.languageId,
+      this.content,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];

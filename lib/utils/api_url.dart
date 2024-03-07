@@ -31,8 +31,10 @@ class ApiUrl {
   static String allBookMark = "${baseUrl}api/bookmark_news/";
 
   // New API URL
-  static String newBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
-  static String imageBaseUrl = 'http://192.168.40.38/Am_inn/public/';
+  // static String newBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
+  // static String imageBaseUrl = 'http://192.168.40.38/Am_inn/public/';
+  static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  static String imageBaseUrl = 'http://aminn.reigeeky.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
   static String newLogOutUrl = '$newBaseUrl/logout';
@@ -45,6 +47,4 @@ class ApiUrl {
   static String newAddBookMark = "$newBaseUrl/bookmark_news/add";
   static String newAllBookMark = "$newBaseUrl/bookmark_news/";
   static String newUserUpdateUrl = "$newBaseUrl/user/update";
-
-
 }
