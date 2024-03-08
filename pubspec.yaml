@@ -38,7 +38,7 @@ dependencies:
   provider: ^6.1.2
 #  geolocator:
 #  geocoding:
-  connectivity_plus: ^5.0.2
+#  connectivity_plus: ^5.0.2
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.0
   flutter_rating_bar: ^4.0.1

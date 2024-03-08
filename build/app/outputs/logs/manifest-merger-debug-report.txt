@@ -3,10 +3,10 @@ application
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:7:5-38:19
 MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-19:19
 MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-19:19
-MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-14:19
-MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-14:19
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-35:19
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-35:19
+MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-14:19
+MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-14:19
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:5-89
@@ -27,22 +27,21 @@ INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
 MERGED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:1:1-39:12
-MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
-MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-16:12
-MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:shared_preferences_android] D:\newsapp\APINewsApp\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:permission_handler_android] D:\newsapp\APINewsApp\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:wakelock_plus] D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
+MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-37:12
+MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-16:12
+MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\bdCalling\.gradle\caches\transforms-3\75f94412898c7559d34d7edbbeaeb394\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.7.2] C:\Users\bdCalling\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core-ktx:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\de4501bdbb2252c813fd52b51b39cff4\transformed\jetified-exoplayer-hls-2.18.7\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\055cf5228dd3b9b69e5bd2a35951aed6\transformed\jetified-exoplayer-dash-2.18.7\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\388f210c80f467fc5caf9e3796c05146\transformed\jetified-exoplayer-smoothstreaming-2.18.7\AndroidManifest.xml:17:1-24:12
@@ -115,38 +114,36 @@ uses-sdk
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
 INJECTED from D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml
-MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:shared_preferences_android] D:\newsapp\APINewsApp\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:shared_preferences_android] D:\newsapp\APINewsApp\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:permission_handler_android] D:\newsapp\APINewsApp\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:permission_handler_android] D:\newsapp\APINewsApp\build\permission_handler_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:wakelock_plus] D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:wakelock_plus] D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:sqflite] D:\newsapp\APINewsApp\build\sqflite\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] D:\newsapp\APINewsApp\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\bdCalling\.gradle\caches\transforms-3\75f94412898c7559d34d7edbbeaeb394\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\bdCalling\.gradle\caches\transforms-3\75f94412898c7559d34d7edbbeaeb394\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.7.2] C:\Users\bdCalling\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.7.2] C:\Users\bdCalling\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core-ktx:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core-ktx:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.5.0] C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\de4501bdbb2252c813fd52b51b39cff4\transformed\jetified-exoplayer-hls-2.18.7\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\de4501bdbb2252c813fd52b51b39cff4\transformed\jetified-exoplayer-hls-2.18.7\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\055cf5228dd3b9b69e5bd2a35951aed6\transformed\jetified-exoplayer-dash-2.18.7\AndroidManifest.xml:20:5-22:41
@@ -229,22 +226,6 @@ ADDED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_andr
 		ADDED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 	android:name
 		ADDED from [:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
-activity#io.flutter.plugins.urllauncher.WebViewActivity
-ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
-	android:exported
-		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
-	android:theme
-		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
-	android:name
-		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-common:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\3a633bb9eac75a1461b6fbfc4b0e1113\transformed\jetified-exoplayer-common-2.18.7\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-common:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\3a633bb9eac75a1461b6fbfc4b0e1113\transformed\jetified-exoplayer-common-2.18.7\AndroidManifest.xml:24:5-79
-	android:name
-		ADDED from [:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
 provider#dev.fluttercommunity.plus.share.ShareFileProvider
 ADDED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
 	android:grantUriPermissions
@@ -267,6 +248,20 @@ action#EXTRA_CHOSEN_COMPONENT
 ADDED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
 	android:name
 		ADDED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+	android:exported
+		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+	android:theme
+		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+	android:name
+		ADDED from [:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\3a633bb9eac75a1461b6fbfc4b0e1113\transformed\jetified-exoplayer-common-2.18.7\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\3a633bb9eac75a1461b6fbfc4b0e1113\transformed\jetified-exoplayer-common-2.18.7\AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from [com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:22-76
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
 	android:required

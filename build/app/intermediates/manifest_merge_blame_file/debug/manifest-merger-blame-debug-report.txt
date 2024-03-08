@@ -28,8 +28,8 @@
 19-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:6:5-66
 19-->D:\newsapp\APINewsApp\android\app\src\main\AndroidManifest.xml:6:22-63
 20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-20-->[:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
-20-->[:connectivity_plus] D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+20-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:5-79
+20-->[com.google.android.exoplayer:exoplayer-core:2.18.7] C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\AndroidManifest.xml:24:22-76
 21
 22    <permission
 22-->[androidx.core:core:1.10.1] C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
@@ -100,53 +100,53 @@
 75                android:resource="@xml/flutter_image_picker_file_paths" />
 75-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 76        </provider>
-77
-78        <activity
-78-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
-79            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-79-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
-80            android:exported="false"
-80-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
-81            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-81-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
-82        <!--
-83           Declares a provider which allows us to store files to share in
-84           '.../caches/share_plus' and grant the receiving action access
-85        -->
-86        <provider
-86-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
-87            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-87-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
-88            android:authorities="com.example.newsapp.flutter.share_provider"
-88-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
-89            android:exported="false"
-89-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
-90            android:grantUriPermissions="true" >
-90-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
-91            <meta-data
-91-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
-92                android:name="android.support.FILE_PROVIDER_PATHS"
-92-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
-93                android:resource="@xml/flutter_share_file_paths" />
-93-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
-94        </provider>
-95        <!--
-96           This manifest declared broadcast receiver allows us to use an explicit
-97           Intent when creating a PendingItent to be informed of the user's choice
-98        -->
-99        <receiver
-99-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
-100            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-100-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
-101            android:exported="false" >
-101-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
-102            <intent-filter>
-102-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
-103                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-103-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
-103-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
-104            </intent-filter>
-105        </receiver>
+77        <!--
+78           Declares a provider which allows us to store files to share in
+79           '.../caches/share_plus' and grant the receiving action access
+80        -->
+81        <provider
+81-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
+82            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+82-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
+83            android:authorities="com.example.newsapp.flutter.share_provider"
+83-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
+84            android:exported="false"
+84-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+85            android:grantUriPermissions="true" >
+85-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
+86            <meta-data
+86-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+87                android:name="android.support.FILE_PROVIDER_PATHS"
+87-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+88                android:resource="@xml/flutter_share_file_paths" />
+88-->[:image_picker_android] D:\newsapp\APINewsApp\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+89        </provider>
+90        <!--
+91           This manifest declared broadcast receiver allows us to use an explicit
+92           Intent when creating a PendingItent to be informed of the user's choice
+93        -->
+94        <receiver
+94-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
+95            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+95-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
+96            android:exported="false" >
+96-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
+97            <intent-filter>
+97-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
+98                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+98-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
+98-->[:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
+99            </intent-filter>
+100        </receiver>
+101
+102        <activity
+102-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+103            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+103-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+104            android:exported="false"
+104-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+105            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+105-->[:url_launcher_android] D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
 106
 107        <uses-library
 107-->[androidx.window:window:1.0.0-beta04] C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40

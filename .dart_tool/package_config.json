@@ -62,18 +62,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "connectivity_plus",
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus-5.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "connectivity_plus_platform_interface",
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/connectivity_plus_platform_interface-1.2.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "cross_file",
       "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.4+1",
       "packageUri": "lib/",
@@ -352,12 +340,6 @@
     {
       "name": "nested",
       "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "nm",
-      "rootUri": "file:///C:/Users/bdCalling/AppData/Local/Pub/Cache/hosted/pub.dev/nm-0.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -782,7 +764,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-03-07T12:41:19.300919Z",
+  "generated": "2024-03-08T03:09:41.881269Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }
