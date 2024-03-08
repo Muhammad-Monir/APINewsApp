@@ -138,7 +138,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
       height: Utils.scrHeight * .096,
       width: Utils.scrHeight * .096,
       child: ClipOval(
-          // borderRadius: BorderRadius.circular(Utils.scrHeight * .048),
+          //   child: Image.network(
+          //     '${ApiUrl.imageBaseUrl}${data.data!.avatar}',
+          //     fit: BoxFit.cover,
+          //     errorBuilder: (context, error, stackTrace) {
+          //       return Utils.showImage('profile_image');
+          //     },
+          //   )),
+
           child: CachedNetworkImage(
         fit: BoxFit.cover,
         fadeInDuration: const Duration(seconds: 2),
