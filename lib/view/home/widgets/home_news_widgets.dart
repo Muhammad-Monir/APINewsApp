@@ -7,10 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
-import '../../../provider/bottom_navigation_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../provider/timer_provider.dart';
-import '../../../route/routes_name.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -246,10 +244,10 @@ class _NewsScreenState extends State<NewsScreen> {
                   Utils.showSnackBar(context, value);
                   if (value == 'Bookmark added successfully') {
                     setState(() {
-                      isFav = true;
+                      isFav = !isFav;
                     });
                   } else if (value == 'Bookmark Remove successfully') {
-                    isFav = true;
+                    isFav = false;
                   }
                   // provider.toggleIsFavorite();
                 });
