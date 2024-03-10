@@ -1,5 +1,6 @@
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
+import 'package:am_innnn/view/home/new_home_screen.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
@@ -27,6 +28,14 @@ class Routes {
             settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (context) => HomeScreen(
+            category: category,
+          ),
+        );
+      case RoutesName.home2:
+        final Map<String, dynamic>? category =
+            settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (context) => NewHomeScreen(
             category: category,
           ),
         );

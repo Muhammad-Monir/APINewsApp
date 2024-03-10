@@ -1,38 +1,36 @@
-com.example.newsapp-jetified-lifecycle-viewmodel-savedstate-2.6.1-0 C:\Users\bdCalling\.gradle\caches\transforms-3\0d71402e87d63dfcdd1e8a19179a5833\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
-com.example.newsapp-jetified-window-1.0.0-beta04-1 C:\Users\bdCalling\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\res
-com.example.newsapp-lifecycle-livedata-2.6.1-2 C:\Users\bdCalling\.gradle\caches\transforms-3\4a950aaebf1aaad1fe6a2fdd6201e69a\transformed\lifecycle-livedata-2.6.1\res
-com.example.newsapp-jetified-profileinstaller-1.3.0-3 C:\Users\bdCalling\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\res
-com.example.newsapp-jetified-core-ktx-1.10.1-4 C:\Users\bdCalling\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\res
-com.example.newsapp-jetified-savedstate-1.2.1-5 C:\Users\bdCalling\.gradle\caches\transforms-3\8d45f58db1b5efd11956cf5f8829d6d3\transformed\jetified-savedstate-1.2.1\res
-com.example.newsapp-jetified-annotation-experimental-1.3.0-6 C:\Users\bdCalling\.gradle\caches\transforms-3\937d6edc8055f6701a18eeac1a67afe6\transformed\jetified-annotation-experimental-1.3.0\res
-com.example.newsapp-jetified-activity-1.7.2-7 C:\Users\bdCalling\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\res
-com.example.newsapp-jetified-window-java-1.0.0-beta04-8 C:\Users\bdCalling\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\res
-com.example.newsapp-core-1.10.1-9 C:\Users\bdCalling\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\res
-com.example.newsapp-browser-1.5.0-10 C:\Users\bdCalling\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\res
-com.example.newsapp-jetified-startup-runtime-1.1.1-11 C:\Users\bdCalling\.gradle\caches\transforms-3\d2a7f03e118140f639e8945afb58cddb\transformed\jetified-startup-runtime-1.1.1\res
-com.example.newsapp-lifecycle-viewmodel-2.6.1-12 C:\Users\bdCalling\.gradle\caches\transforms-3\d5cb841d085c8da3ed38e468f997390f\transformed\lifecycle-viewmodel-2.6.1\res
-com.example.newsapp-core-runtime-2.2.0-13 C:\Users\bdCalling\.gradle\caches\transforms-3\db3ce0e4102f75753fdc0e9c2753a822\transformed\core-runtime-2.2.0\res
-com.example.newsapp-jetified-exoplayer-core-2.18.7-14 C:\Users\bdCalling\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\res
-com.example.newsapp-lifecycle-runtime-2.6.1-15 C:\Users\bdCalling\.gradle\caches\transforms-3\e97fce397db1acf9b6f475dedfc7d654\transformed\lifecycle-runtime-2.6.1\res
-com.example.newsapp-lifecycle-livedata-core-2.6.1-16 C:\Users\bdCalling\.gradle\caches\transforms-3\eed11806d4af25229ebcb855da7e9479\transformed\lifecycle-livedata-core-2.6.1\res
-com.example.newsapp-debug-17 D:\newsapp\APINewsApp\android\app\src\debug\res
-com.example.newsapp-main-18 D:\newsapp\APINewsApp\android\app\src\main\res
-com.example.newsapp-pngs-19 D:\newsapp\APINewsApp\build\app\generated\res\pngs\debug
-com.example.newsapp-resValues-20 D:\newsapp\APINewsApp\build\app\generated\res\resValues\debug
-com.example.newsapp-rs-21 D:\newsapp\APINewsApp\build\app\generated\res\rs\debug
-com.example.newsapp-mergeDebugResources-22 D:\newsapp\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
-com.example.newsapp-mergeDebugResources-23 D:\newsapp\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
-com.example.newsapp-merged_res-24 D:\newsapp\APINewsApp\build\app\intermediates\merged_res\debug
-com.example.newsapp-packaged_res-25 D:\newsapp\APINewsApp\build\connectivity_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-26 D:\newsapp\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-27 D:\newsapp\APINewsApp\build\geocoding_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-28 D:\newsapp\APINewsApp\build\image_picker_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-29 D:\newsapp\APINewsApp\build\package_info_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-30 D:\newsapp\APINewsApp\build\path_provider_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-31 D:\newsapp\APINewsApp\build\permission_handler_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-32 D:\newsapp\APINewsApp\build\share_plus\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-33 D:\newsapp\APINewsApp\build\shared_preferences_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-34 D:\newsapp\APINewsApp\build\sqflite\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-35 D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-36 D:\newsapp\APINewsApp\build\video_player_android\intermediates\packaged_res\debug
-com.example.newsapp-packaged_res-37 D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\packaged_res\debug
+com.example.newsapp-jetified-lifecycle-viewmodel-savedstate-2.6.1-0 C:\Users\bdCalling IT\.gradle\caches\transforms-3\0d71402e87d63dfcdd1e8a19179a5833\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+com.example.newsapp-jetified-window-1.0.0-beta04-1 C:\Users\bdCalling IT\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\res
+com.example.newsapp-lifecycle-livedata-2.6.1-2 C:\Users\bdCalling IT\.gradle\caches\transforms-3\4a950aaebf1aaad1fe6a2fdd6201e69a\transformed\lifecycle-livedata-2.6.1\res
+com.example.newsapp-jetified-profileinstaller-1.3.0-3 C:\Users\bdCalling IT\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\res
+com.example.newsapp-jetified-core-ktx-1.10.1-4 C:\Users\bdCalling IT\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\res
+com.example.newsapp-jetified-savedstate-1.2.1-5 C:\Users\bdCalling IT\.gradle\caches\transforms-3\8d45f58db1b5efd11956cf5f8829d6d3\transformed\jetified-savedstate-1.2.1\res
+com.example.newsapp-jetified-annotation-experimental-1.3.0-6 C:\Users\bdCalling IT\.gradle\caches\transforms-3\937d6edc8055f6701a18eeac1a67afe6\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.newsapp-jetified-activity-1.7.2-7 C:\Users\bdCalling IT\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\res
+com.example.newsapp-jetified-window-java-1.0.0-beta04-8 C:\Users\bdCalling IT\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.newsapp-core-1.10.1-9 C:\Users\bdCalling IT\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\res
+com.example.newsapp-browser-1.5.0-10 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d12883dde0390e08dd2a1192741cec1b\transformed\browser-1.5.0\res
+com.example.newsapp-jetified-startup-runtime-1.1.1-11 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d2a7f03e118140f639e8945afb58cddb\transformed\jetified-startup-runtime-1.1.1\res
+com.example.newsapp-lifecycle-viewmodel-2.6.1-12 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d5cb841d085c8da3ed38e468f997390f\transformed\lifecycle-viewmodel-2.6.1\res
+com.example.newsapp-core-runtime-2.2.0-13 C:\Users\bdCalling IT\.gradle\caches\transforms-3\db3ce0e4102f75753fdc0e9c2753a822\transformed\core-runtime-2.2.0\res
+com.example.newsapp-jetified-exoplayer-core-2.18.7-14 C:\Users\bdCalling IT\.gradle\caches\transforms-3\e255c6ce9910a673f2619b479a7d74a8\transformed\jetified-exoplayer-core-2.18.7\res
+com.example.newsapp-lifecycle-runtime-2.6.1-15 C:\Users\bdCalling IT\.gradle\caches\transforms-3\e97fce397db1acf9b6f475dedfc7d654\transformed\lifecycle-runtime-2.6.1\res
+com.example.newsapp-lifecycle-livedata-core-2.6.1-16 C:\Users\bdCalling IT\.gradle\caches\transforms-3\eed11806d4af25229ebcb855da7e9479\transformed\lifecycle-livedata-core-2.6.1\res
+com.example.newsapp-debug-17 D:\APINewsApp\android\app\src\debug\res
+com.example.newsapp-main-18 D:\APINewsApp\android\app\src\main\res
+com.example.newsapp-pngs-19 D:\APINewsApp\build\app\generated\res\pngs\debug
+com.example.newsapp-resValues-20 D:\APINewsApp\build\app\generated\res\resValues\debug
+com.example.newsapp-rs-21 D:\APINewsApp\build\app\generated\res\rs\debug
+com.example.newsapp-mergeDebugResources-22 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.newsapp-mergeDebugResources-23 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.newsapp-merged_res-24 D:\APINewsApp\build\app\intermediates\merged_res\debug
+com.example.newsapp-packaged_res-25 D:\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-26 D:\APINewsApp\build\image_picker_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-27 D:\APINewsApp\build\package_info_plus\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-28 D:\APINewsApp\build\path_provider_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-29 D:\APINewsApp\build\permission_handler_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-30 D:\APINewsApp\build\share_plus\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-31 D:\APINewsApp\build\shared_preferences_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-32 D:\APINewsApp\build\sqflite\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-33 D:\APINewsApp\build\url_launcher_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-34 D:\APINewsApp\build\video_player_android\intermediates\packaged_res\debug
+com.example.newsapp-packaged_res-35 D:\APINewsApp\build\wakelock_plus\intermediates\packaged_res\debug
