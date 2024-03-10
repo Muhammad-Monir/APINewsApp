@@ -1,4 +1,3 @@
-import 'dart:developer' as d;
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -277,6 +276,7 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
     if (valueNotifier.value.$2.toInt() < widget.children.length - 1) {
       return widget.children[valueNotifier.value.$2.toInt() + 1];
     }
+    return null;
   }
 }
 
