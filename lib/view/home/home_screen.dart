@@ -95,11 +95,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           if (data.isNotEmpty) {
             return !_isRefresh
                 ? CustomFlipWidget(
-                    pages: data
-                        .map((e) => SizedBox(
-                              child: _screenDesign(e, context),
-                            ))
-                        .toList())
+                    pages: data.map((e) => screenDesign(e, context)).toList())
                 : const Center(child: CircularProgressIndicator());
           } else {
             return _errorSection(context);
@@ -113,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  NewsScreen _screenDesign(NewesData data, BuildContext context) {
+  NewsScreen screenDesign(NewesData data, BuildContext context) {
     return NewsScreen(
       newsId: data.id!,
       homeOnTap: () => Scaffold.of(context).openDrawer(),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,6 +75,7 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
+          log('barsVisibility ontap');
           Provider.of<BarsVisibility>(context, listen: false).toggleBars();
           if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
             Timer(const Duration(seconds: 3), () {
