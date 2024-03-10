@@ -7,6 +7,7 @@ import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/color.dart';
+import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -92,50 +93,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         if (snapshot.hasData) {
           final data = snapshot.data!.data!;
           if (data.isNotEmpty) {
-            return PageView.builder(
-              controller: newsPageController,
-              scrollDirection: Axis.vertical,
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                return AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Transform(
-                      transform: Matrix4.identity()
-                        ..setEntry(0, 2, 0.001)
-                        ..rotateX(2 * pi * flipAnim.value),
-                      alignment: Alignment.center,
-                      child: !_isRefresh
-                          ? SizedBox(
-                              child: NewsScreen(
-                                newsId: data[index].id!,
-                                homeOnTap: () =>
-                                    Scaffold.of(context).openDrawer(),
-                                startOnTap: () {
-                                  newsPageController.animateToPage(
-                                    0,
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut,
-                                  );
-                                },
-                                refreshOnTap: () {
-                                  _refreshData();
-                                },
-                                image: data[index].featuredImage ??
-                                    ApiUrl.imageNotFound,
-                                newsDec: data[index].description ??
-                                    'News Description Not Found',
-                                sourceLink: data[index].url ?? 'Url Not Found',
-                                newsTitle:
-                                    data[index].title ?? 'News Title Not Found',
-                              ),
-                            )
-                          : const Center(child: CircularProgressIndicator()),
-                    );
-                  },
-                );
-              },
-            );
+            return !_isRefresh
+                ? CustomFlipWidget(
+                    pages: data
+                        .map((e) => SizedBox(
+                              child: _screenDesign(e, context),
+                            ))
+                        .toList())
+                : const Center(child: CircularProgressIndicator());
           } else {
             return _errorSection(context);
           }
@@ -145,6 +110,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           );
         }
       },
+    );
+  }
+
+  NewsScreen _screenDesign(NewesData data, BuildContext context) {
+    return NewsScreen(
+      newsId: data.id!,
+      homeOnTap: () => Scaffold.of(context).openDrawer(),
+      startOnTap: () {
+        newsPageController.animateToPage(
+          0,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      },
+      refreshOnTap: () {
+        _refreshData();
+      },
+      image: data.featuredImage ?? ApiUrl.imageNotFound,
+      newsDec: data.description ?? 'News Description Not Found',
+      sourceLink: data.url ?? 'Url Not Found',
+      newsTitle: data.title ?? 'News Title Not Found',
     );
   }
 
