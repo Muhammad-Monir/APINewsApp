@@ -4,7 +4,7 @@
     "type": "PACKAGED_MANIFESTS",
     "kind": "Directory"
   },
-  "applicationId": "com.example.newsapp",
+  "applicationId": "com.quikkbyte.quikkbyte",
   "variantName": "debug",
   "elements": [
     {

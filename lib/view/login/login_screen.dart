@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/data/social_login_auth_data/google_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -125,10 +128,20 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text('Or Log in with',
                 style: regularTS(const Color(0xff858E92), fontSize: 14))),
         SizedBox(height: Utils.scrHeight * .02),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PlatformButton(icon: 'google'),
+            PlatformButton(
+              onTap: () {
+                GoogleAuthData.signInWithGoogle().then((user) {
+                  if (user != null) {
+                    log('\nUser: ${user.displayName}');
+                    log('\nUserAdditionalInfo: ${user.email}');
+                  }
+                });
+              },
+              icon: 'google',
+            ),
             PlatformButton(icon: 'facebook'),
             PlatformButton(icon: 'twitter'),
             PlatformButton(icon: 'apple'),

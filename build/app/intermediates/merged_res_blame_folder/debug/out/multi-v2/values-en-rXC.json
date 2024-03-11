@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.newsapp-mergeDebugResources-22:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-26:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-en-rXC\\values-en-rXC.xml",
