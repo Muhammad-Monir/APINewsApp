@@ -109,6 +109,7 @@ class _NewHomeScreenState extends State<NewHomeScreen>
                       child: !_isRefresh
                           ? SizedBox(
                               child: NewsScreen(
+                                category: data[index].category!,
                                 newsId: data[index].id!,
                                 homeOnTap: () =>
                                     Scaffold.of(context).openDrawer(),
@@ -158,26 +159,26 @@ class _NewHomeScreenState extends State<NewHomeScreen>
     );
   }
 
-  NewsScreen screenDesign(NewesData data, BuildContext context) {
-    return NewsScreen(
-      newsId: data.id!,
-      homeOnTap: () => Scaffold.of(context).openDrawer(),
-      startOnTap: () {
-        newsPageController.animateToPage(
-          0,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      },
-      refreshOnTap: () {
-        _refreshData();
-      },
-      image: data.featuredImage ?? ApiUrl.imageNotFound,
-      newsDec: data.description ?? 'News Description Not Found',
-      sourceLink: data.url ?? 'Url Not Found',
-      newsTitle: data.title ?? 'News Title Not Found',
-    );
-  }
+  // NewsScreen screenDesign(NewesData data, BuildContext context) {
+  //   return NewsScreen(
+  //     newsId: data.id!,
+  //     homeOnTap: () => Scaffold.of(context).openDrawer(),
+  //     startOnTap: () {
+  //       newsPageController.animateToPage(
+  //         0,
+  //         duration: const Duration(milliseconds: 500),
+  //         curve: Curves.easeInOut,
+  //       );
+  //     },
+  //     refreshOnTap: () {
+  //       _refreshData();
+  //     },
+  //     image: data.featuredImage ?? ApiUrl.imageNotFound,
+  //     newsDec: data.description ?? 'News Description Not Found',
+  //     sourceLink: data.url ?? 'Url Not Found',
+  //     newsTitle: data.title ?? 'News Title Not Found',
+  //   );
+  // }
 
   Center _errorSection(BuildContext context) {
     return Center(

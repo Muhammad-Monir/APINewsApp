@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
-import '../../../provider/timer_provider.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -25,18 +24,19 @@ class NewsScreen extends StatefulWidget {
   final String sourceLink;
   final String newsTitle;
   final int newsId;
+  final String category;
 
-  const NewsScreen({
-    super.key,
-    this.startOnTap,
-    this.homeOnTap,
-    this.image,
-    required this.newsDec,
-    required this.sourceLink,
-    required this.newsTitle,
-    this.refreshOnTap,
-    required this.newsId,
-  });
+  const NewsScreen(
+      {super.key,
+      this.startOnTap,
+      this.homeOnTap,
+      this.image,
+      required this.newsDec,
+      required this.sourceLink,
+      required this.newsTitle,
+      this.refreshOnTap,
+      required this.newsId,
+      required this.category});
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
@@ -63,7 +63,7 @@ class _NewsScreenState extends State<NewsScreen> {
       _isLogin = isLogin;
     });
     if (_isLogin) {
-      String? authToken = await prefs.getString('token');
+      String? authToken = prefs.getString('token');
       setState(() {
         _authToken = authToken!;
       });
@@ -74,15 +74,15 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: () {
-          log('barsVisibility ontap');
-          Provider.of<BarsVisibility>(context, listen: false).toggleBars();
-          if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-            Timer(const Duration(seconds: 3), () {
-              Provider.of<BarsVisibility>(context, listen: false).hideBars();
-            });
-          }
-        },
+        // onTap: () {
+        //   log('barsVisibility ontap');
+        //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
+        //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
+        //     Timer(const Duration(seconds: 3), () {
+        //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
+        //     });
+        //   }
+        // },
         child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
           return Column(
             children: [
@@ -158,7 +158,7 @@ class _NewsScreenState extends State<NewsScreen> {
           SizedBox(
             height: Utils.scrHeight * .02,
           ),
-          socialLinkSection(),
+          // socialLinkSection(),
           // SizedBox(height: Utils.scrHeight * .02),
         ],
       ),
@@ -214,10 +214,10 @@ class _NewsScreenState extends State<NewsScreen> {
         // Top Image Section
         topImageSection(),
 
-        // Home Screen Top Tab Bar
-        Provider.of<BarsVisibility>(context).showBars
-            ? buildTabBar()
-            : Container(),
+        // // Home Screen Top Tab Bar
+        // Provider.of<BarsVisibility>(context).showBars
+        //     ? buildTabBar()
+        //     : Container(),
 
         // Promo Code
         Positioned(
@@ -227,7 +227,7 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
 
         // BookMark Button
-        if (_isLogin) _addToBookmark()
+        // if (_isLogin) _addToBookmark()
       ],
     );
   }
@@ -237,48 +237,49 @@ class _NewsScreenState extends State<NewsScreen> {
       return Positioned(
           top: Utils.scrHeight * .1,
           right: Utils.scrHeight * .02,
-          child: GestureDetector(
-            onTap: () {
-              if (_isLogin) {
-                // provider.isFavorite ?
-                UserData.addBookMark(_authToken, widget.newsId.toString())
-                    .then((value) {
-                  Utils.showSnackBar(context, value);
-                  if (value == 'Bookmark added successfully') {
-                    setState(() {
-                      isFav = !isFav;
-                    });
-                  } else if (value == 'Bookmark Remove successfully') {
-                    isFav = false;
-                  }
-                  // provider.toggleIsFavorite();
-                });
-              } else {
-                getPopUp(
-                    context,
-                    (p0) => FavoritePopup(
-                          onExit: () {
-                            Navigator.pop(p0);
-                          },
-                        ));
-              }
-            },
-            child: Container(
-              width: Utils.scrHeight * .04,
-              height: Utils.scrHeight * .04,
-              padding: const EdgeInsets.all(8),
-              decoration: ShapeDecoration(
-                color: !isFav
-                    ? Colors.white.withOpacity(0)
-                    : Colors.white.withOpacity(0.3),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: Utils.scrHeight * .001,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.circular(30),
+          child: Container(
+            width: Utils.scrHeight * .04,
+            height: Utils.scrHeight * .04,
+            padding: const EdgeInsets.all(8),
+            decoration: ShapeDecoration(
+              color: !isFav
+                  ? Colors.white.withOpacity(0)
+                  : Colors.white.withOpacity(0.3),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: Utils.scrHeight * .001,
+                  color: Colors.white,
                 ),
+                borderRadius: BorderRadius.circular(30),
               ),
+            ),
+            child: GestureDetector(
+              onTap: () {
+                log('bookmark on Tap');
+                if (_isLogin) {
+                  // provider.isFavorite ?
+                  UserData.addBookMark(_authToken, widget.newsId.toString())
+                      .then((value) {
+                    Utils.showSnackBar(context, value);
+                    if (value == 'Bookmark added successfully') {
+                      setState(() {
+                        isFav = !isFav;
+                      });
+                    } else if (value == 'Bookmark Remove successfully') {
+                      isFav = false;
+                    }
+                    // provider.toggleIsFavorite();
+                  });
+                } else {
+                  getPopUp(
+                      context,
+                      (p0) => FavoritePopup(
+                            onExit: () {
+                              Navigator.pop(p0);
+                            },
+                          ));
+                }
+              },
               child: !isFav
                   ? Utils.showSvgPicture('bookmarks',
                       height: Utils.scrHeight * .020)
@@ -352,8 +353,8 @@ class _NewsScreenState extends State<NewsScreen> {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
-      child:
-          Text('ABCDEFGHI', style: mediumTS(redContainerColor, fontSize: 20)),
+      child: Text(widget.category,
+          style: mediumTS(redContainerColor, fontSize: 20)),
     );
   }
 

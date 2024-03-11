@@ -76,7 +76,8 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                         UserData.addBookMark(
                                 _authToken, data[index].id.toString())
                             .then((value) {
-                          Utils.showSnackBar(context, value);
+                          Utils.showSnackBar(
+                              context, 'Bookmark Remove successfully');
                           bookMarkDataStream.fetchBookMarkStream(_authToken);
                         });
                       },

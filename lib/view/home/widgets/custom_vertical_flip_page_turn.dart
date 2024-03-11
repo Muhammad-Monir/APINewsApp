@@ -1,9 +1,8 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomVerticalFlipPageTurn extends StatefulWidget {
-  CustomVerticalFlipPageTurn({
+  const CustomVerticalFlipPageTurn({
     Key? key,
     required this.children,
     required this.controller,
@@ -29,7 +28,7 @@ class Opp {
 class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
-  Opp _animation = Opp(0);
+  final Opp _animation = Opp(0);
   ValueNotifier<(double, int)> valueNotifier = ValueNotifier((0, 0));
   int myPageIndex = 0;
   int position = 0;
@@ -92,8 +91,8 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
     super.didUpdateWidget(oldWidget);
     // _animation = _animationController
     //     .drive(Tween(begin: 0.0, end: widget.children.length - 1));
-    if (this.position > widget.children.length - 1) {
-      this.position = widget.children.length - 1;
+    if (position > widget.children.length - 1) {
+      position = widget.children.length - 1;
     }
   }
 
@@ -115,14 +114,14 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
         final cellWidth = widget.cellSize.width;
         final cellHeight = widget.cellSize.height;
         //d.log('build angel-$angle | anim=${_animation.value} |mask=$maskOpacity');
-        return Container(
+        return SizedBox(
           width: cellWidth,
           height: cellHeight,
           child: Stack(
             children: <Widget>[
               Offstage(
                 offstage: !(angle >= pi / 2),
-                child: Container(
+                child: SizedBox(
                   width: cellWidth,
                   height: cellHeight,
                   child: Align(
@@ -141,7 +140,7 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
                 offstage: angle == 0,
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
+                  child: SizedBox(
                     width: cellWidth,
                     height: cellHeight / 2,
                     child: OverflowBox(
@@ -170,7 +169,7 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
                     transform: Matrix4.rotationX(pi),
                     child: Align(
                       alignment: Alignment.topCenter,
-                      child: Container(
+                      child: SizedBox(
                         width: cellWidth,
                         height: cellHeight / 2,
                         child: OverflowBox(
@@ -182,14 +181,15 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
                               alignment: Alignment.topCenter,
                               child: Stack(
                                 children: [
-                                  getBottomWidget() ?? SizedBox(),
+                                  getBottomWidget() ?? const SizedBox(),
                                   if (getBottomWidget() != null)
                                     Offstage(
                                       offstage: 1 - maskOpacity == 0,
                                       child: Container(
                                         color: Colors.black12
                                             .withOpacity(1 - maskOpacity),
-                                        constraints: BoxConstraints.expand(),
+                                        constraints:
+                                            const BoxConstraints.expand(),
                                       ),
                                     ),
                                 ],
@@ -211,7 +211,7 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
                     ..rotateX(angle),
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Container(
+                    child: SizedBox(
                       width: angle >= pi / 2 ? 0.0 : cellWidth,
                       height: angle >= pi / 2 ? 0.0 : cellHeight / 2,
                       child: OverflowBox(
@@ -243,7 +243,7 @@ class CustomVerticalFlipPageTurnState extends State<CustomVerticalFlipPageTurn>
               ),
               Offstage(
                 offstage: angle >= pi / 2,
-                child: Container(
+                child: SizedBox(
                   width: cellWidth,
                   height: cellHeight,
                   child: Align(

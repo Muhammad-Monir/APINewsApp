@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
@@ -9,10 +8,12 @@ import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
+import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -30,15 +31,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  // Page Controller
   final PageController storyPageController = PageController();
   final PagingController<int, Data> pagingController =
       PagingController(firstPageKey: 1);
-  bool _isRefresh = false;
-
-  // Animation Property
-  late Animation<double> flipAnim;
-  late PageController newsPageController;
-  late AnimationController _animationController;
+  // late PageController newsPageController;
 
   // API Property
   late Future<NewsModel> fetchAllNews;
@@ -48,18 +45,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late String searchCategory;
   late String searchText;
 
+  // Check Property
+  bool _isLogin = false;
+  late String _authToken = '';
+  int? userId;
+  bool isFav = false;
+  bool _isRefresh = false;
+
   @override
   void initState() {
-    // isLoggedIn();
-    // pagingController.addPageRequestListener((pageKey) async {
-    //   dev.log(pageKey.toString());
-    //   List<Data> story = await NewsData.fetchStory(pageKey);
-    //   pagingController.appendPage(story, pageKey + 1);
-    // });
-
+    isLoggedIn();
     fetchStory = NewsData.fetchStory();
-
-    animation();
     super.initState();
   }
 
@@ -83,6 +79,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true, // Prevent dismissal by tapping outside
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent, // Optional customization
+              // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+              child: childBuilder(context));
+        });
+  }
+
+  //News Section and fetch the news from api
   FutureBuilder<NewsModel> _newsSection() {
     return FutureBuilder<NewsModel>(
       future: fetchNews(),
@@ -94,42 +106,75 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           final data = snapshot.data!.data!;
           if (data.isNotEmpty) {
             return !_isRefresh
-                ? CustomFlipWidget(
-                    pages: data.map((e) => screenDesign(e, context)).toList())
+                ? GestureDetector(
+                    onTap: () {
+                      dev.log('barsVisibility on tap');
+                      Provider.of<BarsVisibility>(context, listen: false)
+                          .toggleBars();
+                      if (Provider.of<BarsVisibility>(context, listen: false)
+                          .showBars) {
+                        Timer(const Duration(seconds: 3), () {
+                          Provider.of<BarsVisibility>(context, listen: false)
+                              .hideBars();
+                        });
+                      }
+                    },
+                    child: Stack(
+                      children: [
+                        // Flip Animation & News Screen Widget
+                        CustomFlipWidget(
+                          pages: data.map((e) => screenDesign(e)).toList(),
+                          data: data.map((e) => e).toList(),
+                        ),
+
+                        // Show Tob TabBar
+                        Provider.of<BarsVisibility>(context).showBars
+                            ? Positioned(
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                child: CustomTabBar(
+                                    homeOnTap: () =>
+                                        Scaffold.of(context).openDrawer(),
+                                    startOnTap: () {
+                                      dev.log('startOnTap');
+                                      // newsPageController.animateToPage(0,
+                                      //     duration:
+                                      //         const Duration(milliseconds: 500),
+                                      //     curve: Curves.easeInOut);
+                                    },
+                                    refreshOnTap: () {
+                                      dev.log('refresh');
+                                      _refreshData();
+                                    }))
+                            : const SizedBox(),
+                      ],
+                    ),
+                  )
                 : const Center(child: CircularProgressIndicator());
           } else {
             return _errorSection(context);
           }
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
   }
 
-  NewsScreen screenDesign(NewesData data, BuildContext context) {
+  // News Screen Design
+  NewsScreen screenDesign(NewesData data) {
+    dev.log(data.id.toString());
     return NewsScreen(
-      newsId: data.id!,
-      homeOnTap: () => Scaffold.of(context).openDrawer(),
-      startOnTap: () {
-        newsPageController.animateToPage(
-          0,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      },
-      refreshOnTap: () {
-        _refreshData();
-      },
-      image: data.featuredImage ?? ApiUrl.imageNotFound,
-      newsDec: data.description ?? 'News Description Not Found',
-      sourceLink: data.url ?? 'Url Not Found',
-      newsTitle: data.title ?? 'News Title Not Found',
-    );
+        category: data.category!,
+        newsId: data.id!,
+        image: data.featuredImage ?? ApiUrl.imageNotFound,
+        newsDec: data.description ?? 'News Description Not Found',
+        sourceLink: data.url ?? 'Url Not Found',
+        newsTitle: data.title ?? 'News Title Not Found');
   }
 
+  // Error Handling From Api
   Center _errorSection(BuildContext context) {
     return Center(
       child: Column(
@@ -138,9 +183,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         children: [
           const Spacer(),
           const Text('No News Found '),
-          SizedBox(
-            height: Utils.scrHeight * .03,
-          ),
+          SizedBox(height: Utils.scrHeight * .03),
           SizedBox(
             width: Utils.scrHeight * .2,
             child: ActionButton(
@@ -158,6 +201,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  // Fetch all Story Form api
   FutureBuilder<StoryModel> _storySection() {
     return FutureBuilder<StoryModel>(
         future: fetchStory,
@@ -175,10 +219,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 scrollDirection: Axis.vertical,
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
+                  // Story Screen Widget
                   return StoryScreen(
-                    imageUrl: data[index].image ?? '',
-                    videoUrl: data[index].video ?? '',
-                  );
+                      imageUrl: data[index].image ?? '',
+                      videoUrl: data[index].video ?? '');
                 });
           } else if (snapshot.hasError) {
             return Center(
@@ -191,28 +235,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           }
         });
   }
-  // PagedListView<int, Data> _storySection() {
-  //   return PagedListView<int, Data>(
-  //     pagingController: pagingController,
-  //     builderDelegate: PagedChildBuilderDelegate<Data>(
-  //       itemBuilder: (context, data, index) {
-  //         dev.log(data.toString());
-  //         return StoryScreen(
-  //           imageUrl: data.image ?? ApiUrl.imageNotFound,
-  //           videoUrl: data.video ??
-  //               'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4',
-  //         );
-  //       },
-  //       firstPageErrorIndicatorBuilder: (context) => const Center(
-  //         child: Text('Error loading data.'),
-  //       ),
-  //       noItemsFoundIndicatorBuilder: (context) => const Center(
-  //         child: Text('Last item'),
-  //       ),
-  //     ),
-  //   );
-  // }
 
+  // BottomNavigationMenu
   Theme _bottomNavigationMenu(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
@@ -226,33 +250,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('search',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Search',
-            ),
+                icon: Utils.showSvgPicture('search',
+                    height: Utils.scrHeight * 0.024,
+                    width: Utils.scrHeight * 0.024),
+                label: 'Search'),
             BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('font',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'Font',
-            ),
+                icon: Utils.showSvgPicture('font',
+                    height: Utils.scrHeight * 0.024,
+                    width: Utils.scrHeight * 0.024),
+                label: 'Font'),
             BottomNavigationBarItem(
-              icon: Utils.showSvgPicture('bookmark',
-                  height: Utils.scrHeight * 0.024,
-                  width: Utils.scrHeight * 0.024),
-              label: 'BookMark',
-            ),
+                icon: Utils.showSvgPicture('bookmark',
+                    height: Utils.scrHeight * 0.024,
+                    width: Utils.scrHeight * 0.024),
+                label: 'BookMark'),
             BottomNavigationBarItem(
-              icon: provider.selectedIndex == 3
-                  ? Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024)
-                  : Utils.showSvgPicture('share',
-                      height: Utils.scrHeight * 0.024,
-                      width: Utils.scrHeight * 0.024),
-              label: 'Share',
-            ),
+                icon: provider.selectedIndex == 3
+                    ? Utils.showSvgPicture('share',
+                        height: Utils.scrHeight * 0.024,
+                        width: Utils.scrHeight * 0.024)
+                    : Utils.showSvgPicture('share',
+                        height: Utils.scrHeight * 0.024,
+                        width: Utils.scrHeight * 0.024),
+                label: 'Share'),
           ],
           useLegacyColorScheme: false,
           showSelectedLabels: true,
@@ -276,6 +296,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  // Fetch News for All News, With Category and Search Title
   Future<NewsModel> fetchNews() async {
     if (widget.category == null) {
       fetchAllNews = NewsData.fetchAllNews();
@@ -298,6 +319,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return fetchAllNews;
   }
 
+  // Share App Url to anyone
   void shareContent(BuildContext context) async {
     try {
       await Share.share('https://flutter.dev/');
@@ -316,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
 
     try {
-      newsPageController.jumpToPage(0);
+      // newsPageController.jumpToPage(0);
       await fetchNews();
       setState(() {
         _isRefresh = false;
@@ -329,31 +351,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
-  void animation() {
-    _animationController = AnimationController(
-      duration: const Duration(seconds: 2), // Adjust animation duration
-      vsync: this,
-    );
-
-    flipAnim = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.slowMiddle,
-    ));
-
-    newsPageController = PageController();
-
-    newsPageController.addListener(() {
-      if (newsPageController.page != null) {
-        _animationController.value = (newsPageController.page! % 1);
-      }
+  // Check Is Login or Not
+  Future<void> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Check if the session data exists
+    bool isLogin = prefs.containsKey('token');
+    setState(() {
+      _isLogin = isLogin;
     });
+    if (_isLogin) {
+      String? authToken = await prefs.getString('token');
+      setState(() {
+        _authToken = authToken!;
+      });
+    }
   }
 
   @override
   void dispose() {
-    newsPageController.dispose();
+    // newsPageController.dispose();
     storyPageController.dispose();
-    _animationController.dispose();
     super.dispose();
   }
 }
