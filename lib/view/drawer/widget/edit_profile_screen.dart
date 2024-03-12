@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/common_widgets/email_form_field.dart';

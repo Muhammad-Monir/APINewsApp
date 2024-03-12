@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field
+
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
@@ -164,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // News Screen Design
   NewsScreen screenDesign(NewesData data) {
-    dev.log(data.id.toString());
+    // dev.log(data.id.toString());
     return NewsScreen(
         category: data.category!,
         newsId: data.id!,
@@ -360,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _isLogin = isLogin;
     });
     if (_isLogin) {
-      String? authToken = await prefs.getString('token');
+      String? authToken = prefs.getString('token');
       setState(() {
         _authToken = authToken!;
       });
