@@ -38,7 +38,7 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
       _isLogin = isLogin;
     });
     if (_isLogin) {
-      String? authToken = await prefs.getString('token');
+      String? authToken = prefs.getString('token');
       setState(() {
         _authToken = authToken!;
       });
@@ -47,61 +47,63 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
-      return Positioned(
-          top: Utils.scrHeight * .1,
-          right: Utils.scrHeight * .02,
-          child: GestureDetector(
-            onTap: () {
-              log('bookmarkOnTap');
-              if (_isLogin) {
-                // provider.isFavorite ?
-                UserData.addBookMark(_authToken, widget.newsId.toString())
-                    .then((value) {
-                  if (value == 'Bookmark added successfully') {
-                    Utils.showSnackBar(context, value);
-                    setState(() {
-                      isFav = !isFav;
-                    });
-                  } else if (value == 'Bookmark Remove successfully') {
-                    isFav = !isFav;
-                  }
-                  // provider.toggleIsFavorite();
-                });
-              } else {
-                getPopUp(
-                    context,
-                    (p0) => FavoritePopup(
-                          onExit: () {
-                            Navigator.pop(p0);
-                          },
-                        ));
-              }
-            },
-            child: Container(
-              width: Utils.scrHeight * .04,
-              height: Utils.scrHeight * .04,
-              padding: const EdgeInsets.all(8),
-              decoration: ShapeDecoration(
-                color: !isFav
-                    ? Colors.white.withOpacity(0)
-                    : Colors.white.withOpacity(0.3),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: Utils.scrHeight * .001,
-                    color: Colors.white,
+    return _isLogin
+        ? Consumer<BookmarkProvider>(builder: (context, provider, child) {
+            return Positioned(
+                top: Utils.scrHeight * .1,
+                right: Utils.scrHeight * .02,
+                child: GestureDetector(
+                  onTap: () {
+                    log('bookmarkOnTap');
+                    if (_isLogin) {
+                      // provider.isFavorite ?
+                      UserData.addBookMark(_authToken, widget.newsId.toString())
+                          .then((value) {
+                        if (value == 'Bookmark added successfully') {
+                          Utils.showSnackBar(context, value);
+                          setState(() {
+                            isFav = !isFav;
+                          });
+                        } else if (value == 'Bookmark Remove successfully') {
+                          isFav = !isFav;
+                        }
+                        // provider.toggleIsFavorite();
+                      });
+                    } else {
+                      getPopUp(
+                          context,
+                          (p0) => FavoritePopup(
+                                onExit: () {
+                                  Navigator.pop(p0);
+                                },
+                              ));
+                    }
+                  },
+                  child: Container(
+                    width: Utils.scrHeight * .04,
+                    height: Utils.scrHeight * .04,
+                    padding: const EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                      color: !isFav
+                          ? Colors.white.withOpacity(0)
+                          : Colors.white.withOpacity(0.3),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: Utils.scrHeight * .001,
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: !isFav
+                        ? Utils.showSvgPicture('bookmarks',
+                            height: Utils.scrHeight * .020)
+                        : Utils.showSvgPicture('selected_bookmark',
+                            height: Utils.scrHeight * .020),
                   ),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: !isFav
-                  ? Utils.showSvgPicture('bookmarks',
-                      height: Utils.scrHeight * .020)
-                  : Utils.showSvgPicture('selected_bookmark',
-                      height: Utils.scrHeight * .020),
-            ),
-          ));
-    });
+                ));
+          })
+        : const SizedBox();
   }
 
   void getPopUp(

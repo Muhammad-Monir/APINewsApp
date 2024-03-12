@@ -1,4 +1,4 @@
-import 'dart:developer';
+// ignore_for_file: unnecessary_import
 
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/color.dart';
@@ -27,7 +27,6 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       CustomVerticalFlipPageTurnController();
   @override
   void initState() {
-    // TODO: implement initState
     controller.addListener(() {
       //log('viewport- ${controller.viewportFraction} | page-${controller.page}');
       //log('page- ${controller.page} | offset-${controller.offset}');

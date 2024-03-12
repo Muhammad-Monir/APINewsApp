@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, unused_element
+
 import 'dart:async';
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';

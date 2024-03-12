@@ -132,6 +132,7 @@ Future share(SocialMedia platform) async {
     SocialMedia.telegram: ('telegram shareable link'),
   };
   final url = urls[platform]!;
+  // ignore: deprecated_member_use
   await launch(url);
 }
 

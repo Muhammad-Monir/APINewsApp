@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -86,6 +88,7 @@ class StoryScreen extends StatelessWidget {
             await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
 
         if (cachedImage != null) {
+          // ignore: deprecated_member_use
           await Share.shareFiles([cachedImage.path], text: 'Sharing image');
         } else {
           throw Exception('Failed to load or download image');

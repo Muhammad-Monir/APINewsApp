@@ -1,7 +1,6 @@
 import 'dart:developer';
-
 import 'package:am_innnn/data/auth_data.dart';
-import 'package:am_innnn/data/social_login_auth_data/google_auth_data.dart';
+import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -132,19 +131,21 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             PlatformButton(
-              onTap: () {
-                GoogleAuthData.signInWithGoogle().then((user) {
+              onTap: () async {
+                await SocialAuthData.signInWithGoogle().then((user) {
                   if (user != null) {
-                    log('\nUser: ${user.displayName}');
-                    log('\nUserAdditionalInfo: ${user.email}');
+                    Navigator.pushNamed(context, RoutesName.home);
+                    // Utils.showSnackBar(context, user.email!);
+                    // log('\nUser: ${user.displayName}');
+                    // log('\nUserAdditionalInfo: ${user.email}');
                   }
                 });
               },
               icon: 'google',
             ),
-            PlatformButton(icon: 'facebook'),
-            PlatformButton(icon: 'twitter'),
-            PlatformButton(icon: 'apple'),
+            const PlatformButton(icon: 'facebook'),
+            const PlatformButton(icon: 'twitter'),
+            const PlatformButton(icon: 'apple'),
           ],
         ),
         SizedBox(height: Utils.scrHeight * .02)

@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously, unused_element
+
+import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/view/change_password/widgets/reset_popup.dart';
 import 'package:flutter/material.dart';
@@ -191,7 +195,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           );
         }
       } catch (e) {
-        print('Error: $e');
+        log('Error: $e');
         Utils.showSnackBar(
           context,
           'Failed to reset password. Please try again.',
