@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">APINewsApp</string>
+    <string name="facebook_app_id">3868010296755847</string>
+    <string name="fb_login_protocol_scheme">fb3868010296755847</string>
+    <string name="facebook_client_token">a236a6c4ea4f8a7c0f17f500aef323ee</string>
+</resources>
