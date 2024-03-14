@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-hdpi_ic_launcher.png.flat",
         "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-hdpi/ic_launcher.png"
     },
@@ -22,5 +23,29 @@
     {
         "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-xxhdpi/ic_launcher.png"
+=======
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/drawable-v21_launch_background.xml.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-xxhdpi/ic_launcher.png"
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
     }
 ]

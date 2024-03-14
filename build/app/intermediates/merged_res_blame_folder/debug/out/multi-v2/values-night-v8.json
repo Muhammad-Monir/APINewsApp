@@ -1,7 +1,11 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-night-v8/values-night-v8.xml",
+=======
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-night-v8/values-night-v8.xml",
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\cff0a11f4a56844f86a75bb945a75ae2\\transformed\\appcompat-1.1.0\\res\\values-night-v8\\values-night-v8.xml",

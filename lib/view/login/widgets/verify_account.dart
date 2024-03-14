@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:flutter/material.dart';
 
@@ -110,7 +114,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               'Account Verification Failed. Please check your OTP and try again.');
         }
       } catch (e) {
-        print('Account verification failed with an exception: $e');
+        log('Account verification failed with an exception: $e');
         Utils.showSnackBar(
             context, 'Account Verification Failed. Please try again.');
       }

@@ -1,10 +1,34 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\aba8f806953ea3dd8f794da3aeb78a12\\transformed\\jetified-play-services-base-18.0.1\\res\\values-sk\\values.xml",
+=======
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-sk/values-sk.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c56c77f0b6757393db49796cc8003f48\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-sk\\values-sk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,194,258,329,406,480,564,646",
+                        "endColumns": "76,61,63,70,76,73,83,81,79",
+                        "endOffsets": "127,189,253,324,401,475,559,641,721"
+                    },
+                    "to": {
+                        "startLines": "28,29,30,31,32,33,34,35,36",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3166,3243,3305,3369,3440,3517,3591,3675,3757",
+                        "endColumns": "76,61,63,70,76,73,83,81,79",
+                        "endOffsets": "3238,3300,3364,3435,3512,3586,3670,3752,3832"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d1787ae722435e45211a35a7c3c959d7\\transformed\\jetified-play-services-base-18.0.1\\res\\values-sk\\values.xml",
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,15 +45,54 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\e255c6ce9910a673f2619b479a7d74a8\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-sk\\values-sk.xml",
+=======
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\5c6b044e4a62005fc1f29a038b8c0230\\transformed\\browser-1.5.0\\res\\values-sk\\values-sk.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,132,194,258,329,406,480,564,646",
-                        "endColumns": "76,61,63,70,76,73,83,81,79",
-                        "endOffsets": "127,189,253,324,401,475,559,641,721"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,162,265,380",
+                        "endColumns": "106,102,114,101",
+                        "endOffsets": "157,260,375,477"
                     },
                     "to": {
+                        "startLines": "27,37,38,39",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3059,3837,3940,4055",
+                        "endColumns": "106,102,114,101",
+                        "endOffsets": "3161,3935,4050,4152"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e84dcff88ad157691af31c1d8b160851\\transformed\\jetified-play-services-basement-18.2.0\\res\\values-sk\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "134",
+                        "endOffsets": "329"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "1791",
+                        "endColumns": "138",
+                        "endOffsets": "1925"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e562a79920a5a44353421bebd369138a\\transformed\\core-1.10.1\\res\\values-sk\\values-sk.xml",
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,354,452,562,670,792",
+                        "endColumns": "95,101,100,97,109,107,121,100",
+                        "endOffsets": "146,248,349,447,557,665,787,888"
+                    },
+                    "to": {
+<<<<<<< HEAD
                         "startLines": "78,79,80,81,82,83,84,85,86",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
                         "startOffsets": "8542,8619,8681,8745,8816,8893,8967,9051,9133",
@@ -120,6 +183,13 @@
                         "startOffsets": "3554,3732,3872,4023,4135,4227,4321,4400,4489,4584,4699,4812,4907,5002,5107,5227,5309,5393,5587,5684,5789,5904,6014",
                         "endColumns": "177,139,150,111,91,93,78,88,94,114,112,94,94,104,119,81,83,193,96,104,114,109,153",
                         "endOffsets": "3727,3867,4018,4130,4222,4316,4395,4484,4579,4694,4807,4902,4997,5102,5222,5304,5388,5582,5679,5784,5899,6009,6163"
+=======
+                        "startLines": "2,3,4,5,6,7,8,40",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,354,452,562,670,4157",
+                        "endColumns": "95,101,100,97,109,107,121,100",
+                        "endOffsets": "146,248,349,447,557,665,787,4253"
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
                     }
                 }
             ]

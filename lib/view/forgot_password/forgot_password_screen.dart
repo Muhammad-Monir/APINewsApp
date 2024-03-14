@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/change_password/change_password_screen.dart';
@@ -105,7 +109,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               'Failed to send password reset instructions. Please try again.');
         }
       } catch (e) {
-        print('Error: $e');
+        log('Error: $e');
         Utils.showSnackBar(context,
             'Failed to send password reset instructions. Please try again.');
       }

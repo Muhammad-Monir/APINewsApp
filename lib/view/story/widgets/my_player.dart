@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'dart:developer';
 import 'package:am_innnn/utils/color.dart';
 import 'package:chewie/chewie.dart';
@@ -14,6 +16,7 @@ class MyPlayer extends StatefulWidget {
   const MyPlayer({super.key, this.t});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyPlayerState createState() => _MyPlayerState();
 }
 

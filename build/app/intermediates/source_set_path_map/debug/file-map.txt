@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com.quikkbyte.quikkbyte.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-0 C:\Users\bdCalling\.gradle\caches\transforms-3\0d71402e87d63dfcdd1e8a19179a5833\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
 com.quikkbyte.quikkbyte.app-jetified-appcompat-resources-1.1.0-1 C:\Users\bdCalling\.gradle\caches\transforms-3\18fc4560aacad669205c83e527dbc4df\transformed\jetified-appcompat-resources-1.1.0\res
 com.quikkbyte.quikkbyte.app-jetified-play-services-auth-20.7.0-2 C:\Users\bdCalling\.gradle\caches\transforms-3\1dd93dfa68077670fe15796ffe5306f3\transformed\jetified-play-services-auth-20.7.0\res
@@ -55,3 +56,53 @@ com.quikkbyte.quikkbyte.app-packaged_res-53 D:\newsapp\APINewsApp\build\sqflite\
 com.quikkbyte.quikkbyte.app-packaged_res-54 D:\newsapp\APINewsApp\build\url_launcher_android\intermediates\packaged_res\debug
 com.quikkbyte.quikkbyte.app-packaged_res-55 D:\newsapp\APINewsApp\build\video_player_android\intermediates\packaged_res\debug
 com.quikkbyte.quikkbyte.app-packaged_res-56 D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\packaged_res\debug
+=======
+com.quikkbyte.quikkbyte.app-jetified-core-ktx-1.10.1-0 C:\Users\bdCalling IT\.gradle\caches\transforms-3\0f050041bb7decb3b60d42b7c9d880bf\transformed\jetified-core-ktx-1.10.1\res
+com.quikkbyte.quikkbyte.app-jetified-annotation-experimental-1.3.0-1 C:\Users\bdCalling IT\.gradle\caches\transforms-3\14cf3344519970eaf1c74253349d6293\transformed\jetified-annotation-experimental-1.3.0\res
+com.quikkbyte.quikkbyte.app-jetified-activity-1.7.2-2 C:\Users\bdCalling IT\.gradle\caches\transforms-3\180e12152a764065659415a0eaaa84a2\transformed\jetified-activity-1.7.2\res
+com.quikkbyte.quikkbyte.app-jetified-firebase-common-20.4.2-3 C:\Users\bdCalling IT\.gradle\caches\transforms-3\269caf2a663bee78d52e85ea699cf71e\transformed\jetified-firebase-common-20.4.2\res
+com.quikkbyte.quikkbyte.app-jetified-play-services-measurement-api-21.5.1-4 C:\Users\bdCalling IT\.gradle\caches\transforms-3\2cbec1211c3c388b120545a7c0467561\transformed\jetified-play-services-measurement-api-21.5.1\res
+com.quikkbyte.quikkbyte.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-5 C:\Users\bdCalling IT\.gradle\caches\transforms-3\2fbf26ff848179d570ed583008a35fa6\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+com.quikkbyte.quikkbyte.app-jetified-window-1.0.0-beta04-6 C:\Users\bdCalling IT\.gradle\caches\transforms-3\309f9cec26ab9760f193c900517d0f8d\transformed\jetified-window-1.0.0-beta04\res
+com.quikkbyte.quikkbyte.app-jetified-startup-runtime-1.1.1-7 C:\Users\bdCalling IT\.gradle\caches\transforms-3\46ccc1eca5476f63bddc03df67434dc5\transformed\jetified-startup-runtime-1.1.1\res
+com.quikkbyte.quikkbyte.app-jetified-ads-adservices-java-1.0.0-beta05-8 C:\Users\bdCalling IT\.gradle\caches\transforms-3\51aa99c7d5f1d781de3033f30cb840a6\transformed\jetified-ads-adservices-java-1.0.0-beta05\res
+com.quikkbyte.quikkbyte.app-browser-1.5.0-9 C:\Users\bdCalling IT\.gradle\caches\transforms-3\5c6b044e4a62005fc1f29a038b8c0230\transformed\browser-1.5.0\res
+com.quikkbyte.quikkbyte.app-jetified-savedstate-1.2.1-10 C:\Users\bdCalling IT\.gradle\caches\transforms-3\6083fa043a3946c2efd8fa4141ae50dd\transformed\jetified-savedstate-1.2.1\res
+com.quikkbyte.quikkbyte.app-jetified-profileinstaller-1.3.0-11 C:\Users\bdCalling IT\.gradle\caches\transforms-3\624d53b382ddc851ad07db70cd392ec9\transformed\jetified-profileinstaller-1.3.0\res
+com.quikkbyte.quikkbyte.app-core-runtime-2.2.0-12 C:\Users\bdCalling IT\.gradle\caches\transforms-3\6d1a344c67188e6178074e80e7a0d01d\transformed\core-runtime-2.2.0\res
+com.quikkbyte.quikkbyte.app-lifecycle-viewmodel-2.6.1-13 C:\Users\bdCalling IT\.gradle\caches\transforms-3\844b6ce495b695d8a46709942af78e44\transformed\lifecycle-viewmodel-2.6.1\res
+com.quikkbyte.quikkbyte.app-lifecycle-livedata-2.6.1-14 C:\Users\bdCalling IT\.gradle\caches\transforms-3\9222b5c175cd3e2b33e699ffe0d27e9e\transformed\lifecycle-livedata-2.6.1\res
+com.quikkbyte.quikkbyte.app-jetified-ads-adservices-1.0.0-beta05-15 C:\Users\bdCalling IT\.gradle\caches\transforms-3\960efbc2efefce475682deda5b2c7a44\transformed\jetified-ads-adservices-1.0.0-beta05\res
+com.quikkbyte.quikkbyte.app-lifecycle-runtime-2.6.1-16 C:\Users\bdCalling IT\.gradle\caches\transforms-3\b3fce5d2a28c7bd9ccd1935ee22f073c\transformed\lifecycle-runtime-2.6.1\res
+com.quikkbyte.quikkbyte.app-jetified-exoplayer-core-2.18.7-17 C:\Users\bdCalling IT\.gradle\caches\transforms-3\c56c77f0b6757393db49796cc8003f48\transformed\jetified-exoplayer-core-2.18.7\res
+com.quikkbyte.quikkbyte.app-jetified-play-services-base-18.0.1-18 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d1787ae722435e45211a35a7c3c959d7\transformed\jetified-play-services-base-18.0.1\res
+com.quikkbyte.quikkbyte.app-jetified-window-java-1.0.0-beta04-19 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d26278dd6957cff205de04c935053919\transformed\jetified-window-java-1.0.0-beta04\res
+com.quikkbyte.quikkbyte.app-lifecycle-livedata-core-2.6.1-20 C:\Users\bdCalling IT\.gradle\caches\transforms-3\d32f914b56eff5b4800b05f3aca409d9\transformed\lifecycle-livedata-core-2.6.1\res
+com.quikkbyte.quikkbyte.app-core-1.10.1-21 C:\Users\bdCalling IT\.gradle\caches\transforms-3\e562a79920a5a44353421bebd369138a\transformed\core-1.10.1\res
+com.quikkbyte.quikkbyte.app-jetified-play-services-basement-18.2.0-22 C:\Users\bdCalling IT\.gradle\caches\transforms-3\e84dcff88ad157691af31c1d8b160851\transformed\jetified-play-services-basement-18.2.0\res
+com.quikkbyte.quikkbyte.app-jetified-play-services-auth-20.7.0-23 C:\Users\bdCalling IT\.gradle\caches\transforms-3\ef0a91c9f9428e3bfe9f02fd451a5738\transformed\jetified-play-services-auth-20.7.0\res
+com.quikkbyte.quikkbyte.app-debug-24 D:\APINewsApp\android\app\src\debug\res
+com.quikkbyte.quikkbyte.app-main-25 D:\APINewsApp\android\app\src\main\res
+com.quikkbyte.quikkbyte.app-RES-26 D:\APINewsApp\build\app\RES\processDebugGoogleServices
+com.quikkbyte.quikkbyte.app-pngs-27 D:\APINewsApp\build\app\generated\res\pngs\debug
+com.quikkbyte.quikkbyte.app-resValues-28 D:\APINewsApp\build\app\generated\res\resValues\debug
+com.quikkbyte.quikkbyte.app-rs-29 D:\APINewsApp\build\app\generated\res\rs\debug
+com.quikkbyte.quikkbyte.app-mergeDebugResources-30 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.quikkbyte.quikkbyte.app-mergeDebugResources-31 D:\APINewsApp\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.quikkbyte.quikkbyte.app-merged_res-32 D:\APINewsApp\build\app\intermediates\merged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-33 D:\APINewsApp\build\firebase_auth\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-34 D:\APINewsApp\build\firebase_core\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-35 D:\APINewsApp\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-36 D:\APINewsApp\build\fluttertoast\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-37 D:\APINewsApp\build\google_sign_in_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-38 D:\APINewsApp\build\image_picker_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-39 D:\APINewsApp\build\package_info_plus\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-40 D:\APINewsApp\build\path_provider_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-41 D:\APINewsApp\build\permission_handler_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-42 D:\APINewsApp\build\share_plus\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-43 D:\APINewsApp\build\shared_preferences_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-44 D:\APINewsApp\build\sqflite\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-45 D:\APINewsApp\build\url_launcher_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-46 D:\APINewsApp\build\video_player_android\intermediates\packaged_res\debug
+com.quikkbyte.quikkbyte.app-packaged_res-47 D:\APINewsApp\build\wakelock_plus\intermediates\packaged_res\debug
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9

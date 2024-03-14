@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:am_innnn/view/feedback/widgets/custom_welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -94,7 +96,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         // ),
         RatingBar.builder(
           onRatingUpdate: (rating) {
-            print(rating);
+            log(rating.toString());
           },
           itemBuilder: (context, index) {
             return Container(

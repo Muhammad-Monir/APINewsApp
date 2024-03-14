@@ -2,9 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../utils/toast_util.dart';
 
-class GoogleAuthData {
+class SocialAuthData {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -29,12 +31,24 @@ class GoogleAuthData {
       // Once signed in, return the UserCredential
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
-
+      ToastUtil.showLongToast(authResult.toString());
+      log(authResult.toString());
       // Return the current user
       return authResult.user;
     } catch (error) {
+      ToastUtil.showLongToast(error.toString());
       log(error.toString());
       return null;
+    }
+  }
+
+  static Future<void> signInWithTwitter() async {
+    TwitterAuthProvider twitterProvider = TwitterAuthProvider();
+
+    if (kIsWeb) {
+      await FirebaseAuth.instance.signInWithPopup(twitterProvider);
+    } else {
+      await FirebaseAuth.instance.signInWithProvider(twitterProvider);
     }
   }
 }

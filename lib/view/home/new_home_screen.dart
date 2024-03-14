@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
+
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'dart:math';
