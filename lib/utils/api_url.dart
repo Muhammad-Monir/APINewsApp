@@ -40,8 +40,13 @@ class ApiUrl {
   static String newResetPasswordUrl = '$newBaseUrl/reset-password';
   static String newVerifyAccountUrl = '$newBaseUrl/account-verify';
   static String newUserProfileUrl = '$newBaseUrl/profile/details';
-  static String newStoryUrl = "$newBaseUrl/story-board";
+  // static String newStoryUrl = "$newBaseUrl/story-board";
   static String newAddBookMark = "$newBaseUrl/bookmark_news/add";
   static String newAllBookMark = "$newBaseUrl/bookmark_news/";
   static String newUserUpdateUrl = "$newBaseUrl/user/update";
+  static String storeNotification =
+      "http://192.168.40.38/Am_inn/public/api/firebase/token/add";
+
+  static String newStoryUrl =
+      "http://192.168.40.38/Am_inn/public/api/story-boards";
 }

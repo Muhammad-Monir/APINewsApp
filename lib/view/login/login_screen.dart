@@ -8,6 +8,7 @@ import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
 import '../../route/routes_name.dart';
+import '../../services/notification_service.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -87,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Provider.of<AuthProvider>(context, listen: false)
                   .login(email, password, context)
                   .then((value) {
+                LocalNotificationService.getToken();
                 Navigator.pushNamedAndRemoveUntil(
                     context, RoutesName.home, (route) => false);
               });
@@ -143,8 +145,15 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               icon: 'google',
             ),
-            const PlatformButton(icon: 'facebook'),
-            const PlatformButton(icon: 'twitter'),
+            const PlatformButton(
+              icon: 'facebook',
+            ),
+            PlatformButton(
+              icon: 'twitter',
+              onTap: () {
+                // SocialAuthData.signInWithTwitter();
+              },
+            ),
             const PlatformButton(icon: 'apple'),
           ],
         ),

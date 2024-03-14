@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/twitter_login.dart';
 import '../../utils/toast_util.dart';
 
 class SocialAuthData {
@@ -42,13 +42,41 @@ class SocialAuthData {
     }
   }
 
-  static Future<void> signInWithTwitter() async {
-    TwitterAuthProvider twitterProvider = TwitterAuthProvider();
+  // static Future<void> signInWithTwitter() async {
+  //   TwitterAuthProvider twitterProvider = TwitterAuthProvider();
 
-    if (kIsWeb) {
-      await FirebaseAuth.instance.signInWithPopup(twitterProvider);
-    } else {
-      await FirebaseAuth.instance.signInWithProvider(twitterProvider);
+  //   if (kIsWeb) {
+  //     await FirebaseAuth.instance.signInWithPopup(twitterProvider);
+  //   } else {
+  //     await FirebaseAuth.instance.signInWithProvider(twitterProvider);
+  //   }
+  // }
+
+  final TwitterLogin twitterLogin = TwitterLogin(
+      apiKey: 'f5sqyyJGNPQIYdKvHcDPFXX6G',
+      apiSecretKey: 'N52pPIpI0zE1xAswBvNpAmE4E1UQjsN2OnDUgsNLjCd1sVTITt',
+      redirectURI: '');
+
+  Future signInWithTwitter() async {
+    final authResult = await twitterLogin.login();
+    if (authResult.status == TwitterLoginStatus.loggedIn) {
+      try {
+        final credential = TwitterAuthProvider.credential(
+            accessToken: authResult.authToken!,
+            secret: authResult.authTokenSecret!);
+        await _auth.signInWithCredential(credential);
+
+        final userDetails = authResult.user;
+        // save all the data
+        // final name = userDetails!.name;
+        // final email = _auth.currentUser!.email;
+        // final imageUrl = userDetails.thumbnailImage;
+        // final uid = userDetails.id.toString();
+        // final provider = "TWITTER";
+        // final hasError = false;
+      } catch (e) {
+        log(e.toString());
+      }
     }
   }
 }
