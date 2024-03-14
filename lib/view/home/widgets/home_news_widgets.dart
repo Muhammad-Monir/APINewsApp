@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,10 +50,14 @@ class _NewsScreenState extends State<NewsScreen> {
   late String _authToken = '';
   int? userId;
   bool isFav = false;
+  late BannerAd _bannerAd;
+  bool _isAdLoaded = false;
+  final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
 
   @override
   void initState() {
     isLoggedIn();
+    _initBannerAd();
     super.initState();
   }
 
@@ -97,7 +102,13 @@ class _NewsScreenState extends State<NewsScreen> {
           );
         }),
       ),
-      floatingActionButton: _floatingActionButton(),
+      floatingActionButton: _isAdLoaded
+          ? SizedBox(
+              height: _bannerAd.size.height.toDouble(),
+              width: _bannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            )
+          : const SizedBox(),
     );
   }
 
@@ -374,6 +385,32 @@ class _NewsScreenState extends State<NewsScreen> {
             child: childBuilder(context),
           );
         });
+  }
+
+  _initBannerAd() {
+    _bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: 'ca-app-pub-3940256099942544/9214589741',
+      // adUnitId: adUnitId,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _isAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+        onAdOpened: (ad) {
+          log('ad  opened');
+        },
+        onAdClosed: (ad) {
+          log('Ad closed');
+        },
+      ),
+      request: const AdRequest(),
+    );
+    _bannerAd.load();
   }
 }
 

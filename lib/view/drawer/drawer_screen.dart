@@ -173,6 +173,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     text: 'Notifications',
                     svgName: 'notification',
                     isToggleable: true,
+                    onTap: () async {
+                      await state.setInNotificationStatus();
+                    },
                     switchProvider: Provider.of<NotificationProvider>(context),
                   ),
                 )
