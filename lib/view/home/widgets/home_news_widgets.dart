@@ -55,6 +55,12 @@ class _NewsScreenState extends State<NewsScreen> {
   final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
 
   @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     isLoggedIn();
     _initBannerAd();
@@ -106,8 +112,7 @@ class _NewsScreenState extends State<NewsScreen> {
           ? SizedBox(
               height: _bannerAd.size.height.toDouble(),
               width: _bannerAd.size.width.toDouble(),
-              child: AdWidget(ad: _bannerAd),
-            )
+              child: AdWidget(ad: _bannerAd..load()))
           : const SizedBox(),
     );
   }
