@@ -1,55 +1,41 @@
-
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class AuthService {
-
-  static Future<void> saveSessionData(String responseData) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Save session data (e.g., token)
+  final SharedPreferences prefs;
+  AuthService(this.prefs);
+  Future<void> saveSessionData(String responseData) async {
     await prefs.setString('token', responseData);
-    // You can save additional session data if needed
-  }
-  static Future<void> saveUserId(int userId) async {
-    log('saveUserId');
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Save session data (e.g., token)
-    await prefs.setInt('id', userId);
   }
 
-  static Future<bool> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
+  bool isLoggedIn() {
     return prefs.containsKey('token');
   }
 
-  static Future<void> clearSessionData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> clearSessionData() async {
     // Remove the token
     await prefs.remove('token');
-    // You can remove additional session data if needed
   }
 
-  static Future<void> clearUserId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Remove the token
-    await prefs.remove('id');
-    // You can remove additional session data if needed
-  }
-
-  static Future<String?> getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? getToken() {
     // Retrieve token from SharedPreferences
     return prefs.getString('token');
   }
 
-  static Future<int?> getUserID() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  void saveUserId(int userId) async {
+    log('saveUserId');
+    // Save session data (e.g., token)
+    await prefs.setInt('id', userId);
+  }
+
+  Future<void> clearUserId() async {
+    // Remove the token
+    await prefs.remove('id');
+  }
+
+  int? getUserID() {
     // Retrieve token from SharedPreferences
     return prefs.getInt('id');
   }
-
-
 }

@@ -2,6 +2,9 @@
     "logs": [
         {
 <<<<<<< HEAD
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-32:/values-pt-rBR/values-pt-rBR.xml",
+=======
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
@@ -25,6 +28,7 @@
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-pt-rBR\\values-pt-rBR.xml",
 =======
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-pt-rBR/values-pt-rBR.xml",
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e562a79920a5a44353421bebd369138a\\transformed\\core-1.10.1\\res\\values-pt-rBR\\values-pt-rBR.xml",

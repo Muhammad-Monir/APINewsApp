@@ -1,3 +1,4 @@
+import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
 import 'package:am_innnn/view/home/new_home_screen.dart';
@@ -31,14 +32,14 @@ class Routes {
             category: category,
           ),
         );
-      case RoutesName.home2:
-        final Map<String, dynamic>? category =
-            settings.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(
-          builder: (context) => NewHomeScreen(
-            category: category,
-          ),
-        );
+      // case RoutesName.home2:
+      //   final Map<String, dynamic>? category =
+      //       settings.arguments as Map<String, dynamic>?;
+      //   return MaterialPageRoute(
+      //     builder: (context) => NewHomeScreen(
+      //       category: category,
+      //     ),
+      //   );
       case RoutesName.splash:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
@@ -110,10 +111,10 @@ class Routes {
           ),
         );
       case RoutesName.story:
-        final String? imageUrl = settings.arguments as String?;
+        final List<Images>? imageUrl = settings.arguments as List<Images>?;
         return MaterialPageRoute(
           builder: (context) => StoryScreen(
-            imageUrl: imageUrl,
+            imageUrl: imageUrl!,
           ),
         );
 

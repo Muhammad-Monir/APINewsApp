@@ -2,6 +2,9 @@
     "logs": [
         {
 <<<<<<< HEAD
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-32:/values-mr/values-mr.xml",
+=======
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-mr/values-mr.xml",
             "map": [
                 {
@@ -25,6 +28,7 @@
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\88ec5fa66f925ee7765cb6576e45c0c4\\transformed\\jetified-facebook-login-16.3.0\\res\\values-mr\\values-mr.xml",
 =======
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-mr/values-mr.xml",
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d1787ae722435e45211a35a7c3c959d7\\transformed\\jetified-play-services-base-18.0.1\\res\\values-mr\\values.xml",

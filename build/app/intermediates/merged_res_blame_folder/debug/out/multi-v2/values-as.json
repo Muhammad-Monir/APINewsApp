@@ -2,12 +2,16 @@
     "logs": [
         {
 <<<<<<< HEAD
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-32:/values-as/values-as.xml",
+=======
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-as/values-as.xml",
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-as\\values-as.xml",
 =======
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-as/values-as.xml",
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\5c6b044e4a62005fc1f29a038b8c0230\\transformed\\browser-1.5.0\\res\\values-as\\values-as.xml",

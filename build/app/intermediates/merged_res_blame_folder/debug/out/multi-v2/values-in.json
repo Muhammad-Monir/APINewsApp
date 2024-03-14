@@ -2,6 +2,9 @@
     "logs": [
         {
 <<<<<<< HEAD
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-32:/values-in/values-in.xml",
+=======
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-in/values-in.xml",
             "map": [
                 {
@@ -25,6 +28,7 @@
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\d12883dde0390e08dd2a1192741cec1b\\transformed\\browser-1.5.0\\res\\values-in\\values-in.xml",
 =======
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-in/values-in.xml",
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d1787ae722435e45211a35a7c3c959d7\\transformed\\jetified-play-services-base-18.0.1\\res\\values-in\\values.xml",

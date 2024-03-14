@@ -17,12 +17,12 @@ class CustomDrawerItem extends StatelessWidget {
 
   const CustomDrawerItem(
       {super.key,
-        required this.text,
-        this.icon,
-        required this.svgName,
-        this.onTap,
-        this.isToggleable = false,
-        this.switchProvider});
+      required this.text,
+      this.icon,
+      required this.svgName,
+      this.onTap,
+      this.isToggleable = false,
+      this.switchProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +44,19 @@ class CustomDrawerItem extends StatelessWidget {
                 const Spacer(),
                 isToggleable
                     ? Consumer<NotificationProvider>(
-                  builder: (context, provider, child) => Switch(
-                      value: provider.isSwitchToggled,
-                      onChanged: (newValue) => provider.toggleSwitch(),
-                      activeColor: appThemeColor,
-                      activeTrackColor: const Color(0xffEBF3FF),
-                      inactiveTrackColor: const Color(0xffB7C1D2),
-                      inactiveThumbColor: const Color(0xff4E617E)),
-                )
+                        builder: (context, provider, child) => Switch(
+                            value: provider.isSwitchToggled,
+                            onChanged: (newValue) => provider.toggleSwitch(),
+                            activeColor: appThemeColor,
+                            activeTrackColor: const Color(0xffEBF3FF),
+                            inactiveTrackColor: const Color(0xffB7C1D2),
+                            inactiveThumbColor: const Color(0xff4E617E)),
+                      )
                     : icon != null
-                    ? Icon(icon,
-                    size: Utils.scrHeight * .016,
-                    color: homeTabTextColor)
-                    : const SizedBox.shrink(),
+                        ? Icon(icon,
+                            size: Utils.scrHeight * .016,
+                            color: homeTabTextColor)
+                        : const SizedBox.shrink(),
               ],
             ),
             SizedBox(height: Utils.scrHeight * .01),

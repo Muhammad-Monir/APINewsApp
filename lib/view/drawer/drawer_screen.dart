@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
+import '../../services/notification_service.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -29,28 +30,21 @@ class DrawerScreen extends StatefulWidget {
 
 class _DrawerScreenState extends State<DrawerScreen> {
   bool _isLogin = false;
-  String _authToken = '';
+  String? _authToken = '';
   final AuthProvider _authProvider = AuthProvider();
   String? localImagePath;
 
   @override
   void initState() {
-    isLoggedIn();
+    isLogfedIn();
     super.initState();
   }
 
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    setState(() {
-      _isLogin = isLogin;
-    });
+  void isLogfedIn() {
+    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    log(_isLogin.toString());
     if (_isLogin) {
-      String? authToken = prefs.getString('token');
-      setState(() {
-        _authToken = authToken!;
-      });
+      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
     }
   }
 
@@ -97,7 +91,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   FutureBuilder<ProfileModel> _userInfoSection() {
     return FutureBuilder<ProfileModel>(
-        future: UserData.userProfile(_authToken),
+        future: UserData.userProfile(_authToken!, context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!;
@@ -117,7 +111,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   FutureBuilder<ProfileModel> _drawerHeaderSection() {
     return FutureBuilder<ProfileModel>(
-        future: UserData.userProfile(_authToken),
+        future: UserData.userProfile(_authToken!, context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!;
@@ -276,9 +270,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   void _logOut() async {
-    await _authProvider.logoutUser(_authToken).then((value) {
-      AuthService.clearSessionData();
-      AuthService.clearUserId();
+    final sharedInstance = Provider.of<AuthService>(context, listen: false);
+    await _authProvider.logoutUser(_authToken!).then((value) {
+      sharedInstance.clearSessionData();
+      sharedInstance.clearUserId();
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.home,

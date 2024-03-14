@@ -2,10 +2,11 @@ import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/bookmark_data.dart';
 import 'package:am_innnn/model/bookmark_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/view/bookmarks/widgets/bookmark_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import '../../data/user_data.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
@@ -20,13 +21,17 @@ class BookMarksScreen extends StatefulWidget {
 
 class _BookMarksScreenState extends State<BookMarksScreen> {
   bool _isLogin = false;
-  String _authToken = '';
+  String? _authToken = '';
   late Future<BookmarkModel> fetchAllBookMark;
   BookMarkDataStream bookMarkDataStream = BookMarkDataStream();
 
   @override
   void initState() {
-    isLoggedIn();
+    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    if (_isLogin) {
+      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+    }
+    // isLoggedIn();
     super.initState();
   }
 
@@ -35,21 +40,22 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     return fetchAllBookMark;
   }
 
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    setState(() {
-      _isLogin = isLogin;
-    });
-    if (_isLogin) {
-      String? authToken = prefs.getString('token');
-      bookMarkDataStream.fetchBookMarkStream(authToken);
-      setState(() {
-        _authToken = authToken!;
-      });
-    }
-  }
+  // Future<void> isLoggedIn() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // // Check if the session data exists
+  //   // bool isLogin = prefs.containsKey('token');
+  //   _isLogin = await AuthService.isLoggedIn();
+  //   // setState(() {
+  //   //   _isLogin = isLogin;
+  //   // });
+  //   if (_isLogin) {
+  //     String? authToken = prefs.getString('token');
+  //     bookMarkDataStream.fetchBookMarkStream(authToken);
+  //     setState(() {
+  //       _authToken = authToken!;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

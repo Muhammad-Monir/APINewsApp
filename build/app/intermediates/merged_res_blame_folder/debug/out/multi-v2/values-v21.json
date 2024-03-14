@@ -2,6 +2,9 @@
     "logs": [
         {
 <<<<<<< HEAD
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-32:/values-v21/values-v21.xml",
+=======
+<<<<<<< HEAD
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-37:/values-v21/values-v21.xml",
             "map": [
                 {
@@ -46,6 +49,7 @@
                     "source": "C:\\Users\\bdCalling\\.gradle\\caches\\transforms-3\\c4988ff80110f75080a936fc6f044848\\transformed\\core-1.10.1\\res\\values-v21\\values-v21.xml",
 =======
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-29:/values-v21/values-v21.xml",
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
             "map": [
                 {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\e562a79920a5a44353421bebd369138a\\transformed\\core-1.10.1\\res\\values-v21\\values-v21.xml",
@@ -59,12 +63,40 @@
                         "endOffsets": "168,232,299,363,479,605,731,859,1031,1383"
                     },
                     "to": {
+<<<<<<< HEAD
+                        "startLines": "2,3,4,5,6,7,14,18,22,25",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,173,237,304,368,484,941,1235,1530,1702",
+                        "endLines": "2,3,4,5,6,7,14,18,24,29",
+                        "endColumns": "117,63,66,63,115,125,125,127,12,12",
+                        "endOffsets": "168,232,299,363,479,605,1062,1358,1697,2049"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\4c7dbe5d5acb7d004fa0439dd46de0df\\transformed\\media-1.1.0\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "2,5,8,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,223,386,554",
+                        "endLines": "4,7,10,13",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "218,381,549,716"
+                    },
+                    "to": {
+                        "startLines": "8,11,15,19",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "610,778,1067,1363",
+                        "endLines": "10,13,17,21",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "773,936,1230,1525"
+=======
                         "startLines": "2,3,4,5,264,265,272,276,280,283",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
                         "startOffsets": "55,173,237,304,18655,18771,19228,19522,19817,19989",
                         "endLines": "2,3,4,5,264,265,272,276,282,287",
                         "endColumns": "117,63,66,63,115,125,125,127,12,12",
                         "endOffsets": "168,232,299,363,18766,18892,19349,19645,19984,20336"
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
                     }
                 }
             ]

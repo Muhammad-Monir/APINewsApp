@@ -1,15 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:am_innnn/model/user_profile_model.dart';
+import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../model/bookmark_model.dart';
 import 'dart:io';
 
 class UserData {
   // Get profile data
-  static Future<ProfileModel> userProfile(String authToken) async {
+  static Future<ProfileModel> userProfile(
+      String authToken, BuildContext context) async {
     try {
+      final sharedInstance = Provider.of<AuthService>(context, listen: false);
       final response = await http.get(
         Uri.parse(ApiUrl.newUserProfileUrl),
         headers: {
@@ -17,54 +22,27 @@ class UserData {
           'Authorization': 'Bearer $authToken'
         },
       );
-      // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        log(data.toString());
+        // log('id is : ${data["data"]["id"]}');
+        sharedInstance.saveUserId(data["data"]["id"]);
+        // int? id = await AuthService.getUserID();
+        // log('user id is : $id');
         return ProfileModel.fromJson(data);
       } else {
-        // If the request was unsuccessful, throw an error
         throw Exception('code  ${response.statusCode}');
       }
     } catch (error) {
-      // Handle errors, display an error message
       throw Exception('Exception : $error');
     }
   }
-
-  // Save user id
-  // static Future<void> getUserId(String authToken) async {
-  //   try {
-  //     final response = await http.get(
-  //       Uri.parse(ApiUrl.newUserProfileUrl),
-  //       headers:{
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer $authToken'
-  //       },
-  //     );
-  //     // Check if the request was successful (status code 200)
-  //     if (response.statusCode == 200) {
-  //       final Map<String, dynamic> data = json.decode(response.body);
-  //       log('inside getUserId');
-  //       log(data['data']['id']);
-  //       AuthService.saveUserId(data['data']['id']);
-  //       log(data.toString());
-  //     } else  {
-  //       // If the request was unsuccessful, throw an error
-  //       throw Exception('code  ${response.statusCode}');
-  //     }
-  //   } catch (error) {
-  //     // Handle errors, display an error message
-  //     throw Exception('Exception is : $error');
-  //   }
-  // }
 
   // Add to bookmark
   static Future<String> addBookMark(String? authToken, String newsId) async {
     try {
       final response = await http.get(
         Uri.parse('${ApiUrl.newAddBookMark}/$newsId'),
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -89,13 +67,12 @@ class UserData {
   }
 
   // Get All bookmark
-  static Future<BookmarkModel> fetchBookMark(
-      String? authToken) async {
+  static Future<BookmarkModel> fetchBookMark(String? authToken) async {
     try {
       log('fetchBookMark: $authToken');
       final response = await http.get(
         Uri.parse(ApiUrl.newAllBookMark),
-        headers:{
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'
         },
@@ -105,7 +82,7 @@ class UserData {
         final Map<String, dynamic> data = jsonDecode(response.body);
         log(data.toString());
         return BookmarkModel.fromJson(data);
-      } else  {
+      } else {
         throw Exception(response.statusCode);
       }
     } catch (error) {
@@ -151,7 +128,7 @@ class UserData {
       if (image.isNotEmpty) {
         final File imageFile = File(image);
         final http.MultipartFile imageMultipartFile =
-        await http.MultipartFile.fromPath('avatar', imageFile.path);
+            await http.MultipartFile.fromPath('avatar', imageFile.path);
         request.files.add(imageMultipartFile);
       }
 

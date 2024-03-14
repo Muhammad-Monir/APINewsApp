@@ -10,6 +10,7 @@ import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
 import '../../data/social_login_auth_data/facebook_auth_data.dart';
 import '../../route/routes_name.dart';
+import '../../services/notification_service.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -89,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Provider.of<AuthProvider>(context, listen: false)
                   .login(email, password, context)
                   .then((value) {
+                LocalNotificationService.getToken();
                 Navigator.pushNamedAndRemoveUntil(
                     context, RoutesName.home, (route) => false);
               });
@@ -146,10 +148,17 @@ class _LoginScreenState extends State<LoginScreen> {
               icon: 'google',
             ),
             PlatformButton(
+              icon: 'twitter',
+              onTap: () {
+                // SocialAuthData.signInWithTwitter();
+              },
+            ),
+            PlatformButton(
               onTap: () {
                 FacebookAuthData().signInWithFacebook().then((user) {
                   if (user != null) {
-                    ToastUtil.showLongToast('\nUser: ${user.user!.displayName}');
+                    ToastUtil.showLongToast(
+                        '\nUser: ${user.user!.displayName}');
                     ToastUtil.showLongToast('\nUser: ${user.user!.email}');
                     log('\nUser: ${user.user!.displayName}');
                     log('\nUserAdditionalInfo: ${user.user!.email}');
@@ -158,7 +167,6 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               icon: 'facebook',
             ),
-            const PlatformButton(icon: 'twitter'),
             const PlatformButton(icon: 'apple'),
           ],
         ),

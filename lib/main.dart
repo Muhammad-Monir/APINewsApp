@@ -8,13 +8,19 @@ import 'package:am_innnn/provider/obscure_provider.dart';
 import 'package:am_innnn/provider/timer_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/utils.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
+import 'services/notification_service.dart';
+
+Future<void> backgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +31,19 @@ void main() async {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
   ));
-  runApp(const MyApp());
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  LocalNotificationService.initialize();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  LocalNotificationService.getToken();
+  runApp(MyApp(
+    preferences: prefs,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final SharedPreferences preferences;
+  const MyApp({super.key, required this.preferences});
 
   // This widget is the root of your application.
   @override
@@ -45,6 +59,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        Provider(create: (_) => AuthService(preferences)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(

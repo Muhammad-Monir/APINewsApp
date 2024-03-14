@@ -12,10 +12,9 @@ import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../data/notification_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -35,8 +34,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Page Controller
   final PageController storyPageController = PageController();
-  final PagingController<int, Data> pagingController =
-      PagingController(firstPageKey: 1);
+  // final PagingController<int, Data> pagingController =
+  //     PagingController(firstPageKey: 1);
   // late PageController newsPageController;
 
   // API Property
@@ -48,16 +47,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late String searchText;
 
   // Check Property
-  bool _isLogin = false;
-  late String _authToken = '';
-  int? userId;
   bool isFav = false;
   bool _isRefresh = false;
 
   @override
   void initState() {
-    isLoggedIn();
     fetchStory = NewsData.fetchStory();
+
     super.initState();
   }
 
@@ -222,8 +218,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   // Story Screen Widget
+                  dev.log('my image is : ${index}' +
+                      data[index].images!.toString());
                   return StoryScreen(
-                      imageUrl: data[index].image ?? '',
+                      imageUrl: data[index].images!,
                       videoUrl: data[index].video ?? '');
                 });
           } else if (snapshot.hasError) {
@@ -349,22 +347,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       dev.log('Error during refresh: $error');
       setState(() {
         _isRefresh = false;
-      });
-    }
-  }
-
-  // Check Is Login or Not
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    setState(() {
-      _isLogin = isLogin;
-    });
-    if (_isLogin) {
-      String? authToken = prefs.getString('token');
-      setState(() {
-        _authToken = authToken!;
       });
     }
   }

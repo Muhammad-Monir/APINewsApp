@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:am_innnn/model/story_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
@@ -11,14 +12,14 @@ import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
-  final String? imageUrl;
+  final List<Images>? imageUrl;
   final String? videoUrl;
 
   const StoryScreen({super.key, this.imageUrl, this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
-    log('story screen image ${imageUrl!}');
+    log('story screen image ${imageUrl!.first.image}');
     log('story screen video ${videoUrl!}');
 
     return Scaffold(
@@ -44,7 +45,7 @@ class StoryScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Show Story Video
-            if (imageUrl == '')
+            if (imageUrl!.isEmpty)
               Expanded(
                 child: SizedBox(
                     width: double.infinity,
@@ -59,7 +60,7 @@ class StoryScreen extends StatelessWidget {
             if (videoUrl == '')
               SizedBox(
                 child: CachedNetworkImage(
-                  imageUrl: '${ApiUrl.imageBaseUrl}$imageUrl',
+                  imageUrl: '${ApiUrl.imageBaseUrl}${imageUrl!.first.image}',
                   // imageUrl: imageUrl!,
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
@@ -69,7 +70,7 @@ class StoryScreen extends StatelessWidget {
               ),
 
             // Show Story Image
-            if (videoUrl == '' && imageUrl == '')
+            if (videoUrl == '' && imageUrl!.isEmpty)
               const Center(
                 child: Text(
                   'Your text story',
@@ -96,12 +97,12 @@ class StoryScreen extends StatelessWidget {
       }
 
       // Video Share Part
-      else if (imageUrl == '') {
+      else if (imageUrl!.isEmpty) {
         await Share.share('${ApiUrl.imageBaseUrl}$videoUrl');
       }
 
       // Text Share Part
-      else if (imageUrl == '' && videoUrl == '') {
+      else if (imageUrl!.isEmpty && videoUrl == '') {
         await Share.share('Your text story');
       }
     } catch (e) {
