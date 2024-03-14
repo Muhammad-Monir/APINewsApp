@@ -107,7 +107,7 @@ class NewsData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load Story: ${response.statusCode}');

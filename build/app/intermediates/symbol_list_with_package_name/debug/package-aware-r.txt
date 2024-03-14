@@ -474,10 +474,6 @@ color material_grey_900
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
-<<<<<<< HEAD
-color primary_text_default_material_dark
-color secondary_text_default_material_dark
-=======
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -578,7 +574,6 @@ dimen abc_text_size_subhead_material
 dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 dimen browser_actions_context_menu_max_width
 dimen browser_actions_context_menu_min_padding
 dimen cardview_compat_inset_shadow
@@ -635,8 +630,6 @@ dimen subtitle_corner_radius
 dimen subtitle_outline_width
 dimen subtitle_shadow_offset
 dimen subtitle_shadow_radius
-<<<<<<< HEAD
-=======
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -762,7 +755,6 @@ drawable com_facebook_tooltip_blue_background
 drawable com_facebook_tooltip_blue_bottomnub
 drawable com_facebook_tooltip_blue_topnub
 drawable com_facebook_tooltip_blue_xout
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -814,7 +806,6 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable toast_bg
-<<<<<<< HEAD
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
@@ -823,8 +814,6 @@ id FUNCTION
 id META
 id SHIFT
 id SYM
-=======
->>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -859,8 +848,6 @@ id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
 id action0
-<<<<<<< HEAD
-=======
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -868,7 +855,6 @@ id action_bar_root
 id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 id action_container
 id action_context_bar
 id action_divider
@@ -900,9 +886,6 @@ id browser_actions_menu_item_icon
 id browser_actions_menu_item_text
 id browser_actions_menu_items
 id browser_actions_menu_view
-<<<<<<< HEAD
-id cancel_action
-=======
 id button
 id buttonPanel
 id cancel_action
@@ -912,7 +895,6 @@ id center_horizontal
 id center_vertical
 id checkbox
 id checked
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 id chronometer
 id clip_horizontal
 id clip_vertical
@@ -936,9 +918,6 @@ id dark
 id decor_content_parent
 id default_activity_button
 id dialog_button
-<<<<<<< HEAD
-id end_padder
-=======
 id disableHome
 id display_always
 id edit_query
@@ -949,7 +928,6 @@ id expanded_menu
 id fill
 id fill_horizontal
 id fill_vertical
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 id forever
 id fragment_container_view_tag
 id group_divider
@@ -973,15 +951,12 @@ id list_item
 id locale
 id ltr
 id media_actions
-<<<<<<< HEAD
-=======
 id message
 id messenger_send_button
 id middle
 id multiply
 id never
 id never_display
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 id none
 id normal
 id notification_background
@@ -1028,15 +1003,11 @@ id src_atop
 id src_in
 id src_over
 id standard
-<<<<<<< HEAD
-id status_bar_latest_event_content
-=======
 id start
 id status_bar_latest_event_content
 id submenuarrow
 id submit_area
 id tabMode
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -1071,16 +1042,12 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible_removing_fragment_view_tag
 id wide
-<<<<<<< HEAD
-integer cancel_button_image_alpha
-=======
 id withText
 id wrap_content
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
 integer config_tooltipAnimTime
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 integer google_play_services_version
 integer status_bar_notification_info_maxnum
 interpolator btn_checkbox_checked_mtrl_animation_interpolator_0
@@ -1120,15 +1087,12 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
-<<<<<<< HEAD
 layout chrome_custom_tab
-=======
 layout com_facebook_activity_layout
 layout com_facebook_device_auth_dialog_fragment
 layout com_facebook_login_fragment
 layout com_facebook_smart_device_dialog_fragment
 layout com_facebook_tooltip_bubble
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 layout custom_dialog
 layout messenger_button_send_blue_large
 layout messenger_button_send_blue_round
@@ -1151,13 +1115,10 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
-<<<<<<< HEAD
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
-=======
->>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
 layout toast_custom
 mipmap ic_launcher
 raw firebase_common_keep
@@ -1253,13 +1214,10 @@ string facebook_client_token
 string fallback_menu_item_copy_link
 string fallback_menu_item_open_in_browser
 string fallback_menu_item_share_link
-<<<<<<< HEAD
-string fcm_fallback_notification_channel_label
-=======
 string fb_login_protocol_scheme
+string fcm_fallback_notification_channel_label
 string messenger_send_button_text
 string search_menu_title
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 string status_bar_notification_info_overflow
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
@@ -1527,8 +1485,6 @@ style TextAppearance_Compat_Notification_Time
 style TextAppearance_Compat_Notification_Time_Media
 style TextAppearance_Compat_Notification_Title
 style TextAppearance_Compat_Notification_Title_Media
-<<<<<<< HEAD
-=======
 style TextAppearance_Widget_AppCompat_ExpandedMenu_Item
 style TextAppearance_Widget_AppCompat_Toolbar_Subtitle
 style TextAppearance_Widget_AppCompat_Toolbar_Title
@@ -1635,7 +1591,6 @@ style Widget_AppCompat_TextView
 style Widget_AppCompat_TextView_SpinnerItem
 style Widget_AppCompat_Toolbar
 style Widget_AppCompat_Toolbar_Button_Navigation
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 style Widget_Compat_NotificationActionContainer
 style Widget_Compat_NotificationActionText
 style Widget_Support_CoordinatorLayout

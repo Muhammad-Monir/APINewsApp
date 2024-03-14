@@ -42,8 +42,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final SharedPreferences preferences;
-  const MyApp({super.key, required this.preferences});
+  final SharedPreferences? preferences;
+  const MyApp({super.key, this.preferences});
 
   // This widget is the root of your application.
   @override
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-        Provider(create: (_) => AuthService(preferences)),
+        Provider(create: (_) => AuthService(preferences!)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(

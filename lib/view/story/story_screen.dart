@@ -3,25 +3,24 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:am_innnn/model/story_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
 class StoryScreen extends StatelessWidget {
-  final List<Images>? imageUrl;
+  final List<Images>? images;
   final String? videoUrl;
 
-  const StoryScreen({super.key, this.imageUrl, this.videoUrl});
+  const StoryScreen({super.key, this.images, this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
-    log('story screen image ${imageUrl!.first.image}');
-    log('story screen video ${videoUrl!}');
-
+    // log('story screen video ${videoUrl!}');
+    final hasImages = images != null && images!.isNotEmpty;
     return Scaffold(
         backgroundColor: const Color(0xffF6F5F3),
         // Share Icon Part
@@ -45,32 +44,42 @@ class StoryScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Show Story Video
-            if (imageUrl!.isEmpty)
+            if (!hasImages && videoUrl != null && videoUrl!.isNotEmpty)
               Expanded(
                 child: SizedBox(
                     width: double.infinity,
                     child: AspectRatio(
-                        aspectRatio: 2,
+                        aspectRatio: 16 / 9,
                         child: MyPlayer(
-                          t: '${ApiUrl.imageBaseUrl}$videoUrl',
+                          t: 'http://192.168.40.38/Am_inn/public/$videoUrl',
                         ))),
               ),
 
             // Show Story Image
-            if (videoUrl == '')
+            if (hasImages)
               SizedBox(
-                child: CachedNetworkImage(
-                  imageUrl: '${ApiUrl.imageBaseUrl}${imageUrl!.first.image}',
-                  // imageUrl: imageUrl!,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Image.network(ApiUrl.imageNotFound),
-                ),
+                height: Utils.scrHeight * .8,
+                // width: double.infinity,
+                child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: images!.length,
+                    itemBuilder: (context, index) {
+                      log(images![index].image!);
+                      return CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl:
+                            'http://192.168.40.38/Am_inn/public/${images![index].image}',
+                        // imageUrl: imageUrl!,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Image.network(ApiUrl.imageNotFound),
+                      );
+                    }),
               ),
 
             // Show Story Image
-            if (videoUrl == '' && imageUrl!.isEmpty)
+            if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
               const Center(
                 child: Text(
                   'Your text story',
@@ -83,10 +92,11 @@ class StoryScreen extends StatelessWidget {
 
   Future<void> shareContent(BuildContext context) async {
     try {
+      final hasImages = images != null && images!.isNotEmpty;
       // Image Share Part
-      if (videoUrl == '') {
-        final File? cachedImage =
-            await downloadImage('${ApiUrl.imageBaseUrl}$imageUrl');
+      if (hasImages) {
+        final File? cachedImage = await downloadImage(
+            'http://192.168.40.38/Am_inn/public/${images!.first.image}');
 
         if (cachedImage != null) {
           // ignore: deprecated_member_use
@@ -97,12 +107,12 @@ class StoryScreen extends StatelessWidget {
       }
 
       // Video Share Part
-      else if (imageUrl!.isEmpty) {
+      else if (!hasImages && (videoUrl != null && videoUrl!.isNotEmpty)) {
         await Share.share('${ApiUrl.imageBaseUrl}$videoUrl');
       }
 
       // Text Share Part
-      else if (imageUrl!.isEmpty && videoUrl == '') {
+      else if (!hasImages && (videoUrl == null || videoUrl!.isEmpty)) {
         await Share.share('Your text story');
       }
     } catch (e) {

@@ -14,7 +14,6 @@ import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../data/notification_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
@@ -218,10 +217,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   // Story Screen Widget
-                  dev.log('my image is : ${index}' +
-                      data[index].images!.toString());
                   return StoryScreen(
-                      imageUrl: data[index].images!,
+                      images: data[index].images,
                       videoUrl: data[index].video ?? '');
                 });
           } else if (snapshot.hasError) {

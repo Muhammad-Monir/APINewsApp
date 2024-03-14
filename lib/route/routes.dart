@@ -1,7 +1,6 @@
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
-import 'package:am_innnn/view/home/new_home_screen.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
@@ -114,7 +113,7 @@ class Routes {
         final List<Images>? imageUrl = settings.arguments as List<Images>?;
         return MaterialPageRoute(
           builder: (context) => StoryScreen(
-            imageUrl: imageUrl!,
+            images: imageUrl,
           ),
         );
 
