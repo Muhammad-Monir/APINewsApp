@@ -90,6 +90,7 @@ MERGED from [:permission_handler_android] D:\newsapp\APINewsApp\build\permission
 MERGED from [:wakelock_plus] D:\newsapp\APINewsApp\build\wakelock_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-37:12
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:fluttertoast] D:\newsapp\APINewsApp\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.android:facebook-android-sdk:16.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\5986d2c1688e560e9cd87bb098ae155e\transformed\jetified-facebook-android-sdk-16.3.0\AndroidManifest.xml:9:1-19:12
 MERGED from [com.facebook.android:facebook-gamingservices:16.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\5253b34755de87e9b7b795ab1bd54922\transformed\jetified-facebook-gamingservices-16.3.0\AndroidManifest.xml:9:1-19:12
@@ -247,6 +248,8 @@ MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\m
 MERGED from [:share_plus] D:\newsapp\APINewsApp\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:package_info_plus] D:\newsapp\APINewsApp\build\package_info_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:fluttertoast] D:\newsapp\APINewsApp\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:fluttertoast] D:\newsapp\APINewsApp\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:video_player_android] D:\newsapp\APINewsApp\build\video_player_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.android:facebook-android-sdk:16.3.0] C:\Users\bdCalling\.gradle\caches\transforms-3\5986d2c1688e560e9cd87bb098ae155e\transformed\jetified-facebook-android-sdk-16.3.0\AndroidManifest.xml:12:5-14:41
