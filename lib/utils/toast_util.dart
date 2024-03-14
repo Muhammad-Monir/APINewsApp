@@ -1,3 +1,4 @@
+
 import 'package:fluttertoast/fluttertoast.dart';
 
 final class ToastUtil {

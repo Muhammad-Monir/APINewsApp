@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
+import '../../data/social_login_auth_data/facebook_auth_data.dart';
 import '../../route/routes_name.dart';
 import '../../services/notification_service.dart';
 import '../../utils/color.dart';
@@ -145,14 +147,25 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               icon: 'google',
             ),
-            const PlatformButton(
-              icon: 'facebook',
-            ),
             PlatformButton(
               icon: 'twitter',
               onTap: () {
                 // SocialAuthData.signInWithTwitter();
               },
+            ),
+            PlatformButton(
+              onTap: () {
+                FacebookAuthData().signInWithFacebook().then((user) {
+                  if (user != null) {
+                    ToastUtil.showLongToast(
+                        '\nUser: ${user.user!.displayName}');
+                    ToastUtil.showLongToast('\nUser: ${user.user!.email}');
+                    log('\nUser: ${user.user!.displayName}');
+                    log('\nUserAdditionalInfo: ${user.user!.email}');
+                  }
+                });
+              },
+              icon: 'facebook',
             ),
             const PlatformButton(icon: 'apple'),
           ],

@@ -1,10 +1,24 @@
+<<<<<<< HEAD
 #Thu Mar 14 10:28:57 BDT 2024
+=======
+<<<<<<< HEAD
+#Thu Mar 14 09:17:23 BDT 2024
+base.0=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.4=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.5=D\:\\newsapp\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+=======
+#Tue Mar 12 17:45:32 BDT 2024
+>>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
 base.0=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.3=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
 base.4=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 base.5=D\:\\APINewsApp\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+>>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=0/classes.dex
