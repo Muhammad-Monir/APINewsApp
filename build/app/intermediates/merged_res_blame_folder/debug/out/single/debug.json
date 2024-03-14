@@ -1,61 +1,26 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/mipmap-hdpi/ic_launcher.png"
-=======
-<<<<<<< HEAD
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/drawable-v21_launch_background.xml.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/drawable-v21/launch_background.xml"
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-39:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-33:/mipmap-xxhdpi/ic_launcher.png"
-=======
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/drawable-v21_launch_background.xml.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-25:/drawable-v21/launch_background.xml"
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
-    },
-    {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
-<<<<<<< HEAD
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-34:/drawable-v21_launch_background.xml.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-28:/drawable-v21/launch_background.xml"
-=======
-        "merged": "com.quikkbyte.quikkbyte.app-merged_res-31:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.quikkbyte.quikkbyte.app-main-25:/mipmap-xxhdpi/ic_launcher.png"
->>>>>>> 77d5808c26e23994afbf5e88b58b2906185eb4b9
->>>>>>> 16f35db66c3abd373fb9663682fa7d9cac6513b9
+        "merged": "com.quikkbyte.quikkbyte.app-merged_res-51:/drawable-v21_launch_background.xml.flat",
+        "source": "com.quikkbyte.quikkbyte.app-main-45:/drawable-v21/launch_background.xml"
     }
 ]
