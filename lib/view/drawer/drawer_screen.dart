@@ -1,6 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:async';
 import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
@@ -12,11 +10,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../common_widgets/action_button.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
-import '../../services/notification_service.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -134,14 +130,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
       height: Utils.scrHeight * .096,
       width: Utils.scrHeight * .096,
       child: ClipOval(
-          //   child: Image.network(
-          //     '${ApiUrl.imageBaseUrl}${data.data!.avatar}',
-          //     fit: BoxFit.cover,
-          //     errorBuilder: (context, error, stackTrace) {
-          //       return Utils.showImage('profile_image');
-          //     },
-          //   )),
-
           child: CachedNetworkImage(
         fit: BoxFit.cover,
         fadeInDuration: const Duration(seconds: 2),

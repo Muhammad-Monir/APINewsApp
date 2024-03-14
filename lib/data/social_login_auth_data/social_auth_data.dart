@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 import '../../utils/toast_util.dart';
@@ -66,7 +65,7 @@ class SocialAuthData {
             secret: authResult.authTokenSecret!);
         await _auth.signInWithCredential(credential);
 
-        final userDetails = authResult.user;
+        // final userDetails = authResult.user;
         // save all the data
         // final name = userDetails!.name;
         // final email = _auth.currentUser!.email;

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/utils/toast_util.dart';

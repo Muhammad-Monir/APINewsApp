@@ -5,6 +5,8 @@ class ApiUrl {
   static String defaultProfile =
       'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg';
 
+  static String videoUrl =
+      'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
   // static String newsBaseUrl = 'https://newsapi.org/v2';
   // static String allNewsCategoryUrl =
   //     '$newsBaseUrl/top-headlines?language=en&apiKey=$apiKey';
