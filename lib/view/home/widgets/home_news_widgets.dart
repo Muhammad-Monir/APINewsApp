@@ -1,13 +1,12 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
-
-import 'dart:async';
 import 'dart:developer';
+import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
@@ -47,7 +46,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   bool _isLogin = false;
-  late String _authToken = '';
+  late String? _authToken = '';
   int? userId;
   bool isFav = false;
   late BannerAd _bannerAd;
@@ -62,18 +61,10 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   // Check Is Login or Not
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    bool isLogin = prefs.containsKey('token');
-    setState(() {
-      _isLogin = isLogin;
-    });
+  void isLoggedIn() {
+    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
     if (_isLogin) {
-      String? authToken = prefs.getString('token');
-      setState(() {
-        _authToken = authToken!;
-      });
+      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
     }
   }
 
@@ -102,6 +93,8 @@ class _NewsScreenState extends State<NewsScreen> {
           );
         }),
       ),
+
+      // Banner Section
       floatingActionButton: _isAdLoaded
           ? SizedBox(
               height: _bannerAd.size.height.toDouble(),
@@ -113,24 +106,24 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   // Showing Floating Add Banner
-  Padding _floatingActionButton() {
-    return Padding(
-      padding: EdgeInsets.only(
-          right: Utils.scrHeight * .054,
-          left: Utils.scrHeight * .054,
-          bottom: Utils.scrHeight * .01),
-      child: GestureDetector(
-        child: SizedBox(
-          width: double.infinity,
-          height: Utils.scrHeight * .054,
-          child: Image.asset(
-            'assets/images/floating_add.png',
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
-  }
+  // Padding _floatingActionButton() {
+  //   return Padding(
+  //     padding: EdgeInsets.only(
+  //         right: Utils.scrHeight * .054,
+  //         left: Utils.scrHeight * .054,
+  //         bottom: Utils.scrHeight * .01),
+  //     child: GestureDetector(
+  //       child: SizedBox(
+  //         width: double.infinity,
+  //         height: Utils.scrHeight * .054,
+  //         child: Image.asset(
+  //           'assets/images/floating_add.png',
+  //           fit: BoxFit.cover,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   // Share Content Function
   void shareContent(BuildContext context) async {
@@ -411,104 +404,5 @@ class _NewsScreenState extends State<NewsScreen> {
       request: const AdRequest(),
     );
     _bannerAd.load();
-  }
-}
-
-class HomeTabBar extends StatelessWidget {
-  const HomeTabBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
-        children: [
-          Utils.showSvgPicture(
-            'home',
-            height: Utils.scrHeight * .022,
-            width: Utils.scrHeight * .022,
-          ),
-          SizedBox(width: Utils.scrHeight * .006),
-          Text('Home', style: regularTS(homeTabTextColor, fontSize: 15)),
-          SizedBox(width: Utils.scrHeight * .013),
-          Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-        ],
-      ),
-    );
-  }
-}
-
-class RefreshTabBar extends StatelessWidget {
-  const RefreshTabBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        child: Row(
-          children: [
-            Utils.showSvgPicture(
-              'refresh',
-              height: Utils.scrHeight * .022,
-              width: Utils.scrHeight * .022,
-            ),
-            SizedBox(width: Utils.scrHeight * .006),
-            Text('Refresh', style: regularTS(homeTabTextColor, fontSize: 15)),
-            SizedBox(width: Utils.scrHeight * .013),
-            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class UnreadTabBar extends StatelessWidget {
-  const UnreadTabBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        child: Row(
-          children: [
-            Utils.showSvgPicture(
-              'unread',
-              height: Utils.scrHeight * .022,
-              width: Utils.scrHeight * .022,
-            ),
-            SizedBox(width: Utils.scrHeight * .006),
-            Text('Unread', style: regularTS(homeTabTextColor, fontSize: 15)),
-            SizedBox(width: Utils.scrHeight * .013),
-            Text('|', style: regularTS(tabBarDividerColor, fontSize: 14))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class StartTabBar extends StatelessWidget {
-  const StartTabBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        child: Row(
-          children: [
-            Utils.showSvgPicture(
-              'start',
-              height: Utils.scrHeight * .022,
-              width: Utils.scrHeight * .022,
-            ),
-            SizedBox(width: Utils.scrHeight * .006),
-            Text('Start', style: regularTS(homeTabTextColor, fontSize: 15)),
-            SizedBox(width: Utils.scrHeight * .013),
-          ],
-        ),
-      ),
-    );
   }
 }

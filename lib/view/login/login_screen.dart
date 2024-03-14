@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
             PlatformButton(
               icon: 'twitter',
               onTap: () {
-                // SocialAuthData.signInWithTwitter();
+                SocialAuthData.signInWithTwitter();
               },
             ),
             PlatformButton(
