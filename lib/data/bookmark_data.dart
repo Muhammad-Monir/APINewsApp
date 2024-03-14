@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import '../model/bookmark_model.dart';
 import '../services/base_stream_service.dart';
 import 'package:http/http.dart' as http;
@@ -19,10 +20,12 @@ class BookMarkDataStream extends MyStreamBase<BookmarkModel> {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
         bookmarkModel = BookmarkModel.fromJson(data);
       }
       return handleSuccessWithReturn(bookmarkModel!);
     } catch (error) {
+      log(error.toString());
       return handleErrorWithReturn(error);
     }
   }

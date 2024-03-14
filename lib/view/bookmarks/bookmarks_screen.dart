@@ -31,7 +31,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     if (_isLogin) {
       _authToken = Provider.of<AuthService>(context, listen: false).getToken();
     }
-    // isLoggedIn();
+    bookMarkDataStream.fetchBookMarkStream(_authToken);
     super.initState();
   }
 

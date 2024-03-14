@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     fetchStory = NewsData.fetchStory();
-
     super.initState();
   }
 
@@ -86,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         builder: (BuildContext context) {
           return Dialog(
               backgroundColor: Colors.transparent, // Optional customization
-              // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
               child: childBuilder(context));
         });
   }
@@ -135,13 +133,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         Scaffold.of(context).openDrawer(),
                                     startOnTap: () {
                                       dev.log('startOnTap');
-                                      // newsPageController.animateToPage(0,
-                                      //     duration:
-                                      //         const Duration(milliseconds: 500),
-                                      //     curve: Curves.easeInOut);
+                                      _refreshData();
                                     },
                                     refreshOnTap: () {
-                                      dev.log('refresh');
                                       _refreshData();
                                     }))
                             : const SizedBox(),
@@ -161,7 +155,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // News Screen Design
   NewsScreen screenDesign(NewesData data) {
-    // dev.log(data.id.toString());
     return NewsScreen(
         category: data.category!,
         newsId: data.id!,

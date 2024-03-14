@@ -51,12 +51,12 @@ class SocialAuthData {
   //   }
   // }
 
-  final TwitterLogin twitterLogin = TwitterLogin(
+  static final TwitterLogin twitterLogin = TwitterLogin(
       apiKey: 'f5sqyyJGNPQIYdKvHcDPFXX6G',
       apiSecretKey: 'N52pPIpI0zE1xAswBvNpAmE4E1UQjsN2OnDUgsNLjCd1sVTITt',
       redirectURI: '');
 
-  Future signInWithTwitter() async {
+  static Future signInWithTwitter() async {
     final authResult = await twitterLogin.login();
     if (authResult.status == TwitterLoginStatus.loggedIn) {
       try {
@@ -65,7 +65,8 @@ class SocialAuthData {
             secret: authResult.authTokenSecret!);
         await _auth.signInWithCredential(credential);
 
-        // final userDetails = authResult.user;
+        final userDetails = authResult.user;
+        ToastUtil.showShortToast(userDetails!.name);
         // save all the data
         // final name = userDetails!.name;
         // final email = _auth.currentUser!.email;
