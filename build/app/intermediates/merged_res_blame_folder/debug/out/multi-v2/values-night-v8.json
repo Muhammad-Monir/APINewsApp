@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-42:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-49:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\b58411815111b5d2d15e364af64810cc\\transformed\\appcompat-1.1.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\5e16742bf361cf3d097104f64ddceab0\\transformed\\appcompat-1.2.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

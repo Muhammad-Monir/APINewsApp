@@ -42,6 +42,7 @@ class ApiUrl {
   static String newResetPasswordUrl = '$newBaseUrl/reset-password';
   static String newVerifyAccountUrl = '$newBaseUrl/account-verify';
   static String newUserProfileUrl = '$newBaseUrl/profile/details';
+
   // static String newStoryUrl = "$newBaseUrl/story-board";
   static String newAddBookMark = "$newBaseUrl/bookmark_news/add";
   static String newAllBookMark = "$newBaseUrl/bookmark_news/";
@@ -51,4 +52,6 @@ class ApiUrl {
 
   static String newStoryUrl =
       "http://192.168.40.38/Am_inn/public/api/story-boards";
+  static String firebaseTokenUrl =
+      "http://192.168.40.38/firebase/token/get";
 }
