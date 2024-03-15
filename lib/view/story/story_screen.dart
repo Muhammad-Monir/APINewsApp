@@ -49,7 +49,7 @@ class StoryScreen extends StatelessWidget {
                 child: SizedBox(
                     width: double.infinity,
                     child: AspectRatio(
-                        aspectRatio: 16 / 9,
+                        aspectRatio: 1,
                         child: MyPlayer(
                           t: 'http://192.168.40.38/Am_inn/public/$videoUrl',
                         ))),
@@ -57,25 +57,27 @@ class StoryScreen extends StatelessWidget {
 
             // Show Story Image
             if (hasImages)
-              SizedBox(
-                height: Utils.scrHeight * .8,
-                // width: double.infinity,
-                child: PageView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: images!.length,
-                    itemBuilder: (context, index) {
-                      log(images![index].image!);
-                      return CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl:
-                            'http://192.168.40.38/Am_inn/public/${images![index].image}',
-                        // imageUrl: imageUrl!,
-                        placeholder: (context, url) =>
-                            const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            Image.network(ApiUrl.imageNotFound),
-                      );
-                    }),
+              Expanded(
+                child: SizedBox(
+                  // height: Utils.scrHeight * .8,
+                  // width: double.infinity,
+                  child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: images!.length,
+                      itemBuilder: (context, index) {
+                        log(images![index].image!);
+                        return CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl:
+                              'http://192.168.40.38/Am_inn/public/${images![index].image}',
+                          // imageUrl: imageUrl!,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              Image.network(ApiUrl.imageNotFound),
+                        );
+                      }),
+                ),
               ),
 
             // Show Story Image
