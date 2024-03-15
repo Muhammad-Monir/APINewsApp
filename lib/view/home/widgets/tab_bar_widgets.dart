@@ -7,33 +7,34 @@ class CustomTabBar extends StatelessWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
   final VoidCallback? refreshOnTap;
+
   const CustomTabBar({
     super.key,
     this.startOnTap,
     this.homeOnTap,
     this.refreshOnTap,
-    
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
         horizontal: Utils.scrHeight * .024,
+        vertical: Utils.scrHeight * .014,
       ),
       color: Colors.white,
-      height: Utils.scrHeight * .09,
+      height: Utils.scrHeight * .1,
       child: Column(
         children: [
           SizedBox(height: Utils.scrHeight * .045),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(
-                  onTap: homeOnTap, child: const HomeTabBar()),
+              GestureDetector(onTap: homeOnTap, child: const HomeTabBar()),
               GestureDetector(
                   onTap: refreshOnTap, child: const RefreshTabBar()),
-              GestureDetector(
-                  onTap: startOnTap, child: const StartTabBar()),
+              GestureDetector(onTap: startOnTap, child: const StartTabBar()),
             ],
           ),
         ],

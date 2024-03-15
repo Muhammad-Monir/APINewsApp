@@ -102,15 +102,14 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
 
         // Banner Section
-        floatingActionButton: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .035),
-          child: _isAdLoaded
-              ? SizedBox(
-                  height: _bannerAd.size.height.toDouble(),
-                  width: _bannerAd.size.width.toDouble(),
-                  child: AdWidget(ad: _bannerAd..load()))
-              : const SizedBox(),
-        ));
+        floatingActionButton: Align(
+          alignment: Alignment.bottomCenter,
+            child: _isAdLoaded
+                ? SizedBox(
+                    height: _bannerAd.size.height.toDouble(),
+                    width: _bannerAd.size.width.toDouble(),
+                    child: AdWidget(ad: _bannerAd..load()))
+                : const SizedBox()));
   }
 
   // Showing Floating Add Banner
