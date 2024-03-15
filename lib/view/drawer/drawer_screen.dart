@@ -66,7 +66,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   left: Utils.scrHeight * .12,
                   bottom: -Utils.scrHeight * .045,
                   child: _isLogin
-                      ? _drawerHeaderSection()
+                      ? Center(child: _drawerHeaderSection())
                       : SizedBox(
                           child: Utils.showImage('profile_image',
                               height: Utils.scrHeight * .096,
