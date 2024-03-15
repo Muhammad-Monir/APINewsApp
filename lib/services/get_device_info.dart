@@ -13,12 +13,11 @@ class GetDeviceInfo {
         String deviceID = androidInfo.id;
         log("device id is: $deviceID");
         return deviceID;
+      } else if (Platform.isIOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        String deviceID = iosInfo.model;
+        return deviceID;
       }
-      // else if (Platform.isIOS) {
-      //   IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-      //   String deviceID = await iosInfo.data;
-      //   return deviceID;
-      // }
     } catch (e) {
       ('Failed to get device info: $e');
     }

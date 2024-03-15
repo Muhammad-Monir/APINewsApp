@@ -337,7 +337,7 @@ class _NewsScreenState extends State<NewsScreen> {
       height: Utils.scrHeight * .09,
       child: Column(
         children: [
-          SizedBox(height: Utils.scrHeight * .045),
+          SizedBox(height: Utils.scrHeight * .05),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
