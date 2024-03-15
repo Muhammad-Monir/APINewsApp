@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Or Login Other Platform
-            _buildLoginOtherPlatform(),
+            // _buildLoginOtherPlatform(),
 
             // Create Account Part
             _buildRegisterPart()

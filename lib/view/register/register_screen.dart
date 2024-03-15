@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Register Other Platform
-            _buildRegisterOtherPlatform(),
+            // _buildRegisterOtherPlatform(),
           ],
         ),
       ),
