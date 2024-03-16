@@ -114,7 +114,9 @@ class LocalNotificationService {
       log(deviceId.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       bool isLoggedIn = AuthService(prefs).isLoggedIn();
+      log(AuthService(prefs).isLoggedIn().toString());
       if (isLoggedIn) {
+        log(AuthService(prefs).getUserID().toString());
         NotificationData.storeNotification(token, deviceId.toString(),
             userId: AuthService(prefs).getUserID().toString(),
             isActive: activeStatus);

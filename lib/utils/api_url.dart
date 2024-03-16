@@ -53,5 +53,5 @@ class ApiUrl {
   static String newStoryUrl =
       "http://192.168.40.38/Am_inn/public/api/story-boards";
   static String firebaseTokenUrl =
-      "http://192.168.40.38/firebase/token/get";
+      "192.168.40.38/Am_inn/public/api/firebase/token/get";
 }

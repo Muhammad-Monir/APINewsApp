@@ -77,39 +77,39 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GestureDetector(
-          // onTap: () {
-          //   log('barsVisibility ontap');
-          //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
-          //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-          //     Timer(const Duration(seconds: 3), () {
-          //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
-          //     });
-          //   }
-          // },
-          child:
-              Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
-            return Column(
-              children: [
-                // Top Banner Image
-                _imageBanner(context),
+      body: GestureDetector(
+        // onTap: () {
+        //   log('barsVisibility ontap');
+        //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
+        //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
+        //     Timer(const Duration(seconds: 3), () {
+        //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
+        //     });
+        //   }
+        // },
+        child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
+          return Column(
+            children: [
+              // Top Banner Image
+              _imageBanner(context),
 
-                // News Section
-                _newsSection(fontSize)
-              ],
-            );
-          }),
-        ),
+              // News Section
+              _newsSection(fontSize)
+            ],
+          );
+        }),
+      ),
 
-        // Banner Section
-        floatingActionButton: Align(
-          alignment: Alignment.bottomCenter,
-            child: _isAdLoaded
-                ? SizedBox(
-                    height: _bannerAd.size.height.toDouble(),
-                    width: _bannerAd.size.width.toDouble(),
-                    child: AdWidget(ad: _bannerAd..load()))
-                : const SizedBox()));
+      // Banner Section
+      // floatingActionButton: Align(
+      //   alignment: Alignment.bottomCenter,
+      //     child: _isAdLoaded
+      //         ? SizedBox(
+      //             height: _bannerAd.size.height.toDouble(),
+      //             width: _bannerAd.size.width.toDouble(),
+      //             child: AdWidget(ad: _bannerAd..load()))
+      //         : const SizedBox())
+    );
   }
 
   // Showing Floating Add Banner

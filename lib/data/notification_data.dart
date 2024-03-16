@@ -17,7 +17,7 @@ class NotificationData {
             })
           : jsonEncode(
               <String, dynamic>{'token': fcmToken, 'device_id': deviceId});
-      log(body.toString());
+      log("body to string : ${body.toString()}");
       final response = await http.post(Uri.parse(ApiUrl.storeNotification),
           headers: {
             'Content-Type': 'application/json',
