@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:am_innnn/services/notification_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -24,6 +25,7 @@ class NotificationProvider with ChangeNotifier {
 
   void toggleSwitch() {
     _isSwitchToggled = !_isSwitchToggled;
+    LocalNotificationService.getToken(isActive: _isSwitchToggled);
     // Save to shared preferences
     _saveSwitchToggledToLocal();
     // Other logic related to switch toggling
@@ -43,6 +45,7 @@ class NotificationProvider with ChangeNotifier {
         final responseData = jsonDecode(response.body);
         final isActive = responseData['data']['is_active'] == '1';
         _isSwitchToggled = !isActive; // Toggle the value
+        log(isActive.toString());
         await _saveSwitchToggledToLocal();
         notifyListeners();
       } else {
