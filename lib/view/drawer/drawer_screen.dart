@@ -63,7 +63,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
               // Profile Image Section
               Positioned(
-                  left: Utils.scrHeight * .12,
+                  left: 110,
                   bottom: -Utils.scrHeight * .045,
                   child: _isLogin
                       ? Center(child: _drawerHeaderSection())

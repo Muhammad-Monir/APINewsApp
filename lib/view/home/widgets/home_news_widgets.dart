@@ -77,39 +77,37 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        // onTap: () {
-        //   log('barsVisibility ontap');
-        //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
-        //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-        //     Timer(const Duration(seconds: 3), () {
-        //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
-        //     });
-        //   }
-        // },
-        child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
-          return Column(
-            children: [
-              // Top Banner Image
-              _imageBanner(context),
+        body: GestureDetector(
+          // onTap: () {
+          //   log('barsVisibility ontap');
+          //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
+          //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
+          //     Timer(const Duration(seconds: 3), () {
+          //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
+          //     });
+          //   }
+          // },
+          child:
+              Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
+            return Column(
+              children: [
+                // Top Banner Image
+                _imageBanner(context),
 
-              // News Section
-              _newsSection(fontSize)
-            ],
-          );
-        }),
-      ),
-
-      // Banner Section
-      // floatingActionButton: Align(
-      //   alignment: Alignment.bottomCenter,
-      //     child: _isAdLoaded
-      //         ? SizedBox(
-      //             height: _bannerAd.size.height.toDouble(),
-      //             width: _bannerAd.size.width.toDouble(),
-      //             child: AdWidget(ad: _bannerAd..load()))
-      //         : const SizedBox())
-    );
+                // News Section
+                _newsSection(fontSize)
+              ],
+            );
+          }),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        // Banner Section
+        floatingActionButton: _isAdLoaded
+            ? SizedBox(
+                height: _bannerAd.size.height.toDouble(),
+                width: _bannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bannerAd..load()))
+            : const SizedBox());
   }
 
   // Showing Floating Add Banner
@@ -148,33 +146,37 @@ class _NewsScreenState extends State<NewsScreen> {
         vertical: Utils.scrHeight * .02,
         horizontal: Utils.scrHeight * .024,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: Utils.scrHeight * .027),
-          SizedBox(
-            // width: Utils.scrHeight * .342,
-            child: Text(
-              widget.newsTitle,
-              style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
-            ),
+      child: newsBody(fontSize),
+    );
+  }
+
+  Column newsBody(FontSizeProvider fontSize) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: Utils.scrHeight * .027),
+        SizedBox(
+          // width: Utils.scrHeight * .342,
+          child: Text(
+            widget.newsTitle,
+            style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
           ),
-          SizedBox(height: Utils.scrHeight * .02),
-          SizedBox(
-            height: Utils.scrHeight * .3,
-            child: Text(
-              Utils.truncateText(widget.newsDec!, 55),
-              style: regularTS(appSecondTextColor,
-                  fontSize: 15 * fontSize.fontSize),
-            ),
+        ),
+        SizedBox(height: Utils.scrHeight * .02),
+        SizedBox(
+          height: Utils.scrHeight * .3,
+          child: Text(
+            Utils.truncateText(widget.newsDec!, 55),
+            style:
+                regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
           ),
-          SizedBox(
-            height: Utils.scrHeight * .02,
-          ),
-          // socialLinkSection(),
-          // SizedBox(height: Utils.scrHeight * .02),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: Utils.scrHeight * .02,
+        ),
+        // socialLinkSection(),
+        // SizedBox(height: Utils.scrHeight * .02),
+      ],
     );
   }
 
