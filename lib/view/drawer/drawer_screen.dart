@@ -220,7 +220,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'Privacy & Policy',
               svgName: 'privacy&policy',
               icon: Icons.arrow_forward_ios),
-          SizedBox(height: Utils.scrHeight * .074),
+          SizedBox(height: Utils.scrHeight * .05),
 
           // Logout Button
           _isLogin

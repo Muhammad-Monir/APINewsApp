@@ -2,6 +2,7 @@ import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
+import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
 import '../view/bottom_navigation/bottom_navigation_bar.dart';
@@ -117,6 +118,12 @@ class Routes {
             images: imageUrl,
           ),
         );
+      // case RoutesName.newsDetails:
+      //   return MaterialPageRoute(
+      //
+      //     builder: (context) => NewsDetailsScreen(
+      //         newsDec: newsDec, sourceLink: sourceLink, newsTitle: newsTitle),
+      //   );
 
       default:
         return MaterialPageRoute(
