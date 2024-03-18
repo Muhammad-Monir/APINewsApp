@@ -7,6 +7,7 @@ import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
+import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
 import '../../utils/color.dart';
@@ -121,9 +122,25 @@ class _SearchScreenState extends State<SearchScreen> {
                               //     vertical: Utils.scrHeight * .024),
                               itemCount: data.length,
                               itemBuilder: (context, index) {
-                                return SearchListItem(
-                                  title: data[index].title,
-                                  imageName: data[index].featuredImage,
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              NewsDetailsScreen(
+                                            newsId: data[index].id!,
+                                            newsDec: data[index].description,
+                                            sourceLink: data[index].url!,
+                                            newsTitle: data[index].title!,
+                                            image: data[index].featuredImage,
+                                          ),
+                                        ));
+                                  },
+                                  child: SearchListItem(
+                                    title: data[index].title,
+                                    imageName: data[index].featuredImage,
+                                  ),
                                 );
                               },
                             )
@@ -193,9 +210,9 @@ class _SearchScreenState extends State<SearchScreen> {
         });
   }
 
-  // @override
-  // void dispose() {
-  //   _searchController.dispose();
-  //   super.dispose();
-  // }
+// @override
+// void dispose() {
+//   _searchController.dispose();
+//   super.dispose();
+// }
 }
