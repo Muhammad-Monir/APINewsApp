@@ -106,7 +106,7 @@ class _NewsScreenState extends State<NewsScreen> {
       //         height: _bannerAd.size.height.toDouble(),
       //         width: _bannerAd.size.width.toDouble(),
       //         child: AdWidget(ad: _bannerAd..load()))
-      //     : const SizedBox()
+      //     : const SizedBox(),
     );
   }
 
@@ -181,42 +181,42 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   // Social Link Section
-  SizedBox socialLinkSection() {
-    return SizedBox(
-      width: Utils.scrHeight * .398,
-      height: Utils.scrHeight * .02,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Source Link : ',
-                style: regularTS(appTextColor, fontSize: 14),
-              ),
-              const SizedBox(width: 2),
-              SizedBox(
-                width: Utils.scrHeight * .28,
-                child: GestureDetector(
-                  onTap: () async {
-                    await launchUrl(Uri.parse(widget.sourceLink));
-                  },
-                  child: Text(widget.sourceLink,
-                      overflow: TextOverflow.ellipsis,
-                      style: regularTS(appThemeColor, fontSize: 14)),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  // SizedBox socialLinkSection() {
+  //   return SizedBox(
+  //     width: Utils.scrHeight * .398,
+  //     height: Utils.scrHeight * .02,
+  //     child: Row(
+  //       mainAxisSize: MainAxisSize.min,
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           mainAxisSize: MainAxisSize.min,
+  //           mainAxisAlignment: MainAxisAlignment.start,
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Text(
+  //               'Source Link : ',
+  //               style: regularTS(appTextColor, fontSize: 14),
+  //             ),
+  //             const SizedBox(width: 2),
+  //             SizedBox(
+  //               width: Utils.scrHeight * .28,
+  //               child: GestureDetector(
+  //                 onTap: () async {
+  //                   await launchUrl(Uri.parse(widget.sourceLink));
+  //                 },
+  //                 child: Text(widget.sourceLink,
+  //                     overflow: TextOverflow.ellipsis,
+  //                     style: regularTS(appThemeColor, fontSize: 14)),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   // Top Image Banner with promo code
 

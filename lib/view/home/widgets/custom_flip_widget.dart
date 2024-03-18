@@ -14,6 +14,7 @@ import 'custom_vertical_flip_page_turn.dart';
 class CustomFlipWidget extends StatefulWidget {
   final List<Widget> pages;
   final List<NewesData> data;
+
   const CustomFlipWidget({super.key, required this.pages, required this.data});
 
   @override
@@ -25,6 +26,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
   int page = 0;
   CustomVerticalFlipPageTurnController turnController =
       CustomVerticalFlipPageTurnController();
+
   @override
   void initState() {
     controller.addListener(() {
@@ -116,9 +118,9 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                   onTap: () async {
                     await launchUrl(Uri.parse(sourceLink));
                   },
-                  child: Text(sourceLink,
-                      overflow: TextOverflow.ellipsis,
-                      style: regularTS(appThemeColor, fontSize: 14)),
+                  child: Text('Tap for more info',
+                      style: regularTS(appThemeColor,
+                          fontSize: 14, isUnderline: true)),
                 ),
               ),
             ],
