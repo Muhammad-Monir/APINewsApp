@@ -188,21 +188,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
-          isLogin
-              ? const CustomDrawerItem(
-                  text: 'Rate this App',
-                  svgName: 'rating',
-                  icon: Icons.arrow_forward_ios)
-              : Container(),
-          // isLogin
-          //     ? CustomDrawerItem(
-          //         onTap: () {
-          //           Navigator.pushNamed(context, RoutesName.feedBack);
-          //         },
-          //         text: 'Feedback',
-          //         svgName: 'feedback',
-          //         icon: Icons.arrow_forward_ios)
-          //     : Container(),
+
+          const CustomDrawerItem(
+              text: 'Rate this App',
+              svgName: 'rating',
+              icon: Icons.arrow_forward_ios),
+
+          CustomDrawerItem(
+              onTap: () {
+                Navigator.pushNamed(context, RoutesName.feedBack);
+              },
+              text: 'Feedback',
+              svgName: 'feedback',
+              icon: Icons.arrow_forward_ios),
+
           const CustomDrawerItem(
               text: 'Contact Us',
               svgName: 'contact_us',

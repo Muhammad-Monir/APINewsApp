@@ -48,7 +48,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   (p0) => const CustomWelcomeScreen(
                         title: 'Thank you!',
                         description:
-                            'By making your voice heard, you help us improve\n"API News App"',
+                            'By making your voice heard, you help us improve\n"Quikkbyte App"',
                       ));
             },
             buttonColor: appThemeColor,
