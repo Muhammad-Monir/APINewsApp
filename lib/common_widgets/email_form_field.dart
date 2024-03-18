@@ -59,8 +59,8 @@ class EmailFormField extends StatelessWidget {
     switch (type) {
       case TextInputType.emailAddress:
         return _validateEmail;
-      // case TextInputType.phone:
-      //   return _validatePhoneNumber;
+      case TextInputType.phone:
+        return _validatePhoneNumber;
       default:
         return _validateText;
     }
@@ -76,15 +76,16 @@ class EmailFormField extends StatelessWidget {
     return null;
   }
 
-  // String? _validatePhoneNumber(String? value) {
-  //   if (value == null || value.isEmpty) {
-  //     return 'Please enter your phone number';
-  //   }
-  //   if (!RegExp(r'^\d+$').hasMatch(value)) {
-  //     return 'Please enter a valid phone number';
-  //   }
-  //   return null;
-  // }
+  String? _validatePhoneNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    }
+    if (!RegExp(r'^\+\d+$').hasMatch(value)) {
+      return 'Please enter a valid phone number with country code';
+    }
+    return null;
+  }
+
 
   String? _validateText(String? value) {
     if (value == null || value.isEmpty) {
