@@ -50,7 +50,7 @@ class StoryScreen extends StatelessWidget {
                     child: AspectRatio(
                         aspectRatio: 1,
                         child: MyPlayer(
-                          t: 'http://192.168.40.38/Am_inn/public/$videoUrl',
+                          t: '${ApiUrl.imageBaseUrl}$videoUrl',
                         ))),
               ),
 
@@ -68,7 +68,7 @@ class StoryScreen extends StatelessWidget {
                         return CachedNetworkImage(
                           fit: BoxFit.contain,
                           imageUrl:
-                              'http://192.168.40.38/Am_inn/public/${images![index].image}',
+                              '${ApiUrl.imageBaseUrl}${images![index].image}',
                           // imageUrl: imageUrl!,
                           placeholder: (context, url) =>
                               const Center(child: CircularProgressIndicator()),
@@ -96,8 +96,8 @@ class StoryScreen extends StatelessWidget {
       final hasImages = images != null && images!.isNotEmpty;
       // Image Share Part
       if (hasImages) {
-        final File? cachedImage = await downloadImage(
-            'http://192.168.40.38/Am_inn/public/${images!.first.image}');
+        final File? cachedImage =
+            await downloadImage('${ApiUrl.imageBaseUrl}${images!.first.image}');
 
         if (cachedImage != null) {
           // ignore: deprecated_member_use

@@ -201,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           phone: phoneNumber,
         )
             .then((value) {
-          Utils.showSnackBar(context, 'Registration Successful');
+          // Utils.showSnackBar(context, 'Registration Successful');
           Navigator.pushNamedAndRemoveUntil(
               context, RoutesName.login, (route) => false);
         });
