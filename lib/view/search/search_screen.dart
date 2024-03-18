@@ -107,42 +107,47 @@ class _SearchScreenState extends State<SearchScreen> {
               SizedBox(height: Utils.scrHeight * .010),
               Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
               SizedBox(height: Utils.scrHeight * .010),
-              SizedBox(
-                height: Utils.scrHeight * .5,
-                child: StreamBuilder<NewsModel>(
-                  stream: searchDataStream.broadCastStream,
-                  builder: (context, AsyncSnapshot<NewsModel> snapshot) {
-                    if (snapshot.hasData) {
-                      final data = snapshot.data!.data;
-                      return data!.isNotEmpty
-                          ? ListView.builder(
-                              // padding: EdgeInsets.symmetric(
-                              //     horizontal: Utils.scrHeight * .024,
-                              //     vertical: Utils.scrHeight * .024),
-                              itemCount: data.length,
-                              itemBuilder: (context, index) {
-                                return SearchListItem(
-                                  title: data[index].title,
-                                  imageName: data[index].featuredImage,
-                                );
-                              },
-                            )
-                          : const Center(child: Text('Data not found'));
-                    } else if (snapshot.hasError) {
-                      return const Center(
-                        child: Text('No BookMark Added To List'),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              )
+              searchListItem()
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox searchListItem() {
+    return SizedBox(
+      height: Utils.scrHeight * .5,
+      child: StreamBuilder<NewsModel>(
+        stream: searchDataStream.broadCastStream,
+        builder: (context, AsyncSnapshot<NewsModel> snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!.data;
+            return data!.isNotEmpty
+                ? ListView.builder(
+                    // padding: EdgeInsets.symmetric(
+                    //     horizontal: Utils.scrHeight * .024,
+                    //     vertical: Utils.scrHeight * .024),
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return SearchListItem(
+                        title: data[index].title,
+                        imageName: data[index].featuredImage,
+                        time: data[index].createdAt,
+                      );
+                    },
+                  )
+                : const Center(child: Text('Data not found'));
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('No BookMark Added To List'),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

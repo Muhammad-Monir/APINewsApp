@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:developer' as dev;
+import 'dart:math';
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
@@ -42,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Future<StoryModel> fetchStory;
 
   // Filter Category
-  late String searchCategory;
-  late String searchText;
+  // late String searchCategory;
+  // late String searchText;
 
   // Check Property
   bool isFav = false;
@@ -291,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (widget.category == null) {
       fetchAllNews = NewsData.fetchAllNews();
     } else {
-      fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
+      fetchAllNews = NewsData.fetchAllNews(category: widget.category);
       // setState(() {
       //   searchCategory = widget.category!['selectedCategory'];
       //   searchText = widget.category!['searchText'];
