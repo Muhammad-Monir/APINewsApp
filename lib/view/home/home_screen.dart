@@ -24,7 +24,7 @@ import '../story/story_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.category});
 
-  final Map<String, dynamic>? category;
+  final String? category;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -291,20 +291,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (widget.category == null) {
       fetchAllNews = NewsData.fetchAllNews();
     } else {
-      setState(() {
-        searchCategory = widget.category!['selectedCategory'];
-        searchText = widget.category!['searchText'];
-      });
-      dev.log('Select search: $searchCategory');
-      dev.log('Select search: $searchText');
-      if (searchText == null || searchText.isEmpty) {
-        fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
-      } else if (searchCategory == null || searchCategory.isEmpty) {
-        fetchAllNews = NewsData.searchText(searchTitle: searchText);
-      } else {
-        fetchAllNews =
-            NewsData.filter(category: searchCategory, searchTitle: searchText);
-      }
+      fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
+      // setState(() {
+      //   searchCategory = widget.category!['selectedCategory'];
+      //   searchText = widget.category!['searchText'];
+      // });
+      // dev.log('Select search: $searchCategory');
+      // dev.log('Select search: $searchText');
+      // if (searchText == null || searchText.isEmpty) {
+      //   fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
+      // } else if (searchCategory == null || searchCategory.isEmpty) {
+      //   fetchAllNews = NewsData.searchText(searchTitle: searchText);
+      // } else {
+      //   fetchAllNews =
+      //       NewsData.filter(category: searchCategory, searchTitle: searchText);
+      // }
     }
     return fetchAllNews;
   }
