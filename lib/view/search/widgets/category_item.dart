@@ -50,7 +50,7 @@ class CustomCategoryItems extends StatelessWidget {
                           topLeft: Radius.circular(Utils.scrHeight * .014),
                           topRight: Radius.circular(Utils.scrHeight * .014)),
                       child: Image.network(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7nPZCwROGuuTovCxot4bBmSwlLL70Y3ecoJQ03wKf0w&s',
+                        ApiUrl.imageNotFound,
                         fit: BoxFit.cover,
                       )),
                 ),
