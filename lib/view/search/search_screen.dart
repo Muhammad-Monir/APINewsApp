@@ -109,7 +109,6 @@ class _SearchScreenState extends State<SearchScreen> {
               Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
               SizedBox(height: Utils.scrHeight * .010),
               searchListItem()
-
             ],
           ),
         ),
@@ -137,14 +136,13 @@ class _SearchScreenState extends State<SearchScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    NewsDetailsScreen(
-                                      newsId: data[index].id!,
-                                      newsDec: data[index].description,
-                                      sourceLink: data[index].url!,
-                                      newsTitle: data[index].title!,
-                                      image: data[index].featuredImage,
-                                    ),
+                                builder: (context) => NewsDetailsScreen(
+                                  newsId: data[index].id!,
+                                  newsDec: data[index].description,
+                                  sourceLink: data[index].url!,
+                                  newsTitle: data[index].title!,
+                                  image: data[index].featuredImage,
+                                ),
                               ));
                         },
                         child: SearchListItem(
@@ -158,7 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 : const Center(child: Text('Data not found'));
           } else if (snapshot.hasError) {
             return const Center(
-              child: Text('No BookMark Added To List'),
+              child: Text('No Search result found'),
             );
           } else {
             return const Center(
