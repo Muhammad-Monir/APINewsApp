@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
@@ -98,7 +99,7 @@ class NewsData {
 
   static Future<StoryModel> fetchStory() async {
     try {
-      log('call get story');
+      // log('call get story');
       final response = await http.get(
         Uri.parse('${ApiUrl.newStoryUrl}?page=1'),
         headers: {
@@ -107,12 +108,35 @@ class NewsData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load Story: ${response.statusCode}');
       }
     } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<CategoryModel> fetchCategory() async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse(ApiUrl.newCategoryUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
+        return CategoryModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      // log(error.toString());
       rethrow;
     }
   }

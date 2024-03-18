@@ -24,8 +24,9 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesName.home:
-        final Map<String, dynamic>? category =
-            settings.arguments as Map<String, dynamic>?;
+        // final Map<String, dynamic>? category =
+        //     settings.arguments as Map<String, dynamic>?;
+        final String? category = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (context) => HomeScreen(
             category: category,

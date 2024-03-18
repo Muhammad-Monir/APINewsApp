@@ -356,7 +356,6 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-
   // Widget _buildPromoCode() {
   //   return ClipOval(
   //     child: Container(
@@ -374,7 +373,6 @@ class _NewsScreenState extends State<NewsScreen> {
   //   );
   // }
 
-
   Widget _buildPromoCode() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
@@ -387,8 +385,8 @@ class _NewsScreenState extends State<NewsScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child: Text('Quikkbyte',
-          style: mediumTS(redContainerColor, fontSize: 20)),
+      child:
+          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
     );
   }
 
