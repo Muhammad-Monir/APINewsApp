@@ -99,14 +99,16 @@ class _NewsScreenState extends State<NewsScreen> {
           );
         }),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // // Banner Section
-      // floatingActionButton: _isAdLoaded
-      //     ? SizedBox(
-      //         height: _bannerAd.size.height.toDouble(),
-      //         width: _bannerAd.size.width.toDouble(),
-      //         child: AdWidget(ad: _bannerAd..load()))
-      //     : const SizedBox(),
+
+      // position of banner section
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // Banner Section
+      floatingActionButton: _isAdLoaded
+          ? SizedBox(
+              height: _bannerAd.size.height.toDouble(),
+              width: _bannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd..load()))
+          : const SizedBox(),
     );
   }
 

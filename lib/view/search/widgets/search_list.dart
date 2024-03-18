@@ -13,14 +13,14 @@ class SearchListItem extends StatelessWidget {
     // required this.svgName,
     this.imageName,
     this.title,
-    // this.time,
+    this.time,
     // this.onTap,
   });
 
   // final String svgName;
   final String? imageName;
   final String? title;
-  // final String? time;
+  final String? time;
   // final VoidCallback? onTap;
 
   @override
@@ -53,17 +53,17 @@ class SearchListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: Utils.scrHeight * .25,
+                      // width: Utils.scrHeight * .25,
                       child: Text(title ?? '',
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    // Text(
-                    //     DateFormat('dd MMM yyyy hh:mm a')
-                    //         .format(DateTime.parse(time!)),
-                    //     style: regularTS(homeTabTextColor, fontSize: 13)),
+                    Text(
+                        DateFormat('dd MMM yyyy hh:mm a')
+                            .format(DateTime.parse(time!)),
+                        style: regularTS(homeTabTextColor, fontSize: 13)),
                   ],
                 ),
               ),
