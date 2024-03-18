@@ -236,8 +236,8 @@ class _NewsScreenState extends State<NewsScreen> {
 
         // Promo Code
         Positioned(
-          bottom: -Utils.scrHeight * .01,
-          left: Utils.scrHeight * .05,
+          bottom: -Utils.scrHeight * .014,
+          right: Utils.scrHeight * .05,
           child: _buildPromoCode(),
         ),
 
@@ -356,7 +356,26 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Container _buildPromoCode() {
+
+  // Widget _buildPromoCode() {
+  //   return ClipOval(
+  //     child: Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
+  //       // width: Utils.scrHeight * .14,
+  //       // height: 66,
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //        border: Border.all( width: 1)
+  //       ),
+  //       child: Text('Quikkbyte',
+  //           style: mediumTS(redContainerColor, fontSize: 20)),
+  //     ),
+  //   );
+  // }
+
+
+  Widget _buildPromoCode() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
       // width: Utils.scrHeight * .14,
@@ -365,10 +384,10 @@ class _NewsScreenState extends State<NewsScreen> {
         color: Colors.white,
         shape: RoundedRectangleBorder(
           side: const BorderSide(width: 1, color: redContainerColor),
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child: Text(widget.category,
+      child: Text('Quikkbyte',
           style: mediumTS(redContainerColor, fontSize: 20)),
     );
   }
