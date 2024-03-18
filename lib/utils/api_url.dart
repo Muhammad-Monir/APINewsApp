@@ -33,6 +33,7 @@ class ApiUrl {
   // static String newBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
   // static String imageBaseUrl = 'http://192.168.40.38/Am_inn/public/';
   static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  // static String newBaseUrl = 'http://192.168.40.38/Am_inn/public/api';
   static String imageBaseUrl = 'http://aminn.reigeeky.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
@@ -50,8 +51,7 @@ class ApiUrl {
   static String storeNotification =
       "http://192.168.40.38/Am_inn/public/api/firebase/token/add";
 
-  static String newStoryUrl =
-      "http://192.168.40.38/Am_inn/public/api/story-boards";
+  static String newStoryUrl = "$newBaseUrl/story-boards";
   static String firebaseTokenUrl =
       "192.168.40.38/Am_inn/public/api/firebase/token/get";
 }

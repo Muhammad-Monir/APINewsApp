@@ -1,4 +1,4 @@
-
+import 'package:am_innnn/utils/color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final class ToastUtil {
@@ -6,9 +6,9 @@ final class ToastUtil {
   static void showLongToast(String message) {
     String trn = message;
     Fluttertoast.showToast(
-      msg: trn,
-      toastLength: Toast.LENGTH_LONG,
-    );
+        msg: trn,
+        toastLength: Toast.LENGTH_LONG,
+        backgroundColor: appThemeColor);
   }
 
   static void showShortToast(String message) {

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -77,9 +78,13 @@ class AuthProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         _isLoading = false;
+        final Map<String, dynamic> data = json.decode(response.body);
+        ToastUtil.showShortToast(data["message"]);
         return {'success': true};
       } else if (response.statusCode == 403) {
         final Map<String, dynamic> errorResponse = json.decode(response.body);
+        ToastUtil.showLongToast(
+            "${errorResponse["message"]["email"]} \n ${errorResponse["message"]["phone"]}");
         return {'success': false, 'errors': errorResponse['message']};
       } else {
         return {
