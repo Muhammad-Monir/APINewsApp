@@ -5,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
@@ -96,7 +95,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     );
   }
 
-
   // News Section to Show News Data
   Container _newsSection(FontSizeProvider fontSize) {
     return Container(
@@ -161,7 +159,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   onTap: () async {
                     await launchUrl(Uri.parse(widget.sourceLink));
                   },
-                  child: Text('Tap here for info',
+                  child: Text('Tap here for more info',
                       overflow: TextOverflow.ellipsis,
                       style: regularTS(appThemeColor,
                           fontSize: 14, isUnderline: true)),
@@ -244,18 +242,18 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 } else {
                   getPopUp(
                       context,
-                          (p0) => FavoritePopup(
-                        onExit: () {
-                          Navigator.pop(p0);
-                        },
-                      ));
+                      (p0) => FavoritePopup(
+                            onExit: () {
+                              Navigator.pop(p0);
+                            },
+                          ));
                 }
               },
               child: !isFav
                   ? Utils.showSvgPicture('bookmarks',
-                  height: Utils.scrHeight * .020)
+                      height: Utils.scrHeight * .020)
                   : Utils.showSvgPicture('selected_bookmark',
-                  height: Utils.scrHeight * .020),
+                      height: Utils.scrHeight * .020),
             ),
           ));
     });
@@ -285,32 +283,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           ),
         ));
   }
-
-  // Container buildTabBar() {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(
-  //       horizontal: Utils.scrHeight * .024,
-  //     ),
-  //     color: Colors.white,
-  //     height: Utils.scrHeight * .09,
-  //     child: Column(
-  //       children: [
-  //         SizedBox(height: Utils.scrHeight * .05),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           children: [
-  //             GestureDetector(
-  //                 onTap: widget.homeOnTap, child: const HomeTabBar()),
-  //             GestureDetector(
-  //                 onTap: widget.refreshOnTap, child: const RefreshTabBar()),
-  //             GestureDetector(
-  //                 onTap: widget.startOnTap, child: const StartTabBar()),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   // Widget _buildPromoCode() {
   //   return ClipOval(

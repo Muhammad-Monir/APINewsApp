@@ -57,11 +57,14 @@ class CustomCategoryItems extends StatelessWidget {
               ),
             ),
             SizedBox(height: Utils.scrHeight * .005),
-            Text(
-              title,
-              style: semiBoldTS(
-                isSelected ? Colors.white : appThemeColor,
-                fontSize: 14,
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: semiBoldTS(
+                  isSelected ? Colors.white : appThemeColor,
+                  fontSize: 14,
+                ),
               ),
             ),
           ],

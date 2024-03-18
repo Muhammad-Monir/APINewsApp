@@ -118,7 +118,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                   onTap: () async {
                     await launchUrl(Uri.parse(sourceLink));
                   },
-                  child: Text('Tap for more info',
+                  child: Text('Tap here for more info',
                       style: regularTS(appThemeColor,
                           fontSize: 14, isUnderline: true)),
                 ),
