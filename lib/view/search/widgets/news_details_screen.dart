@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
+import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/services/auth_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +69,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('News Details', style: mediumTS(appBarColor, fontSize: 24)),
-      ),
+      // appBar: AppBar(
+      //   title: Text('News Details', style: mediumTS(appBarColor, fontSize: 24)),
+      // ),
       body: GestureDetector(
         child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
           return Column(
@@ -195,6 +196,39 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           child: _buildPromoCode(),
         ),
 
+        // backbutton
+        Positioned(
+            top: Utils.scrHeight * .05,
+            left: Utils.scrHeight * .02,
+            child: Container(
+              alignment: Alignment.center,
+              width: Utils.scrHeight * .04,
+              height: Utils.scrHeight * .04,
+              decoration: ShapeDecoration(
+                color: Colors.white.withOpacity(0),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: Utils.scrHeight * .001,
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RoutesName.home, ((route) => false));
+                },
+                child: const Center(
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            )),
+
         // BookMark Button
         if (_isLogin) _addToBookmark()
       ],
@@ -204,7 +238,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   Consumer<BookmarkProvider> _addToBookmark() {
     return Consumer<BookmarkProvider>(builder: (context, provider, child) {
       return Positioned(
-          top: Utils.scrHeight * .03,
+          top: Utils.scrHeight * .05,
           right: Utils.scrHeight * .02,
           child: Container(
             width: Utils.scrHeight * .04,
