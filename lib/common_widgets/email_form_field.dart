@@ -9,17 +9,19 @@ class EmailFormField extends StatelessWidget {
     required this.emailController,
     required this.hintText,
     this.textInputType = TextInputType.emailAddress,
-    this.validate = true, // Add a parameter to control validation
+    this.validate = true, this.onChanged, // Add a parameter to control validation
   }) : super(key: key);
 
   final TextEditingController emailController;
   final String hintText;
   final TextInputType textInputType;
+  final void Function(String?)? onChanged;
   final bool validate; // New parameter to control validation
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: emailController,
       keyboardType: textInputType,
       decoration: InputDecoration(

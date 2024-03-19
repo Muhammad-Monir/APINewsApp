@@ -140,7 +140,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     },
                                     refreshOnTap: () {
                                       // searchCategory = '';
-                                      _refreshData();
+                                      // _refreshData();
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          RoutesName.home, (route) => false);
                                     }))
                             : const SizedBox(),
                       ],

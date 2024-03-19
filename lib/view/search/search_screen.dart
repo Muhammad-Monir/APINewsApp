@@ -33,10 +33,11 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     // Listen for changes in the search text field
-    _searchController.text.isEmpty
-        ? searchDataStream.fetchSearchStream('')
-        : _searchController.addListener(_onSearchTextChanged);
-    _searchController.addListener(_onSearchTextChanged);
+    searchDataStream.fetchSearchStream('');
+    // _searchController.text.isEmpty
+    //     ? searchDataStream.fetchSearchStream('')
+    //     : _searchController.addListener(_onSearchTextChanged);
+    // _searchController.addListener(_onSearchTextChanged);
     // _searchSubscription = _searchController.addListener(_onSearchTextChanged);
   }
 
@@ -48,12 +49,12 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  // Function to handle search text changes
-  void _onSearchTextChanged() {
-    final searchText = _searchController.text;
-    log('Search text changed: $searchText');
-    searchDataStream.fetchSearchStream(searchText);
-  }
+  // // Function to handle search text changes
+  // void _onSearchTextChanged() {
+  //   final searchText = _searchController.text;
+  //   log('Search text changed: $searchText');
+  //   searchDataStream.fetchSearchStream(searchText);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +74,9 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               // Search Filed for search by title
               EmailFormField(
+                onChanged: (value) {
+                  searchDataStream.fetchSearchStream(value);
+                },
                 emailController: _searchController,
                 hintText: 'Search news',
                 validate: false,
