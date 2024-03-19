@@ -118,42 +118,92 @@ class _SearchScreenState extends State<SearchScreen> {
 
   SizedBox searchListItem() {
     return SizedBox(
-      height: Utils.scrHeight * .5,
       child: StreamBuilder<NewsModel>(
         stream: searchDataStream.broadCastStream,
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!.data;
-            return data!.isNotEmpty
-                ? ListView.builder(
-                    // padding: EdgeInsets.symmetric(
-                    //     horizontal: Utils.scrHeight * .024,
-                    //     vertical: Utils.scrHeight * .024),
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => NewsDetailsScreen(
-                                  newsId: data[index].id!,
-                                  newsDec: data[index].description,
-                                  sourceLink: data[index].url!,
-                                  newsTitle: data[index].title!,
-                                  image: data[index].featuredImage,
-                                ),
-                              ));
-                        },
-                        child: SearchListItem(
-                          title: data[index].title,
-                          imageName: data[index].featuredImage,
-                          time: data[index].createdAt,
-                        ),
-                      );
-                    },
-                  )
-                : const Center(child: Text('Data not found'));
+            List<Widget> searchList = data!
+                .map((e) => GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsDetailsScreen(
+                                newsId: e.id!,
+                                newsDec: e.description,
+                                sourceLink: e.url!,
+                                newsTitle: e.title!,
+                                image: e.featuredImage,
+                              ),
+                            ));
+                      },
+                      child: SearchListItem(
+                        title: e.title,
+                        imageName: e.featuredImage,
+                        time: e.createdAt,
+                      ),
+                    ))
+                .toList();
+            return Column(children: [
+              if (searchList.isNotEmpty) ...searchList,
+              if (searchList.isEmpty) const Text('No Search Result Found'),
+            ]);
+
+            // data.isNotEmpty
+            //     ?
+            //     // ? data
+            //     //     .map((e) => GestureDetector(
+            //     //           onTap: () {
+            //     //             Navigator.push(
+            //     //                 context,
+            //     //                 MaterialPageRoute(
+            //     //                   builder: (context) => NewsDetailsScreen(
+            //     //                     newsId: e.id!,
+            //     //                     newsDec: e.description,
+            //     //                     sourceLink: e.url!,
+            //     //                     newsTitle: e.title!,
+            //     //                     image: e.featuredImage,
+            //     //                   ),
+            //     //                 ));
+            //     //           },
+            //     //           child: SearchListItem(
+            //     //             title: e.title,
+            //     //             imageName: e.featuredImage,
+            //     //             time: e.createdAt,
+            //     //           ),
+            //     //         ));)
+            //     //     .toList()
+
+            //     ListView.builder(
+            //         // padding: EdgeInsets.symmetric(
+            //         //     horizontal: Utils.scrHeight * .024,
+            //         //     vertical: Utils.scrHeight * .024),
+            //         itemCount: data.length,
+            //         itemBuilder: (context, index) {
+            //           return GestureDetector(
+            //             onTap: () {
+            //               Navigator.push(
+            //                   context,
+            //                   MaterialPageRoute(
+            //                     builder: (context) => NewsDetailsScreen(
+            //                       newsId: data[index].id!,
+            //                       newsDec: data[index].description,
+            //                       sourceLink: data[index].url!,
+            //                       newsTitle: data[index].title!,
+            //                       image: data[index].featuredImage,
+            //                     ),
+            //                   ));
+            //             },
+            //             child: SearchListItem(
+            //               title: data[index].title,
+            //               imageName: data[index].featuredImage,
+            //               time: data[index].createdAt,
+            //             ),
+            //           );
+            //         },
+            //       )
+            //     : const Center(child: Text('Data not found'));
           } else if (snapshot.hasError) {
             return const Center(
               child: Text('No Search result found'),
@@ -181,7 +231,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 crossAxisSpacing: Utils.scrHeight * .014,
                 mainAxisSpacing: Utils.scrHeight * .014,
                 crossAxisCount: 2,
-                childAspectRatio: 1.5,
+                childAspectRatio: 1.4,
               ),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {

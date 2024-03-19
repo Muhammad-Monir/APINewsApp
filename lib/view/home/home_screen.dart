@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Future<StoryModel> fetchStory;
 
   // Filter Category
-  // late String searchCategory;
+  late String searchCategory;
   // late String searchText;
 
   // Check Property
@@ -52,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     fetchStory = NewsData.fetchStory();
+    // Close keyboard
+    FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
   }
 
@@ -133,9 +135,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         Scaffold.of(context).openDrawer(),
                                     startOnTap: () {
                                       dev.log('startOnTap');
+                                      // searchCategory = '';
                                       _refreshData();
                                     },
                                     refreshOnTap: () {
+                                      // searchCategory = '';
                                       _refreshData();
                                     }))
                             : const SizedBox(),
@@ -288,24 +292,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // Fetch News for All News, With Category and Search Title
   Future<NewsModel> fetchNews() async {
+    // searchCategory = widget.category!;
     if (widget.category == null) {
       fetchAllNews = NewsData.fetchAllNews();
     } else {
       fetchAllNews = NewsData.fetchAllNews(category: widget.category);
-      // setState(() {
-      //   searchCategory = widget.category!['selectedCategory'];
-      //   searchText = widget.category!['searchText'];
-      // });
-      // dev.log('Select search: $searchCategory');
-      // dev.log('Select search: $searchText');
-      // if (searchText == null || searchText.isEmpty) {
-      //   fetchAllNews = NewsData.fetchAllNews(category: searchCategory);
-      // } else if (searchCategory == null || searchCategory.isEmpty) {
-      //   fetchAllNews = NewsData.searchText(searchTitle: searchText);
-      // } else {
-      //   fetchAllNews =
-      //       NewsData.filter(category: searchCategory, searchTitle: searchText);
-      // }
     }
     return fetchAllNews;
   }
