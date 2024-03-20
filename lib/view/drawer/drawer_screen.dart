@@ -195,9 +195,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               icon: Icons.arrow_forward_ios),
 
           CustomDrawerItem(
-              onTap: () {
-                Navigator.pushNamed(context, RoutesName.feedBack);
-              },
+              onTap: () {},
               text: 'Feedback',
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
