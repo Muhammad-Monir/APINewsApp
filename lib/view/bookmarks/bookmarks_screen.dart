@@ -35,28 +35,6 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     super.initState();
   }
 
-  Future<BookmarkModel> fetchBookMark() async {
-    fetchAllBookMark = UserData.fetchBookMark(_authToken);
-    return fetchAllBookMark;
-  }
-
-  // Future<void> isLoggedIn() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   // // Check if the session data exists
-  //   // bool isLogin = prefs.containsKey('token');
-  //   _isLogin = await AuthService.isLoggedIn();
-  //   // setState(() {
-  //   //   _isLogin = isLogin;
-  //   // });
-  //   if (_isLogin) {
-  //     String? authToken = prefs.getString('token');
-  //     bookMarkDataStream.fetchBookMarkStream(authToken);
-  //     setState(() {
-  //       _authToken = authToken!;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +55,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                       vertical: Utils.scrHeight * .024),
                   itemCount: data.length,
                   itemBuilder: (context, index) {
+                    // Show bookmark item
                     return BookmarkItem(
                       onTap: () {
                         UserData.addBookMark(
@@ -109,6 +88,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     );
   }
 
+  // If user not loged in
   Center _ifNotLogin(BuildContext context) {
     return Center(
       child: Column(

@@ -150,7 +150,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         builder: (BuildContext context) {
           return Dialog(
             backgroundColor: Colors.transparent, // Optional customization
-            // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
             child: childBuilder(context),
           );
         });
