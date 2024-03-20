@@ -69,9 +69,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('News Details', style: mediumTS(appBarColor, fontSize: 24)),
-      // ),
       body: GestureDetector(
         child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
           return Column(
@@ -129,7 +126,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           ),
         ),
         socialLinkSection(),
-        // SizedBox(height: Utils.scrHeight * .02),
       ],
     );
   }
@@ -174,7 +170,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   }
 
   // Top Image Banner with promo code
-
   Stack _imageBanner(
     BuildContext context,
   ) {
@@ -184,16 +179,11 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         // Top Image Section
         topImageSection(),
 
-        // // Home Screen Top Tab Bar
-        // Provider.of<BarsVisibility>(context).showBars
-        //     ? buildTabBar()
-        //     : Container(),
-
         // Promo Code
         Positioned(
           bottom: -Utils.scrHeight * .02,
           right: Utils.scrHeight * .05,
-          child: _buildPromoCode(),
+          child: _buildAppBandingName(),
         ),
 
         // backbutton
@@ -258,7 +248,6 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
             ),
             child: GestureDetector(
               onTap: () {
-                log('bookmark on Tap');
                 if (_isLogin) {
                   // provider.isFavorite ?
                   UserData.addBookMark(_authToken, widget.newsId.toString())
@@ -293,6 +282,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     });
   }
 
+  // News Image
   Container topImageSection() {
     return Container(
         height: Utils.scrHeight * .3,
@@ -318,28 +308,10 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         ));
   }
 
-  // Widget _buildPromoCode() {
-  //   return ClipOval(
-  //     child: Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
-  //       // width: Utils.scrHeight * .14,
-  //       // height: 66,
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //        border: Border.all( width: 1)
-  //       ),
-  //       child: Text('Quikkbyte',
-  //           style: mediumTS(redContainerColor, fontSize: 20)),
-  //     ),
-  //   );
-  // }
-
-  Widget _buildPromoCode() {
+  // App Banding Name
+  Widget _buildAppBandingName() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
-      // width: Utils.scrHeight * .14,
-      // height: 66,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -352,6 +324,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     );
   }
 
+  // Function to showdialog massage
   void getPopUp(
     BuildContext context,
     Widget Function(BuildContext) childBuilder,
@@ -361,13 +334,13 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         barrierDismissible: true, // Prevent dismissal by tapping outside
         builder: (BuildContext context) {
           return Dialog(
-            backgroundColor: Colors.transparent, // Optional customization
-            // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+            backgroundColor: Colors.transparent,
             child: childBuilder(context),
           );
         });
   }
 
+  // Googles AdsMob
   _initBannerAd() {
     _bannerAd = BannerAd(
       size: AdSize.banner,

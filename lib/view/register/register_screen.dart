@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/toast_util.dart';
@@ -65,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             // Repeat Password Part
             _buildRepeatPasswordPart(),
 
-            // Register User
+            // Click Button for Register User
             ActionButton(
                 onTap: () {
                   _registerUser();
@@ -211,9 +210,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ToastUtil.showLongToast(
                 'User registration failed.Your Email or Phone has already been taken');
           }
-          // Utils.showSnackBar(context, 'Registration Successful');
-          // Navigator.pushNamedAndRemoveUntil(
-          //     context, RoutesName.login, (route) => false);
         });
       } catch (e) {
         // Handle network errors or other exceptions

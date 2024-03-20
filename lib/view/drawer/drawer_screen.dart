@@ -85,12 +85,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 
+  // User Information Part (Showing the user name and email)
   FutureBuilder<ProfileModel> _userInfoSection() {
     return FutureBuilder<ProfileModel>(
         future: UserData.userProfile(_authToken!, context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!;
+            //Showing the user name and email
             return buildUserInformationPart(
                 data.data!.username, data.data!.email);
           } else if (snapshot.hasError) {
@@ -105,12 +107,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
         });
   }
 
+  // DrawerHeader Section ( profile image section)
   FutureBuilder<ProfileModel> _drawerHeaderSection() {
     return FutureBuilder<ProfileModel>(
         future: UserData.userProfile(_authToken!, context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!;
+            // Showing Profile Imgae
             return _profileImage(data);
           } else if (snapshot.hasError) {
             return Center(
@@ -124,6 +128,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         });
   }
 
+  //profile image section
   SizedBox _profileImage(ProfileModel data) {
     log('message: ${ApiUrl.imageBaseUrl}${data.data!.avatar}');
     return SizedBox(
@@ -139,6 +144,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 
+  // User anme and Email Section
   Column buildUserInformationPart(String? userName, String? email) {
     return Column(
       children: [
@@ -150,11 +156,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 
+  // Drawer Items
   Padding _buildDrawerItems(BuildContext context, {bool isLogin = false}) {
     return Padding(
       padding: EdgeInsets.all(Utils.scrHeight * .02),
       child: Column(
         children: [
+          // Notificaiton Item
           isLogin
               ? Consumer<NotificationProvider>(
                   builder: (context, state, child) => CustomDrawerItem(
@@ -168,6 +176,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                 )
               : Container(),
+          // Edite Porfile
           isLogin
               ? CustomDrawerItem(
                   onTap: () {
@@ -177,6 +186,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   svgName: 'edit',
                   icon: Icons.arrow_forward_ios)
               : Container(),
+          // Share App Link
           CustomDrawerItem(
               onTap: () async {
                 try {
@@ -188,22 +198,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
-
+          // Rate this app
           const CustomDrawerItem(
               text: 'Rate this App',
               svgName: 'rating',
               icon: Icons.arrow_forward_ios),
-
+          // FeddBack the app
           CustomDrawerItem(
               onTap: () {},
               text: 'Feedback',
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
-
+          // Contact Us
           const CustomDrawerItem(
               text: 'Contact Us',
               svgName: 'contact_us',
               icon: Icons.arrow_forward_ios),
+          // Apps Terms and Conditions
           CustomDrawerItem(
               onTap: () {
                 Navigator.pushNamed(context, RoutesName.termsOfUses);
@@ -211,6 +222,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'Terms Of Uses',
               svgName: 'terms_of_uses',
               icon: Icons.arrow_forward_ios),
+          // App Privacy & Policy
           CustomDrawerItem(
               onTap: () {
                 Navigator.pushNamed(context, RoutesName.privacyPolicy);

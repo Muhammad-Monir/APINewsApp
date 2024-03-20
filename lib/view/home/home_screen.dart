@@ -33,9 +33,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Page Controller
   final PageController storyPageController = PageController();
-  // final PagingController<int, Data> pagingController =
-  //     PagingController(firstPageKey: 1);
-  // late PageController newsPageController;
 
   // API Property
   late Future<NewsModel> fetchAllNews;
@@ -75,20 +72,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  void getPopUp(
-    BuildContext context,
-    Widget Function(BuildContext) childBuilder,
-  ) {
-    showDialog(
-        context: context,
-        barrierDismissible: true, // Prevent dismissal by tapping outside
-        builder: (BuildContext context) {
-          return Dialog(
-              backgroundColor: Colors.transparent, // Optional customization
-              child: childBuilder(context));
-        });
   }
 
   //News Section and fetch the news from api
@@ -204,9 +187,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return FutureBuilder<StoryModel>(
         future: fetchStory,
         builder: (context, snapshot) {
+          // Remove the bottomnavigation when go to story page
           if (snapshot.hasData) {
             final data = snapshot.data!.storyboard!.data;
-
             if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
               Timer(const Duration(seconds: 1), () {
                 Provider.of<BarsVisibility>(context, listen: false).hideBars();
@@ -246,6 +229,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         return BottomNavigationBar(
           selectedLabelStyle: const TextStyle(color: appSecondTextColor),
           unselectedLabelStyle: const TextStyle(color: appSecondTextColor),
+          // BottomNavigation Bar Item
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Utils.showSvgPicture('search',
@@ -296,10 +280,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   // Fetch News for All News, With Category and Search Title
   Future<NewsModel> fetchNews() async {
-    // searchCategory = widget.category!;
     if (widget.category == null) {
+      // Fetch All News
       fetchAllNews = NewsData.fetchAllNews();
     } else {
+      // Fetch News filter by Category
       fetchAllNews = NewsData.fetchAllNews(category: widget.category);
     }
     return fetchAllNews;
@@ -335,6 +320,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _isRefresh = false;
       });
     }
+  }
+
+  // Function to show popUp massage
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true, // Prevent dismissal by tapping outside
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent, // Optional customization
+              child: childBuilder(context));
+        });
   }
 
   @override
