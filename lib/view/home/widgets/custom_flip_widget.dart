@@ -115,7 +115,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                     await launchUrl(Uri.parse(sourceLink));
                   },
                   child: Text('Tap to know more',
-                      style: regularTS(Colors.black, fontSize: 14)),
+                      style: regularTS(Colors.black,
+                          fontSize: 14, isUnderline: true)),
                 ),
               ),
             ],

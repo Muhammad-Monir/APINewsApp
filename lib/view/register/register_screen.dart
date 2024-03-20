@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/material.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
@@ -201,9 +202,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           phone: phoneNumber,
         )
             .then((value) {
+          log('value is : $value');
+          if (value["success"] == true) {
+            ToastUtil.showShortToast('User registered successfully.');
+            Navigator.pushNamedAndRemoveUntil(
+                context, RoutesName.login, (route) => false);
+          } else if (value["success"] == false) {
+            ToastUtil.showLongToast(
+                'User registration failed.Your Email or Phone has already been taken');
+          }
           // Utils.showSnackBar(context, 'Registration Successful');
-          Navigator.pushNamedAndRemoveUntil(
-              context, RoutesName.login, (route) => false);
+          // Navigator.pushNamedAndRemoveUntil(
+          //     context, RoutesName.login, (route) => false);
         });
       } catch (e) {
         // Handle network errors or other exceptions
