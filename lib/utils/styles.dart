@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,13 +7,12 @@ TextStyle regularTS(Color color,
         {double? fontSize = 12, bool isUnderline = false}) =>
     GoogleFonts.roboto(
         textStyle: TextStyle(
-            decoration:
-                isUnderline ? TextDecoration.underline : TextDecoration.none,
-            decorationColor:
-                isUnderline ? const Color(0xff2E8540) : Colors.transparent,
-            color: color,
-            fontSize: fontSize,
-            fontWeight: FontWeight.w400));
+      decoration: isUnderline ? TextDecoration.underline : TextDecoration.none,
+      decorationColor: isUnderline ? Colors.black : Colors.transparent,
+      color: color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
+    ));
 
 TextStyle mediumTS(Color color,
         {double? fontSize = 14, bool isUnderline = false}) =>

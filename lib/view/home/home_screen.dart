@@ -110,10 +110,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           .toggleBars();
                       if (Provider.of<BarsVisibility>(context, listen: false)
                           .showBars) {
-                        Timer(const Duration(seconds: 3), () {
-                          Provider.of<BarsVisibility>(context, listen: false)
-                              .hideBars();
-                        });
+                        // Timer(const Duration(seconds: 3), () {
+                        Provider.of<BarsVisibility>(context, listen: false)
+                            .hideBars();
+                        Provider.of<BarsVisibility>(context, listen: false)
+                            .toggleBars();
+                        // });
                       }
                     },
                     child: Stack(
