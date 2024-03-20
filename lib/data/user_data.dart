@@ -115,8 +115,8 @@ class UserData {
 
   // Update User Information
   Future<Map<String, dynamic>?> updateProfile({
-    required String userName,
-    required String image,
+    String? userName,
+    String? image,
     String? authToken,
   }) async {
     try {
@@ -125,14 +125,14 @@ class UserData {
         Uri.parse(ApiUrl.newUserUpdateUrl),
       );
 
-      if (image.isNotEmpty) {
+      if (image != null && image.isNotEmpty) {
         final File imageFile = File(image);
         final http.MultipartFile imageMultipartFile =
             await http.MultipartFile.fromPath('avatar', imageFile.path);
         request.files.add(imageMultipartFile);
       }
 
-      request.fields['username'] = userName;
+      request.fields['username'] = userName!;
 
       request.headers['Content-Type'] = 'multipart/form-data';
       request.headers['Authorization'] = 'Bearer $authToken';
