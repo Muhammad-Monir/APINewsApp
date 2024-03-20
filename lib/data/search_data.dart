@@ -14,7 +14,7 @@ class SearchDataStream extends MyStreamBase<NewsModel> {
           await http.get(Uri.parse('${ApiUrl.allNewsUrl}?title=$searchTitle'));
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        log('search data iss : ${data.toString()}');
+        // log('search data iss : ${data.toString()}');
         searchModel = NewsModel.fromJson(data);
       }
       return handleSuccessWithReturn(searchModel!);

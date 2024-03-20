@@ -69,6 +69,7 @@ dependencies:
   wakelock_plus: ^1.1.4
   twitter_login: ^4.4.2
   google_mobile_ads: ^4.0.0
+  debounce_throttle: ^2.0.0
 
 
 dev_dependencies:
