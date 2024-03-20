@@ -9,18 +9,22 @@ class EmailFormField extends StatelessWidget {
     required this.emailController,
     required this.hintText,
     this.textInputType = TextInputType.emailAddress,
-    this.validate = true, this.onChanged, // Add a parameter to control validation
+    this.validate = true,
+    this.onChanged,
+    this.onFiledSubmitt, // Add a parameter to control validation
   }) : super(key: key);
 
   final TextEditingController emailController;
   final String hintText;
   final TextInputType textInputType;
   final void Function(String?)? onChanged;
+  final void Function(String?)? onFiledSubmitt;
   final bool validate; // New parameter to control validation
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: onFiledSubmitt,
       onChanged: onChanged,
       controller: emailController,
       keyboardType: textInputType,
@@ -88,14 +92,12 @@ class EmailFormField extends StatelessWidget {
     return null;
   }
 
-
   String? _validateText(String? value) {
     if (value == null || value.isEmpty) {
       return 'This field cannot be empty';
     }
     return null;
   }
-
 
   bool _isValidEmail(String email) {
     // Regular expression pattern for validating email addresses

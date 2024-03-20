@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
+import 'package:debounce_throttle/debounce_throttle.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   String? selectedCategory = '';
   final _searchController = TextEditingController();
+  final _debouncer =
+      Debouncer<String>(const Duration(milliseconds: 500), initialValue: '');
   final _formKey = GlobalKey<FormState>();
 
   SearchDataStream searchDataStream = SearchDataStream();
@@ -33,12 +36,16 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     // Listen for changes in the search text field
-    searchDataStream.fetchSearchStream('');
+    dataFetch();
     // _searchController.text.isEmpty
     //     ? searchDataStream.fetchSearchStream('')
     //     : _searchController.addListener(_onSearchTextChanged);
     // _searchController.addListener(_onSearchTextChanged);
     // _searchSubscription = _searchController.addListener(_onSearchTextChanged);
+  }
+
+  void dataFetch({String? queary = ''}) {
+    searchDataStream.fetchSearchStream(queary);
   }
 
   @override
@@ -49,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  // // Function to handle search text changes
+  // Function to handle search text changes
   // void _onSearchTextChanged() {
   //   final searchText = _searchController.text;
   //   log('Search text changed: $searchText');
@@ -74,9 +81,13 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               // Search Filed for search by title
               EmailFormField(
-                onChanged: (value) {
-                  searchDataStream.fetchSearchStream(value);
+                onFiledSubmitt: (value) {
+                  value!.isNotEmpty ? dataFetch(queary: value) : dataFetch();
                 },
+                // onChanged: (value) {
+                //   dataFetch(queary: value);
+                //   // searchDataStream.fetchSearchStream(value);
+                // },
                 emailController: _searchController,
                 hintText: 'Search news',
                 validate: false,
@@ -127,87 +138,36 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!.data;
-            List<Widget> searchList = data!
-                .map((e) => GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NewsDetailsScreen(
-                                newsId: e.id!,
-                                newsDec: e.description,
-                                sourceLink: e.url!,
-                                newsTitle: e.title!,
-                                image: e.featuredImage,
-                              ),
-                            ));
-                      },
-                      child: SearchListItem(
-                        title: e.title,
-                        imageName: e.featuredImage,
-                        time: e.createdAt,
-                      ),
-                    ))
-                .toList();
-            return Column(children: [
-              if (searchList.isNotEmpty) ...searchList,
-              if (searchList.isEmpty) const Text('No Search Result Found'),
-            ]);
-
-            // data.isNotEmpty
-            //     ?
-            //     // ? data
-            //     //     .map((e) => GestureDetector(
-            //     //           onTap: () {
-            //     //             Navigator.push(
-            //     //                 context,
-            //     //                 MaterialPageRoute(
-            //     //                   builder: (context) => NewsDetailsScreen(
-            //     //                     newsId: e.id!,
-            //     //                     newsDec: e.description,
-            //     //                     sourceLink: e.url!,
-            //     //                     newsTitle: e.title!,
-            //     //                     image: e.featuredImage,
-            //     //                   ),
-            //     //                 ));
-            //     //           },
-            //     //           child: SearchListItem(
-            //     //             title: e.title,
-            //     //             imageName: e.featuredImage,
-            //     //             time: e.createdAt,
-            //     //           ),
-            //     //         ));)
-            //     //     .toList()
-
-            //     ListView.builder(
-            //         // padding: EdgeInsets.symmetric(
-            //         //     horizontal: Utils.scrHeight * .024,
-            //         //     vertical: Utils.scrHeight * .024),
-            //         itemCount: data.length,
-            //         itemBuilder: (context, index) {
-            //           return GestureDetector(
-            //             onTap: () {
-            //               Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                     builder: (context) => NewsDetailsScreen(
-            //                       newsId: data[index].id!,
-            //                       newsDec: data[index].description,
-            //                       sourceLink: data[index].url!,
-            //                       newsTitle: data[index].title!,
-            //                       image: data[index].featuredImage,
-            //                     ),
-            //                   ));
-            //             },
-            //             child: SearchListItem(
-            //               title: data[index].title,
-            //               imageName: data[index].featuredImage,
-            //               time: data[index].createdAt,
-            //             ),
-            //           );
-            //         },
-            //       )
-            //     : const Center(child: Text('Data not found'));
+            log(data.toString());
+            if (data!.isNotEmpty) {
+              List<Widget> searchList = data!
+                  .map((e) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewsDetailsScreen(
+                                  newsId: e.id!,
+                                  newsDec: e.description,
+                                  sourceLink: e.url!,
+                                  newsTitle: e.title!,
+                                  image: e.featuredImage,
+                                ),
+                              ));
+                        },
+                        child: SearchListItem(
+                          title: e.title,
+                          imageName: e.featuredImage,
+                          time: e.createdAt,
+                        ),
+                      ))
+                  .toList();
+              return Column(
+                children: searchList,
+              );
+            } else {
+              return const Center(child: Text('Data not found'));
+            }
           } else if (snapshot.hasError) {
             return const Center(
               child: Text('No Search result found'),
