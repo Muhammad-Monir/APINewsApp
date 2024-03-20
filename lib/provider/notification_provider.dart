@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/toast_util.dart';
+
 class NotificationProvider with ChangeNotifier {
   bool _isSwitchToggled = false;
 
@@ -26,9 +28,14 @@ class NotificationProvider with ChangeNotifier {
   void toggleSwitch() {
     _isSwitchToggled = !_isSwitchToggled;
     LocalNotificationService.getToken(isActive: _isSwitchToggled);
-    // Save to shared preferences
     _saveSwitchToggledToLocal();
-    // Other logic related to switch toggling
+
+    // Showing toast msg when user toggle
+    if (_isSwitchToggled) {
+      ToastUtil.showShortToast("Notifications enabled");
+    } else {
+      ToastUtil.showShortToast("Notifications disabled");
+    }
     notifyListeners();
   }
 
