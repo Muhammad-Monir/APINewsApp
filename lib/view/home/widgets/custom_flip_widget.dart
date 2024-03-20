@@ -107,10 +107,6 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Source Link : ',
-                style: regularTS(appTextColor, fontSize: 14),
-              ),
               const SizedBox(width: 2),
               SizedBox(
                 width: Utils.scrHeight * .28,
@@ -118,9 +114,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                   onTap: () async {
                     await launchUrl(Uri.parse(sourceLink));
                   },
-                  child: Text('Tap here for more info',
-                      style: regularTS(appThemeColor,
-                          fontSize: 14, isUnderline: true)),
+                  child: Text('Tap to know more',
+                      style: regularTS(Colors.black, fontSize: 14)),
                 ),
               ),
             ],

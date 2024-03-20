@@ -193,18 +193,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _updateProfile() async {
-    if (localImagePath == null) {
-      Utils.showSnackBar(context, 'Select Profile Picture');
-      return;
-    }
+    // if (localImagePath == null) {
+    //   Utils.showSnackBar(context, 'Select Profile Picture');
+    //   return;
+    // }
 
-    if (_formKey.currentState!.validate()) {
       final userName = _nameController.text;
 
       try {
         final Map<String, dynamic>? response = await _userData.updateProfile(
           userName: userName,
-          image: localImagePath!,
+          image: localImagePath,
           authToken: _authToken,
         );
 
@@ -218,6 +217,5 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       } catch (error) {
         Utils.showSnackBar(context, 'Error: $error');
       }
-    }
   }
 }

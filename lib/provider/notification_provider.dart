@@ -10,16 +10,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/toast_util.dart';
 
 class NotificationProvider with ChangeNotifier {
-  bool _isSwitchToggled = false;
+  bool _isSwitchToggled = true;
 
   NotificationProvider() {
-    // Initialize _isSwitchToggled from shared preferences on startup
     _initializeSwitchToggled();
   }
 
   Future<void> _initializeSwitchToggled() async {
     final prefs = await SharedPreferences.getInstance();
-    _isSwitchToggled = prefs.getBool('isSwitchToggled') ?? false;
+    _isSwitchToggled = prefs.getBool('isSwitchToggled') ?? true;
+    if (!_isSwitchToggled) {
+      _isSwitchToggled = true;
+      await _saveSwitchToggledToLocal();
+    }
     notifyListeners();
   }
 
@@ -46,7 +49,6 @@ class NotificationProvider with ChangeNotifier {
 
   Future<void> setInNotificationStatus() async {
     try {
-      // Your API call logic
       final response = await http.get(Uri.parse(ApiUrl.firebaseTokenUrl));
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
