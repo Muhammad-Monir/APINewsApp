@@ -13,18 +13,41 @@ import '../../utils/utils.dart';
 class StoryScreen extends StatelessWidget {
   final List<Images>? images;
   final String? videoUrl;
+  final String? title;
 
-  const StoryScreen({super.key, this.images, this.videoUrl});
+  const StoryScreen({super.key, this.images, this.videoUrl, this.title});
 
   @override
   Widget build(BuildContext context) {
-    // log('story screen video ${videoUrl!}');
     final hasImages = images != null && images!.isNotEmpty;
     return Scaffold(
         backgroundColor: const Color(0xffF6F5F3),
         // Share Icon Part
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
+        floatingActionButton:
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Padding(
+            //       padding: EdgeInsets.symmetric(
+            //         vertical: Utils.scrHeight * .08,
+            //         horizontal: Utils.scrHeight * .04,
+            //       ),
+            //       child: FloatingActionButton(
+            //         shape: OutlineInputBorder(
+            //           borderSide: BorderSide.none,
+            //           borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
+            //         ),
+            //         onPressed: () {
+            //           Navigator.pushNamed(context, RoutesName.home);
+            //         },
+            //         child: const Icon(Icons.arrow_back),
+            //       ),
+            //     ),
+            Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: Utils.scrHeight * .08,
+            // horizontal: Utils.scrHeight * .04,
+          ),
           child: FloatingActionButton(
             shape: OutlineInputBorder(
               borderSide: BorderSide.none,
@@ -38,6 +61,8 @@ class StoryScreen extends StatelessWidget {
             ),
           ),
         ),
+        //   ],
+        // ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -81,10 +106,10 @@ class StoryScreen extends StatelessWidget {
 
             // Show Story Image
             if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
-              const Center(
+              Center(
                 child: Text(
-                  'Your text story',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  title!,
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
           ],
@@ -114,7 +139,7 @@ class StoryScreen extends StatelessWidget {
 
       // Text Share Part
       else if (!hasImages && (videoUrl == null || videoUrl!.isEmpty)) {
-        await Share.share('Your text story');
+        await Share.share(title!);
       }
     } catch (e) {
       log(e.toString());

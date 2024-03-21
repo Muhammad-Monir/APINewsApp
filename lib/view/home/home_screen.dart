@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field
-
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
@@ -14,9 +13,11 @@ import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../data/news_stream_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
+import '../../services/auth_service.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../story/story_screen.dart';
@@ -31,24 +32,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  // Page Controller
   final PageController storyPageController = PageController();
-
-  // API Property
+  NewsDataStream newsDataStream = NewsDataStream();
   late Future<NewsModel> fetchAllNews;
   late Future<StoryModel> fetchStory;
-
-  // Filter Category
   late String searchCategory;
-  // late String searchText;
-
-  // Check Property
   bool isFav = false;
   bool _isRefresh = false;
+  bool _isLogin = false;
+  String? _authToken = '';
 
   @override
   void initState() {
+    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    if (_isLogin) {
+      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+    }
+    // fetchNews();
     fetchStory = NewsData.fetchStory();
+    dev.log('inintstate call');
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
@@ -187,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return FutureBuilder<StoryModel>(
         future: fetchStory,
         builder: (context, snapshot) {
-          // Remove the bottomnavigation when go to story page
+          // Remove the bottom navigation when go to story page
           if (snapshot.hasData) {
             final data = snapshot.data!.storyboard!.data;
             if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
@@ -203,7 +205,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   // Story Screen Widget
                   return StoryScreen(
                       images: data[index].images,
-                      videoUrl: data[index].video ?? '');
+                      videoUrl: data[index].video ?? '',
+                      title: data[index].title ?? '');
                 });
           } else if (snapshot.hasError) {
             return Center(
@@ -278,7 +281,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  // Fetch News for All News, With Category and Search Title
   Future<NewsModel> fetchNews() async {
     if (widget.category == null) {
       // Fetch All News
@@ -289,6 +291,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     return fetchAllNews;
   }
+
+  // Fetch News for All News, With Category and Search Title
+  // Future<NewsModel> fetchNews() async {
+  //   if (_isLogin) {
+  //     if (widget.category == null) {
+  //       // Fetch All News
+  //       fetchAllNews = newsDataStream.fetchNewsStream(authToken: _authToken);
+  //     } else {
+  //       // Fetch News filter by Category
+  //       fetchAllNews =
+  //           newsDataStream.fetchNewsStream(category: widget.category);
+  //     }
+  //   } else {
+  //     if (widget.category == null) {
+  //       // Fetch All News
+  //       fetchAllNews = newsDataStream.fetchNewsStream();
+  //     } else {
+  //       // Fetch News filter by Category
+  //       fetchAllNews =
+  //           newsDataStream.fetchNewsStream(category: widget.category);
+  //     }
+  //   }
+  //   return fetchAllNews;
+  // }
 
   // Share App Url to anyone
   void shareContent(BuildContext context) async {

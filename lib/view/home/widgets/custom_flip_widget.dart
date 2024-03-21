@@ -1,7 +1,5 @@
 // ignore_for_file: unnecessary_import
-
 import 'package:am_innnn/model/news_model.dart';
-import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/styles.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:am_innnn/view/home/widgets/add_bookmark_widget.dart';
@@ -15,7 +13,11 @@ class CustomFlipWidget extends StatefulWidget {
   final List<Widget> pages;
   final List<NewesData> data;
 
-  const CustomFlipWidget({super.key, required this.pages, required this.data});
+  const CustomFlipWidget({
+    super.key,
+    required this.pages,
+    required this.data,
+  });
 
   @override
   State<CustomFlipWidget> createState() => _CustomFlipWidgetState();
@@ -61,7 +63,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
             left: 0,
             right: 0,
             bottom: 0,
-            top: 0,
+            top: Utils.scrHeight * .1,
             child: PageView(
               controller: controller,
               scrollDirection: Axis.vertical,
@@ -75,7 +77,10 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                           // crossAxisAlignment: CrossAxisAlignment.center,
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            AddBookMArkWidget(newsId: widget.data[index].id),
+                            AddBookMArkWidget(
+                              newsId: widget.data[index].id,
+                              index: index,
+                            ),
                             Positioned(
                                 bottom: Utils.scrHeight * .13,
                                 left: Utils.scrHeight * .02,

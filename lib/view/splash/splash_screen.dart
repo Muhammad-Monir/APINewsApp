@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // _detectLocation();
 
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 0),
       () {
         Navigator.pushNamedAndRemoveUntil(
           context,

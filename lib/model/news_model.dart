@@ -42,6 +42,7 @@ class NewesData {
   String? createdAt;
   String? updatedAt;
   dynamic deletedAt;
+  bool? isBookmarked;
 
   NewesData(
       {this.id,
@@ -60,7 +61,8 @@ class NewesData {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.deletedAt});
+      this.deletedAt,
+      this.isBookmarked});
 
   NewesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -80,6 +82,7 @@ class NewesData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
+    isBookmarked = json['isBookmarked'];
   }
 
   Map<String, dynamic> toJson() {
@@ -101,6 +104,7 @@ class NewesData {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
+    data['isBookmarked'] = isBookmarked;
     return data;
   }
 }
