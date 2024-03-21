@@ -82,14 +82,14 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           );
         }),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // // Banner Section
-      // floatingActionButton: _isAdLoaded
-      //     ? SizedBox(
-      //         height: _bannerAd.size.height.toDouble(),
-      //         width: _bannerAd.size.width.toDouble(),
-      //         child: AdWidget(ad: _bannerAd..load()))
-      //     : const SizedBox(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // Banner Section
+      floatingActionButton: _isAdLoaded
+          ? SizedBox(
+              height: _bannerAd.size.height.toDouble(),
+              width: _bannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd..load()))
+          : const SizedBox(),
     );
   }
 
@@ -145,11 +145,11 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Source Link : ',
-                style: regularTS(appTextColor, fontSize: 14),
-              ),
-              const SizedBox(width: 2),
+              // Text(
+              //   'Source Link : ',
+              //   style: regularTS(appTextColor, fontSize: 14),
+              // ),
+              // const SizedBox(width: 2),
               SizedBox(
                 width: Utils.scrHeight * .28,
                 child: GestureDetector(
@@ -220,7 +220,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
             )),
 
         // BookMark Button
-        if (_isLogin) _addToBookmark()
+        // if (_isLogin) _addToBookmark()
+        // if (_isLogin) _addToBookmark()
       ],
     );
   }

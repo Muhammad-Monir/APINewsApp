@@ -4,7 +4,6 @@ import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
-import '../view/bottom_navigation/bottom_navigation_bar.dart';
 import '../view/change_password/change_password_screen.dart';
 import '../view/drawer/drawer_screen.dart';
 import '../view/feedback/feedback_screen.dart';
@@ -60,10 +59,10 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => const ShareScreen(),
         );
-      case RoutesName.bottomNavigationBar:
-        return MaterialPageRoute(
-          builder: (context) => const BottomNavigationMenu(),
-        );
+      // case RoutesName.bottomNavigationBar:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const BottomNavigationMenu(),
+      //   );
       case RoutesName.login:
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),

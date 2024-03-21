@@ -10,6 +10,7 @@ class ApiUrl {
 
   // New API URL
   static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  // static String newBaseUrl = '192.168.40.38/Am_inn/public/api';
   static String imageBaseUrl = 'http://aminn.reigeeky.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';

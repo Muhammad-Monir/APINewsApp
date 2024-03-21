@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
-import 'package:debounce_throttle/debounce_throttle.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -25,8 +24,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   String? selectedCategory = '';
   final _searchController = TextEditingController();
-  final _debouncer =
-      Debouncer<String>(const Duration(milliseconds: 500), initialValue: '');
   final _formKey = GlobalKey<FormState>();
 
   SearchDataStream searchDataStream = SearchDataStream();
@@ -140,7 +137,7 @@ class _SearchScreenState extends State<SearchScreen> {
             final data = snapshot.data!.data;
             log(data.toString());
             if (data!.isNotEmpty) {
-              List<Widget> searchList = data!
+              List<Widget> searchList = data
                   .map((e) => GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -151,7 +148,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   newsDec: e.description,
                                   sourceLink: e.url!,
                                   newsTitle: e.title!,
-                                  image: e.featuredImage,
+                                  image: e.featuredImage!,
                                 ),
                               ));
                         },

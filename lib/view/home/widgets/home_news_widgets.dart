@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
 import 'package:am_innnn/services/auth_service.dart';
-import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -77,15 +76,6 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        // onTap: () {
-        //   log('barsVisibility ontap');
-        //   Provider.of<BarsVisibility>(context, listen: false).toggleBars();
-        //   if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-        //     Timer(const Duration(seconds: 3), () {
-        //       Provider.of<BarsVisibility>(context, listen: false).hideBars();
-        //     });
-        //   }
-        // },
         child: Consumer<FontSizeProvider>(builder: (context, fontSize, child) {
           return Column(
             children: [
@@ -110,26 +100,6 @@ class _NewsScreenState extends State<NewsScreen> {
           : const SizedBox(),
     );
   }
-
-  // Showing Floating Add Banner
-  // Padding _floatingActionButton() {
-  //   return Padding(
-  //     padding: EdgeInsets.only(
-  //         right: Utils.scrHeight * .054,
-  //         left: Utils.scrHeight * .054,
-  //         bottom: Utils.scrHeight * .01),
-  //     child: GestureDetector(
-  //       child: SizedBox(
-  //         width: double.infinity,
-  //         height: Utils.scrHeight * .054,
-  //         child: Image.asset(
-  //           'assets/images/floating_add.png',
-  //           fit: BoxFit.cover,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   // Share Content Function
   void shareContent(BuildContext context) async {
@@ -157,16 +127,17 @@ class _NewsScreenState extends State<NewsScreen> {
       children: [
         SizedBox(height: Utils.scrHeight * .027),
         SizedBox(
-          // width: Utils.scrHeight * .342,
           child: Text(
+            textAlign: TextAlign.justify,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
+            style: semiBoldTS(appTextColor, fontSize: 19),
           ),
         ),
         SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
           height: Utils.scrHeight * .3,
           child: Text(
+            textAlign: TextAlign.justify,
             Utils.truncateText(widget.newsDec!, 55),
             style:
                 regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
@@ -175,52 +146,11 @@ class _NewsScreenState extends State<NewsScreen> {
         SizedBox(
           height: Utils.scrHeight * .02,
         ),
-        // socialLinkSection(),
-        // SizedBox(height: Utils.scrHeight * .02),
       ],
     );
   }
 
-  // Social Link Section
-  // SizedBox socialLinkSection() {
-  //   return SizedBox(
-  //     width: Utils.scrHeight * .398,
-  //     height: Utils.scrHeight * .02,
-  //     child: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Text(
-  //               'Source Link : ',
-  //               style: regularTS(appTextColor, fontSize: 14),
-  //             ),
-  //             const SizedBox(width: 2),
-  //             SizedBox(
-  //               width: Utils.scrHeight * .28,
-  //               child: GestureDetector(
-  //                 onTap: () async {
-  //                   await launchUrl(Uri.parse(widget.sourceLink));
-  //                 },
-  //                 child: Text(widget.sourceLink,
-  //                     overflow: TextOverflow.ellipsis,
-  //                     style: regularTS(appThemeColor, fontSize: 14)),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   // Top Image Banner with promo code
-
   Stack _imageBanner(
     BuildContext context,
   ) {
@@ -229,11 +159,6 @@ class _NewsScreenState extends State<NewsScreen> {
       children: [
         // Top Image Section
         topImageSection(),
-
-        // // Home Screen Top Tab Bar
-        // Provider.of<BarsVisibility>(context).showBars
-        //     ? buildTabBar()
-        //     : Container(),
 
         // Promo Code
         Positioned(
@@ -331,54 +256,9 @@ class _NewsScreenState extends State<NewsScreen> {
         ));
   }
 
-  Container buildTabBar() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Utils.scrHeight * .024,
-      ),
-      color: Colors.white,
-      height: Utils.scrHeight * .09,
-      child: Column(
-        children: [
-          SizedBox(height: Utils.scrHeight * .05),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                  onTap: widget.homeOnTap, child: const HomeTabBar()),
-              GestureDetector(
-                  onTap: widget.refreshOnTap, child: const RefreshTabBar()),
-              GestureDetector(
-                  onTap: widget.startOnTap, child: const StartTabBar()),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Widget _buildPromoCode() {
-  //   return ClipOval(
-  //     child: Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
-  //       // width: Utils.scrHeight * .14,
-  //       // height: 66,
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //        border: Border.all( width: 1)
-  //       ),
-  //       child: Text('Quikkbyte',
-  //           style: mediumTS(redContainerColor, fontSize: 20)),
-  //     ),
-  //   );
-  // }
-
   Widget _buildPromoCode() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Utils.scrHeight * .01),
-      // width: Utils.scrHeight * .14,
-      // height: 66,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -401,7 +281,6 @@ class _NewsScreenState extends State<NewsScreen> {
         builder: (BuildContext context) {
           return Dialog(
             backgroundColor: Colors.transparent, // Optional customization
-            // insetPadding: EdgeInsets.only(bottom: Utils.scrHeight * .08),
             child: childBuilder(context),
           );
         });

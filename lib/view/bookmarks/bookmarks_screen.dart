@@ -38,7 +38,16 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Bookmarks', style: largeTS(appBarColor))),
+        appBar: AppBar(
+          title: Text('Bookmarks', style: largeTS(appBarColor)),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RoutesName.home, ((route) => false));
+            },
+          ),
+        ),
         body: _isLogin ? _allBookMark() : _ifNotLogin(context));
   }
 
