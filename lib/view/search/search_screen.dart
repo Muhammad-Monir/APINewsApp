@@ -79,12 +79,15 @@ class _SearchScreenState extends State<SearchScreen> {
               // Search Filed for search by title
               EmailFormField(
                 onFiledSubmitt: (value) {
+                  log('submitte called');
                   value!.isNotEmpty ? dataFetch(queary: value) : dataFetch();
                 },
-                // onChanged: (value) {
-                //   dataFetch(queary: value);
-                //   // searchDataStream.fetchSearchStream(value);
-                // },
+                onChanged: (value) {
+                  log('onchange called');
+                  value!.isNotEmpty ? dataFetch(queary: value) : dataFetch();
+                  // dataFetch(queary: value);
+                  // searchDataStream.fetchSearchStream(value);
+                },
                 emailController: _searchController,
                 hintText: 'Search news',
                 validate: false,

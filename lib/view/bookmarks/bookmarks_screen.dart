@@ -37,21 +37,28 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Bookmarks', style: largeTS(appBarColor)),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, RoutesName.home, ((route) => false));
-            },
+    return PopScope(
+      onPopInvoked: (value) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutesName.home, (route) => false);
+      },
+      canPop: false,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('Bookmarks', style: largeTS(appBarColor)),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutesName.home, ((route) => false));
+              },
+            ),
           ),
-        ),
-        body: _isLogin ? _allBookMark() : _ifNotLogin(context));
+          body: _isLogin ? allBookMarkData() : _ifNotLogin(context)),
+    );
   }
 
-  StreamBuilder<BookmarkModel> _allBookMark() {
+  StreamBuilder<BookmarkModel> allBookMarkData() {
     return StreamBuilder<BookmarkModel>(
       stream: bookMarkDataStream.broadCastStream,
       builder: (context, AsyncSnapshot<BookmarkModel> snapshot) {

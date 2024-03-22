@@ -1,6 +1,7 @@
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -32,15 +33,16 @@ class CustomCategoryItems extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(
+            Expanded(
               // padding: EdgeInsets.symmetric(vertical: Utils.scrHeight * .01),
-              height: Utils.scrHeight * .095,
-              width: double.infinity,
+              // height: Utils.scrHeight * .095,
+              // width: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(Utils.scrHeight * .014),
                     topRight: Radius.circular(Utils.scrHeight * .014)),
                 child: CachedNetworkImage(
+                  width: double.infinity,
                   fit: BoxFit.cover,
                   fadeInDuration: const Duration(seconds: 2),
                   imageUrl: '${ApiUrl.imageBaseUrl}$image',
@@ -58,6 +60,7 @@ class CustomCategoryItems extends StatelessWidget {
             ),
             SizedBox(height: Utils.scrHeight * .005),
             Container(
+              height: Utils.scrHeight * .03,
               alignment: Alignment.center,
               child: Text(
                 title,
@@ -67,6 +70,7 @@ class CustomCategoryItems extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: Utils.scrHeight * .005),
           ],
         ),
       ),
