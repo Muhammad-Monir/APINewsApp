@@ -1,6 +1,9 @@
 // ignore_for_file: unnecessary_import
+import 'dart:developer';
+
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/styles.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:am_innnn/view/home/widgets/add_bookmark_widget.dart';
 import 'package:collection/collection.dart';
@@ -34,14 +37,21 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
     controller.addListener(() {
       //log('viewport- ${controller.viewportFraction} | page-${controller.page}');
       //log('page- ${controller.page} | offset-${controller.offset}');
+      // log('page- ${controller.page} | offset-${controller.offset}');
       turnController.animCustom(
           controller.page ?? 0, (controller.page ?? 0).toInt());
+      log('page number: ${controller.page}');
+      log('page number: ${widget.pages.length}');
+      if (controller.page == (widget.pages.length - 1)) {
+        ToastUtil.showShortToast('No more data found');
+      }
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    log('build widget');
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Stack(
