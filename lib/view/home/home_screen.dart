@@ -32,7 +32,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  final PageController storyPageController = PageController();
+  late PageController storyPageController = PageController();
   NewsDataStream newsDataStream = NewsDataStream();
   late Future<NewsModel> fetchAllNews;
   late Future<StoryModel> fetchStory;
@@ -41,19 +41,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool _isRefresh = false;
   bool _isLogin = false;
   String? _authToken = '';
+  List storyData = [];
+  int page = 1;
 
   @override
   void initState() {
+    storyPageController.addListener(() {
+      _scroolListener();
+    });
     _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
     if (_isLogin) {
       _authToken = Provider.of<AuthService>(context, listen: false).getToken();
     }
     // fetchNews();
-    fetchStory = NewsData.fetchStory();
-    dev.log('inintstate call');
+    fetchStory = NewsData.fetchStory(page);
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
+  }
+
+  void _scroolListener() {
+    if (storyPageController.position.pixels ==
+        storyPageController.position.maxScrollExtent) {
+      setState(() {
+        // page = page + 1;
+      });
+      fetchStory = NewsData.fetchStory(page);
+      dev.log('scrool');
+    }
   }
 
   @override

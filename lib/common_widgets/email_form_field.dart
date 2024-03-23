@@ -6,7 +6,7 @@ import '../utils/utils.dart';
 class EmailFormField extends StatelessWidget {
   const EmailFormField({
     Key? key,
-    required this.emailController,
+    this.emailController,
     required this.hintText,
     this.textInputType = TextInputType.emailAddress,
     this.validate = true,
@@ -14,7 +14,7 @@ class EmailFormField extends StatelessWidget {
     this.onFiledSubmitt, // Add a parameter to control validation
   }) : super(key: key);
 
-  final TextEditingController emailController;
+  final TextEditingController? emailController;
   final String hintText;
   final TextInputType textInputType;
   final void Function(String?)? onChanged;

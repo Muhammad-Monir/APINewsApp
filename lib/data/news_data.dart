@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../model/news_model.dart';
 
 class NewsData {
-  // static bool isLastPage = false;
+  static bool isLastPage = false;
   static Future<NewsModel> fetchAllNews({String? category}) async {
     try {
       final response = await http.get(category == null
@@ -97,11 +97,11 @@ class NewsData {
   //   }
   // }
 
-  static Future<StoryModel> fetchStory() async {
+  static Future<StoryModel> fetchStory(int page) async {
     try {
       // log('call get story');
       final response = await http.get(
-        Uri.parse('${ApiUrl.newStoryUrl}?page=1'),
+        Uri.parse('${ApiUrl.newStoryUrl}?page=$page'),
         headers: {
           'Content-Type': 'application/json',
         },

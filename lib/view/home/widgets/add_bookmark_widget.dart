@@ -44,7 +44,7 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
               if (snapshot.hasData) {
                 final data = snapshot.data!.data;
                 bool isBookmarked = data![widget.index!].isBookmarked ?? false;
-                log(isBookmarked.toString());
+                // log(isBookmarked.toString());
                 return data.isNotEmpty
                     ? Consumer<BookmarkProvider>(
                         builder: (context, provider, child) {

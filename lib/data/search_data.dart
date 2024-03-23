@@ -7,7 +7,7 @@ import '../utils/api_url.dart';
 
 class SearchDataStream extends MyStreamBase<NewsModel> {
   SearchDataStream() : super(empty: NewsModel());
-  Future<NewsModel> fetchSearchStream(String? searchTitle) async {
+  Future<NewsModel> fetchSearchStream({String? searchTitle}) async {
     NewsModel? searchModel;
     try {
       final response =
