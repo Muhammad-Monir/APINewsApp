@@ -51,7 +51,6 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
 
   @override
   Widget build(BuildContext context) {
-    log('build widget');
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Stack(

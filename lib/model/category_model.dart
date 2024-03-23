@@ -1,6 +1,6 @@
 class CategoryModel {
   bool? success;
-  List<Data>? data;
+  List<CategoryData>? data;
   String? message;
 
   CategoryModel({this.success, this.data, this.message});
@@ -8,9 +8,9 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <CategoryData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(CategoryData.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,7 +27,7 @@ class CategoryModel {
   }
 }
 
-class Data {
+class CategoryData {
   int? id;
   String? title;
   String? slug;
@@ -37,7 +37,7 @@ class Data {
   String? updatedAt;
   dynamic deletedAt;
 
-  Data(
+  CategoryData(
       {this.id,
       this.title,
       this.slug,
@@ -47,7 +47,7 @@ class Data {
       this.updatedAt,
       this.deletedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CategoryData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     slug = json['slug'];

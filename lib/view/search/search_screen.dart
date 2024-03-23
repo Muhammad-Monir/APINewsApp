@@ -1,4 +1,4 @@
-import 'dart:async';
+// ignore_for_file: unnecessary_null_comparison
 import 'dart:developer';
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/data/news_data.dart';
@@ -25,106 +25,141 @@ class _SearchScreenState extends State<SearchScreen> {
   String? selectedCategory = '';
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  List<Widget> searchList = [];
+  final FocusNode _focusNode = FocusNode();
+  bool _isKeyboardOpen = false;
+  late Future<NewsModel> fetchAllNews;
+
+  void _onFocusChange() {
+    setState(() {
+      _isKeyboardOpen = _focusNode.hasFocus;
+    });
+  }
 
   SearchDataStream searchDataStream = SearchDataStream();
-  StreamSubscription? _searchSubscription;
+  // StreamSubscription? _searchSubscription;
 
   @override
   void initState() {
     super.initState();
-    // Listen for changes in the search text field
-    dataFetch();
-    // _searchController.text.isEmpty
-    //     ? searchDataStream.fetchSearchStream('')
-    //     : _searchController.addListener(_onSearchTextChanged);
+    // fetchNews(_searchController.text);
+    _focusNode.addListener(_onFocusChange);
+    searchDataStream.fetchSearchStream(searchTitle: '');
     // _searchController.addListener(_onSearchTextChanged);
-    // _searchSubscription = _searchController.addListener(_onSearchTextChanged);
   }
 
-  void dataFetch({String? queary = ''}) {
-    searchDataStream.fetchSearchStream(queary);
+  Future<NewsModel> fetchNews(String? searchText) async {
+    if (searchText == null) {
+      // Fetch All News
+      fetchAllNews = NewsData.fetchAllNews();
+    } else {
+      // Fetch News filter by Category
+      fetchAllNews = NewsData.searchText(searchTitle: searchText);
+    }
+    return fetchAllNews;
   }
 
   @override
   void dispose() {
-    _searchSubscription
-        ?.cancel(); // Cancel the subscription when disposing the widget
+    _focusNode.removeListener(_onFocusChange);
     _searchController.dispose();
+    // _searchController.removeListener(_onSearchTextChanged);
     super.dispose();
   }
 
-  // Function to handle search text changes
+// Function to handle search text changes
   // void _onSearchTextChanged() {
-  //   final searchText = _searchController.text;
-  //   log('Search text changed: $searchText');
-  //   searchDataStream.fetchSearchStream(searchText);
+  //   log(_searchController.text);
+  //   if (_searchController.text.isNotEmpty) {
+  //     log('if work');
+  //     searchDataStream.fetchSearchStream(searchTitle: _searchController.text);
+  //   } else {
+  //     log('else work');
+  //     searchDataStream.fetchSearchStream(searchTitle: '');
+  //   }
   // }
 
   @override
   Widget build(BuildContext context) {
+    log('build widget');
     return Scaffold(
       appBar: AppBar(
         title: Text('Search For', style: mediumTS(appBarColor, fontSize: 24)),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: Utils.scrHeight * .024,
-          vertical: Utils.scrHeight * .016,
-        ),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Search Filed for search by title
-              EmailFormField(
-                onFiledSubmitt: (value) {
-                  log('submitte called');
-                  value!.isNotEmpty ? dataFetch(queary: value) : dataFetch();
-                },
-                onChanged: (value) {
-                  log('onchange called');
-                  value!.isNotEmpty ? dataFetch(queary: value) : dataFetch();
-                  // dataFetch(queary: value);
-                  // searchDataStream.fetchSearchStream(value);
-                },
-                emailController: _searchController,
-                hintText: 'Search news',
-                validate: false,
-              ),
-              SizedBox(height: Utils.scrHeight * .024),
-              Text('Categories', style: semiBoldTS(appTextColor, fontSize: 20)),
-              SizedBox(height: Utils.scrHeight * .016),
+      body: GestureDetector(
+        // onTap: () {
+        //   FocusScope.of(context).requestFocus(FocusNode());
+        //   searchDataStream.fetchSearchStream(searchTitle: '');
+        // },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Utils.scrHeight * .024,
+            vertical: Utils.scrHeight * .016,
+          ),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                // Search Filed for search by title
+                Focus(
+                  focusNode: _focusNode,
+                  child: EmailFormField(
+                    onFiledSubmitt: (value) {
+                      log('submitte called $value');
+                      if (value!.isNotEmpty) {
+                        // searchDataStream.fetchSearchStream(
+                        //     searchTitle: _searchController.text);
+                        fetchNews(_searchController.text);
+                      } else {
+                        // searchDataStream.fetchSearchStream(searchTitle: '');
+                        fetchNews(_searchController.text);
+                      }
+                    },
+                    // onChanged: (value) {
+                    //   if (value!.isNotEmpty || value != null) {
+                    //     searchDataStream.fetchSearchStream(searchTitle: value);
+                    //   }
+                    // },
+                    emailController: _searchController,
+                    hintText: 'Search news',
+                    validate: false,
+                  ),
+                ),
+                SizedBox(height: Utils.scrHeight * .024),
+                Text('Categories',
+                    style: semiBoldTS(appTextColor, fontSize: 20)),
+                SizedBox(height: Utils.scrHeight * .016),
 
-              // Select Category for search by category
-              SizedBox(
-                height: Utils.scrHeight * .62,
-                child: selectCategorySection(),
-              ),
+                // Select Category for search by category
+                SizedBox(
+                  height: Utils.scrHeight * .62,
+                  child: selectCategorySection(),
+                ),
 
-              // Search button
-              // ActionButton(
-              //   onTap: () {
-              //     log('Selected category: $selectedCategory');
-              //     log('Select search: ${_searchController.text}');
-              //     Map<String, dynamic> filter = {
-              //       'selectedCategory': selectedCategory,
-              //       'searchText': _searchController.text,
-              //     };
-              //     log('Select search: $filter');
-              //     // Navigate to next page with selected category
-              //     Navigator.pushNamed(context, RoutesName.home,
-              //         arguments: filter);
-              //   },
-              //   buttonColor: appThemeColor,
-              //   textColor: Colors.white,
-              //   buttonName: 'Search',
-              // ),
-              SizedBox(height: Utils.scrHeight * .010),
-              Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
-              SizedBox(height: Utils.scrHeight * .010),
-              searchListItem()
-            ],
+                // Search button
+                // ActionButton(
+                //   onTap: () {
+                //     log('Selected category: $selectedCategory');
+                //     log('Select search: ${_searchController.text}');
+                //     Map<String, dynamic> filter = {
+                //       'selectedCategory': selectedCategory,
+                //       'searchText': _searchController.text,
+                //     };
+                //     log('Select search: $filter');
+                //     // Navigate to next page with selected category
+                //     Navigator.pushNamed(context, RoutesName.home,
+                //         arguments: filter);
+                //   },
+                //   buttonColor: appThemeColor,
+                //   textColor: Colors.white,
+                //   buttonName: 'Search',
+                // ),
+                SizedBox(height: Utils.scrHeight * .010),
+                Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
+                SizedBox(height: Utils.scrHeight * .010),
+                searchListItem()
+              ],
+            ),
           ),
         ),
       ),
@@ -133,14 +168,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   SizedBox searchListItem() {
     return SizedBox(
-      child: StreamBuilder<NewsModel>(
-        stream: searchDataStream.broadCastStream,
+      child: FutureBuilder<NewsModel>(
+        future: fetchNews(_searchController.text),
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!.data;
-            log(data.toString());
             if (data!.isNotEmpty) {
-              List<Widget> searchList = data
+              searchList = data
                   .map((e) => GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -169,14 +203,13 @@ class _SearchScreenState extends State<SearchScreen> {
               return const Center(child: Text('Data not found'));
             }
           } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('No Search result found'),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Text(snapshot.error.toString()),
             );
           }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
@@ -227,10 +260,4 @@ class _SearchScreenState extends State<SearchScreen> {
           }
         });
   }
-
-// @override
-// void dispose() {
-//   _searchController.dispose();
-//   super.dispose();
-// }
 }
