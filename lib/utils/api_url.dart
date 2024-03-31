@@ -1,5 +1,5 @@
 class ApiUrl {
-  // news api
+  // image url
   static String imageNotFound =
       'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=996';
   static String defaultProfile =
@@ -9,9 +9,11 @@ class ApiUrl {
       'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
 
   // New API URL
-  static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  // static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  static String newBaseUrl = 'https://quikkbyte.com/api';
   // static String newBaseUrl = '192.168.40.38/Am_inn/public/api';
-  static String imageBaseUrl = 'http://aminn.reigeeky.com/';
+  // static String newBaseUrl = 'https://66.29.145.160/public/api';
+  static String imageBaseUrl = 'https://quikkbyte.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
   static String newLogOutUrl = '$newBaseUrl/logout';
@@ -28,6 +30,5 @@ class ApiUrl {
   static String newCategoryUrl = "$newBaseUrl/categories-list";
 
   static String storeNotification = "$newBaseUrl/firebase/token/add";
-
   static String firebaseTokenUrl = "$newBaseUrl/firebase/token/get";
 }

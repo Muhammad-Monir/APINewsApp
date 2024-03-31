@@ -35,8 +35,8 @@ class NewesData {
   String? category;
   dynamic image;
   dynamic video;
-  String? isTop;
-  String? languageId;
+  int? isTop;
+  int? languageId;
   String? content;
   String? status;
   String? createdAt;
