@@ -160,7 +160,7 @@ class Data {
 
 class Images {
   int? id;
-  String? storyBoardId;
+  int? storyBoardId;
   String? image;
   String? createdAt;
   String? updatedAt;

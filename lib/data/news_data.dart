@@ -16,6 +16,7 @@ class NewsData {
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
+        log(data.toString());
         return NewsModel.fromJson(data);
       } else {
         // If the server did not return a 200 OK response, throw an exception
