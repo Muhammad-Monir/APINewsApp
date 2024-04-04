@@ -128,6 +128,8 @@ class _NewsScreenState extends State<NewsScreen> {
         SizedBox(height: Utils.scrHeight * .027),
         SizedBox(
           child: Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
             textAlign: TextAlign.justify,
             widget.newsTitle,
             style: semiBoldTS(appTextColor, fontSize: 19),
@@ -137,8 +139,10 @@ class _NewsScreenState extends State<NewsScreen> {
         SizedBox(
           height: Utils.scrHeight * .3,
           child: Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 5,
             textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 55),
+            Utils.truncateText(widget.newsDec!, 40),
             style:
                 regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
           ),
