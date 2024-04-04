@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    rotation();
     Utils.initScreenSize(context);
     return MultiProvider(
       providers: [
@@ -77,4 +78,16 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+void rotation() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
