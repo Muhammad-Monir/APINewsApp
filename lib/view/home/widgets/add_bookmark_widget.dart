@@ -42,8 +42,8 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
             stream: newsDataStream.broadCastStream,
             builder: (context, AsyncSnapshot<NewsModel> snapshot) {
               if (snapshot.hasData) {
-                final data = snapshot.data!.data;
-                bool isBookmarked = data![widget.index!].isBookmarked ?? false;
+                final data = snapshot.data!.data!.data!;
+                bool isBookmarked = data[widget.index!].isBookmarked ?? false;
                 // log(isBookmarked.toString());
                 return data.isNotEmpty
                     ? Consumer<BookmarkProvider>(

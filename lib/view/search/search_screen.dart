@@ -172,7 +172,7 @@ class _SearchScreenState extends State<SearchScreen> {
         future: fetchNews(_searchController.text),
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data!.data;
+            final data = snapshot.data!.data!.data;
             if (data!.isNotEmpty) {
               searchList = data
                   .map((e) => GestureDetector(
@@ -192,7 +192,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: SearchListItem(
                           title: e.title,
                           imageName: e.featuredImage,
-                          time: e.createdAt,
+                          time: e.createdAt.toString(),
                         ),
                       ))
                   .toList();

@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasData) {
-          final data = snapshot.data!.data!;
+          final data = snapshot.data!.data!.data!;
           if (data.isNotEmpty) {
             return !_isRefresh
                 ? GestureDetector(
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   // News Screen Design
-  NewsScreen screenDesign(NewesData data) {
+  NewsScreen screenDesign(Datum data) {
     return NewsScreen(
         category: data.category!,
         newsId: data.id!,

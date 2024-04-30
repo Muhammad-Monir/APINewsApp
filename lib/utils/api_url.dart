@@ -9,8 +9,8 @@ class ApiUrl {
       'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
 
   // New API URL
-  // static String newBaseUrl = 'http://aminn.reigeeky.com/api';
-  static String newBaseUrl = 'https://quikkbyte.com/api';
+  static String newBaseUrl = 'http://aminn.reigeeky.com/api';
+  // static String newBaseUrl = 'https://quikkbyte.com/api';
   // static String newBaseUrl = '192.168.40.38/Am_inn/public/api';
   // static String newBaseUrl = 'https://66.29.145.160/public/api';
   static String imageBaseUrl = 'https://quikkbyte.com/';

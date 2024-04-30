@@ -14,7 +14,7 @@ import 'custom_vertical_flip_page_turn.dart';
 
 class CustomFlipWidget extends StatefulWidget {
   final List<Widget> pages;
-  final List<NewesData> data;
+  final List<Datum> data;
 
   const CustomFlipWidget({
     super.key,
