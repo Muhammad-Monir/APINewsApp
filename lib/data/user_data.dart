@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import '../model/bookmark_model.dart';
 import 'dart:io';
 
+import '../utils/di.dart';
+
 class UserData {
   // Get profile data
   static Future<ProfileModel> userProfile(

@@ -70,6 +70,9 @@ dependencies:
   twitter_login: ^4.4.2
   google_mobile_ads: ^4.0.0
   debounce_throttle: ^2.0.0
+  internet_connection_checker: ^1.0.0+1
+  get_storage: ^2.1.1
+  get_it: ^7.7.0
 
 
 dev_dependencies:

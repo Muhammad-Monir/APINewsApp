@@ -10,16 +10,22 @@ import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/color.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'services/notification_service.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
+import 'utils/helper.dart';
+import 'utils/toast_util.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {}
 
@@ -29,6 +35,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  diSetup();
+  await GetStorage.init();
+  initInternetChecker();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
@@ -45,12 +54,14 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final SharedPreferences? preferences;
+
   const MyApp({super.key, this.preferences});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     rotation();
+    setInitValue();
     Utils.initScreenSize(context);
     return MultiProvider(
       providers: [
@@ -90,4 +101,21 @@ void rotation() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+}
+
+Future<void> initInternetChecker() async {
+  InternetConnectionChecker.createInstance(
+          checkTimeout: const Duration(seconds: 1),
+          checkInterval: const Duration(seconds: 2))
+      .onStatusChange
+      .listen((status) {
+    switch (status) {
+      case InternetConnectionStatus.connected:
+        ToastUtil.showShortToast('Data connection is available.');
+        break;
+      case InternetConnectionStatus.disconnected:
+        ToastUtil.showNoInternetToast();
+        break;
+    }
+  });
 }
