@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class UserData {
   static Future<ProfileModel> userProfile(
       String authToken, BuildContext context) async {
     try {
-      final sharedInstance = Provider.of<AuthService>(context, listen: false);
+      // final sharedInstance = Provider.of<AuthService>(context, listen: false);
       final response = await http.get(
         Uri.parse(ApiUrl.newUserProfileUrl),
         headers: {
@@ -26,8 +27,9 @@ class UserData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        // log('id is : ${data["data"]["id"]}');
-        sharedInstance.saveUserId(data["data"]["id"]);
+        log('id is : ${data["data"]["id"]}');
+        appData.write(kKeyUserID, data["data"]["id"]);
+        // sharedInstance.saveUserId(data["data"]["id"]);
         // int? id = await AuthService.getUserID();
         // log('user id is : $id');
         return ProfileModel.fromJson(data);

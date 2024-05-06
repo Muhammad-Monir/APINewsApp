@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -43,8 +45,8 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  bool _isLogin = false;
-  late String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   int? userId;
   bool isFav = false;
   late BannerAd _bannerAd;
@@ -59,18 +61,18 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   void initState() {
-    isLoggedIn();
+    // isLoggedIn();
     _initBannerAd();
     super.initState();
   }
 
   // Check Is Login or Not
-  void isLoggedIn() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
-  }
+  // void isLoggedIn() {
+  //   _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+  //   if (_isLogin) {
+  //     _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

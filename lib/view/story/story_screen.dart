@@ -73,7 +73,7 @@ class StoryScreen extends StatelessWidget {
                 child: SizedBox(
                     width: double.infinity,
                     child: AspectRatio(
-                        aspectRatio: 1,
+                        aspectRatio: 0.475,
                         child: MyPlayer(
                           t: '${ApiUrl.imageBaseUrl}$videoUrl',
                         ))),

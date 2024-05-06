@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,6 +13,7 @@ import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
+import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 import '../../home/widgets/favorite_popup.dart';
@@ -37,8 +39,8 @@ class NewsDetailsScreen extends StatefulWidget {
 }
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
-  bool _isLogin = false;
-  late String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   int? userId;
   bool isFav = false;
   late BannerAd _bannerAd;
@@ -53,18 +55,18 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   @override
   void initState() {
-    isLoggedIn();
+    // isLoggedIn();
     _initBannerAd();
     super.initState();
   }
 
   // Check Is Login or Not
-  void isLoggedIn() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
-  }
+  // void isLoggedIn() {
+  //   _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+  //   if (_isLogin) {
+  //     _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

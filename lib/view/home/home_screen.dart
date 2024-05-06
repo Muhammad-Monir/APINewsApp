@@ -6,7 +6,9 @@ import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/color.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
@@ -39,8 +41,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late String searchCategory;
   bool isFav = false;
   bool _isRefresh = false;
-  bool _isLogin = false;
-  String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   List storyData = [];
   int page = 1;
 
@@ -49,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     storyPageController.addListener(() {
       _scroolListener();
     });
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
+    // _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    // if (_isLogin) {
+    //   _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+    // }
     // fetchNews();
     fetchStory = NewsData.fetchStory(page);
     // Close keyboard

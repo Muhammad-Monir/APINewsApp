@@ -41,8 +41,10 @@ class Data {
   String? category;
   dynamic image;
   dynamic video;
-  int? isTop;
-  int? languageId;
+  // Change This int To String
+  String? isTop;
+  // Change This int To String
+  String? languageId;
   String? content;
   String? status;
   String? createdAt;

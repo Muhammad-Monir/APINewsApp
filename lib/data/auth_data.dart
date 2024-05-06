@@ -1,9 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:convert';
 import 'dart:developer';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> login(
       String email, String password, BuildContext context) async {
-    final sharedInstance = Provider.of<AuthService>(context, listen: false);
+    // final sharedInstance = Provider.of<AuthService>(context, listen: false);
     try {
       _isLoading = true;
       notifyListeners();
@@ -38,11 +39,16 @@ class AuthProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         final Map<String, dynamic> data = jsonDecode(response.body);
+        // UserData.userProfile(data["token"], context).then((value) async {
         UserData.userProfile(data["token"], context).then((value) async {
-          int? userId = sharedInstance.getUserID();
-          log('login user id = ${userId.toString()}');
+
+          // int? userId = sharedInstance.getUserID();
+          // log('login user id = ${userId.toString()}');
+          log('login user id = ${appData.read(kKeyUserID)}');
         });
-        sharedInstance.saveSessionData(data["token"]);
+        appData.write(kKeyIsLoggedIn, true);
+        appData.write(kKeyToken, data["token"]);
+        // sharedInstance.saveSessionData(data["token"]);
         Utils.showSnackBar(context, data["message"]);
         _navigateToHome(context);
       } else {

@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_import
 import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/styles.dart';
 import 'package:am_innnn/utils/toast_util.dart';
@@ -43,7 +42,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       log('page number: ${controller.page}');
       log('page number: ${widget.pages.length}');
       if (controller.page == (widget.pages.length - 1)) {
-        ToastUtil.showShortToast('No more data found');
+        ToastUtil.showShortToast('We Are Coming Soon Be Paction');
       }
     });
     super.initState();

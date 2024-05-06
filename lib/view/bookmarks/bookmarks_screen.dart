@@ -4,6 +4,8 @@ import 'package:am_innnn/model/bookmark_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/bookmarks/widgets/bookmark_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,17 +22,18 @@ class BookMarksScreen extends StatefulWidget {
 }
 
 class _BookMarksScreenState extends State<BookMarksScreen> {
-  bool _isLogin = false;
-  String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   late Future<BookmarkModel> fetchAllBookMark;
   BookMarkDataStream bookMarkDataStream = BookMarkDataStream();
 
   @override
   void initState() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
+    // _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    // if (_isLogin) {
+    //   _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+    // }
+    // bookMarkDataStream.fetchBookMarkStream(_authToken);
     bookMarkDataStream.fetchBookMarkStream(_authToken);
     super.initState();
   }

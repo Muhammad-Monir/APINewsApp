@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../data/news_stream_data.dart';
@@ -19,18 +21,18 @@ class AddBookMArkWidget extends StatefulWidget {
 }
 
 class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
-  bool _isLogin = false;
-  late String _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   int? userId;
   bool? isFav = false;
   NewsDataStream newsDataStream = NewsDataStream();
 
   @override
   void initState() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken()!;
-    }
+    // _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+    // if (_isLogin) {
+    //   _authToken = Provider.of<AuthService>(context, listen: false).getToken()!;
+    // }
     newsDataStream.fetchNewsStream(authToken: _authToken);
     super.initState();
   }

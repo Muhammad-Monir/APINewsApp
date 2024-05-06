@@ -5,6 +5,7 @@ import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/view/drawer/widget/custom_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import '../../common_widgets/action_button.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
 import '../../utils/color.dart';
+import '../../utils/di.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
 
@@ -25,24 +27,24 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
-  bool _isLogin = false;
-  String? _authToken = '';
+  bool _isLogin = appData.read(kKeyIsLoggedIn);
+  String? _authToken = appData.read(kKeyToken);
   final AuthProvider _authProvider = AuthProvider();
   String? localImagePath;
 
   @override
   void initState() {
-    isLogfedIn();
+    // isLogfedIn();
     super.initState();
   }
 
-  void isLogfedIn() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    log(_isLogin.toString());
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
-  }
+  // void isLogfedIn() {
+  //   _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+  //   log(_isLogin.toString());
+  //   if (_isLogin) {
+  //     _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -270,10 +272,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   void _logOut() async {
-    final sharedInstance = Provider.of<AuthService>(context, listen: false);
+    // final sharedInstance = Provider.of<AuthService>(context, listen: false);
     await _authProvider.logoutUser(_authToken!).then((value) {
-      sharedInstance.clearSessionData();
-      sharedInstance.clearUserId();
+      // sharedInstance.clearSessionData();
+      // sharedInstance.clearUserId();
+      appData.remove(kKeyUserID);
+      appData.remove(kKeyToken);
+      appData.write(kKeyIsLoggedIn, false);
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.home,

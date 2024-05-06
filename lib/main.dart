@@ -44,11 +44,10 @@ void main() async {
   ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   LocalNotificationService.initialize();
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
   LocalNotificationService.getToken();
   runApp(MyApp(
-    preferences: prefs,
+    // preferences: prefs,
   ));
 }
 
@@ -73,7 +72,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
-        Provider(create: (_) => AuthService(preferences!)),
+        // Provider(create: (_) => AuthService(preferences!)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(
