@@ -1,4 +1,3 @@
-
 const String kKeyName = 'name';
 const String kKeyUserCollection = 'User';
 const String kKeyDeviceToken = 'device_token';
@@ -14,3 +13,6 @@ const String kKeySelectedLocation = 'selected_location';
 const String kKeySelectedLat = 'selected_lot';
 const String kKeySelectedLng = 'selected_lng';
 const String kKeyToken = 'token';
+const String kKeyCountryCode = 'country_code';
+const String kKeyLanguageCode = 'language_code';
+const String kKeyLanguageId = 'language_id';

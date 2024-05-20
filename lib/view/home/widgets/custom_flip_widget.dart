@@ -108,6 +108,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
 
   Widget socialLinkSection(String sourceLink) {
     return SizedBox(
+      // color: Colors.amber,
       width: Utils.scrHeight * .398,
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, unused_field
 import 'dart:developer';
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/data/news_data.dart';
@@ -6,10 +6,12 @@ import 'package:am_innnn/data/search_data.dart';
 import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
+import '../../common_widgets/action_button.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -29,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _isKeyboardOpen = false;
   late Future<NewsModel> fetchAllNews;
+  List<int> selectedCategories = [];
 
   void _onFocusChange() {
     setState(() {
@@ -137,23 +140,24 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
 
                 // Search button
-                // ActionButton(
-                //   onTap: () {
-                //     log('Selected category: $selectedCategory');
-                //     log('Select search: ${_searchController.text}');
-                //     Map<String, dynamic> filter = {
-                //       'selectedCategory': selectedCategory,
-                //       'searchText': _searchController.text,
-                //     };
-                //     log('Select search: $filter');
-                //     // Navigate to next page with selected category
-                //     Navigator.pushNamed(context, RoutesName.home,
-                //         arguments: filter);
-                //   },
-                //   buttonColor: appThemeColor,
-                //   textColor: Colors.white,
-                //   buttonName: 'Search',
-                // ),
+                ActionButton(
+                  onTap: () {
+                    // log('Selected category: $selectedCategory');
+                    log('Selected category: $selectedCategories');
+                    // log('Select search: ${_searchController.text}');
+                    // // Map<String, dynamic> filter = {
+                    // //   'selectedCategory': selectedCategory,
+                    // //   'searchText': _searchController.text,
+                    // // };
+                    // // log('Select search: $filter');
+                    // // Navigate to next page with selected category
+                    Navigator.pushNamed(context, RoutesName.home,
+                        arguments: selectedCategories);
+                  },
+                  buttonColor: appThemeColor,
+                  textColor: Colors.white,
+                  buttonName: 'Search',
+                ),
                 SizedBox(height: Utils.scrHeight * .010),
                 Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
                 SizedBox(height: Utils.scrHeight * .010),
@@ -233,19 +237,32 @@ class _SearchScreenState extends State<SearchScreen> {
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 return CustomCategoryItems(
-                  isSelected: selectedCategory == data[index].title,
+                  isSelected: selectedCategories.contains(data[index].id),
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.home,
-                        arguments: data[index].title);
-                    log('Selected category: ${data[index].title}');
                     setState(() {
-                      selectedCategory = data[index].title;
-                      // Navigator.pushNamed(context, RoutesName.home,
-                      //     arguments: selectedCategory);
+                      if (selectedCategories.contains(data[index].id)) {
+                        selectedCategories.remove(data[index].id);
+                        log('Selected selectedCategories: $selectedCategories');
+                      } else {
+                        selectedCategories.add(data[index].id!);
+                        log('Selected selectedCategories: $selectedCategories');
+                      }
                     });
                   },
+                  // isSelected: selectedCategories[index] == data[index].title,
+                  // onTap: () {
+                  //   // Navigator.pushNamed(context, RoutesName.home,
+                  //   //     arguments: data[index].title);
+                  //   log('Selected category: ${data[index].title}');
+                  //   setState(() {
+                  //     selectedCategory = data[index].title;
+                  //     // Navigator.pushNamed(context, RoutesName.home,
+                  //     //     arguments: selectedCategory);
+                  //   });
+                  // },
+
                   title: data[index].title!,
-                  image: data[index].image ?? '',
+                  image: ApiUrl.imageNotFound,
                 );
               },
             );

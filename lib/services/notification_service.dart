@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
@@ -8,13 +10,10 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/di.dart';
-import 'auth_service.dart';
 
 //import '../networks/api_acess.dart';
 //import 'di.dart';

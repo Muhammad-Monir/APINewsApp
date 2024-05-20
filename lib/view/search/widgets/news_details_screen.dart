@@ -1,13 +1,14 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
+
 import 'package:am_innnn/route/routes_name.dart';
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
@@ -106,6 +107,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     );
   }
 
+  // News Title & News Description
   Column newsBody(FontSizeProvider fontSize) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

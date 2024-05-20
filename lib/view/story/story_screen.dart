@@ -1,12 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:share_plus/share_plus.dart';
+
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
@@ -68,50 +69,51 @@ class StoryScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Show Story Video
-            if (!hasImages && videoUrl != null && videoUrl!.isNotEmpty)
-              Expanded(
-                child: SizedBox(
-                    width: double.infinity,
-                    child: AspectRatio(
-                        aspectRatio: 0.475,
-                        child: MyPlayer(
-                          t: '${ApiUrl.imageBaseUrl}$videoUrl',
-                        ))),
-              ),
-
-            // Show Story Image
-            if (hasImages)
-              Expanded(
-                child: SizedBox(
-                  // height: Utils.scrHeight * .8,
+            // if (!hasImages && videoUrl != null && videoUrl!.isNotEmpty)
+            Expanded(
+              child: SizedBox(
                   width: double.infinity,
-                  child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: images!.length,
-                      itemBuilder: (context, index) {
-                        log(images![index].image!);
-                        return CachedNetworkImage(
-                          fit: BoxFit.contain,
-                          imageUrl:
-                              '${ApiUrl.imageBaseUrl}${images![index].image}',
-                          // imageUrl: imageUrl!,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              Image.network(ApiUrl.imageNotFound),
-                        );
-                      }),
-                ),
-              ),
+                  child: AspectRatio(
+                      aspectRatio: 0.48,
+                      child: MyPlayer(
+                        title: title,
+                        t: '${ApiUrl.imageBaseUrl}$videoUrl',
+                      ))),
+            ),
 
-            // Show Story Image
-            if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
-              Center(
-                child: Text(
-                  title!,
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ),
+            // // Show Story Image
+            // if (hasImages)
+            //   Expanded(
+            //     child: SizedBox(
+            //       // height: Utils.scrHeight * .8,
+            //       width: double.infinity,
+            //       child: PageView.builder(
+            //           scrollDirection: Axis.horizontal,
+            //           itemCount: images!.length,
+            //           itemBuilder: (context, index) {
+            //             log(images![index].image!);
+            //             return CachedNetworkImage(
+            //               fit: BoxFit.contain,
+            //               imageUrl:
+            //                   '${ApiUrl.imageBaseUrl}${images![index].image}',
+            //               // imageUrl: imageUrl!,
+            //               placeholder: (context, url) =>
+            //                   const Center(child: CircularProgressIndicator()),
+            //               errorWidget: (context, url, error) =>
+            //                   Image.network(ApiUrl.imageNotFound),
+            //             );
+            //           }),
+            //     ),
+            //   ),
+
+            // // Show Story Image
+            // if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
+            //   Center(
+            //     child: Text(
+            //       title!,
+            //       style: const TextStyle(fontSize: 20, color: Colors.black),
+            //     ),
+            //   ),
           ],
         ));
   }

@@ -25,7 +25,8 @@ class Routes {
       case RoutesName.home:
         // final Map<String, dynamic>? category =
         //     settings.arguments as Map<String, dynamic>?;
-        final String? category = settings.arguments as String?;
+        // final String? category = settings.arguments as String?;
+        final List<int>? category = settings.arguments as List<int>?;
         return MaterialPageRoute(
           builder: (context) => HomeScreen(
             category: category,

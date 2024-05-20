@@ -21,6 +21,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\265a83cdde7cd8b6e3a901e2ee6c680b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-en-rGB\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "197,298,446,567,670,817,936,1048,1147,1302,1403,1551,1672,1814,1958,2017,2075",
+                        "endColumns": "100,147,120,102,146,118,111,98,154,100,147,120,141,143,58,57,74",
+                        "endOffsets": "297,445,566,669,816,935,1047,1146,1301,1402,1550,1671,1813,1957,2016,2074,2149"
+                    },
+                    "to": {
+                        "startLines": "40,41,42,43,44,45,46,47,49,50,51,52,53,54,55,56,57",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3984,4089,4241,4366,4473,4624,4747,4863,5104,5263,5368,5520,5645,5791,5939,6002,6064",
+                        "endColumns": "104,151,124,106,150,122,115,102,158,104,151,124,145,147,62,61,78",
+                        "endOffsets": "4084,4236,4361,4468,4619,4742,4858,4961,5258,5363,5515,5640,5786,5934,5997,6059,6138"
+                    }
+                },
+                {
                     "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\c56c77f0b6757393db49796cc8003f48\\transformed\\jetified-exoplayer-core-2.18.7\\res\\values-en-rGB\\values-en-rGB.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
@@ -35,6 +52,23 @@
                         "startOffsets": "6241,6311,6373,6438,6502,6579,6644,6734,6819",
                         "endColumns": "69,61,64,63,76,64,89,84,68",
                         "endOffsets": "6306,6368,6433,6497,6574,6639,6729,6814,6883"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\93d5303e71591295a3e20624b23bd8a6\\transformed\\jetified-facebook-login-17.0.0\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,190,302,410",
+                        "endColumns": "134,111,107,147",
+                        "endOffsets": "185,297,405,553"
+                    },
+                    "to": {
+                        "startLines": "36,37,38,39",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3481,3616,3728,3836",
+                        "endColumns": "134,111,107,147",
+                        "endOffsets": "3611,3723,3831,3979"
                     }
                 },
                 {
@@ -103,40 +137,6 @@
                         "startOffsets": "6143,6888,6985,7094",
                         "endColumns": "97,96,108,98",
                         "endOffsets": "6236,6980,7089,7188"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\3b9f8649bf2c2b99ce7a0e6348938ae3\\transformed\\jetified-facebook-login-16.3.0\\res\\values-en-rGB\\values-en-rGB.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,190,302,410",
-                        "endColumns": "134,111,107,147",
-                        "endOffsets": "185,297,405,553"
-                    },
-                    "to": {
-                        "startLines": "36,37,38,39",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3481,3616,3728,3836",
-                        "endColumns": "134,111,107,147",
-                        "endOffsets": "3611,3723,3831,3979"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d1787ae722435e45211a35a7c3c959d7\\transformed\\jetified-play-services-base-18.0.1\\res\\values-en-rGB\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "197,298,446,567,670,817,936,1048,1147,1302,1403,1551,1672,1814,1958,2017,2075",
-                        "endColumns": "100,147,120,102,146,118,111,98,154,100,147,120,141,143,58,57,74",
-                        "endOffsets": "297,445,566,669,816,935,1047,1146,1301,1402,1550,1671,1813,1957,2016,2074,2149"
-                    },
-                    "to": {
-                        "startLines": "40,41,42,43,44,45,46,47,49,50,51,52,53,54,55,56,57",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3984,4089,4241,4366,4473,4624,4747,4863,5104,5263,5368,5520,5645,5791,5939,6002,6064",
-                        "endColumns": "104,151,124,106,150,122,115,102,158,104,151,124,145,147,62,61,78",
-                        "endOffsets": "4084,4236,4361,4468,4619,4742,4858,4961,5258,5363,5515,5640,5786,5934,5997,6059,6138"
                     }
                 }
             ]

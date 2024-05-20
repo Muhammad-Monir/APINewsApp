@@ -4,6 +4,7 @@ import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
+import 'package:am_innnn/provider/dropdown_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -19,7 +20,6 @@ import '../../data/news_stream_data.dart';
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/timer_provider.dart';
-import '../../services/auth_service.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../story/story_screen.dart';
@@ -27,7 +27,7 @@ import '../story/story_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.category});
 
-  final String? category;
+  final List<int>? category;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -45,17 +45,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _authToken = appData.read(kKeyToken);
   List storyData = [];
   int page = 1;
+  bool loading = false;
 
   @override
   void initState() {
+    dev.log('initstate call');
     storyPageController.addListener(() {
       _scroolListener();
     });
-    // _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    // if (_isLogin) {
-    //   _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    // }
-    // fetchNews();
     fetchStory = NewsData.fetchStory(page);
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
@@ -75,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    dev.log('widget build');
     return Scaffold(
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? _bottomNavigationMenu(context)
@@ -95,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   //News Section and fetch the news from api
   FutureBuilder<NewsModel> _newsSection() {
+    dev.log('news section call');
     return FutureBuilder<NewsModel>(
       future: fetchNews(),
       builder: (context, snapshot) {
@@ -166,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // News Screen Design
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
-        category: data.category!,
+        category: data.categoryId!,
         newsId: data.id!,
         image: data.featuredImage ?? ApiUrl.imageNotFound,
         newsDec: data.description ?? 'News Description Not Found',
@@ -182,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          const Text('No News Found '),
+          const Text('We Are Coming Soon Be Paction'),
           SizedBox(height: Utils.scrHeight * .03),
           SizedBox(
             width: Utils.scrHeight * .2,
@@ -190,6 +189,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               buttonColor: appThemeColor,
               buttonName: 'Try Again',
               onTap: () {
+                Provider.of<LanguageProvider>(context, listen: false)
+                    .resetLanguage();
+                appData.write(kKeyLanguageCode, 'en');
+                appData.write(kKeyLanguageId, 2);
                 Navigator.pushNamedAndRemoveUntil(
                     context, RoutesName.home, (route) => false);
               },
@@ -299,12 +302,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<NewsModel> fetchNews() async {
+    dev.log('fetchNews Call');
+    dev.log('categories is : ${widget.category}');
     if (widget.category == null) {
       // Fetch All News
       fetchAllNews = NewsData.fetchAllNews();
     } else {
+      String categoriesString = widget.category!.join(',');
+      dev.log('categories is : $categoriesString');
       // Fetch News filter by Category
-      fetchAllNews = NewsData.fetchAllNews(category: widget.category);
+      fetchAllNews = NewsData.fetchAllNews(category: categoriesString);
     }
     return fetchAllNews;
   }

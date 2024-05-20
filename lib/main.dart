@@ -8,22 +8,22 @@ import 'package:am_innnn/provider/obscure_provider.dart';
 import 'package:am_innnn/provider/timer_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'firebase_options.dart';
-import 'services/notification_service.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
+import 'provider/dropdown_provider.dart';
+import 'services/notification_service.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
 
@@ -46,9 +46,9 @@ void main() async {
   LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   LocalNotificationService.getToken();
-  runApp(MyApp(
-    // preferences: prefs,
-  ));
+  runApp(const MyApp(
+      // preferences: prefs,
+      ));
 }
 
 class MyApp extends StatelessWidget {
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
     rotation();
     setInitValue();
     Utils.initScreenSize(context);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => BarsVisibility()),
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DropDownProvider()),
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],

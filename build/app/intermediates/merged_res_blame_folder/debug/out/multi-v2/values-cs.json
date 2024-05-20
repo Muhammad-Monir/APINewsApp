@@ -4,7 +4,7 @@
             "outputFile": "com.quikkbyte.quikkbyte.app-mergeDebugResources-49:/values-cs/values-cs.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\d1787ae722435e45211a35a7c3c959d7\\transformed\\jetified-play-services-base-18.0.1\\res\\values-cs\\values.xml",
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\265a83cdde7cd8b6e3a901e2ee6c680b\\transformed\\jetified-play-services-base-18.1.0\\res\\values-cs\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -106,7 +106,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\3b9f8649bf2c2b99ce7a0e6348938ae3\\transformed\\jetified-facebook-login-16.3.0\\res\\values-cs\\values-cs.xml",
+                    "source": "C:\\Users\\bdCalling IT\\.gradle\\caches\\transforms-3\\93d5303e71591295a3e20624b23bd8a6\\transformed\\jetified-facebook-login-17.0.0\\res\\values-cs\\values-cs.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

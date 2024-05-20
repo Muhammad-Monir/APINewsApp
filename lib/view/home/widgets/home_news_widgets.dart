@@ -1,6 +1,6 @@
-// ignore_for_file: use_build_context_synchronously, unused_element
+// ignore_for_file: use_build_context_synchronously, unused_element, unused_field
 import 'dart:developer';
-import 'package:am_innnn/services/auth_service.dart';
+
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
@@ -92,14 +93,14 @@ class _NewsScreenState extends State<NewsScreen> {
       ),
 
       // position of banner section
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       // Banner Section
-      floatingActionButton: _isAdLoaded
-          ? SizedBox(
-              height: _bannerAd.size.height.toDouble(),
-              width: _bannerAd.size.width.toDouble(),
-              child: AdWidget(ad: _bannerAd..load()))
-          : const SizedBox(),
+      //   floatingActionButton: _isAdLoaded
+      //       ? SizedBox(
+      //           height: _bannerAd.size.height.toDouble(),
+      //           width: _bannerAd.size.width.toDouble(),
+      //           child: AdWidget(ad: _bannerAd..load()))
+      //       : const SizedBox(),
     );
   }
 
@@ -130,8 +131,8 @@ class _NewsScreenState extends State<NewsScreen> {
         SizedBox(height: Utils.scrHeight * .027),
         SizedBox(
           child: Text(
-            overflow: TextOverflow.ellipsis,
-            maxLines: 3,
+            // overflow: TextOverflow.ellipsis,
+            // maxLines: 3,
             textAlign: TextAlign.justify,
             widget.newsTitle,
             style: semiBoldTS(appTextColor, fontSize: 19),
@@ -139,12 +140,13 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
         SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
+          // color: Colors.red,
           height: Utils.scrHeight * .3,
           child: Text(
             overflow: TextOverflow.ellipsis,
-            maxLines: 5,
+            maxLines: 8,
             textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 40),
+            Utils.truncateText(widget.newsDec!, 55),
             style:
                 regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
           ),
@@ -251,6 +253,7 @@ class _NewsScreenState extends State<NewsScreen> {
             bottomLeft: Radius.circular(Utils.scrHeight * .022),
             bottomRight: Radius.circular(Utils.scrHeight * .022),
           ),
+          // child: NewsVideoPlayer(),
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: widget.image!,

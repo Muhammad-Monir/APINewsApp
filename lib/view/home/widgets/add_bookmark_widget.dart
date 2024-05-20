@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:am_innnn/model/news_model.dart';
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../data/news_stream_data.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';

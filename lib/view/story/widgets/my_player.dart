@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:am_innnn/utils/color.dart';
+import 'package:am_innnn/view/story/widgets/options_screen.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -12,8 +13,9 @@ import '../../../utils/styles.dart';
 /// Stateful widget to fetch and then display video content.shakib
 class MyPlayer extends StatefulWidget {
   final String? t;
+  final String? title;
 
-  const MyPlayer({super.key, this.t});
+  const MyPlayer({super.key, this.t, this.title});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -156,7 +158,10 @@ class _MyPlayerState extends State<MyPlayer> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                Positioned.fill(
+                Positioned(
+                  // bottom: 20,
+                  // left: 16,
+                  // right: 16,
                   left: 0,
                   right: 0,
                   bottom: 0,
@@ -165,10 +170,13 @@ class _MyPlayerState extends State<MyPlayer> {
                     controller: _chewieController!,
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                //   child: _buildCustomControls(),
-                // )
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  // child: _buildCustomControls(),
+                  child: OptionsScreen(
+                    title: widget.title,
+                  ),
+                )
               ],
             ),
           )
@@ -225,7 +233,7 @@ class _MyPlayerState extends State<MyPlayer> {
       looping: true,
       // aspectRatio: 16 / 9,
       // aspectRatio: videoController.value.aspectRatio,
-      aspectRatio: 0.475,
+      aspectRatio: 0.48,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,

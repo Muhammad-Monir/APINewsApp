@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+
 import 'package:am_innnn/model/user_profile_model.dart';
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import '../model/bookmark_model.dart';
-import 'dart:io';
 
+import '../model/bookmark_model.dart';
 import '../utils/di.dart';
 
 class UserData {

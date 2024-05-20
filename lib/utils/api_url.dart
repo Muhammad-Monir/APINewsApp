@@ -13,7 +13,8 @@ class ApiUrl {
   // static String newBaseUrl = 'https://quikkbyte.com/api';
   // static String newBaseUrl = '192.168.40.38/Am_inn/public/api';
   // static String newBaseUrl = 'https://66.29.145.160/public/api';
-  static String imageBaseUrl = 'https://quikkbyte.com/';
+  // static String imageBaseUrl = 'https://quikkbyte.com/';
+  static String imageBaseUrl = 'http://aminn.reigeeky.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
   static String newLogOutUrl = '$newBaseUrl/logout';
@@ -28,6 +29,7 @@ class ApiUrl {
   static String newUserUpdateUrl = "$newBaseUrl/user/update";
   static String newStoryUrl = "$newBaseUrl/story-boards";
   static String newCategoryUrl = "$newBaseUrl/categories-list";
+  static String newLanguageUrl = "$newBaseUrl/languages-list";
 
   static String storeNotification = "$newBaseUrl/firebase/token/add";
   static String firebaseTokenUrl = "$newBaseUrl/firebase/token/get";
