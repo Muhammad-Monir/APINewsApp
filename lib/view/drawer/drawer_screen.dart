@@ -162,7 +162,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   // Drawer Items
-  Padding _buildDrawerItems(BuildContext context, {bool isLogin = false}) {
+  Widget _buildDrawerItems(BuildContext context, {bool isLogin = false}) {
     return Padding(
       padding: EdgeInsets.all(Utils.scrHeight * .02),
       child: Column(
@@ -257,7 +257,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               text: 'Privacy & Policy',
               svgName: 'privacy&policy',
               icon: Icons.arrow_forward_ios),
-          SizedBox(height: Utils.scrHeight * .05),
+
+          SizedBox(height: Utils.scrHeight * .03),
 
           // Logout Button
           _isLogin
@@ -277,6 +278,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   textColor: Colors.white,
                   buttonName: 'Log In',
                 ),
+
+          SizedBox(height: Utils.scrHeight * .04),
+
+          // Logout Button
+          _isLogin
+              ? ActionButton(
+                  onTap: () {
+                    _logOut();
+                  },
+                  buttonColor: const Color(0xffFFCFCC),
+                  textColor: const Color(0xffFF3B30),
+                  buttonName: 'Delete Account',
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

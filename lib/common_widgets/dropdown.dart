@@ -27,31 +27,27 @@ class MyDropDown extends StatelessWidget {
             languageProvider.languages!.isEmpty) {
           return const Text('No data found');
         } else {
-          return Padding(
-            padding: EdgeInsets.all(Utils.scrHeight * .012),
-            child: DropdownButton<LanguageData>(
-              isExpanded: true,
-              underline: Container(),
-              hint: Text(selectedValue, style: mediumTS(homeTabTextColor)),
-              icon: Image.asset(
-                'assets/icons/image.png',
-                width: Utils.scrHeight * .03,
-              ),
-              value: languageProvider.selectedLanguage,
-              onChanged: (LanguageData? newValue) {
-                languageProvider.setSelectedLanguage(newValue);
-                appData.write(kKeyLanguageCode, newValue!.code);
-                appData.write(kKeyLanguageId, newValue.id);
-              },
-              items: languageProvider.languages!
-                  .map<DropdownMenuItem<LanguageData>>((LanguageData language) {
-                return DropdownMenuItem<LanguageData>(
-                  value: language,
-                  child:
-                      Text(language.code!, style: mediumTS(homeTabTextColor)),
-                );
-              }).toList(),
+          return DropdownButton<LanguageData>(
+            isExpanded: true,
+            underline: Container(),
+            hint: Text(selectedValue, style: mediumTS(homeTabTextColor)),
+            icon: Image.asset(
+              'assets/icons/image.png',
+              width: Utils.scrHeight * .03,
             ),
+            value: languageProvider.selectedLanguage,
+            onChanged: (LanguageData? newValue) {
+              languageProvider.setSelectedLanguage(newValue);
+              appData.write(kKeyLanguageCode, newValue!.code);
+              appData.write(kKeyLanguageId, newValue.id);
+            },
+            items: languageProvider.languages!
+                .map<DropdownMenuItem<LanguageData>>((LanguageData language) {
+              return DropdownMenuItem<LanguageData>(
+                value: language,
+                child: Text(language.code!, style: mediumTS(homeTabTextColor)),
+              );
+            }).toList(),
           );
         }
       },

@@ -1114,6 +1114,7 @@ drawable notification_bg_low_pressed
 drawable notification_bg_normal
 drawable notification_bg_normal_pressed
 drawable notification_icon_background
+drawable notification_oversize_large_icon_bg
 drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
@@ -1297,6 +1298,7 @@ id easeInOut
 id easeOut
 id east
 id edit_query
+id edit_text_id
 id end
 id end_padder
 id expand_activities_button
@@ -1315,6 +1317,7 @@ id group_divider
 id grouping
 id groups
 id headline
+id hide_ime_id
 id home
 id homeAsUp
 id honorRequest
@@ -1550,6 +1553,8 @@ layout com_facebook_tooltip_bubble
 layout custom_dialog
 layout gnt_medium_template_view
 layout gnt_small_template_view
+layout ime_base_split_test_activity
+layout ime_secondary_split_test_activity
 layout medium_template_view_layout
 layout messenger_button_send_blue_large
 layout messenger_button_send_blue_round

@@ -29,7 +29,7 @@ class StoryModel {
 
 class Storyboard {
   int? currentPage;
-  List<Data>? data;
+  List<StoryData>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -60,9 +60,9 @@ class Storyboard {
   Storyboard.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <StoryData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(StoryData.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -106,7 +106,7 @@ class Storyboard {
   }
 }
 
-class Data {
+class StoryData {
   int? id;
   String? title;
   String? video;
@@ -116,7 +116,7 @@ class Data {
   dynamic deletedAt;
   List<Images>? images;
 
-  Data(
+  StoryData(
       {this.id,
       this.title,
       this.video,
@@ -126,7 +126,7 @@ class Data {
       this.deletedAt,
       this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  StoryData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     video = json['video'];

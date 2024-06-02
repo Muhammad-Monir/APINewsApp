@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field, unused_element
 import 'dart:async';
 import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
@@ -43,9 +43,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool _isRefresh = false;
   final _isLogin = appData.read(kKeyIsLoggedIn);
   final _authToken = appData.read(kKeyToken);
-  List storyData = [];
+  // List storyData = [];
+  List<StoryData> storyData = [];
   int page = 1;
   bool loading = false;
+  bool hasMore = true;
 
   @override
   void initState() {
@@ -54,11 +56,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _scroolListener();
     });
     fetchStory = NewsData.fetchStory(page);
+    // fetchStory = _fetchStory(page + 1);
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
   }
 
+  // News Scrool Listener
   void _scroolListener() {
     if (storyPageController.position.pixels ==
         storyPageController.position.maxScrollExtent) {
@@ -66,7 +70,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         // page = page + 1;
       });
       fetchStory = NewsData.fetchStory(page);
+      // fetchStory = _fetchStory(page + 1);
       dev.log('scrool');
+    }
+  }
+
+  // Get All Story Data
+  Future<StoryModel> _fetchStory(int page) async {
+    setState(() {
+      loading = true;
+    });
+    try {
+      final response = await NewsData.fetchStory(page);
+      setState(() {
+        storyData.addAll(response.storyboard!.data!);
+        this.page = page;
+        hasMore = response.storyboard!.data!.isNotEmpty;
+      });
+      return response;
+    } catch (e) {
+      dev.log(e.toString());
+      rethrow;
+    } finally {
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -102,59 +130,57 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         }
         if (snapshot.hasData) {
           final data = snapshot.data!.data!.data!;
-          if (data.isNotEmpty) {
-            return !_isRefresh
-                ? GestureDetector(
-                    onTap: () {
-                      dev.log('barsVisibility on tap');
+          return !_isRefresh
+              ? GestureDetector(
+                  onTap: () {
+                    dev.log('barsVisibility on tap');
+                    Provider.of<BarsVisibility>(context, listen: false)
+                        .toggleBars();
+                    if (Provider.of<BarsVisibility>(context, listen: false)
+                        .showBars) {
+                      // Timer(const Duration(seconds: 3), () {
+                      Provider.of<BarsVisibility>(context, listen: false)
+                          .hideBars();
                       Provider.of<BarsVisibility>(context, listen: false)
                           .toggleBars();
-                      if (Provider.of<BarsVisibility>(context, listen: false)
-                          .showBars) {
-                        // Timer(const Duration(seconds: 3), () {
-                        Provider.of<BarsVisibility>(context, listen: false)
-                            .hideBars();
-                        Provider.of<BarsVisibility>(context, listen: false)
-                            .toggleBars();
-                        // });
-                      }
-                    },
-                    child: Stack(
-                      children: [
-                        // Flip Animation & News Screen Widget
-                        CustomFlipWidget(
-                          pages: data.map((e) => screenDesign(e)).toList(),
-                          data: data.map((e) => e).toList(),
-                        ),
+                      // });
+                    }
+                  },
+                  child: Stack(
+                    children: [
+                      // Flip Animation & News Screen Widget
+                      data.isNotEmpty
+                          ? CustomFlipWidget(
+                              pages: data.map((e) => screenDesign(e)).toList(),
+                              data: data.map((e) => e).toList(),
+                            )
+                          : _errorSection(context),
 
-                        // Show Tob TabBar
-                        Provider.of<BarsVisibility>(context).showBars
-                            ? Positioned(
-                                top: 0,
-                                right: 0,
-                                left: 0,
-                                child: CustomTabBar(
-                                    homeOnTap: () =>
-                                        Scaffold.of(context).openDrawer(),
-                                    startOnTap: () {
-                                      dev.log('startOnTap');
-                                      // searchCategory = '';
-                                      _refreshData();
-                                    },
-                                    refreshOnTap: () {
-                                      // searchCategory = '';
-                                      // _refreshData();
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          RoutesName.home, (route) => false);
-                                    }))
-                            : const SizedBox(),
-                      ],
-                    ),
-                  )
-                : const Center(child: CircularProgressIndicator());
-          } else {
-            return _errorSection(context);
-          }
+                      // Show Tob TabBar
+                      Provider.of<BarsVisibility>(context).showBars
+                          ? Positioned(
+                              top: 0,
+                              right: 0,
+                              left: 0,
+                              child: CustomTabBar(
+                                  homeOnTap: () =>
+                                      Scaffold.of(context).openDrawer(),
+                                  startOnTap: () {
+                                    dev.log('startOnTap');
+                                    // searchCategory = '';
+                                    _refreshData();
+                                  },
+                                  refreshOnTap: () {
+                                    // searchCategory = '';
+                                    // _refreshData();
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        RoutesName.home, (route) => false);
+                                  }))
+                          : const SizedBox(),
+                    ],
+                  ),
+                )
+              : const Center(child: CircularProgressIndicator());
         } else {
           return const Center(child: CircularProgressIndicator());
         }
@@ -174,32 +200,36 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   // Error Handling From Api
-  Center _errorSection(BuildContext context) {
+  Widget _errorSection(BuildContext context) {
     return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(),
-          const Text('We Are Coming Soon Be Paction'),
-          SizedBox(height: Utils.scrHeight * .03),
-          SizedBox(
-            width: Utils.scrHeight * .2,
-            child: ActionButton(
-              buttonColor: appThemeColor,
-              buttonName: 'Try Again',
-              onTap: () {
-                Provider.of<LanguageProvider>(context, listen: false)
-                    .resetLanguage();
-                appData.write(kKeyLanguageCode, 'en');
-                appData.write(kKeyLanguageId, 2);
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesName.home, (route) => false);
-              },
+      child: Container(
+        color: Colors.transparent,
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            const Text('We Are Coming Soon Be Paction'),
+            SizedBox(height: Utils.scrHeight * .03),
+            SizedBox(
+              width: Utils.scrHeight * .2,
+              child: ActionButton(
+                buttonColor: appThemeColor,
+                buttonName: 'Try Again',
+                onTap: () {
+                  Provider.of<LanguageProvider>(context, listen: false)
+                      .resetLanguage();
+                  appData.write(kKeyLanguageCode, 'en');
+                  appData.write(kKeyLanguageId, 2);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RoutesName.home, (route) => false);
+                },
+              ),
             ),
-          ),
-          const Spacer(),
-        ],
+            const Spacer(),
+          ],
+        ),
       ),
     );
   }
