@@ -15,7 +15,7 @@ class MyDropDown extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    String selectedValue = appData.read(kKeyLanguageCode);
+    String selectedValue = appData.read(kKeyLanguageName);
     int selectedId = appData.read(kKeyLanguageId);
     return Consumer<LanguageProvider>(
       builder: (context, languageProvider, child) {
@@ -39,13 +39,14 @@ class MyDropDown extends StatelessWidget {
             onChanged: (LanguageData? newValue) {
               languageProvider.setSelectedLanguage(newValue);
               appData.write(kKeyLanguageCode, newValue!.code);
+              appData.write(kKeyLanguageName, newValue.name);
               appData.write(kKeyLanguageId, newValue.id);
             },
             items: languageProvider.languages!
                 .map<DropdownMenuItem<LanguageData>>((LanguageData language) {
               return DropdownMenuItem<LanguageData>(
                 value: language,
-                child: Text(language.code!, style: mediumTS(homeTabTextColor)),
+                child: Text(language.name!, style: mediumTS(homeTabTextColor)),
               );
             }).toList(),
           );

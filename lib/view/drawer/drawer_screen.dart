@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields
 import 'dart:developer';
-
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
@@ -11,9 +10,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
+import '../../common_widgets/delete_account_popup.dart';
 import '../../common_widgets/dropdown.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
@@ -37,17 +36,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   @override
   void initState() {
-    // isLogfedIn();
     super.initState();
   }
-
-  // void isLogfedIn() {
-  //   _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-  //   log(_isLogin.toString());
-  //   if (_isLogin) {
-  //     _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +170,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     switchProvider: Provider.of<NotificationProvider>(context),
                   ),
                 )
-              : Container(),
+              : const SizedBox.shrink(),
           // Edite Porfile
           isLogin
               ? CustomDrawerItem(
@@ -190,7 +180,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   text: 'Edit Profile',
                   svgName: 'edit',
                   icon: Icons.arrow_forward_ios)
-              : Container(),
+              : const SizedBox.shrink(),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: Utils.scrHeight * .016,
@@ -201,8 +191,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Icons.language,
                   color: Colors.grey,
                 ),
-                SizedBox(
-                    width: Utils.scrHeight * .250, child: const MyDropDown()),
+                SizedBox(width: Utils.scrHeight * .02),
+                const Expanded(
+                  child: SizedBox(child: MyDropDown()),
+                ),
               ],
             ),
           ),
@@ -285,7 +277,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
           _isLogin
               ? ActionButton(
                   onTap: () {
-                    _logOut();
+                    getPopUp(
+                      context,
+                      (p0) => const WelComePopup(),
+                    );
                   },
                   buttonColor: const Color(0xffFFCFCC),
                   textColor: const Color(0xffFF3B30),

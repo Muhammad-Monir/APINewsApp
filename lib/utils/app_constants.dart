@@ -15,4 +15,5 @@ const String kKeySelectedLng = 'selected_lng';
 const String kKeyToken = 'token';
 const String kKeyCountryCode = 'country_code';
 const String kKeyLanguageCode = 'language_code';
+const String kKeyLanguageName = 'language_name';
 const String kKeyLanguageId = 'language_id';
