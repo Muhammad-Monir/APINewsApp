@@ -27,19 +27,20 @@ class NewsScreen extends StatefulWidget {
   final String sourceLink;
   final String newsTitle;
   final int newsId;
-  final String category;
+  // final String category;
 
-  const NewsScreen(
-      {super.key,
-      this.startOnTap,
-      this.homeOnTap,
-      this.image,
-      required this.newsDec,
-      required this.sourceLink,
-      required this.newsTitle,
-      this.refreshOnTap,
-      required this.newsId,
-      required this.category});
+  const NewsScreen({
+    super.key,
+    this.startOnTap,
+    this.homeOnTap,
+    this.image,
+    required this.newsDec,
+    required this.sourceLink,
+    required this.newsTitle,
+    this.refreshOnTap,
+    required this.newsId,
+    // required this.category
+  });
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
@@ -146,7 +147,7 @@ class _NewsScreenState extends State<NewsScreen> {
             overflow: TextOverflow.ellipsis,
             maxLines: 8,
             textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 55),
+            Utils.truncateText(widget.newsDec!, 60),
             style:
                 regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
           ),

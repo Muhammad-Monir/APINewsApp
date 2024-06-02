@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
-import 'package:am_innnn/utils/app_constants.dart';
-import 'package:am_innnn/utils/di.dart';
 import 'package:http/http.dart' as http;
 import '../model/language_model.dart';
 import '../model/news_model.dart';
@@ -12,13 +10,14 @@ import '../model/news_model.dart';
 class NewsData {
   static bool isLastPage = false;
   static Future<NewsModel> fetchAllNews(
-      {String? category, String countryCode = 'us'}) async {
+      {String? category, String countryCode = 'in'}) async {
     try {
       final response = await http.get(category == null
           ? Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=$countryCode')
+              // '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=$countryCode')
+              '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
           : Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=2&country=$countryCode&category=$category'));
+              '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);

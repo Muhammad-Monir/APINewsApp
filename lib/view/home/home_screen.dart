@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // News Screen Design
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
-        category: data.categoryId!,
+        // category: data.categoryId!,
         newsId: data.id!,
         image: data.featuredImage ?? ApiUrl.imageNotFound,
         newsDec: data.description ?? 'News Description Not Found',
@@ -333,7 +333,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<NewsModel> fetchNews() async {
     dev.log('fetchNews Call');
-    dev.log('categories is : ${widget.category}');
     if (widget.category == null) {
       // Fetch All News
       fetchAllNews = NewsData.fetchAllNews();

@@ -10,7 +10,7 @@ Future<void> setInitValue() async {
   await appData.writeIfNull(kKeyCountryCode, 'us');
   await appData.writeIfNull(kKeyLanguageCode, 'en');
   await appData.writeIfNull(kKeyLanguageName, 'English');
-  await appData.writeIfNull(kKeyLanguageId, 2);
+  await appData.writeIfNull(kKeyLanguageId, 22);
 
   var deviceInfo = DeviceInfoPlugin();
   if (Platform.isIOS) {
