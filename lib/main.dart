@@ -1,6 +1,7 @@
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/bottom_navigation_provider.dart';
+import 'package:am_innnn/provider/country_provider.dart';
 import 'package:am_innnn/provider/drop_down_provider.dart';
 import 'package:am_innnn/provider/font_size_provider.dart';
 import 'package:am_innnn/provider/notification_provider.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => BookmarkProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => CountryProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],

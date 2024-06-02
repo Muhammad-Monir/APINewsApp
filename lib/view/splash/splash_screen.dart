@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, unused_field
+// ignore_for_file: unnecessary_null_comparison, unused_field, unused_element
 
 import 'dart:developer';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -24,16 +24,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _detectLocation();
+    // _detectLocation();
 
     Future.delayed(
-      const Duration(seconds: 0),
+      const Duration(seconds: 2),
       () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RoutesName.home,
-          (route) => false,
-        );
+        if (appData.read(kKeyIsFirstTime)) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesName.onBoarding,
+            (route) => false,
+          );
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesName.home,
+            (route) => false,
+          );
+          appData.write(kKeyIsFirstTime, false);
+        }
       },
     );
     super.initState();

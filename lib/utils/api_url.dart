@@ -30,6 +30,7 @@ class ApiUrl {
   static String newStoryUrl = "$newBaseUrl/story-boards";
   static String newCategoryUrl = "$newBaseUrl/categories-list";
   static String newLanguageUrl = "$newBaseUrl/languages-list";
+  static String newCountryUrl = "$newBaseUrl/countries-list";
 
   static String storeNotification = "$newBaseUrl/firebase/token/add";
   static String firebaseTokenUrl = "$newBaseUrl/firebase/token/get";

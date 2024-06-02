@@ -1,15 +1,18 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_final_fields
 
 import 'dart:io';
+
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../data/user_data.dart';
 import '../../../route/routes_name.dart';
+import '../../../utils/app_constants.dart';
 import '../../../utils/color.dart';
+import '../../../utils/di.dart';
 import '../../../utils/utils.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -24,20 +27,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final UserData _userData = UserData();
-  late String _authToken = '';
+  String? _authToken = appData.read(kKeyToken);
 
-  Future<void> isLoggedIn() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Check if the session data exists
-    String? authToken = prefs.getString('token');
-    setState(() {
-      _authToken = authToken!;
-    });
-  }
+  // Future<void> isLoggedIn() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // Check if the session data exists
+  //   String? authToken = prefs.getString('token');
+  //   setState(() {
+  //     _authToken = authToken!;
+  //   });
+  // }
 
   @override
   void initState() {
-    isLoggedIn();
+    // isLoggedIn();
     super.initState();
   }
 
@@ -198,24 +201,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     //   return;
     // }
 
-      final userName = _nameController.text;
+    final userName = _nameController.text;
 
-      try {
-        final Map<String, dynamic>? response = await _userData.updateProfile(
-          userName: userName,
-          image: localImagePath,
-          authToken: _authToken,
-        );
+    try {
+      final Map<String, dynamic>? response = await _userData.updateProfile(
+        userName: userName,
+        image: localImagePath,
+        authToken: _authToken,
+      );
 
-        if (response != null) {
-          Utils.showSnackBar(context, 'Profile updated successfully');
-          Navigator.pushNamedAndRemoveUntil(
-              context, RoutesName.home, (route) => false);
-        } else {
-          Utils.showSnackBar(context, 'Failed to update profile');
-        }
-      } catch (error) {
-        Utils.showSnackBar(context, 'Error: $error');
+      if (response != null) {
+        Utils.showSnackBar(context, 'Profile updated successfully');
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutesName.home, (route) => false);
+      } else {
+        Utils.showSnackBar(context, 'Failed to update profile');
       }
+    } catch (error) {
+      Utils.showSnackBar(context, 'Error: $error');
+    }
   }
 }

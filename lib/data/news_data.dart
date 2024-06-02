@@ -4,8 +4,11 @@ import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import '../model/country_model.dart';
 import '../model/language_model.dart';
 import '../model/news_model.dart';
+import '../utils/app_constants.dart';
+import '../utils/di.dart';
 
 class NewsData {
   static bool isLastPage = false;
@@ -14,10 +17,11 @@ class NewsData {
     try {
       final response = await http.get(category == null
           ? Uri.parse(
-              // '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=$countryCode')
-              '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=${appData.read(kKeyCountryCode)}')
+          // '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
           : Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));
+              // '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=${appData.read(kKeyCountryCode)}&category=$category'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
@@ -160,6 +164,29 @@ class NewsData {
         final Map<String, dynamic> data = jsonDecode(response.body);
         log(data.toString());
         return LanguageModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      log(error.toString());
+      rethrow;
+    }
+  }
+
+  static Future<CountryModel> getAllCountry() async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse(ApiUrl.newCountryUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
+        return CountryModel.fromJson(data);
       } else {
         // log(response.statusCode.toString());
         throw Exception('Failed to load category: ${response.statusCode}');

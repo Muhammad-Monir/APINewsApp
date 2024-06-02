@@ -18,5 +18,6 @@ class RoutesName {
   static const String drawerScreen = "/drawer_screen";
   static const String verifyAccount = "/verify_account";
   static const String editProfile = "/edit-profile";
+  static const String onBoarding = "/onBoarding";
   // static const String newsDetails = "/news-details";
 }

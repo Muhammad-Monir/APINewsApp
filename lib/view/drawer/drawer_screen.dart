@@ -181,23 +181,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   svgName: 'edit',
                   icon: Icons.arrow_forward_ios)
               : const SizedBox.shrink(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Utils.scrHeight * .016,
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.language,
-                  color: Colors.grey,
-                ),
-                SizedBox(width: Utils.scrHeight * .02),
-                const Expanded(
-                  child: SizedBox(child: MyDropDown()),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: Utils.scrHeight * .016,
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       const Icon(
+          //         Icons.language,
+          //         color: Colors.grey,
+          //       ),
+          //       SizedBox(width: Utils.scrHeight * .02),
+          //       const Expanded(
+          //         child: SizedBox(child: LanguageDropDown()),
+          //       ),
+          //     ],
+          //   ),
+          // ),
 
           Padding(
             padding: EdgeInsets.symmetric(
