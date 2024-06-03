@@ -13,7 +13,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../common_widgets/delete_account_popup.dart';
-import '../../common_widgets/dropdown.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
 import '../../utils/color.dart';

@@ -4,6 +4,8 @@ import 'package:am_innnn/common_widgets/country_dropdown.dart';
 import 'package:am_innnn/common_widgets/dropdown.dart';
 import 'package:am_innnn/provider/country_provider.dart';
 import 'package:am_innnn/provider/dropdown_provider.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,14 @@ class OnBoarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFirstTime = appData.read(kKeyIsFirstTime);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF4F9F9),
+        title: isFirstTime
+            ? const Icon(Icons.arrow_back)
+            : const SizedBox.shrink(),
+      ),
       backgroundColor: const Color(0xFFF4F9F9),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

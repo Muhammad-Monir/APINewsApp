@@ -49,9 +49,9 @@ class LanguageDropDown extends StatelessWidget {
             value: provider.selectedLanguage,
             onChanged: (LanguageData? newValue) {
               provider.setSelectedLanguage(newValue);
-              appData.writeIfNull(kKeyLanguageCode, newValue!.code);
-              appData.writeIfNull(kKeyLanguageName, newValue.name);
-              appData.writeIfNull(kKeyLanguageId, newValue.id);
+              appData.write(kKeyLanguageCode, newValue!.code);
+              appData.write(kKeyLanguageName, newValue.name);
+              appData.write(kKeyLanguageId, newValue.id);
             },
 
             //DropDown Button Style

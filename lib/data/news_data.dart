@@ -12,12 +12,13 @@ import '../utils/di.dart';
 
 class NewsData {
   static bool isLastPage = false;
-  static Future<NewsModel> fetchAllNews(
-      {String? category, String countryCode = 'in'}) async {
+  static Future<NewsModel> fetchAllNews({String? category}) async {
     try {
+      log(appData.read(kKeyLanguageId).toString());
+      log(appData.read(kKeyCountryCode));
       final response = await http.get(category == null
           ? Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=${appData.read(kKeyCountryCode)}')
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}')
           // '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
           : Uri.parse(
               // '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));

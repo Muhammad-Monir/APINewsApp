@@ -48,9 +48,9 @@ class CountryDropDown extends StatelessWidget {
             value: provider.selectedCountry,
             onChanged: (CountryData? newValue) {
               provider.setSelectedCountry(newValue);
-              appData.writeIfNull(kKeyCountryCode, newValue!.code);
-              appData.writeIfNull(kKeyCountryName, newValue.name);
-              appData.writeIfNull(kKeyCountryId, newValue.id);
+              appData.write(kKeyCountryCode, newValue!.code);
+              appData.write(kKeyCountryName, newValue.name);
+              appData.write(kKeyCountryId, newValue.id);
             },
 
             //DropDown Button Style

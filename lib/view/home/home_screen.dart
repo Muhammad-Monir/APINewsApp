@@ -101,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     dev.log('widget build');
+    dev.log('country code ${appData.read(kKeyCountryCode)}');
+    dev.log('widget build');
     return Scaffold(
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? _bottomNavigationMenu(context)
@@ -191,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // News Screen Design
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
-        // category: data.categoryId!,
+        //category: data.categoryId!,
         newsId: data.id!,
         image: data.featuredImage ?? ApiUrl.imageNotFound,
         newsDec: data.description ?? 'News Description Not Found',
@@ -295,6 +297,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     width: Utils.scrHeight * 0.024),
                 label: 'Font'),
             BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.language,
+                  size: Utils.scrHeight * 0.030,
+                ),
+                label: 'Font'),
+            BottomNavigationBarItem(
                 icon: Utils.showSvgPicture('bookmark',
                     height: Utils.scrHeight * 0.024,
                     width: Utils.scrHeight * 0.024),
@@ -321,8 +329,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             } else if (provider.selectedIndex == 1) {
               Navigator.pushNamed(context, RoutesName.font);
             } else if (provider.selectedIndex == 2) {
-              Navigator.pushNamed(context, RoutesName.bookmark);
+              Navigator.pushNamed(context, RoutesName.onBoarding);
             } else if (provider.selectedIndex == 3) {
+              Navigator.pushNamed(context, RoutesName.bookmark);
+            } else if (provider.selectedIndex == 4) {
               shareContent(context);
             }
           },
