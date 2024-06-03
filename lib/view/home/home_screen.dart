@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Icons.language,
                   size: Utils.scrHeight * 0.030,
                 ),
-                label: 'Font'),
+                label: 'Language'),
             BottomNavigationBarItem(
                 icon: Utils.showSvgPicture('bookmark',
                     height: Utils.scrHeight * 0.024,
