@@ -76,6 +76,7 @@ dependencies:
   # geolocator: ^11.0.0
   # geocoding: ^3.0.0
   flutter_screenutil: ^5.9.1
+  full_screen_image: ^2.0.0
 
 
 dev_dependencies:
