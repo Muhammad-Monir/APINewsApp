@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/custom_divider.dart';
 import '../../common_widgets/delete_account_popup.dart';
@@ -18,6 +19,7 @@ import '../../route/routes_name.dart';
 import '../../utils/color.dart';
 import '../../utils/di.dart';
 import '../../utils/styles.dart';
+import '../../utils/toast_util.dart';
 import '../../utils/utils.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -228,7 +230,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
           // Contact Us
-          const CustomDrawerItem(
+         CustomDrawerItem(
+          onTap: () {
+            _sideBarAction('https://aminn.reigeeky.com/contact');
+          },
               text: 'Contact Us',
               svgName: 'contact_us',
               icon: Icons.arrow_forward_ios),
@@ -319,5 +324,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
         (route) => false,
       );
     });
+  }
+
+    void _sideBarAction(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      ToastUtil.showShortToast('No apps found to perform this action');
+    }
   }
 }
