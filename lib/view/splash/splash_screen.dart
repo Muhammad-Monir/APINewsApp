@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields
 
+import 'dart:developer';
+
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +28,14 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 2),
       () {
         if (appData.read(kKeyIsFirstTime)) {
+          log('if');
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.onBoarding,
             (route) => false,
           );
-          appData.write(kKeyIsFirstTime, false);
         } else {
+          log('else');
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.home,
