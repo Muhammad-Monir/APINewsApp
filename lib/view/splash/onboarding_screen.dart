@@ -27,60 +27,62 @@ class OnBoarding extends StatelessWidget {
             : const SizedBox.shrink(),
       ),
       backgroundColor: const Color(0xFFF4F9F9),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: Utils.scrHeight * .056),
-            Center(child: Image.asset('assets/images/map.png')),
-            SizedBox(height: Utils.scrHeight * .023),
-            const Text(
-              'Which Country and Language You',
-            ),
-            const Text(
-              'Prefer to News in?',
-            ),
-            SizedBox(height: Utils.scrHeight * .028),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28.0),
-              child: CountryDropDown(),
-            ),
-            SizedBox(height: Utils.scrHeight * .016),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28.0),
-              child: LanguageDropDown(),
-            ),
-            SizedBox(height: Utils.scrHeight * .033),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0),
-              child: ActionButton(
-                buttonName: 'Next',
-                buttonColor: Colors.blue,
-                onTap: () {
-                  final selectedCountry =
-                      Provider.of<CountryProvider>(context, listen: false)
-                          .selectedCountry;
-                  final selectedLanguage =
-                      Provider.of<LanguageProvider>(context, listen: false)
-                          .selectedLanguage;
-
-                  if (selectedCountry == null || selectedLanguage == null) {
-                    log('not selected');
-                    ToastUtil.showShortToast('Select Country & Laguage');
-                  } else {
-                    log('selected');
-                    appData.write(kKeyIsFirstTime, false);
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      RoutesName.home,
-                      (route) => false,
-                    );
-                  }
-                },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: Utils.scrHeight * .056),
+              Center(child: Image.asset('assets/images/map.png')),
+              SizedBox(height: Utils.scrHeight * .023),
+              const Text(
+                'Which Country and Language You',
               ),
-            ),
-          ],
+              const Text(
+                'Prefer to News in?',
+              ),
+              SizedBox(height: Utils.scrHeight * .028),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 28.0),
+                child: CountryDropDown(),
+              ),
+              SizedBox(height: Utils.scrHeight * .016),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 28.0),
+                child: LanguageDropDown(),
+              ),
+              SizedBox(height: Utils.scrHeight * .033),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                child: ActionButton(
+                  buttonName: 'Next',
+                  buttonColor: Colors.blue,
+                  onTap: () {
+                    final selectedCountry =
+                        Provider.of<CountryProvider>(context, listen: false)
+                            .selectedCountry;
+                    final selectedLanguage =
+                        Provider.of<LanguageProvider>(context, listen: false)
+                            .selectedLanguage;
+
+                    if (selectedCountry == null || selectedLanguage == null) {
+                      log('not selected');
+                      ToastUtil.showShortToast('Select Country & Laguage');
+                    } else {
+                      log('selected');
+                      appData.write(kKeyIsFirstTime, false);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RoutesName.home,
+                        (route) => false,
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
