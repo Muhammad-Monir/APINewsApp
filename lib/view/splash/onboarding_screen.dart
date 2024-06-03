@@ -70,6 +70,7 @@ class OnBoarding extends StatelessWidget {
                     ToastUtil.showShortToast('Select Country & Laguage');
                   } else {
                     log('selected');
+                    appData.write(kKeyIsFirstTime, false);
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       RoutesName.home,

@@ -22,7 +22,7 @@ class NewsData {
           // '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
           : Uri.parse(
               // '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId)}&country=${appData.read(kKeyCountryCode)}&category=$category'));
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);

@@ -100,9 +100,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    dev.log('widget build');
-    dev.log('country code ${appData.read(kKeyCountryCode)}');
-    dev.log('widget build');
     return Scaffold(
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? _bottomNavigationMenu(context)
@@ -123,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   //News Section and fetch the news from api
   FutureBuilder<NewsModel> _newsSection() {
-    dev.log('news section call');
     return FutureBuilder<NewsModel>(
       future: fetchNews(),
       builder: (context, snapshot) {
@@ -193,7 +189,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // News Screen Design
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
-        //category: data.categoryId!,
         newsId: data.id!,
         image: data.featuredImage ?? ApiUrl.imageNotFound,
         newsDec: data.description ?? 'News Description Not Found',
@@ -261,8 +256,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       title: data[index].title ?? '');
                 });
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.hasError.toString()),
+            return const Center(
+              child: Text('No Story Found'),
             );
           } else {
             return const Center(
@@ -342,12 +337,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<NewsModel> fetchNews() async {
-    dev.log('fetchNews Call');
-    if (widget.category == null) {
+    if (appData.read(kKeyCategory) == null ||
+        appData.read(kKeyCategory).isEmpty ||
+        appData.read(kKeyCategory) == []) {
       // Fetch All News
+      dev.log('fetchNews Call without category');
       fetchAllNews = NewsData.fetchAllNews();
     } else {
-      String categoriesString = widget.category!.join(',');
+      String categoriesString = appData.read(kKeyCategory).join(',');
       dev.log('categories is : $categoriesString');
       // Fetch News filter by Category
       fetchAllNews = NewsData.fetchAllNews(category: categoriesString);
