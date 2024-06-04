@@ -18,6 +18,7 @@ class ApiUrl {
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
   static String newLogOutUrl = '$newBaseUrl/logout';
+  static String newProfileDeleteUrl = '$newBaseUrl/profile/delete';
   static String newRegisterUrl = '$newBaseUrl/register';
   static String newForgotPasswordUrl = '$newBaseUrl/forgot-password';
   static String newResetPasswordUrl = '$newBaseUrl/reset-password';

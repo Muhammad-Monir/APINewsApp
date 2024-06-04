@@ -231,6 +231,30 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  // Account Delete
+  Future<void> profileDelete(String authToken) async {
+    final url = Uri.parse(ApiUrl.newProfileDeleteUrl);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        log('Profile Delete successful');
+      } else {
+        throw Exception('Account Delete failed - ${response.statusCode}');
+      }
+    } catch (error) {
+      log('Error during Account delete: $error');
+      throw Exception('Error during Account delete');
+    }
+  }
+
   _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
