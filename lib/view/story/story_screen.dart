@@ -1,13 +1,11 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
@@ -22,7 +20,15 @@ class StoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasImages = images != null && images!.isNotEmpty;
     return Scaffold(
-        backgroundColor: const Color(0xffF6F5F3),
+        appBar: AppBar(
+          title: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.transparent,
+        ),
+        // backgroundColor: const Color(0xffF6F5F3),
+        backgroundColor: const Color(0xff000000),
         // Share Icon Part
         floatingActionButton:
             // Row(
@@ -50,6 +56,7 @@ class StoryScreen extends StatelessWidget {
             // horizontal: Utils.scrHeight * .04,
           ),
           child: FloatingActionButton(
+            backgroundColor: Colors.transparent,
             shape: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(Utils.scrHeight * .1),

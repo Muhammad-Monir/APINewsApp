@@ -4,8 +4,10 @@ import 'package:am_innnn/provider/bottom_navigation_provider.dart';
 import 'package:am_innnn/provider/country_provider.dart';
 import 'package:am_innnn/provider/drop_down_provider.dart';
 import 'package:am_innnn/provider/font_size_provider.dart';
+import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/provider/notification_provider.dart';
 import 'package:am_innnn/provider/obscure_provider.dart';
+import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/provider/timer_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
@@ -76,6 +78,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => CountryProvider()),
+        ChangeNotifierProvider(create: (_) => StoryProvider()),
+        ChangeNotifierProvider(create: (_) => NewsProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
