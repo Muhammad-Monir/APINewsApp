@@ -26,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
   final _phoneNumberController = TextEditingController();
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
 
   @override
   Widget build(BuildContext context) {

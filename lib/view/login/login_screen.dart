@@ -1,15 +1,13 @@
 // ignore_for_file: unnecessary_null_comparison, unused_element
-import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
-import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
-import '../../data/social_login_auth_data/facebook_auth_data.dart';
 import '../../route/routes_name.dart';
 import '../../services/notification_service.dart';
 import '../../utils/color.dart';
@@ -71,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: Utils.scrHeight * .03),
 
             // Or Login Other Platform
-            // _buildLoginOtherPlatform(),
+            _buildLoginOtherPlatform(),
 
             // Create Account Part
             _buildRegisterPart()
@@ -81,14 +79,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Consumer<AuthProvider> loginButton() {
-    return Consumer<AuthProvider>(builder: (context, provider, child) {
+  Consumer<AuthenticationProvider> loginButton() {
+    return Consumer<AuthenticationProvider>(
+        builder: (context, provider, child) {
       return ActionButton(
           onTap: () {
             if (_formKey.currentState!.validate()) {
               final email = _emailController.text;
               final password = _passwordController.text;
-              Provider.of<AuthProvider>(context, listen: false)
+              Provider.of<AuthenticationProvider>(context, listen: false)
                   .login(email, password, context)
                   .then((value) {
                 LocalNotificationService.getToken();
@@ -137,37 +136,38 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             PlatformButton(
               onTap: () async {
-                await SocialAuthData.signInWithGoogle().then((user) {
-                  if (user != null) {
-                    Navigator.pushNamed(context, RoutesName.home);
-                    // Utils.showSnackBar(context, user.email!);
-                    // log('\nUser: ${user.displayName}');
-                    // log('\nUserAdditionalInfo: ${user.email}');
-                  }
-                });
+                await SocialAuthData.signInWithGoogle(context);
+                // .then((user) {
+                //   if (user != null) {
+                //     Navigator.pushNamed(context, RoutesName.home);
+                //     // Utils.showSnackBar(context, user.email!);
+                //     // log('\nUser: ${user.displayName}');
+                //     // log('\nUserAdditionalInfo: ${user.email}');
+                //   }
+                // });
               },
               icon: 'google',
             ),
-            PlatformButton(
-              icon: 'twitter',
-              onTap: () {
-                SocialAuthData.signInWithTwitter();
-              },
-            ),
-            PlatformButton(
-              onTap: () {
-                FacebookAuthData().signInWithFacebook().then((user) {
-                  if (user != null) {
-                    ToastUtil.showLongToast(
-                        '\nUser: ${user.user!.displayName}');
-                    ToastUtil.showLongToast('\nUser: ${user.user!.email}');
-                    log('\nUser: ${user.user!.displayName}');
-                    log('\nUserAdditionalInfo: ${user.user!.email}');
-                  }
-                });
-              },
-              icon: 'facebook',
-            ),
+            // PlatformButton(
+            //   icon: 'twitter',
+            //   onTap: () {
+            //     SocialAuthData.signInWithTwitter();
+            //   },
+            // ),
+            // PlatformButton(
+            //   onTap: () {
+            //     FacebookAuthData().signInWithFacebook().then((user) {
+            //       if (user != null) {
+            //         ToastUtil.showLongToast(
+            //             '\nUser: ${user.user!.displayName}');
+            //         ToastUtil.showLongToast('\nUser: ${user.user!.email}');
+            //         log('\nUser: ${user.user!.displayName}');
+            //         log('\nUserAdditionalInfo: ${user.user!.email}');
+            //       }
+            //     });
+            //   },
+            //   icon: 'facebook',
+            // ),
             const PlatformButton(icon: 'apple'),
           ],
         ),

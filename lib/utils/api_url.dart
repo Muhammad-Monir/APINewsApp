@@ -17,6 +17,7 @@ class ApiUrl {
   static String imageBaseUrl = 'http://aminn.reigeeky.com/';
   static String allNewsUrl = '$newBaseUrl/news';
   static String newLoginUrl = '$newBaseUrl/login';
+  static String newSocialLoginUrl = '$newBaseUrl/login/social';
   static String newLogOutUrl = '$newBaseUrl/logout';
   static String newRegisterUrl = '$newBaseUrl/register';
   static String newForgotPasswordUrl = '$newBaseUrl/forgot-password';
