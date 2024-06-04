@@ -32,7 +32,7 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   bool _isLogin = appData.read(kKeyIsLoggedIn);
   String? _authToken = appData.read(kKeyToken);
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
   String? localImagePath;
 
   @override
@@ -230,10 +230,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
           // Contact Us
-         CustomDrawerItem(
-          onTap: () {
-            _sideBarAction('https://aminn.reigeeky.com/contact');
-          },
+          CustomDrawerItem(
+              onTap: () {
+                _sideBarAction('https://aminn.reigeeky.com/contact');
+              },
               text: 'Contact Us',
               svgName: 'contact_us',
               icon: Icons.arrow_forward_ios),
@@ -326,7 +326,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     });
   }
 
-    void _sideBarAction(String url) async {
+  void _sideBarAction(String url) async {
     if (await canLaunchUrlString(url)) {
       await launchUrlString(url);
     } else {

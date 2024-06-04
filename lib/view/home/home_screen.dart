@@ -496,7 +496,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     try {
       // newsPageController.jumpToPage(0);
-      await fetchNews();
+      // await fetchNews();
+      Provider.of<NewsProvider>(context, listen: false).fetchNews();
       setState(() {
         _isRefresh = false;
       });

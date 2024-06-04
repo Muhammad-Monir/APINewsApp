@@ -12,14 +12,13 @@ import 'package:http/http.dart' as http;
 import '../route/routes_name.dart';
 import '../utils/utils.dart';
 
-class AuthProvider with ChangeNotifier {
+class AuthenticationProvider with ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
 
   Future<void> login(
       String email, String password, BuildContext context) async {
-    // final sharedInstance = Provider.of<AuthService>(context, listen: false);
     try {
       _isLoading = true;
       notifyListeners();
@@ -39,15 +38,52 @@ class AuthProvider with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // UserData.userProfile(data["token"], context).then((value) async {
         UserData.userProfile(data["token"], context).then((value) async {
-          // int? userId = sharedInstance.getUserID();
-          // log('login user id = ${userId.toString()}');
           log('login user id = ${appData.read(kKeyUserID)}');
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
-        // sharedInstance.saveSessionData(data["token"]);
+        Utils.showSnackBar(context, data["message"]);
+        _navigateToHome(context);
+      } else {
+        throw Exception('Failed to login');
+      }
+    } catch (error) {
+      Utils.showSnackBar(context, "$error");
+      rethrow;
+    }
+  }
+
+  Future<void> socialLogin(String email, String username, String token,
+      String provider, BuildContext context) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      final response = await http.post(
+        Uri.parse(ApiUrl.newSocialLoginUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'username': username,
+          'token': token,
+          'provider': provider,
+          // 'secret': secret!,
+        }),
+      );
+      log('login : ${response.body}');
+      if (response.statusCode == 200) {
+        _isLoading = false;
+        notifyListeners();
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log('social signin response: $data');
+        UserData.userProfile(data["token"], context).then((value) async {
+          log('login user id = ${appData.read(kKeyUserID)}');
+        });
+        appData.write(kKeyIsLoggedIn, true);
+        appData.write(kKeyToken, data["token"]);
         Utils.showSnackBar(context, data["message"]);
         _navigateToHome(context);
       } else {

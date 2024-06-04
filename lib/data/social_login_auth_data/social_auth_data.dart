@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
+import 'package:am_innnn/data/auth_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter_login/twitter_login.dart';
 import '../../utils/toast_util.dart';
 
@@ -9,7 +14,7 @@ class SocialAuthData {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  static Future<User?> signInWithGoogle() async {
+  static Future<User?> signInWithGoogle(BuildContext context) async {
     try {
       await InternetAddress.lookup('google.com');
 
@@ -31,7 +36,15 @@ class SocialAuthData {
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
       ToastUtil.showLongToast(authResult.toString());
-      log(authResult.toString());
+      if (authResult.user != null) {
+        Provider.of<AuthenticationProvider>(context, listen: false).socialLogin(
+            authResult.user!.email!,
+            authResult.user!.displayName!,
+            authResult.credential!.accessToken!,
+            'google',
+            context);
+      }
+      log("google sing in info$authResult");
       // Return the current user
       return authResult.user;
     } catch (error) {

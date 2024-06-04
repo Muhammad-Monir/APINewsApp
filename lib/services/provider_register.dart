@@ -17,6 +17,6 @@ var providers = [
   ChangeNotifierProvider(create: (_) => FontSizeProvider()),
   ChangeNotifierProvider(create: (_) => DropDownProvider()),
   ChangeNotifierProvider(create: (_) => BookmarkProvider()),
-  ChangeNotifierProvider(create: (_) => AuthProvider()),
+  ChangeNotifierProvider(create: (_) => AuthenticationProvider()),
   // ChangeNotifierProvider(create: (_) => UserProvider()),
 ];
