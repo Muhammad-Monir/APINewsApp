@@ -7,7 +7,10 @@ import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
+import 'package:am_innnn/view/search/widgets/favorite_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
@@ -144,6 +147,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   onTap: () {
                     // log('Selected category: $selectedCategory');
                     log('Selected category: $selectedCategories');
+                    appData.write(kKeyCategory, selectedCategories);
                     // log('Select search: ${_searchController.text}');
                     // // Map<String, dynamic> filter = {
                     // //   'selectedCategory': selectedCategory,
@@ -244,8 +248,22 @@ class _SearchScreenState extends State<SearchScreen> {
                         selectedCategories.remove(data[index].id);
                         log('Selected selectedCategories: $selectedCategories');
                       } else {
-                        selectedCategories.add(data[index].id!);
-                        log('Selected selectedCategories: $selectedCategories');
+                        if (appData.read(kKeyIsLoggedIn)) {
+                          selectedCategories.add(data[index].id!);
+                          log('Selected selectedCategories: $selectedCategories');
+                        } else {
+                          if (selectedCategories.isNotEmpty) {
+                            getPopUp(
+                              context,
+                              (p0) => CategoryPopup(
+                                onExit: () => Navigator.pop(context),
+                              ),
+                            );
+                          } else {
+                            selectedCategories.add(data[index].id!);
+                            log('Selected selectedCategories: $selectedCategories');
+                          }
+                        }
                       }
                     });
                   },
@@ -275,6 +293,20 @@ class _SearchScreenState extends State<SearchScreen> {
               child: CircularProgressIndicator(),
             );
           }
+        });
+  }
+
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent,
+              child: childBuilder(context));
         });
   }
 }
