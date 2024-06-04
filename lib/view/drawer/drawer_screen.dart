@@ -200,12 +200,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
           //   ),
           // ),
 
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Utils.scrHeight * .016,
-            ),
-            child: const CustomDivider(),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(
+          //     horizontal: Utils.scrHeight * .016,
+          //   ),
+          //   child: const CustomDivider(),
+          // ),
           // Share App Link
           CustomDrawerItem(
               onTap: () async {
