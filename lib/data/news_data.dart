@@ -12,21 +12,20 @@ import '../utils/di.dart';
 
 class NewsData {
   static bool isLastPage = false;
-  static Future<NewsModel> fetchAllNews({String? category}) async {
+  static Future<NewsModel> fetchAllNews(
+      {String? category, int page = 1}) async {
     try {
-      log(appData.read(kKeyLanguageId).toString());
-      log(appData.read(kKeyCountryCode));
       final response = await http.get(category == null
           ? Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}')
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&page=$page')
           // '${ApiUrl.allNewsUrl}??language=22&country=$countryCode&page=1')
           : Uri.parse(
               // '${ApiUrl.allNewsUrl}?language=&country=$countryCode&category=$category'));
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category'));
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&page=$page'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return NewsModel.fromJson(data);
       } else {
         // If the server did not return a 200 OK response, throw an exception
