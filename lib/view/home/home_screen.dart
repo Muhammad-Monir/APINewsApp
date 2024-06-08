@@ -5,7 +5,7 @@ import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/provider/bookmark_provider.dart';
-import 'package:am_innnn/provider/dropdown_provider.dart';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';

@@ -29,8 +29,8 @@ class UserData {
 
         log('id is : ${data["data"]["id"]}');
         appData.write(kKeyUserID, data["data"]["id"]);
-        // appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
-        // appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
+        appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
+        appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
 
         // save the categories
         List<int> categories = List<int>.from(data["data"]["categories"]);
@@ -176,6 +176,35 @@ class UserData {
         },
         body: jsonEncode(<String, dynamic>{
           'categories': categoryList,
+        }),
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
+        ToastUtil.showShortToast(data["message"]);
+        return data["message"];
+      } else {
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  // Update Categories
+  static Future<String> addCountryLanguage(
+      int countryId, int languageId) async {
+    try {
+      final response = await http.post(
+        Uri.parse(ApiUrl.addCountryLanguage),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${appData.read(kKeyToken)}'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'country_id': countryId,
+          'language_id': languageId,
         }),
       );
       // Check if the request was successful (status code 200)

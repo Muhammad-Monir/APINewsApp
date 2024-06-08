@@ -39,9 +39,6 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _isKeyboardOpen = false;
   late Future<NewsModel> fetchAllNews;
-  // List<int> list = appData.read(kKeyCategory);
-  // List<int> selectedCategories =
-  //     appData.read(kKeyIsLoggedIn) ? appData.read(kKeyCategory) : [];
   List<int> selectedCategories = appData.read(kKeyIsLoggedIn)
       ? List<int>.from(appData.read(kKeyCategory))
       : [];
@@ -57,9 +54,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    // log(appData.read(kKeyCategory).toString());
-    // selectedCategories =
-    //     appData.read(kKeyIsLoggedIn) ? appData.read(kKeyCategory) : [];
     super.initState();
     // fetchNews(_searchController.text);
     _focusNode.addListener(_onFocusChange);
@@ -159,48 +153,31 @@ class _SearchScreenState extends State<SearchScreen> {
                   // Search button
                   ActionButton(
                     onTap: () {
-                      log('Selected category: $selectedCategories');
                       appData.write(kKeyCategory, selectedCategories);
                       if (appData.read(kKeyIsLoggedIn)) {
                         UserData.addCategory(selectedCategories).then((value) {
                           UserData.userProfile(appData.read(kKeyToken), context)
                               .then((value) {
-                            if (Provider.of<NewsProvider>(context,
-                                    listen: false)
-                                .newes
-                                .isNotEmpty) {
-                              Provider.of<NewsProvider>(context, listen: false)
-                                  .clearList();
-                              Provider.of<BookmarkProvider>(context,
-                                      listen: false)
-                                  .clearList();
-                              Navigator.pushNamed(context, RoutesName.home,
-                                  arguments: selectedCategories);
-                            } else {
-                              Provider.of<BookmarkProvider>(context,
-                                      listen: false)
-                                  .clearList();
-                              Navigator.pushNamed(context, RoutesName.home,
-                                  arguments: selectedCategories);
-                            }
+                            navigateToHome();
                           });
                         });
                       } else {
-                        if (Provider.of<NewsProvider>(context, listen: false)
-                            .newes
-                            .isNotEmpty) {
-                          Provider.of<NewsProvider>(context, listen: false)
-                              .clearList();
-                          Provider.of<BookmarkProvider>(context, listen: false)
-                              .clearList();
-                          Navigator.pushNamed(context, RoutesName.home,
-                              arguments: selectedCategories);
-                        } else {
-                          Provider.of<BookmarkProvider>(context, listen: false)
-                              .clearList();
-                          Navigator.pushNamed(context, RoutesName.home,
-                              arguments: selectedCategories);
-                        }
+                        navigateToHome();
+                        // if (Provider.of<NewsProvider>(context, listen: false)
+                        //     .newes
+                        //     .isNotEmpty) {
+                        //   Provider.of<NewsProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Provider.of<BookmarkProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Navigator.pushNamed(context, RoutesName.home,
+                        //       arguments: selectedCategories);
+                        // } else {
+                        //   Provider.of<BookmarkProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Navigator.pushNamed(context, RoutesName.home,
+                        //       arguments: selectedCategories);
+                        // }
                       }
                     },
                     buttonColor: appThemeColor,
@@ -293,11 +270,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     setState(() {
                       if (selectedCategories.contains(data[index].id)) {
                         selectedCategories.remove(data[index].id);
-                        log('Selected selectedCategories: $selectedCategories');
                       } else {
                         if (appData.read(kKeyIsLoggedIn)) {
                           selectedCategories.add(data[index].id!);
-                          log('Selected selectedCategories: $selectedCategories');
                         } else {
                           if (selectedCategories.isNotEmpty) {
                             getPopUp(
@@ -308,7 +283,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             );
                           } else {
                             selectedCategories.add(data[index].id!);
-                            log('Selected selectedCategories: $selectedCategories');
                           }
                         }
                       }
@@ -355,5 +329,18 @@ class _SearchScreenState extends State<SearchScreen> {
               backgroundColor: Colors.transparent,
               child: childBuilder(context));
         });
+  }
+
+  void navigateToHome() {
+    if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home,
+          arguments: selectedCategories);
+    } else {
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home,
+          arguments: selectedCategories);
+    }
   }
 }

@@ -21,6 +21,7 @@ class CountryDropDown extends StatefulWidget {
 
 class _CountryDropDownState extends State<CountryDropDown> {
   final TextEditingController textEditingController = TextEditingController();
+  final isLogin = appData.read(kKeyIsLoggedIn);
 
   @override
   void dispose() {
@@ -58,6 +59,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
                   ),
                 );
               }).toList(),
+              // value: countryData,
               value: provider.selectedCountry,
               onChanged: (CountryData? newValue) {
                 provider.setSelectedCountry(newValue);
@@ -134,55 +136,3 @@ class _CountryDropDownState extends State<CountryDropDown> {
     );
   }
 }
-
-
-// class CountryDropDown extends StatelessWidget {
-//   const CountryDropDown({super.key});
-
-//   @override
-//   Widget build(final BuildContext context) {
-//     // String selectedValue = appData.read(kKeyLanguageName);
-//     // int selectedId = appData.read(kKeyLanguageId);
-//     // String? selectedValue;
-//     // int? selectedId;
-//     return Consumer<CountryProvider>(
-//       builder: (context, provider, child) {
-//         if (provider.isLoading) {
-//           return const SizedBox.shrink();
-//         } else if (provider.errorMessage != null) {
-//           return Text('Error: ${provider.errorMessage}');
-//         } else if (provider.countries == null || provider.countries!.isEmpty) {
-//           return const Text('No data found');
-//         } else {
-//           return DropdownButton<CountryData>(
-//             isExpanded: true,
-//             underline: Container(),
-//             hint:
-//                 Text('Select Your Country', style: mediumTS(homeTabTextColor)),
-//             icon: Image.asset(
-//               'assets/icons/image.png',
-//               width: Utils.scrHeight * .03,
-//             ),
-//             value: provider.selectedCountry,
-//             onChanged: (CountryData? newValue) {
-//               provider.setSelectedCountry(newValue);
-//               appData.writeIfNull(kKeyCountryCode, newValue!.code);
-//               appData.writeIfNull(kKeyCountryName, newValue.name);
-//               appData.writeIfNull(kKeyCountryId, newValue.id);
-//             },
-//             items: provider.countries!
-//                 .map<DropdownMenuItem<CountryData>>((CountryData country) {
-//               return DropdownMenuItem<CountryData>(
-//                 value: country,
-//                 child: SizedBox(
-//                     width: 100,
-//                     child:
-//                         Text(country.name!, style: mediumTS(homeTabTextColor))),
-//               );
-//             }).toList(),
-//           );
-//         }
-//       },
-//     );
-//   }
-// }

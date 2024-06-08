@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
+import 'package:am_innnn/provider/country_provider.dart';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
@@ -303,14 +305,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   void _logOut() async {
-    // final sharedInstance = Provider.of<AuthService>(context, listen: false);
     await _authProvider.logoutUser(_authToken!).then((value) {
-      // sharedInstance.clearSessionData();
-      // sharedInstance.clearUserId();
+      appData.write(kKeyCountryCode, 'in');
+      appData.write(kKeyLanguageId, 22);
       appData.remove(kKeyUserID);
       appData.remove(kKeyToken);
       appData.write(kKeyIsLoggedIn, false);
-
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutesName.home,

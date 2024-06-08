@@ -37,4 +37,6 @@ class ApiUrl {
   static String storeNotification = "$newBaseUrl/firebase/token/add";
   static String firebaseTokenUrl = "$newBaseUrl/firebase/token/get";
   static String addCategoryUrl = "$newBaseUrl/profile/update/categories";
+  static String addCountryLanguage =
+      "$newBaseUrl/profile/update/language_and_country";
 }

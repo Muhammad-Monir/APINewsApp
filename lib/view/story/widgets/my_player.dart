@@ -1,14 +1,13 @@
 // ignore_for_file: implementation_imports
 
 import 'dart:developer';
-import 'package:am_innnn/utils/color.dart';
+
 import 'package:am_innnn/view/story/widgets/options_screen.dart';
 import 'package:chewie/chewie.dart';
+import 'package:chewie/src/helpers/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:chewie/src/helpers/utils.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import '../../../utils/styles.dart';
 
 /// Stateful widget to fetch and then display video content.shakib
 class MyPlayer extends StatefulWidget {

@@ -53,16 +53,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                if (Provider.of<NewsProvider>(context, listen: false)
-                    .newes
-                    .isNotEmpty) {
-                  Provider.of<NewsProvider>(context, listen: false).clearList();
-                  Provider.of<BookmarkProvider>(context, listen: false)
-                      .clearList();
-                  Navigator.pushNamed(context, RoutesName.home);
-                } else {
-                  Navigator.pushNamed(context, RoutesName.home);
-                }
+                navigatToHome();
               },
             ),
           ),
@@ -139,5 +130,15 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
         ],
       ),
     );
+  }
+
+  void navigatToHome() {
+    if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home);
+    } else {
+      Navigator.pushNamed(context, RoutesName.home);
+    }
   }
 }

@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:am_innnn/common_widgets/country_dropdown.dart';
-import 'package:am_innnn/common_widgets/dropdown.dart';
+import 'package:am_innnn/common_widgets/language_dropdown.dart';
+import 'package:am_innnn/data/user_data.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/country_provider.dart';
-import 'package:am_innnn/provider/dropdown_provider.dart';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
+import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/toast_util.dart';
@@ -14,8 +17,20 @@ import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../route/routes_name.dart';
 
-class OnBoarding extends StatelessWidget {
+class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
+
+  @override
+  State<OnBoarding> createState() => _OnBoardingState();
+}
+
+class _OnBoardingState extends State<OnBoarding> {
+  @override
+  void initState() {
+    initialSetData();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,22 +86,14 @@ class OnBoarding extends StatelessWidget {
                     } else {
                       log('selected');
                       appData.write(kKeyIsFirstTime, false);
-                      if (Provider.of<NewsProvider>(context, listen: false)
-                          .newes
-                          .isNotEmpty) {
-                        Provider.of<NewsProvider>(context, listen: false)
-                            .clearList();
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          RoutesName.home,
-                          (route) => false,
-                        );
+                      if (appData.read(kKeyIsLoggedIn)) {
+                        UserData.addCountryLanguage(
+                                selectedCountry.id!, selectedLanguage.id!)
+                            .then((value) {
+                          navigateToHome(context);
+                        });
                       } else {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          RoutesName.home,
-                          (route) => false,
-                        );
+                        navigateToHome(context);
                       }
                     }
                   },
@@ -97,5 +104,38 @@ class OnBoarding extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void navigateToHome(BuildContext context) {
+    if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      clearAllData(context);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RoutesName.home,
+        (route) => false,
+      );
+    } else {
+      clearAllData(context);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RoutesName.home,
+        (route) => false,
+      );
+    }
+  }
+
+  void clearAllData(BuildContext context) {
+    Provider.of<NewsProvider>(context, listen: false).clearList();
+    Provider.of<BookmarkProvider>(context, listen: false).clearList();
+    Provider.of<StoryProvider>(context, listen: false).clearList();
+  }
+
+  void initialSetData() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<LanguageProvider>(context, listen: false)
+          .initializeSelectedLanguage();
+      Provider.of<CountryProvider>(context, listen: false)
+          .initializeSelectedCountry();
+    });
   }
 }
