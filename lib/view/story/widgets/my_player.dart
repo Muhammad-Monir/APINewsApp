@@ -1,14 +1,13 @@
 // ignore_for_file: implementation_imports
 
 import 'dart:developer';
-import 'package:am_innnn/utils/color.dart';
+
 import 'package:am_innnn/view/story/widgets/options_screen.dart';
 import 'package:chewie/chewie.dart';
+import 'package:chewie/src/helpers/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:chewie/src/helpers/utils.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import '../../../utils/styles.dart';
 
 /// Stateful widget to fetch and then display video content.shakib
 class MyPlayer extends StatefulWidget {
@@ -180,11 +179,13 @@ class _MyPlayerState extends State<MyPlayer> {
               ],
             ),
           )
-        : Center(
-            child: Text(
-            'Loading...',
-            style: regularTS(appThemeColor),
-          ));
+        : const Center(child: CircularProgressIndicator()
+
+            //   Text(
+            //   'Loading...',
+            //   style: regularTS(appThemeColor),
+            // )
+            );
     // IconButton(onPressed: (){
     //   final t = 'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
     //   _changeVideoSource(t);
@@ -232,8 +233,8 @@ class _MyPlayerState extends State<MyPlayer> {
       autoPlay: true,
       looping: true,
       // aspectRatio: 16 / 9,
-      // aspectRatio: videoController.value.aspectRatio,
-      aspectRatio: 0.48,
+      aspectRatio: videoController.value.aspectRatio,
+      // aspectRatio: 0.48,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,

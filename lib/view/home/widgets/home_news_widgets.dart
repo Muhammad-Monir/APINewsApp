@@ -4,7 +4,6 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:full_screen_image/full_screen_image.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -123,10 +122,10 @@ class _NewsScreenState extends State<NewsScreen> {
         SizedBox(
           child: Text(
             // overflow: TextOverflow.ellipsis,
-            // maxLines: 3,
+            maxLines: 3,
             textAlign: TextAlign.justify,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 19),
+            style: semiBoldTS(appTextColor, fontSize: 17 * fontSize.fontSize),
           ),
         ),
         SizedBox(height: Utils.scrHeight * .02),
@@ -137,7 +136,7 @@ class _NewsScreenState extends State<NewsScreen> {
             overflow: TextOverflow.ellipsis,
             maxLines: 8,
             textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 60),
+            Utils.truncateText(widget.newsDec!, 50),
             style:
                 regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
           ),
@@ -232,39 +231,40 @@ class _NewsScreenState extends State<NewsScreen> {
 
   Container topImageSection() {
     return Container(
-        height: Utils.scrHeight * .335,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(Utils.scrHeight * .12),
-          bottomRight: Radius.circular(Utils.scrHeight * .12),
-        )),
-        child: FullScreenWidget(
-          disposeLevel: DisposeLevel.Medium,
-          child: Hero(
-            tag: 'teg',
-            child: InteractiveViewer(
-              maxScale: 5,
-              minScale: 0.1,
-              constrained: true,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Utils.scrHeight * .022),
-                  bottomRight: Radius.circular(Utils.scrHeight * .022),
-                ),
-                // child: NewsVideoPlayer(),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: widget.image!,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Image.network(ApiUrl.imageNotFound),
-                ),
-              ),
-            ),
-          ),
-        ));
+      height: Utils.scrHeight * .335,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(Utils.scrHeight * .12),
+        bottomRight: Radius.circular(Utils.scrHeight * .12),
+      )),
+      // child: FullScreenWidget(
+      //   disposeLevel: DisposeLevel.Medium,
+      //   child: Hero(
+      //     tag: 'teg',
+      //     child: InteractiveViewer(
+      //       maxScale: 5,
+      //       minScale: 0.1,
+      //       constrained: true,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(Utils.scrHeight * .022),
+          bottomRight: Radius.circular(Utils.scrHeight * .022),
+        ),
+        // child: NewsVideoPlayer(),
+        child: CachedNetworkImage(
+          fit: BoxFit.cover,
+          imageUrl: widget.image!,
+          placeholder: (context, url) =>
+              const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) =>
+              Image.network(ApiUrl.imageNotFound),
+        ),
+      ),
+      // ),
+      //   ),
+      // )
+    );
   }
 
   Widget _buildPromoCode() {

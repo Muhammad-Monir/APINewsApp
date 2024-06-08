@@ -6,7 +6,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/language_model.dart';
-import '../provider/dropdown_provider.dart';
+import '../provider/language_provider.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
 import '../utils/utils.dart';

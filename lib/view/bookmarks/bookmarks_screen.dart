@@ -1,14 +1,16 @@
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/bookmark_data.dart';
 import 'package:am_innnn/model/bookmark_model.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/bookmarks/widgets/bookmark_item.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../data/user_data.dart';
+import '../../provider/news_provider.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -51,8 +53,7 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesName.home, ((route) => false));
+                navigatToHome();
               },
             ),
           ),
@@ -129,5 +130,15 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
         ],
       ),
     );
+  }
+
+  void navigatToHome() {
+    if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home);
+    } else {
+      Navigator.pushNamed(context, RoutesName.home);
+    }
   }
 }

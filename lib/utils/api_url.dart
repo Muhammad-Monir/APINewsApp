@@ -19,7 +19,7 @@ class ApiUrl {
   static String newLoginUrl = '$newBaseUrl/login';
   static String newSocialLoginUrl = '$newBaseUrl/login/social';
   static String newLogOutUrl = '$newBaseUrl/logout';
-  static String newProfileDeleteUrl = '$newBaseUrl/profile/delete';
+  static String newDeleteProfile = '$newBaseUrl/profile/delete';
   static String newRegisterUrl = '$newBaseUrl/register';
   static String newForgotPasswordUrl = '$newBaseUrl/forgot-password';
   static String newResetPasswordUrl = '$newBaseUrl/reset-password';
@@ -36,4 +36,7 @@ class ApiUrl {
 
   static String storeNotification = "$newBaseUrl/firebase/token/add";
   static String firebaseTokenUrl = "$newBaseUrl/firebase/token/get";
+  static String addCategoryUrl = "$newBaseUrl/profile/update/categories";
+  static String addCountryLanguage =
+      "$newBaseUrl/profile/update/language_and_country";
 }

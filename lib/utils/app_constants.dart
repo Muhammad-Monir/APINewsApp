@@ -21,3 +21,5 @@ const String kKeyLanguageCode = 'language_code';
 const String kKeyLanguageName = 'language_name';
 const String kKeyLanguageId = 'language_id';
 const String kKeyCategory = 'category';
+const String kKeyCountryData = 'countryData';
+const String kKeyLanguageData = 'languageData';

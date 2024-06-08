@@ -1,7 +1,9 @@
 // ignore_for_file: unnecessary_import
 import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/styles.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:am_innnn/view/home/widgets/add_bookmark_widget.dart';
@@ -10,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../provider/news_provider.dart';
 import 'custom_vertical_flip_page_turn.dart';
 
@@ -46,6 +47,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       log('page number: ${widget.pages.length}');
       if (controller.page == (widget.pages.length - 1)) {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
+        Provider.of<BookmarkProvider>(context, listen: false).fetchNews();
       }
     });
     super.initState();
@@ -79,19 +81,35 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
               controller: controller,
               scrollDirection: Axis.vertical,
               onPageChanged: (index) {
+                log('before assign page index = $index');
+                log('before assign page = $page');
                 page = index;
+                log('after assign page = $page');
               },
               children: widget.pages
                   .mapIndexed((index, e) => Container(
                         color: Colors.transparent,
                         child: Stack(
                           children: [
-                            AddBookMArkWidget(
-                              newsId: widget.data[index].id,
-                              index: index,
-                            ),
+                            // Container(
+                            //     height: 50,
+                            //     width: 50,
+                            //     color: Colors.black,
+                            //     child: Text(
+                            //       index.toString(),
+                            //       style: const TextStyle(color: Colors.white),
+                            //     )),
+                            appData.read(kKeyIsLoggedIn) ||
+                                    Provider.of<NewsProvider>(context,
+                                            listen: false)
+                                        .isLoading
+                                ? AddBookMArkWidget(
+                                    newsId: widget.data[index].id,
+                                    index: index,
+                                  )
+                                : const SizedBox.shrink(),
                             Positioned(
-                                bottom: Utils.scrHeight * .13,
+                                bottom: Utils.scrHeight * .1,
                                 left: Utils.scrHeight * .02,
                                 right: Utils.scrHeight * .02,
                                 child:

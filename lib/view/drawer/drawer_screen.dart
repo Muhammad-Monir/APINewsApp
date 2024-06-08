@@ -1,8 +1,13 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields
 import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
+import 'package:am_innnn/provider/country_provider.dart';
+import 'package:am_innnn/provider/language_provider.dart';
+import 'package:am_innnn/provider/news_provider.dart';
+import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/view/drawer/widget/custom_item.dart';
@@ -12,7 +17,6 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../common_widgets/action_button.dart';
-import '../../common_widgets/custom_divider.dart';
 import '../../common_widgets/delete_account_popup.dart';
 import '../../provider/notification_provider.dart';
 import '../../route/routes_name.dart';
@@ -182,30 +186,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   svgName: 'edit',
                   icon: Icons.arrow_forward_ios)
               : const SizedBox.shrink(),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(
-          //     horizontal: Utils.scrHeight * .016,
-          //   ),
-          //   child: Row(
-          //     children: [
-          //       const Icon(
-          //         Icons.language,
-          //         color: Colors.grey,
-          //       ),
-          //       SizedBox(width: Utils.scrHeight * .02),
-          //       const Expanded(
-          //         child: SizedBox(child: LanguageDropDown()),
-          //       ),
-          //     ],
-          //   ),
-          // ),
 
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Utils.scrHeight * .016,
-            ),
-            child: const CustomDivider(),
-          ),
           // Share App Link
           CustomDrawerItem(
               onTap: () async {
@@ -248,7 +229,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // App Privacy & Policy
           CustomDrawerItem(
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.privacyPolicy);
+                // Navigator.pushNamed(context, RoutesName.privacyPolicy);
+                _sideBarAction(
+                    'http://aminn.reigeeky.com/pages/privacy-policy');
               },
               text: 'Privacy & Policy',
               svgName: 'privacy&policy',
@@ -260,6 +243,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
           _isLogin
               ? ActionButton(
                   onTap: () {
+                    appData.write(kKeyCategory, []);
+                    Provider.of<NewsProvider>(context, listen: false)
+                        .clearList();
+                    Provider.of<StoryProvider>(context, listen: false)
+                        .clearList();
                     _logOut();
                   },
                   buttonColor: const Color(0xffFFCFCC),
@@ -268,7 +256,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 )
               : ActionButton(
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.login);
+                    // Navigator.pushNamed(context, RoutesName.login);
+                    // Provider.of<NewsProvider>(context, listen: false)
+                    //     .clearList();
+                    // Provider.of<StoryProvider>(context, listen: false)
+                    //     .clearList();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, RoutesName.login, (route) => false);
                   },
                   buttonColor: appThemeColor,
                   textColor: Colors.white,
@@ -311,10 +305,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   void _logOut() async {
-    // final sharedInstance = Provider.of<AuthService>(context, listen: false);
     await _authProvider.logoutUser(_authToken!).then((value) {
-      // sharedInstance.clearSessionData();
-      // sharedInstance.clearUserId();
+      appData.write(kKeyCountryCode, 'in');
+      appData.write(kKeyLanguageId, 22);
       appData.remove(kKeyUserID);
       appData.remove(kKeyToken);
       appData.write(kKeyIsLoggedIn, false);

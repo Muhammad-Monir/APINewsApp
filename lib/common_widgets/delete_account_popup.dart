@@ -1,5 +1,10 @@
 import 'package:am_innnn/common_widgets/action_button.dart';
+import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../route/routes_name.dart';
 import '../data/auth_data.dart';
 import '../route/routes_name.dart';
 import '../utils/app_constants.dart';
@@ -50,6 +55,12 @@ class _DeletePopupState extends State<DeletePopup> {
             buttonColor: const Color(0xffFFCFCC),
             textColor: const Color(0xffFF3B30),
             onTap: () {
+              Provider.of<AuthenticationProvider>(context, listen: false)
+                  .deleteUser(appData.read(kKeyToken))
+                  .then((value) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutesName.login, (route) => false);
+              });
               _deleteAccount();
             },
           ),

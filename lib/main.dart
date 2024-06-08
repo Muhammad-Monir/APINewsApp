@@ -25,7 +25,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
-import 'provider/dropdown_provider.dart';
+import 'provider/language_provider.dart';
 import 'services/notification_service.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
