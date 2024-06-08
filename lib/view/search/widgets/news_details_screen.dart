@@ -116,19 +116,23 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         SizedBox(
           // width: Utils.scrHeight * .342,
           child: Text(
+            maxLines: 4,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
+            style: semiBoldTS(appTextColor, fontSize: 17 * fontSize.fontSize),
           ),
         ),
         SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
           height: Utils.scrHeight * .28,
           child: Text(
+            textAlign: TextAlign.justify,
+            maxLines: 8,
             Utils.truncateText(widget.newsDec!, 55),
             style:
-                regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
+                regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
         ),
+        SizedBox(height: Utils.scrHeight * .09),
         socialLinkSection(),
       ],
     );
@@ -162,7 +166,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   },
                   child: Text('Tap to know more',
                       overflow: TextOverflow.ellipsis,
-                      style: regularTS(appThemeColor,
+                      style: regularTS(Colors.black,
                           fontSize: 14, isUnderline: true)),
                 ),
               ),

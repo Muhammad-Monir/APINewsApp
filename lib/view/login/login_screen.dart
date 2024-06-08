@@ -91,8 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   .login(email, password, context)
                   .then((value) {
                 LocalNotificationService.getToken();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesName.home, (route) => false);
+                // Provider.of<NewsProvider>(context, listen: false).clearList();
+                // Provider.of<StoryProvider>(context, listen: false).clearList();
+                // Navigator.pushNamedAndRemoveUntil(
+                //     context, RoutesName.home, (route) => false);
               });
             }
           },

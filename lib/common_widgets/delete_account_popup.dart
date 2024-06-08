@@ -1,5 +1,10 @@
 import 'package:am_innnn/common_widgets/action_button.dart';
+import 'package:am_innnn/data/auth_data.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../route/routes_name.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
 import '../utils/utils.dart';
@@ -36,7 +41,14 @@ class WelComePopup extends StatelessWidget {
             buttonName: 'Delete',
             buttonColor: const Color(0xffFFCFCC),
             textColor: const Color(0xffFF3B30),
-            onTap: () {},
+            onTap: () {
+              Provider.of<AuthenticationProvider>(context, listen: false)
+                  .deleteUser(appData.read(kKeyToken))
+                  .then((value) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutesName.login, (route) => false);
+              });
+            },
           ),
           SizedBox(height: Utils.scrHeight * .02),
           ActionButton(

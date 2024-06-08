@@ -4,18 +4,24 @@ import 'package:am_innnn/model/news_model.dart';
 import '../services/base_stream_service.dart';
 import 'package:http/http.dart' as http;
 import '../utils/api_url.dart';
+import '../utils/app_constants.dart';
+import '../utils/di.dart';
 
 class NewsDataStream extends MyStreamBase<NewsModel> {
   NewsDataStream() : super(empty: NewsModel());
   Future<NewsModel> fetchNewsStream(
-      {String? category, String? authToken}) async {
+      {String? category, String? authToken, int page = 1}) async {
     NewsModel? newsModel;
 
     try {
       final response = await http.get(
         category == null
-            ? Uri.parse(ApiUrl.allNewsUrl)
-            : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'),
+            ? Uri.parse(
+                '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&page=$page')
+            : Uri.parse(
+                '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&page=$page'),
+        // ? Uri.parse(ApiUrl.allNewsUrl)
+        // : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $authToken'

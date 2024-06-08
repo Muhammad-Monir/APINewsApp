@@ -4,6 +4,7 @@ import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/dropdown_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
@@ -53,9 +54,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     storyPageController.addListener(() {
       _scroolListener();
     });
+    fetchData();
 
-    Provider.of<StoryProvider>(context, listen: false).fetchStories();
-    Provider.of<NewsProvider>(context, listen: false).fetchNews();
+    // Provider.of<StoryProvider>(context, listen: false).fetchStories();
+    // Provider.of<NewsProvider>(context, listen: false).fetchNews();
     // fetchStory = NewsData.fetchStory(page);
     // fetchStory =
     //     Provider.of<StoryProvider>(context, listen: false).fetchStories();
@@ -105,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    dev.log('${appData.read(kKeyCountryCode)}');
     return Scaffold(
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? _bottomNavigationMenu(context)
@@ -114,10 +117,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         scrollDirection: Axis.horizontal,
         children: [
           // All news with Vertical Scroll view
-          _newsSection(),
+          _buildNewsSection(),
 
           // All Story for swipe horizontally
-          _storySection(),
+          _buildStorySection(),
         ],
       ),
     );
@@ -190,16 +193,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   //     },
   //   );
   // }
-  Consumer<NewsProvider> _newsSection() {
+  Consumer<NewsProvider> _buildNewsSection() {
     return Consumer<NewsProvider>(
       builder: (context, provider, child) {
         if (provider.isLoading && provider.newes.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (provider.newes.isEmpty) {
-          return const Center(child: Text('We Are Coming Soon Be Paction'));
-        }
+        // if (provider.newes.isEmpty) {
+        //   return const Center(child: Text('We Are Coming Soon Be Paction'));
+        // }
 
         return !_isRefresh
             ? GestureDetector(
@@ -239,15 +242,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 homeOnTap: () =>
                                     Scaffold.of(context).openDrawer(),
                                 startOnTap: () {
-                                  dev.log('startOnTap');
-                                  // searchCategory = '';
-                                  _refreshData();
+                                  Provider.of<NewsProvider>(context,
+                                          listen: false)
+                                      .clearList();
+                                  Provider.of<NewsProvider>(context,
+                                          listen: false)
+                                      .fetchNews();
                                 },
                                 refreshOnTap: () {
-                                  // searchCategory = '';
-                                  // _refreshData();
-                                  Navigator.pushNamedAndRemoveUntil(context,
-                                      RoutesName.home, (route) => false);
+                                  Provider.of<NewsProvider>(context,
+                                          listen: false)
+                                      .clearList();
+                                  _refreshData();
                                 }))
                         : const SizedBox(),
                   ],
@@ -338,8 +344,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   //         }
   //       });
   // }
-  Consumer<StoryProvider> _storySection() {
-    return Consumer<StoryProvider>(builder: (context, storyProvider, child) {
+  Consumer<StoryProvider> _buildStorySection() {
+    return Consumer<StoryProvider>(builder: (context, storyProvider, _) {
+      // dev.log(storyProvider.stories.first.video!);
       // Remove the bottom navigation when go to story page
       if (storyProvider.isLoading && storyProvider.stories.isEmpty) {
         return const Center(child: CircularProgressIndicator());
@@ -349,17 +356,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         return const Center(child: Text('We Are Coming Soon Be Paction'));
       }
 
-      if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-        Timer(const Duration(seconds: 1), () {
-          Provider.of<BarsVisibility>(context, listen: false).hideBars();
-        });
-      }
       return PageView.builder(
           controller: storyPageController,
           scrollDirection: Axis.vertical,
           itemCount: storyProvider.stories.length,
           itemBuilder: (context, index) {
             final story = storyProvider.stories[index];
+            if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
+              Timer(const Duration(seconds: 1), () {
+                Provider.of<BarsVisibility>(context, listen: false).hideBars();
+              });
+            }
             return StoryScreen(
               images: story.images,
               videoUrl: story.video ?? '',
@@ -497,7 +504,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     try {
       // newsPageController.jumpToPage(0);
       // await fetchNews();
-      Provider.of<NewsProvider>(context, listen: false).fetchNews();
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      fetchData();
+      // if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      //   Provider.of<NewsProvider>(context, listen: false).clearList();
+      //   fetchData();
+      //   // Provider.of<NewsProvider>(context, listen: false).fetchNews();
+      // } else {
+      //   Provider.of<NewsProvider>(context, listen: false).clearList();
+      //   fetchData();
+      //   // Provider.of<NewsProvider>(context, listen: false).fetchNews();
+      // }
       setState(() {
         _isRefresh = false;
       });
@@ -529,5 +547,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // newsPageController.dispose();
     storyPageController.dispose();
     super.dispose();
+  }
+
+  void fetchData() {
+    // Provider.of<StoryProvider>(context, listen: false).clearList();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty ||
+          Provider.of<StoryProvider>(context, listen: false)
+              .stories
+              .isNotEmpty) {
+        Provider.of<StoryProvider>(context, listen: false).clearList();
+        Provider.of<NewsProvider>(context, listen: false).clearList();
+        Provider.of<StoryProvider>(context, listen: false).fetchStories();
+        Provider.of<NewsProvider>(context, listen: false).fetchNews();
+      } else {
+        Provider.of<StoryProvider>(context, listen: false).fetchStories();
+        Provider.of<NewsProvider>(context, listen: false).fetchNews();
+      }
+    });
   }
 }

@@ -4,6 +4,7 @@ import 'package:am_innnn/common_widgets/country_dropdown.dart';
 import 'package:am_innnn/common_widgets/dropdown.dart';
 import 'package:am_innnn/provider/country_provider.dart';
 import 'package:am_innnn/provider/dropdown_provider.dart';
+import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/toast_util.dart';
@@ -22,9 +23,7 @@ class OnBoarding extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF4F9F9),
-        title: isFirstTime
-            ? const Icon(Icons.arrow_back)
-            : const SizedBox.shrink(),
+        automaticallyImplyLeading: isFirstTime ? false : true,
       ),
       backgroundColor: const Color(0xFFF4F9F9),
       body: SingleChildScrollView(
@@ -72,11 +71,23 @@ class OnBoarding extends StatelessWidget {
                     } else {
                       log('selected');
                       appData.write(kKeyIsFirstTime, false);
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        RoutesName.home,
-                        (route) => false,
-                      );
+                      if (Provider.of<NewsProvider>(context, listen: false)
+                          .newes
+                          .isNotEmpty) {
+                        Provider.of<NewsProvider>(context, listen: false)
+                            .clearList();
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.home,
+                          (route) => false,
+                        );
+                      } else {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.home,
+                          (route) => false,
+                        );
+                      }
                     }
                   },
                 ),

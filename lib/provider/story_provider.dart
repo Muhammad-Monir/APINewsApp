@@ -27,11 +27,11 @@ class StoryProvider with ChangeNotifier {
       final response = await NewsData.fetchStory(_page);
 
       if (response.storyboard?.data != null) {
+        _stories.addAll(response.storyboard!.data!);
+        _hasMore = response.storyboard!.data!.isNotEmpty;
         if (response.storyboard!.nextPageUrl == null) {
           return ToastUtil.showShortToast('We Are Coming Soon Be Paction');
         }
-        _stories.addAll(response.storyboard!.data!);
-        _hasMore = response.storyboard!.data!.isNotEmpty;
         _page++;
       } else {
         _hasMore = false;
@@ -42,5 +42,11 @@ class StoryProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void clearList() {
+    _stories.clear();
+    _page = 1;
+    notifyListeners();
   }
 }

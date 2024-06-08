@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/data/search_data.dart';
+import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
+import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -14,7 +16,9 @@ import 'package:am_innnn/view/search/widgets/favorite_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
+import '../../provider/news_provider.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -27,6 +31,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final isLogin = appData.read(kKeyIsLoggedIn);
   String? selectedCategory = '';
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -34,7 +39,12 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _isKeyboardOpen = false;
   late Future<NewsModel> fetchAllNews;
-  List<int> selectedCategories = [];
+  // List<int> list = appData.read(kKeyCategory);
+  // List<int> selectedCategories =
+  //     appData.read(kKeyIsLoggedIn) ? appData.read(kKeyCategory) : [];
+  List<int> selectedCategories = appData.read(kKeyIsLoggedIn)
+      ? List<int>.from(appData.read(kKeyCategory))
+      : [];
 
   void _onFocusChange() {
     setState(() {
@@ -47,6 +57,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
+    // log(appData.read(kKeyCategory).toString());
+    // selectedCategories =
+    //     appData.read(kKeyIsLoggedIn) ? appData.read(kKeyCategory) : [];
     super.initState();
     // fetchNews(_searchController.text);
     _focusNode.addListener(_onFocusChange);
@@ -92,81 +105,115 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         title: Text('Search For', style: mediumTS(appBarColor, fontSize: 24)),
       ),
-      body: GestureDetector(
-        // onTap: () {
-        //   FocusScope.of(context).requestFocus(FocusNode());
-        //   searchDataStream.fetchSearchStream(searchTitle: '');
-        // },
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Utils.scrHeight * .024,
-            vertical: Utils.scrHeight * .016,
-          ),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                // Search Filed for search by title
-                Focus(
-                  focusNode: _focusNode,
-                  child: EmailFormField(
-                    onFiledSubmitt: (value) {
-                      log('submitte called $value');
-                      if (value!.isNotEmpty) {
-                        // searchDataStream.fetchSearchStream(
-                        //     searchTitle: _searchController.text);
-                        fetchNews(_searchController.text);
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          // onTap: () {
+          //   FocusScope.of(context).requestFocus(FocusNode());
+          //   searchDataStream.fetchSearchStream(searchTitle: '');
+          // },
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Utils.scrHeight * .024,
+              vertical: Utils.scrHeight * .016,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  // Search Filed for search by title
+                  Focus(
+                    focusNode: _focusNode,
+                    child: EmailFormField(
+                      onFiledSubmitt: (value) {
+                        log('submitte called $value');
+                        if (value!.isNotEmpty) {
+                          // searchDataStream.fetchSearchStream(
+                          //     searchTitle: _searchController.text);
+                          fetchNews(_searchController.text);
+                        } else {
+                          // searchDataStream.fetchSearchStream(searchTitle: '');
+                          fetchNews(_searchController.text);
+                        }
+                      },
+                      // onChanged: (value) {
+                      //   if (value!.isNotEmpty || value != null) {
+                      //     searchDataStream.fetchSearchStream(searchTitle: value);
+                      //   }
+                      // },
+                      emailController: _searchController,
+                      hintText: 'Search news',
+                      validate: false,
+                    ),
+                  ),
+                  SizedBox(height: Utils.scrHeight * .024),
+                  Text('Categories',
+                      style: semiBoldTS(appTextColor, fontSize: 20)),
+                  SizedBox(height: Utils.scrHeight * .016),
+
+                  // Select Category for search by category
+                  SizedBox(
+                    height: Utils.scrHeight * .62,
+                    child: selectCategorySection(),
+                  ),
+
+                  // Search button
+                  ActionButton(
+                    onTap: () {
+                      log('Selected category: $selectedCategories');
+                      appData.write(kKeyCategory, selectedCategories);
+                      if (appData.read(kKeyIsLoggedIn)) {
+                        UserData.addCategory(selectedCategories).then((value) {
+                          UserData.userProfile(appData.read(kKeyToken), context)
+                              .then((value) {
+                            if (Provider.of<NewsProvider>(context,
+                                    listen: false)
+                                .newes
+                                .isNotEmpty) {
+                              Provider.of<NewsProvider>(context, listen: false)
+                                  .clearList();
+                              Provider.of<BookmarkProvider>(context,
+                                      listen: false)
+                                  .clearList();
+                              Navigator.pushNamed(context, RoutesName.home,
+                                  arguments: selectedCategories);
+                            } else {
+                              Provider.of<BookmarkProvider>(context,
+                                      listen: false)
+                                  .clearList();
+                              Navigator.pushNamed(context, RoutesName.home,
+                                  arguments: selectedCategories);
+                            }
+                          });
+                        });
                       } else {
-                        // searchDataStream.fetchSearchStream(searchTitle: '');
-                        fetchNews(_searchController.text);
+                        if (Provider.of<NewsProvider>(context, listen: false)
+                            .newes
+                            .isNotEmpty) {
+                          Provider.of<NewsProvider>(context, listen: false)
+                              .clearList();
+                          Provider.of<BookmarkProvider>(context, listen: false)
+                              .clearList();
+                          Navigator.pushNamed(context, RoutesName.home,
+                              arguments: selectedCategories);
+                        } else {
+                          Provider.of<BookmarkProvider>(context, listen: false)
+                              .clearList();
+                          Navigator.pushNamed(context, RoutesName.home,
+                              arguments: selectedCategories);
+                        }
                       }
                     },
-                    // onChanged: (value) {
-                    //   if (value!.isNotEmpty || value != null) {
-                    //     searchDataStream.fetchSearchStream(searchTitle: value);
-                    //   }
-                    // },
-                    emailController: _searchController,
-                    hintText: 'Search news',
-                    validate: false,
+                    buttonColor: appThemeColor,
+                    textColor: Colors.white,
+                    buttonName: 'Search',
                   ),
-                ),
-                SizedBox(height: Utils.scrHeight * .024),
-                Text('Categories',
-                    style: semiBoldTS(appTextColor, fontSize: 20)),
-                SizedBox(height: Utils.scrHeight * .016),
-
-                // Select Category for search by category
-                SizedBox(
-                  height: Utils.scrHeight * .62,
-                  child: selectCategorySection(),
-                ),
-
-                // Search button
-                ActionButton(
-                  onTap: () {
-                    // log('Selected category: $selectedCategory');
-                    log('Selected category: $selectedCategories');
-                    appData.write(kKeyCategory, selectedCategories);
-                    // log('Select search: ${_searchController.text}');
-                    // // Map<String, dynamic> filter = {
-                    // //   'selectedCategory': selectedCategory,
-                    // //   'searchText': _searchController.text,
-                    // // };
-                    // // log('Select search: $filter');
-                    // // Navigate to next page with selected category
-                    Navigator.pushNamed(context, RoutesName.home,
-                        arguments: selectedCategories);
-                  },
-                  buttonColor: appThemeColor,
-                  textColor: Colors.white,
-                  buttonName: 'Search',
-                ),
-                SizedBox(height: Utils.scrHeight * .010),
-                Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
-                SizedBox(height: Utils.scrHeight * .010),
-                searchListItem()
-              ],
+                  SizedBox(height: Utils.scrHeight * .010),
+                  Text('All News',
+                      style: semiBoldTS(appTextColor, fontSize: 20)),
+                  SizedBox(height: Utils.scrHeight * .010),
+                  searchListItem()
+                ],
+              ),
             ),
           ),
         ),

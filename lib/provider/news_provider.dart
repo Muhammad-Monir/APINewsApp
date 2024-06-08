@@ -31,9 +31,11 @@ class NewsProvider extends ChangeNotifier {
       if (appData.read(kKeyCategory) == null ||
           appData.read(kKeyCategory).isEmpty ||
           appData.read(kKeyCategory) == []) {
+        log('if');
         // Fetch All News
         response = await NewsData.fetchAllNews(page: _page);
       } else {
+        log('else');
         String categoriesString = appData.read(kKeyCategory).join(',');
         // Fetch News filter by Category
         response = await NewsData.fetchAllNews(
@@ -47,7 +49,7 @@ class NewsProvider extends ChangeNotifier {
         _newes.addAll(response.data!.data!);
         _hasMore = response.data!.data!.isNotEmpty;
         if (_hasMore == false) {
-          ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+          ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
         }
         log('news data from news provider : ${_newes.first.title}');
         _page++;
@@ -60,5 +62,11 @@ class NewsProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void clearList() {
+    _newes.clear();
+    _page = 1;
+    notifyListeners();
   }
 }

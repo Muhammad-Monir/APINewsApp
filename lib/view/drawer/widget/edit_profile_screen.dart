@@ -27,7 +27,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final UserData _userData = UserData();
-  String? _authToken = appData.read(kKeyToken);
+  final _authToken = appData.read(kKeyToken);
 
   // Future<void> isLoggedIn() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();

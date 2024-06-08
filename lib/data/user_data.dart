@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,11 +26,16 @@ class UserData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
+
         log('id is : ${data["data"]["id"]}');
         appData.write(kKeyUserID, data["data"]["id"]);
-        // sharedInstance.saveUserId(data["data"]["id"]);
-        // int? id = await AuthService.getUserID();
-        // log('user id is : $id');
+        // appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
+        // appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
+
+        // save the categories
+        List<int> categories = List<int>.from(data["data"]["categories"]);
+        appData.write(kKeyCategory, categories);
+
         return ProfileModel.fromJson(data);
       } else {
         throw Exception('code  ${response.statusCode}');
@@ -157,6 +162,33 @@ class UserData {
     } catch (error) {
       log('Error: $error');
       return null;
+    }
+  }
+
+  // Update Categories
+  static Future<String> addCategory(List<int> categoryList) async {
+    try {
+      final response = await http.post(
+        Uri.parse(ApiUrl.addCategoryUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${appData.read(kKeyToken)}'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'categories': categoryList,
+        }),
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
+        ToastUtil.showShortToast(data["message"]);
+        return data["message"];
+      } else {
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      throw Exception(error);
     }
   }
 }

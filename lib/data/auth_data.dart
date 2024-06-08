@@ -6,9 +6,13 @@ import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
+import '../provider/news_provider.dart';
+import '../provider/story_provider.dart';
 import '../route/routes_name.dart';
 import '../utils/utils.dart';
 
@@ -40,6 +44,10 @@ class AuthenticationProvider with ChangeNotifier {
         final Map<String, dynamic> data = jsonDecode(response.body);
         UserData.userProfile(data["token"], context).then((value) async {
           log('login user id = ${appData.read(kKeyUserID)}');
+          Provider.of<NewsProvider>(context, listen: false).clearList();
+          Provider.of<StoryProvider>(context, listen: false).clearList();
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutesName.home, (route) => false);
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
@@ -258,6 +266,32 @@ class AuthenticationProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         log('Logout successful');
+      } else {
+        throw Exception('Logout failed - ${response.statusCode}');
+      }
+    } catch (error) {
+      log('Error during logout: $error');
+      throw Exception('Error during logout');
+    }
+  }
+
+  // Delete User
+  Future<void> deleteUser(String authToken) async {
+    final url = Uri.parse(ApiUrl.newDeleteProfile);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        ToastUtil.showShortToast(data["message"]);
+        log('Account Delete Successful');
       } else {
         throw Exception('Logout failed - ${response.statusCode}');
       }

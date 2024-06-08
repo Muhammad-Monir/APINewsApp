@@ -180,11 +180,13 @@ class _MyPlayerState extends State<MyPlayer> {
               ],
             ),
           )
-        : Center(
-            child: Text(
-            'Loading...',
-            style: regularTS(appThemeColor),
-          ));
+        : const Center(child: CircularProgressIndicator()
+
+            //   Text(
+            //   'Loading...',
+            //   style: regularTS(appThemeColor),
+            // )
+            );
     // IconButton(onPressed: (){
     //   final t = 'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
     //   _changeVideoSource(t);
@@ -232,8 +234,8 @@ class _MyPlayerState extends State<MyPlayer> {
       autoPlay: true,
       looping: true,
       // aspectRatio: 16 / 9,
-      // aspectRatio: videoController.value.aspectRatio,
-      aspectRatio: 0.48,
+      aspectRatio: videoController.value.aspectRatio,
+      // aspectRatio: 0.48,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,
