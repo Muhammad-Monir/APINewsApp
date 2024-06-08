@@ -277,7 +277,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   onTap: () {
                     getPopUp(
                       context,
-                      (p0) => const WelComePopup(),
+                      (p0) => const DeletePopup(),
                     );
                   },
                   buttonColor: const Color(0xffFFCFCC),

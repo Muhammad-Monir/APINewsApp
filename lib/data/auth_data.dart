@@ -278,6 +278,7 @@ class AuthenticationProvider with ChangeNotifier {
     }
   }
 
+
   // Delete User
   Future<void> deleteUser(String authToken) async {
     final url = Uri.parse(ApiUrl.newDeleteProfile);
