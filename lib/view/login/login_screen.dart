@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
-import '../../provider/country_provider.dart';
-import '../../provider/language_provider.dart';
 import '../../route/routes_name.dart';
 import '../../services/notification_service.dart';
 import '../../utils/color.dart';

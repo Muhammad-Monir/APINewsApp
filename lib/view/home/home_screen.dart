@@ -253,6 +253,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   Provider.of<NewsProvider>(context,
                                           listen: false)
                                       .clearList();
+
+                                  Provider.of<StoryProvider>(context,
+                                          listen: false)
+                                      .clearList();
+                                  Provider.of<BookmarkProvider>(context,
+                                          listen: false)
+                                      .clearList();
                                   _refreshData();
                                 }))
                         : const SizedBox(),
@@ -505,6 +512,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       // newsPageController.jumpToPage(0);
       // await fetchNews();
       Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
       Provider.of<BookmarkProvider>(context, listen: false).clearList();
       fetchData();
       // if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {

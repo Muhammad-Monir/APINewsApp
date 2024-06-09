@@ -2,6 +2,7 @@ import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/bookmark_data.dart';
 import 'package:am_innnn/model/bookmark_model.dart';
 import 'package:am_innnn/provider/bookmark_provider.dart';
+import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -136,8 +137,11 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
       Provider.of<NewsProvider>(context, listen: false).clearList();
       Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home);
     } else {
+      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home);
     }
   }

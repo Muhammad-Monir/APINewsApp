@@ -1,17 +1,15 @@
+// ignore_for_file: unused_field
+
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../route/routes_name.dart';
-import '../data/auth_data.dart';
-import '../route/routes_name.dart';
-import '../utils/app_constants.dart';
 import '../utils/color.dart';
-import '../utils/di.dart';
 import '../utils/styles.dart';
-import '../utils/toast_util.dart';
 import '../utils/utils.dart';
 
 class DeletePopup extends StatefulWidget {
@@ -23,7 +21,6 @@ class DeletePopup extends StatefulWidget {
 
 class _DeletePopupState extends State<DeletePopup> {
   final String? _authToken = appData.read(kKeyToken);
-  final _authProvider = AuthProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +58,7 @@ class _DeletePopupState extends State<DeletePopup> {
                 Navigator.pushNamedAndRemoveUntil(
                     context, RoutesName.login, (route) => false);
               });
-              _deleteAccount();
+              // _deleteAccount();
             },
           ),
           SizedBox(height: Utils.scrHeight * .02),
@@ -78,17 +75,17 @@ class _DeletePopupState extends State<DeletePopup> {
     );
   }
 
-  void _deleteAccount() async {
-    await _authProvider.profileDelete(_authToken!).then((value) {
-      appData.remove(kKeyUserID);
-      appData.remove(kKeyToken);
-      appData.write(kKeyIsLoggedIn, false);
-      ToastUtil.showShortToast('Your Account Deleted Successfully');
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        RoutesName.home,
-        (route) => false,
-      );
-    });
-  }
+  // void _deleteAccount() async {
+  //   await _authProvider.profileDelete(_authToken!).then((value) {
+  //     appData.remove(kKeyUserID);
+  //     appData.remove(kKeyToken);
+  //     appData.write(kKeyIsLoggedIn, false);
+  //     ToastUtil.showShortToast('Your Account Deleted Successfully');
+  //     Navigator.pushNamedAndRemoveUntil(
+  //       context,
+  //       RoutesName.home,
+  //       (route) => false,
+  //     );
+  //   });
+  // }
 }

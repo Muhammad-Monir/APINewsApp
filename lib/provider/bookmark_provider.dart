@@ -1,10 +1,7 @@
 // ignore_for_file: unused_local_variable, prefer_final_fields, prefer_typing_uninitialized_variables, prefer_interpolation_to_compose_strings
-
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../data/news_stream_data.dart';
 import '../data/user_data.dart';
 import '../model/news_model.dart';
@@ -35,6 +32,7 @@ class BookmarkProvider with ChangeNotifier {
     notifyListeners();
 
     try {
+      String categoriesString = appData.read(kKeyCategory).join(',');
       final response;
       if (appData.read(kKeyCategory) == null ||
           appData.read(kKeyCategory).isEmpty ||
@@ -43,14 +41,13 @@ class BookmarkProvider with ChangeNotifier {
         // Fetch All News
         log("token" + _authToken);
         response = await newsDataStream.fetchNewsStream(
-            authToken: _authToken, page: _page);
+            authToken: _authToken, page: _page, category: categoriesString);
       } else {
         log('else bookmark');
         log("token" + _authToken);
-        String categoriesString = appData.read(kKeyCategory).join(',');
         // Fetch News filter by Category
         response = await newsDataStream.fetchNewsStream(
-            authToken: _authToken, page: _page);
+            authToken: _authToken, page: _page, category: categoriesString);
       }
       // if (response.data!.nextPageUrl != null) {
       //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');

@@ -12,7 +12,7 @@ class NewsDataStream extends MyStreamBase<NewsModel> {
   Future<NewsModel> fetchNewsStream(
       {String? category, String? authToken, int page = 1}) async {
     NewsModel? newsModel;
-
+    log('on stream category: $category');
     try {
       final response = await http.get(
         category == null
@@ -29,7 +29,7 @@ class NewsDataStream extends MyStreamBase<NewsModel> {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // log("Check bookmark News :$data");
+        log("Check bookmark News :$data");
         newsModel = NewsModel.fromJson(data);
       }
       return handleSuccessWithReturn(newsModel!);

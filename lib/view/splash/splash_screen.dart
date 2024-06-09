@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields
 
 import 'dart:developer';
-
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // _detectLocation();
 
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 0),
       () {
         if (appData.read(kKeyIsFirstTime)) {
           log('if');
