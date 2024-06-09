@@ -40,9 +40,10 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _isKeyboardOpen = false;
   late Future<NewsModel> fetchAllNews;
-  List<int> selectedCategories = appData.read(kKeyIsLoggedIn)
-      ? List<int>.from(appData.read(kKeyCategory))
-      : [];
+  // List<int> selectedCategories = appData.read(kKeyIsLoggedIn)
+  //     ? List<int>.from(appData.read(kKeyCategory))
+  //     : List<int>.from(appData.read(kKeyCategory));
+  List<int> selectedCategories = List<int>.from(appData.read(kKeyCategory));
 
   void _onFocusChange() {
     setState(() {
@@ -218,7 +219,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                   newsDec: e.description,
                                   sourceLink: e.url!,
                                   newsTitle: e.title!,
-                                  image: e.featuredImage!,
+                                  image:
+                                      e.featuredImage ?? ApiUrl.imageNotFound,
                                 ),
                               ));
                         },

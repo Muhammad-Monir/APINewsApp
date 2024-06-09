@@ -47,7 +47,9 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       log('page number: ${widget.pages.length}');
       if (controller.page == (widget.pages.length - 1)) {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
-        Provider.of<BookmarkProvider>(context, listen: false).fetchNews();
+        if (appData.read(kKeyIsLoggedIn)) {
+          Provider.of<BookmarkProvider>(context, listen: false).fetchNews();
+        }
       }
     });
     super.initState();
