@@ -127,7 +127,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           child: Text(
             textAlign: TextAlign.justify,
             maxLines: 8,
-            Utils.truncateText(widget.newsDec!, 55),
+            Utils.truncateText(widget.newsDec ?? 'NA', 55),
             style:
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
