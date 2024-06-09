@@ -59,6 +59,8 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
                   child: GestureDetector(
                     onTap: () {
                       if (_isLogin) {
+                        log('news id from news screen: ${widget.newsId}');
+                        log('news id from provider: ${provider.newes[widget.index!].id}');
                         provider.toggleBookmark(
                             appData.read(kKeyToken), widget.newsId!);
                         // provider.isFavorite ?
@@ -129,6 +131,8 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
   void fetchData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (Provider.of<BookmarkProvider>(context, listen: false).newes.isEmpty) {
+        log('index: ${widget.index}');
+        log('news id from news screen: ${widget.newsId}');
         Provider.of<BookmarkProvider>(context, listen: false)
             .fetchNews()
             .then((value) {
@@ -140,6 +144,8 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
                   Provider.of<BookmarkProvider>(context, listen: false)
                       .newes
                       .length) {
+            log('news id from provider: ${Provider.of<BookmarkProvider>(context, listen: false).newes[widget.index!].id}');
+
             Provider.of<BookmarkProvider>(context, listen: false)
                 .setFavoriteValue(
                     Provider.of<BookmarkProvider>(context, listen: false)

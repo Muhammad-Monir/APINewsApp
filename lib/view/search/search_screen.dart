@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../provider/news_provider.dart';
+import '../../provider/story_provider.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -334,11 +335,14 @@ class _SearchScreenState extends State<SearchScreen> {
   void navigateToHome() {
     if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
       Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
       Provider.of<BookmarkProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home,
           arguments: selectedCategories);
     } else {
       Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home,
           arguments: selectedCategories);
     }

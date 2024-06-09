@@ -29,8 +29,25 @@ class UserData {
 
         log('id is : ${data["data"]["id"]}');
         appData.write(kKeyUserID, data["data"]["id"]);
-        appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
-        appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
+
+        // Check if language and country data are not null before accessing them
+        final language = data["data"]["language"];
+        final country = data["data"]["country"];
+
+        if (language != null) {
+          appData.write(kKeyLanguageId, language["id"]);
+        } else {
+          appData.write(kKeyLanguageId, 22);
+        }
+
+        if (country != null) {
+          appData.write(kKeyCountryCode, country["code"]);
+        } else {
+          appData.write(kKeyCountryCode, 'in');
+        }
+
+        // appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
+        // appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
 
         // save the categories
         List<int> categories = List<int>.from(data["data"]["categories"]);
