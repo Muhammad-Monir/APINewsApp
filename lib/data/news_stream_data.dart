@@ -29,7 +29,7 @@ class NewsDataStream extends MyStreamBase<NewsModel> {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        log("Check bookmark News :$data");
+        // log("Check bookmark News :$data");
         newsModel = NewsModel.fromJson(data);
       }
       return handleSuccessWithReturn(newsModel!);

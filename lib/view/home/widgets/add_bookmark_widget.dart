@@ -26,6 +26,7 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
 
   @override
   void initState() {
+    log('add book mark widget call');
     fetchData();
     super.initState();
   }
@@ -134,7 +135,7 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
         log('index: ${widget.index}');
         log('news id from news screen: ${widget.newsId}');
         Provider.of<BookmarkProvider>(context, listen: false)
-            .fetchNews()
+            .fetchBookmarkNews()
             .then((value) {
           if (Provider.of<BookmarkProvider>(context, listen: false)
                   .newes
@@ -157,7 +158,7 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
       } else {
         Provider.of<BookmarkProvider>(context, listen: false).clearList();
         Provider.of<BookmarkProvider>(context, listen: false)
-            .fetchNews()
+            .fetchBookmarkNews()
             .then((value) {
           if (Provider.of<BookmarkProvider>(context, listen: false)
                   .newes

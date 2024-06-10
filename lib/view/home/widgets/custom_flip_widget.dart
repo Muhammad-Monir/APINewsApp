@@ -48,7 +48,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       if (controller.page == (widget.pages.length - 1)) {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
         if (appData.read(kKeyIsLoggedIn)) {
-          Provider.of<BookmarkProvider>(context, listen: false).fetchNews();
+          Provider.of<BookmarkProvider>(context, listen: false)
+              .fetchBookmarkNews();
         }
       }
     });
@@ -95,10 +96,9 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                           children: [
                             // Container(
                             //     height: 50,
-                            //     width: 50,
                             //     color: Colors.black,
                             //     child: Text(
-                            //       index.toString(),
+                            //       'read news : ${index + 1} unreade news: ${widget.data[index]}',
                             //       style: const TextStyle(color: Colors.white),
                             //     )),
                             appData.read(kKeyIsLoggedIn) ||
