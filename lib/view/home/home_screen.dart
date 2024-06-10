@@ -570,7 +570,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
       } else {
         Provider.of<StoryProvider>(context, listen: false).fetchStories();
+        Provider.of<StoryProvider>(context, listen: false).clearList();
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
+        Provider.of<StoryProvider>(context, listen: false).fetchStories();
       }
     });
   }

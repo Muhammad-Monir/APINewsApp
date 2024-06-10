@@ -25,7 +25,7 @@ class BookmarkProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasMore => _hasMore;
 
-  Future<void> fetchNews() async {
+  Future<void> fetchBookmarkNews() async {
     if (_isLoading) return;
 
     _isLoading = true;

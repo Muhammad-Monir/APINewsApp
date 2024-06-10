@@ -93,9 +93,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
             return buildUserInformationPart(
                 data.data!.username, data.data!.email);
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.hasError.toString()),
-            );
+            return const Center(
+                child: SizedBox.shrink() //Text(snapshot.hasError.toString()),
+                );
           } else {
             return Center(
               child: Container(),

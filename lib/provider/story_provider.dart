@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_final_fields
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../data/news_data.dart';
 import '../model/story_model.dart';
 import '../utils/toast_util.dart'; // Update with the actual path
@@ -29,10 +27,12 @@ class StoryProvider with ChangeNotifier {
       if (response.storyboard?.data != null) {
         _stories.addAll(response.storyboard!.data!);
         _hasMore = response.storyboard!.data!.isNotEmpty;
-        if (response.storyboard!.nextPageUrl == null) {
-          return ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+        // if (response.storyboard!.nextPageUrl == null) {
+        if (!hasMore) {
+          ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+        } else {
+          _page++;
         }
-        _page++;
       } else {
         _hasMore = false;
       }
