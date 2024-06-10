@@ -1,9 +1,10 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields
 
-import 'dart:developer';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
+import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
+
 import '../../route/routes_name.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,19 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // _detectLocation();
-
     Future.delayed(
-      const Duration(seconds: 0),
+      const Duration(seconds: 2),
       () {
         if (appData.read(kKeyIsFirstTime)) {
-          log('if');
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.onBoarding,
             (route) => false,
           );
         } else {
-          log('else');
           Navigator.pushNamedAndRemoveUntil(
             context,
             RoutesName.home,
@@ -80,7 +78,13 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Container()],
+          children: [
+            SizedBox(
+              height: Utils.scrHeight * .1,
+              width: Utils.scrHeight * .1,
+              child: Image.asset('assets/images/logo.png'),
+            )
+          ],
         ),
       ),
     );

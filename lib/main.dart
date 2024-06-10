@@ -23,7 +23,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'firebase_options.dart';
 import 'provider/language_provider.dart';
 import 'services/notification_service.dart';
@@ -81,7 +80,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
-        // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -27,7 +27,8 @@ class UserData {
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
 
-        log('id is : ${data["data"]["id"]}');
+        // log('id is : ${data["data"]["id"]}');
+        // Save User Id Localy
         appData.write(kKeyUserID, data["data"]["id"]);
 
         // Check if language and country data are not null before accessing them
@@ -53,6 +54,7 @@ class UserData {
         List<int> categories = List<int>.from(data["data"]["categories"]);
         appData.write(kKeyCategory, categories);
 
+        log('*********save the ln cn ca is calling');
         return ProfileModel.fromJson(data);
       } else {
         throw Exception('code  ${response.statusCode}');

@@ -1,4 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, unused_element
+import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
@@ -91,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   .login(email, password, context)
                   .then((value) {
                 LocalNotificationService.getToken();
+                log('*********auth is calling');
                 // Provider.of<NewsProvider>(context, listen: false).clearList();
                 // Provider.of<StoryProvider>(context, listen: false).clearList();
                 // Navigator.pushNamedAndRemoveUntil(

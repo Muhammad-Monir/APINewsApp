@@ -26,6 +26,7 @@ class AuthenticationProvider with ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
+      // http post request call
       final response = await http.post(
         Uri.parse(ApiUrl.newLoginUrl),
         headers: <String, String>{
@@ -37,23 +38,26 @@ class AuthenticationProvider with ChangeNotifier {
           'password': password,
         }),
       );
-      log('login : ${response.body}');
+
+      // log('login : ${response.body}');
       if (response.statusCode == 200) {
         _isLoading = false;
         notifyListeners();
+        // json decode response
         final Map<String, dynamic> data = jsonDecode(response.body);
         UserData.userProfile(data["token"], context).then((value) async {
-          log('login user id = ${appData.read(kKeyUserID)}');
+          // log('login user id = ${appData.read(kKeyUserID)}');
           Provider.of<NewsProvider>(context, listen: false).clearList();
           Provider.of<StoryProvider>(context, listen: false).clearList();
 
+          log('*********user profile is calling');
           Navigator.pushNamedAndRemoveUntil(
               context, RoutesName.home, (route) => false);
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
         Utils.showSnackBar(context, data["message"]);
-        _navigateToHome(context);
+        // _navigateToHome(context);
       } else {
         throw Exception('Failed to login');
       }
