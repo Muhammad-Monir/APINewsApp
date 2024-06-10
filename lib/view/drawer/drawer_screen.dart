@@ -305,6 +305,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     await _authProvider.logoutUser(_authToken!).then((value) {
       appData.write(kKeyCountryCode, 'in');
       appData.write(kKeyLanguageId, 22);
+      // appData.write(kKeyCategory, []);
       appData.remove(kKeyUserID);
       appData.remove(kKeyToken);
       appData.write(kKeyIsLoggedIn, false);

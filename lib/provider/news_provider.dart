@@ -31,11 +31,11 @@ class NewsProvider extends ChangeNotifier {
       if (appData.read(kKeyCategory) == null ||
           appData.read(kKeyCategory).isEmpty ||
           appData.read(kKeyCategory) == []) {
-        log('if');
+        log('----------if');
         // Fetch All News
         response = await NewsData.fetchAllNews(page: _page);
       } else {
-        log('else');
+        log('----------else');
         String categoriesString = appData.read(kKeyCategory).join(',');
         // Fetch News filter by Category
         response = await NewsData.fetchAllNews(

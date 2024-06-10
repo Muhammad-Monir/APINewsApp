@@ -43,8 +43,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       // log('page- ${controller.page} | offset-${controller.offset}');
       turnController.animCustom(
           controller.page ?? 0, (controller.page ?? 0).toInt());
-      log('page number: ${controller.page}');
-      log('page number: ${widget.pages.length}');
+      // log('page number: ${controller.page}');
+      // log('page number: ${widget.pages.length}');
       if (controller.page == (widget.pages.length - 1)) {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
         if (appData.read(kKeyIsLoggedIn)) {
