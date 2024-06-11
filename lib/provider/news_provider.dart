@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, prefer_final_fields
 
 import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
 import 'package:flutter/material.dart';
-
 import '../data/news_data.dart';
 import '../utils/app_constants.dart';
 import '../utils/di.dart';
