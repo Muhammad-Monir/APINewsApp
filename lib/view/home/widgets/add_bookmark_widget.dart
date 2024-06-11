@@ -132,8 +132,8 @@ class _AddBookMArkWidgetState extends State<AddBookMArkWidget> {
   void fetchData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (Provider.of<BookmarkProvider>(context, listen: false).newes.isEmpty) {
-        log('index: ${widget.index}');
-        log('news id from news screen: ${widget.newsId}');
+        // log('index: ${widget.index}');
+        // log('news id from news screen: ${widget.newsId}');
         Provider.of<BookmarkProvider>(context, listen: false)
             .fetchBookmarkNews()
             .then((value) {

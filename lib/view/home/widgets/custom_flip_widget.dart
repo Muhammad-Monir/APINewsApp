@@ -101,10 +101,11 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                             //       'read news : ${index + 1} unreade news: ${widget.data[index]}',
                             //       style: const TextStyle(color: Colors.white),
                             //     )),
-                            appData.read(kKeyIsLoggedIn) ||
-                                    Provider.of<NewsProvider>(context,
-                                            listen: false)
-                                        .isLoading
+                            appData.read(kKeyIsLoggedIn)
+                                //  ||
+                                //         Provider.of<BookmarkProvider>(context,
+                                //                 listen: false)
+                                //             .isLoading
                                 ? AddBookMArkWidget(
                                     newsId: widget.data[index].id,
                                     index: index,

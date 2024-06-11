@@ -38,4 +38,29 @@ class NewsDataStream extends MyStreamBase<NewsModel> {
       return handleErrorWithReturn(error);
     }
   }
+
+  Future<NewsModel> fetchBookmarkStream(
+      {String? userId, String? authToken, String? newsId}) async {
+    NewsModel? newsModel;
+    try {
+      final response = await http.get(
+        Uri.parse(ApiUrl.allNewsUrl),
+        // ? Uri.parse(ApiUrl.allNewsUrl)
+        // : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken'
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log("Check bookmark News :$data");
+        newsModel = NewsModel.fromJson(data);
+      }
+      return handleSuccessWithReturn(newsModel!);
+    } catch (error) {
+      log(error.toString());
+      return handleErrorWithReturn(error);
+    }
+  }
 }

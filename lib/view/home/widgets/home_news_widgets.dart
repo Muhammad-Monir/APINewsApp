@@ -2,7 +2,7 @@
 import 'dart:developer';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,6 @@ import 'package:share_plus/share_plus.dart';
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
-import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -21,6 +20,7 @@ class NewsScreen extends StatefulWidget {
   final VoidCallback? homeOnTap;
   final VoidCallback? refreshOnTap;
   final String? image;
+  final List<String>? images;
   final String? newsDec;
   final String sourceLink;
   final String newsTitle;
@@ -37,6 +37,7 @@ class NewsScreen extends StatefulWidget {
     required this.newsTitle,
     this.refreshOnTap,
     required this.newsId,
+    this.images,
     // required this.category
   });
 
@@ -252,14 +253,15 @@ class _NewsScreenState extends State<NewsScreen> {
           bottomRight: Radius.circular(Utils.scrHeight * .022),
         ),
         // child: NewsVideoPlayer(),
-        child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          imageUrl: widget.image!,
-          placeholder: (context, url) =>
-              const Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) =>
-              Image.network(ApiUrl.imageNotFound),
-        ),
+        child: CarouselImageSlider(images: widget.images!),
+        // child: CachedNetworkImage(
+        //   fit: BoxFit.cover,
+        //   imageUrl: widget.image!,
+        //   placeholder: (context, url) =>
+        //       const Center(child: CircularProgressIndicator()),
+        //   errorWidget: (context, url, error) =>
+        //       Image.network(ApiUrl.imageNotFound),
+        // ),
       ),
       // ),
       //   ),
