@@ -220,13 +220,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                   sourceLink: e.url!,
                                   newsTitle: e.title!,
                                   image:
-                                      e.featuredImage ?? ApiUrl.imageNotFound,
+                                      // e.featuredImage ?? ApiUrl.imageNotFound,
+                                      e.featuredImage!.first,
                                 ),
                               ));
                         },
                         child: SearchListItem(
                           title: e.title,
-                          imageName: e.featuredImage,
+                          // imageName: e.featuredImage,
+                          imageName: e.featuredImage!.first,
                           time: e.createdAt.toString(),
                         ),
                       ))

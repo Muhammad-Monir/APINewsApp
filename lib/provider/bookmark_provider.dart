@@ -39,12 +39,10 @@ class BookmarkProvider with ChangeNotifier {
           appData.read(kKeyCategory) == []) {
         log('if bookmark');
         // Fetch All News
-        log("token" + _authToken);
         response = await newsDataStream.fetchNewsStream(
             authToken: _authToken, page: _page, category: categoriesString);
       } else {
         log('else bookmark');
-        log("token" + _authToken);
         // Fetch News filter by Category
         response = await newsDataStream.fetchNewsStream(
             authToken: _authToken, page: _page, category: categoriesString);
@@ -60,8 +58,8 @@ class BookmarkProvider with ChangeNotifier {
         // if (_hasMore == false) {
         //   // ToastUtil.showShortToast('We Are Coming Soon Be Paction');
         // }
-        log('bookmark data is : ${_newes.first.isBookmarked}');
-        log('bookmark title is : ${_newes.first.title}');
+        // log('bookmark data is : ${_newes.first.isBookmarked}');
+        // log('bookmark title is : ${_newes.first.title}');
         _page++;
       } else {
         _hasMore = false;

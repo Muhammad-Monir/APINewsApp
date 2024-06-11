@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field, unused_element
 import 'dart:async';
 import 'dart:developer' as dev;
+
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
@@ -8,7 +9,6 @@ import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
-import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -18,6 +18,7 @@ import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/story_provider.dart';
@@ -275,7 +276,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
         newsId: data.id!,
-        image: data.featuredImage ?? ApiUrl.imageNotFound,
+        // image: data.featuredImage ?? ApiUrl.imageNotFound,
+        images: data.featuredImage,
         newsDec: data.description ?? 'News Description Not Found',
         sourceLink: data.url ?? 'Url Not Found',
         newsTitle: data.title ?? 'News Title Not Found');
