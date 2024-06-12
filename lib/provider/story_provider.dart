@@ -27,14 +27,17 @@ class StoryProvider with ChangeNotifier {
       if (response.storyboard?.data != null) {
         _stories.addAll(response.storyboard!.data!);
         _hasMore = response.storyboard!.data!.isNotEmpty;
-        // if (response.storyboard!.nextPageUrl == null) {
-        if (!hasMore) {
-          ToastUtil.showShortToast('We Are Coming Soon Be Paction');
-        } else {
-          _page++;
+        _page++;
+        if (response.status == false) {
+          ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
         }
+        // if (response.storyboard!.nextPageUrl == null) {
+        // if (!hasMore) {
+        //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+        // }
       } else {
         _hasMore = false;
+        ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
       }
     } catch (e) {
       debugPrint(e.toString());

@@ -22,7 +22,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'firebase_options.dart';
 import 'provider/language_provider.dart';
 import 'services/notification_service.dart';
@@ -48,15 +48,11 @@ void main() async {
   LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   LocalNotificationService.getToken();
-  runApp(const MyApp(
-      // preferences: prefs,
-      ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final SharedPreferences? preferences;
-
-  const MyApp({super.key, this.preferences});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override

@@ -1,7 +1,6 @@
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/bookmark_data.dart';
 import 'package:am_innnn/model/bookmark_model.dart';
-import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
@@ -9,6 +8,7 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/bookmarks/widgets/bookmark_item.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../data/user_data.dart';
 import '../../provider/news_provider.dart';
@@ -36,7 +36,9 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
     //   _authToken = Provider.of<AuthService>(context, listen: false).getToken();
     // }
     // bookMarkDataStream.fetchBookMarkStream(_authToken);
-    bookMarkDataStream.fetchBookMarkStream(_authToken);
+    if (_isLogin) {
+      bookMarkDataStream.fetchBookMarkStream(_authToken);
+    }
     super.initState();
   }
 
@@ -90,7 +92,8 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                       imageName:
                           data[index].featuredImage ?? ApiUrl.imageNotFound,
                       title: data[index].title!,
-                      time: data[index].createdAt!,
+                      time: DateFormat('yyyy-MM-dd HH:mm')
+                          .format(data[index].createdAt!),
                     );
                   },
                 )
@@ -136,11 +139,11 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
   void navigatToHome() {
     if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
       Provider.of<NewsProvider>(context, listen: false).clearList();
-      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home);
     } else {
-      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home);
     }

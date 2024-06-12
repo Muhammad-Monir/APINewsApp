@@ -115,6 +115,7 @@ class StoryScreen extends StatelessWidget {
                       itemCount: images!.length,
                       itemBuilder: (context, index) {
                         log(images![index].image!);
+                        log('my story image url ${ApiUrl.imageBaseUrl}${images![index].image}');
                         return CachedNetworkImage(
                           fit: BoxFit.contain,
                           imageUrl:

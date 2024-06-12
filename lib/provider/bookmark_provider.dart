@@ -1,7 +1,7 @@
-// ignore_for_file: unused_local_variable, prefer_final_fields, prefer_typing_uninitialized_variables, prefer_interpolation_to_compose_strings
-import 'dart:developer';
+// ignore_for_file: unused_local_variable, prefer_final_fields, prefer_typing_uninitialized_variables, prefer_interpolation_to_compose_strings, unused_field
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import '../data/news_stream_data.dart';
 import '../data/user_data.dart';
 import '../model/news_model.dart';
@@ -25,58 +25,58 @@ class BookmarkProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasMore => _hasMore;
 
-  Future<void> fetchBookmarkNews() async {
-    if (_isLoading) return;
+  // Future<void> fetchBookmarkNews() async {
+  //   if (_isLoading) return;
 
-    _isLoading = true;
-    notifyListeners();
+  //   _isLoading = true;
+  //   notifyListeners();
 
-    try {
-      String categoriesString = appData.read(kKeyCategory).join(',');
-      final response;
-      if (appData.read(kKeyCategory) == null ||
-          appData.read(kKeyCategory).isEmpty ||
-          appData.read(kKeyCategory) == []) {
-        log('if bookmark');
-        // Fetch All News
-        response = await newsDataStream.fetchNewsStream(
-            authToken: _authToken, page: _page, category: categoriesString);
-      } else {
-        log('else bookmark');
-        // Fetch News filter by Category
-        response = await newsDataStream.fetchNewsStream(
-            authToken: _authToken, page: _page, category: categoriesString);
-      }
-      // if (response.data!.nextPageUrl != null) {
-      //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');
-      // }
+  //   try {
+  //     String categoriesString = appData.read(kKeyCategory).join(',');
+  //     final response;
+  //     if (appData.read(kKeyCategory) == null ||
+  //         appData.read(kKeyCategory).isEmpty ||
+  //         appData.read(kKeyCategory) == []) {
+  //       log('if bookmark');
+  //       // Fetch All News
+  //       response = await newsDataStream.fetchNewsStream(
+  //           authToken: _authToken, page: _page, category: categoriesString);
+  //     } else {
+  //       log('else bookmark');
+  //       // Fetch News filter by Category
+  //       response = await newsDataStream.fetchNewsStream(
+  //           authToken: _authToken, page: _page, category: categoriesString);
+  //     }
+  //     // if (response.data!.nextPageUrl != null) {
+  //     //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+  //     // }
 
-      if (response.data?.data != null) {
-        _newes.addAll(response.data!.data!);
-        _hasMore = response.data!.data!.isNotEmpty;
+  //     if (response.data?.data != null) {
+  //       _newes.addAll(response.data!.data!);
+  //       _hasMore = response.data!.data!.isNotEmpty;
 
-        // if (_hasMore == false) {
-        //   // ToastUtil.showShortToast('We Are Coming Soon Be Paction');
-        // }
-        // log('bookmark data is : ${_newes.first.isBookmarked}');
-        // log('bookmark title is : ${_newes.first.title}');
-        _page++;
-      } else {
-        _hasMore = false;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
+  //       // if (_hasMore == false) {
+  //       //   // ToastUtil.showShortToast('We Are Coming Soon Be Paction');
+  //       // }
+  //       // log('bookmark data is : ${_newes.first.isBookmarked}');
+  //       // log('bookmark title is : ${_newes.first.title}');
+  //       _page++;
+  //     } else {
+  //       _hasMore = false;
+  //     }
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   } finally {
+  //     _isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
 
-  void clearList() {
-    _newes.clear();
-    _page = 1;
-    notifyListeners();
-  }
+  // void clearList() {
+  //   _newes.clear();
+  //   _page = 1;
+  //   notifyListeners();
+  // }
 
   void toggleBookmark(String authToken, int newsId) async {
     final value = await UserData.addBookMark(authToken, newsId.toString());
@@ -95,8 +95,8 @@ class BookmarkProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void setFavoriteValue(bool bookmarkValue) {
-    _isFavorite = bookmarkValue;
-    // notifyListeners();
-  }
+  // void setFavoriteValue(bool bookmarkValue) {
+  //   _isFavorite = bookmarkValue;
+  //   // notifyListeners();
+  // }
 }

@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_import
 import 'dart:developer';
+
 import 'package:am_innnn/model/news_model.dart';
-import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/styles.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../provider/news_provider.dart';
 import 'custom_vertical_flip_page_turn.dart';
 
@@ -47,10 +48,10 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       // log('page number: ${widget.pages.length}');
       if (controller.page == (widget.pages.length - 1)) {
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
-        if (appData.read(kKeyIsLoggedIn)) {
-          Provider.of<BookmarkProvider>(context, listen: false)
-              .fetchBookmarkNews();
-        }
+        // if (appData.read(kKeyIsLoggedIn)) {
+        //   Provider.of<BookmarkProvider>(context, listen: false)
+        //       .fetchBookmarkNews();
+        // }
       }
     });
     super.initState();

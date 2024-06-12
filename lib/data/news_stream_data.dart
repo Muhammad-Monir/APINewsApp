@@ -39,28 +39,32 @@ class NewsDataStream extends MyStreamBase<NewsModel> {
     }
   }
 
-  Future<NewsModel> fetchBookmarkStream(
-      {String? userId, String? authToken, String? newsId}) async {
-    NewsModel? newsModel;
-    try {
-      final response = await http.get(
-        Uri.parse(ApiUrl.allNewsUrl),
-        // ? Uri.parse(ApiUrl.allNewsUrl)
-        // : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $authToken'
-        },
-      );
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        // log("Check bookmark News :$data");
-        newsModel = NewsModel.fromJson(data);
-      }
-      return handleSuccessWithReturn(newsModel!);
-    } catch (error) {
-      log(error.toString());
-      return handleErrorWithReturn(error);
-    }
-  }
+  // Future<CheckBookmark> checkBookmarkStream(
+  //     String userId, String newsId) async {
+  //   CheckBookmark? newsModel;
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse(ApiUrl.newCheckBookMark),
+  //       // ? Uri.parse(ApiUrl.allNewsUrl)
+  //       // : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ${appData.read(kKeyToken)}'
+  //       },
+  //       body: jsonEncode(<String, String>{
+  //         'user_id': userId,
+  //         'news_id': newsId,
+  //       }),
+  //     );
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> data = jsonDecode(response.body);
+  //       // log("Check bookmark News :$data");
+  //       newsModel = CheckBookmark.fromJson(data);
+  //     }
+  //     return handleSuccessWithReturn(newsModel!);
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return handleErrorWithReturn(error);
+  //   }
+  // }
 }
