@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, prefer_final_fields
 
 import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
 import 'package:flutter/material.dart';
-
 import '../data/news_data.dart';
 import '../utils/app_constants.dart';
 import '../utils/di.dart';
@@ -32,12 +30,11 @@ class NewsProvider extends ChangeNotifier {
           appData.read(kKeyCategory).isEmpty ||
           appData.read(kKeyCategory) == []) {
         log('----------if');
-        // Fetch All News
         response = await NewsData.fetchAllNews(page: _page);
       } else {
         log('----------else');
         String categoriesString = appData.read(kKeyCategory).join(',');
-        // Fetch News filter by Category
+        log('---------- categoriesString: $categoriesString');
         response = await NewsData.fetchAllNews(
             category: categoriesString, page: _page);
       }
@@ -46,16 +43,13 @@ class NewsProvider extends ChangeNotifier {
       // }
 
       if (response.data?.data != null) {
-        log("response status");
-        log("response status $response");
-        log("response status ${response.status}");
-
+        // if (response.data!.nextPageUrl != null)
         _newes.addAll(response.data!.data!);
         _hasMore = response.data!.data!.isNotEmpty;
-        if (_hasMore == false) {
+        _page++;
+        if (response.status == false) {
           ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
         }
-        _page++;
       } else {
         ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
         _hasMore = false;

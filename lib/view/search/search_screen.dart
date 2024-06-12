@@ -1,12 +1,12 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field
 import 'dart:developer';
+
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/data/search_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
-import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -16,7 +16,9 @@ import 'package:am_innnn/view/search/widgets/favorite_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../common_widgets/action_button.dart';
 import '../../provider/news_provider.dart';
 import '../../provider/story_provider.dart';
@@ -57,9 +59,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    // fetchNews(_searchController.text);
-    _focusNode.addListener(_onFocusChange);
-    searchDataStream.fetchSearchStream(searchTitle: '');
+    fetchNews(_searchController.text);
+    // _focusNode.addListener(_onFocusChange);
+    // searchDataStream.fetchSearchStream(searchTitle: '');
     // _searchController.addListener(_onSearchTextChanged);
   }
 
@@ -207,7 +209,7 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!.data!.data;
-            if (data!.isNotEmpty) {
+            if (data != null && data.isNotEmpty) {
               searchList = data
                   .map((e) => GestureDetector(
                         onTap: () {
@@ -228,8 +230,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: SearchListItem(
                           title: e.title,
                           // imageName: e.featuredImage,
-                          imageName: e.featuredImage!.first,
-                          time: e.createdAt.toString(),
+                          imageName: e.featuredImage!.isNotEmpty
+                              ? e.featuredImage!.first
+                              : ApiUrl.imageNotFound,
+                          time: DateFormat('yyyy-MM-dd HH:mm')
+                              .format(e.createdAt!),
                         ),
                       ))
                   .toList();
@@ -288,6 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             );
                           } else {
                             selectedCategories.add(data[index].id!);
+                            log('selected category is : $selectedCategories');
                           }
                         }
                       }
@@ -340,11 +346,11 @@ class _SearchScreenState extends State<SearchScreen> {
     if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
       Provider.of<NewsProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
-      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home,
           arguments: selectedCategories);
     } else {
-      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       Provider.of<NewsProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
       Navigator.pushNamed(context, RoutesName.home,

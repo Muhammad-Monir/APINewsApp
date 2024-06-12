@@ -5,7 +5,6 @@ import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
-import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
@@ -258,9 +257,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   Provider.of<StoryProvider>(context,
                                           listen: false)
                                       .clearList();
-                                  Provider.of<BookmarkProvider>(context,
-                                          listen: false)
-                                      .clearList();
+                                  // Provider.of<BookmarkProvider>(context,
+                                  //         listen: false)
+                                  //     .clearList();
                                   _refreshData();
                                 }))
                         : const SizedBox(),
@@ -515,7 +514,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       // await fetchNews();
       Provider.of<NewsProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
-      Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       fetchData();
       // if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
       //   Provider.of<NewsProvider>(context, listen: false).clearList();

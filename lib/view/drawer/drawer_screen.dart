@@ -94,7 +94,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 data.data!.username, data.data!.email);
           } else if (snapshot.hasError) {
             return const Center(
-                child: SizedBox.shrink() //Text(snapshot.hasError.toString()),
+                child: Text(
+                    'Somthing Want Wrong') //Text(snapshot.hasError.toString()),
                 );
           } else {
             return Center(
@@ -114,9 +115,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             // Showing Profile Imgae
             return _profileImage(data);
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.hasError.toString()),
-            );
+            return Center(child: Utils.showImage('profile_image'));
           } else {
             return Center(
               child: Container(),

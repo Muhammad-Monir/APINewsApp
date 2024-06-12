@@ -37,7 +37,7 @@ class SearchListItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: imageName ?? '',
+                    imageUrl: imageName ?? ApiUrl.imageNotFound,
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>

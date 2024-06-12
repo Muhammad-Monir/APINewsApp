@@ -27,7 +27,8 @@ class ApiUrl {
   static String newUserProfileUrl = '$newBaseUrl/profile/details';
 
   static String newAddBookMark = "$newBaseUrl/bookmark_news/add";
-  static String newAllBookMark = "$newBaseUrl/bookmark_news/";
+  static String newAllBookMark = "$newBaseUrl/bookmark_news/all";
+  static String newCheckBookMark = "$newBaseUrl/bookmark_news/item";
   static String newUserUpdateUrl = "$newBaseUrl/user/update";
   static String newStoryUrl = "$newBaseUrl/story-boards";
   static String newCategoryUrl = "$newBaseUrl/categories-list";
