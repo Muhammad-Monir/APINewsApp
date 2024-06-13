@@ -59,17 +59,20 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    fetchNews(_searchController.text);
-    // _focusNode.addListener(_onFocusChange);
+    // fetchNews(_searchController.text);
+    _focusNode.addListener(_onFocusChange);
     // searchDataStream.fetchSearchStream(searchTitle: '');
     // _searchController.addListener(_onSearchTextChanged);
   }
 
   Future<NewsModel> fetchNews(String? searchText) async {
+    log('search text : $searchText');
     if (searchText == null) {
       // Fetch All News
       fetchAllNews = NewsData.fetchAllNews();
     } else {
+      log('else search text is: $searchText');
+
       // Fetch News filter by Category
       fetchAllNews = NewsData.searchText(searchTitle: searchText);
     }
@@ -125,10 +128,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       onFiledSubmitt: (value) {
                         log('submitte called $value');
                         if (value!.isNotEmpty) {
+                          log('if submitte called $value');
+
                           // searchDataStream.fetchSearchStream(
                           //     searchTitle: _searchController.text);
                           fetchNews(_searchController.text);
                         } else {
+                          log('else submitte called $value');
+
                           // searchDataStream.fetchSearchStream(searchTitle: '');
                           fetchNews(_searchController.text);
                         }
@@ -209,10 +216,11 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
             final data = snapshot.data!.data!.data;
-            if (data != null && data.isNotEmpty) {
+            if (data!.isNotEmpty) {
               searchList = data
                   .map((e) => GestureDetector(
                         onTap: () {
+                          log('search data is : ${e.title}');
                           Navigator.push(
                               context,
                               MaterialPageRoute(

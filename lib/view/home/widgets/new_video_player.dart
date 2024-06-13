@@ -31,6 +31,8 @@ class _NewsVideoPlayerState extends State<NewsVideoPlayer> {
   final positionValue = ValueNotifier<String>('00:00');
 
   final t = 'https://live-par-2-abr.livepush.io/vod/bigbuckbunnyclip.mp4';
+  final t1 =
+      'https://rr3---sn-4g5lznls.googlevideo.com/videoplayback?expire=1718276421&ei=5XxqZv_uA9PU6dsPmZmUoAs&ip=142.132.137.4&id=o-ACVnAuFtSfzIGMDOmBlEdRNSe4tJWoj_53z76K1FpCJk&itag=22&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&mh=JD&mm=31%2C26&mn=sn-4g5lznls%2Csn-f5f7lnld&ms=au%2Conr&mv=u&mvi=3&pl=24&bui=AbKP-1OF0Hon_h4bG9TgR9LQ1V74Zk1Yks2fY1JCDxNHXp4gDY9PQyjWZHI9AU_g0vWXPru732nIu1Az&vprv=1&mime=video%2Fmp4&rqh=1&cnr=14&ratebypass=yes&dur=36.269&lmt=1716798156162089&mt=1718253563&fvip=3&c=MEDIA_CONNECT_FRONTEND&txp=5432434&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Cmime%2Crqh%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRgIhALgnckdr0TVI0LUsaizrWpbsxGyuCyJdD_dAemZn1b-IAiEAtpwMRX0vtiaOlg7Qfs9SI6NGPmFMNwW3PlHL-Om7bvk%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl&lsig=AHlkHjAwRQIgTE0R2esFhz309ZCQgAOHeWvQLPNqSsPAeh8ACEfhOewCIQD-WQu4s623l3b7gKzDY326Hts4qeiPUQKMXWmoyeiEEg%3D%3D&title=Top%2010%20Australian%20Bowlers%20of%20all%20Time%20%23shorts%20%23bowling%20%23cricket%20%23Mitchell%20stark';
 
   @override
   void initState() {
@@ -41,6 +43,7 @@ class _NewsVideoPlayerState extends State<NewsVideoPlayer> {
           // VideoPlayerController.networkUrl(Uri.parse('${widget.t}'))
           VideoPlayerController.networkUrl(
               Uri.parse('${ApiUrl.imageBaseUrl}${widget.t}'))
+            // Uri.parse(t1))
             ..initialize().then((value) {
               setState(() {
                 _chewieController = _setUpPlayer(_videoPlayerController);

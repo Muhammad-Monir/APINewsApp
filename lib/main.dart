@@ -79,6 +79,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        showPerformanceOverlay: true,
         title: 'Api News App',
         theme: ThemeData(
           appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
