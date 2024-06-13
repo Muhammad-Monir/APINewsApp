@@ -1,6 +1,4 @@
 // ignore_for_file: unnecessary_import
-import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -85,10 +83,10 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
               controller: controller,
               scrollDirection: Axis.vertical,
               onPageChanged: (index) {
-                log('before assign page index = $index');
-                log('before assign page = $page');
+                // log('before assign page index = $index');
+                // log('before assign page = $page');
                 page = index;
-                log('after assign page = $page');
+                // log('after assign page = $page');
               },
               children: widget.pages
                   .mapIndexed((index, e) => Container(

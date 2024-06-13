@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, unused_element, unused_field
 import 'dart:developer';
-
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../../../provider/font_size_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
@@ -112,7 +110,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Container _newsSection(FontSizeProvider fontSize) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: Utils.scrHeight * .02,
+        // vertical: Utils.scrHeight * .02,
         horizontal: Utils.scrHeight * .024,
       ),
       child: newsBody(fontSize),
@@ -123,14 +121,14 @@ class _NewsScreenState extends State<NewsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: Utils.scrHeight * .027),
+        SizedBox(height: Utils.scrHeight * .025),
         SizedBox(
           child: Text(
             // overflow: TextOverflow.ellipsis,
             maxLines: 3,
             textAlign: TextAlign.justify,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 17 * fontSize.fontSize),
+            style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
         ),
         SizedBox(height: Utils.scrHeight * .02),
@@ -265,8 +263,11 @@ class _NewsScreenState extends State<NewsScreen> {
                     ? widget.images ?? imageList // Handled Null
                     : imageList, // Empty Case
               )
-            : NewsVideoPlayer(
-                t: widget.video,
+            : Container(
+                color: Colors.black,
+                child: NewsVideoPlayer(
+                  t: widget.video,
+                ),
               ),
 
         // child: CachedNetworkImage(

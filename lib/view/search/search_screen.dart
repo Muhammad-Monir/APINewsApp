@@ -320,7 +320,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   // },
 
                   title: data[index].title!,
-                  image: ApiUrl.imageNotFound,
+                  image: data[index].image ?? ApiUrl.imageNotFound,
                 );
               },
             );
