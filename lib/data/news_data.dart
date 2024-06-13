@@ -26,7 +26,7 @@ class NewsData {
               '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&page=$page'));
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return NewsModel.fromJson(data);
       } else if (response.statusCode == 404) {
         ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
@@ -46,14 +46,15 @@ class NewsData {
     try {
       final response = await http.get(category == null
           ? Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}')
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&title=$searchTitle')
           : Uri.parse(
-              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category'));
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&title=$searchTitle'));
       // final response =
       //     await http.get(Uri.parse('${ApiUrl.allNewsUrl}?title=$searchTitle'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
+        log('search data si s: ${data.toString()}');
         return NewsModel.fromJson(data);
       } else {
         // If the server did not return a 200 OK response, throw an exception
