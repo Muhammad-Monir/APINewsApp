@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unused_element, unused_field
 import 'dart:developer';
+
+import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
@@ -37,7 +40,7 @@ class NewsScreen extends StatefulWidget {
     required this.newsTitle,
     this.refreshOnTap,
     required this.newsId,
-    this.images,
+    required this.images,
     // required this.category
   });
 
@@ -53,6 +56,7 @@ class _NewsScreenState extends State<NewsScreen> {
   late BannerAd _bannerAd;
   bool _isAdLoaded = false;
   final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
+  List<String> imageList = [ApiUrl.imageNotFound];
 
   @override
   void dispose() {
@@ -231,6 +235,7 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   Container topImageSection() {
+    log("widget.images ${widget.images}");
     return Container(
       height: Utils.scrHeight * .335,
       width: double.infinity,
@@ -253,7 +258,13 @@ class _NewsScreenState extends State<NewsScreen> {
           bottomRight: Radius.circular(Utils.scrHeight * .022),
         ),
         // child: NewsVideoPlayer(),
-        child: CarouselImageSlider(images: widget.images!),
+        child: CarouselImageSlider(
+          // Api Image's List Empty Case
+          images: (widget.images!.isNotEmpty)
+              ? widget.images ?? imageList // Handled Null
+              : imageList, // Empty Case
+        ),
+        // child: CachedNetworkImage(
         // child: CachedNetworkImage(
         //   fit: BoxFit.cover,
         //   imageUrl: widget.image!,
