@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import '../utils/api_url.dart';
+
 class NewsModel {
   bool? status;
   String? message;
@@ -267,7 +269,7 @@ class Datum {
         description: json["description"],
         url: json["url"],
         featuredImage: json["featured_image"] == null
-            ? []
+            ? [ApiUrl.imageNotFound]
             : List<String>.from(json["featured_image"].map((x) => x)),
         source: sourceValues.map[json["source"]],
         author: authorValues.map[json["author"]],
@@ -311,8 +313,9 @@ class Datum {
         "description": description,
         "url": url,
         "featured_image": featuredImage == null
-            ? []
-            : List<dynamic>.from(featuredImage ?? [].map((x) => x)),
+            ? [ApiUrl.imageNotFound]
+            : List<dynamic>.from(
+                featuredImage ?? [ApiUrl.imageNotFound].map((x) => x)),
         "source": sourceValues.reverse[source],
         "author": authorValues.reverse[author],
         "image": image,

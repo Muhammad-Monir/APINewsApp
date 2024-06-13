@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unused_element, unused_field
 import 'dart:developer';
+
+import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
@@ -7,19 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../data/user_data.dart';
-import '../../../provider/bookmark_provider.dart';
+
 import '../../../provider/font_size_provider.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
-import 'favorite_popup.dart';
+import 'new_video_player.dart';
 
 class NewsScreen extends StatefulWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
   final VoidCallback? refreshOnTap;
   final String? image;
+  final String? video;
   final List<String>? images;
   final String? newsDec;
   final String sourceLink;
@@ -37,7 +39,8 @@ class NewsScreen extends StatefulWidget {
     required this.newsTitle,
     this.refreshOnTap,
     required this.newsId,
-    this.images,
+    required this.images,
+    this.video,
     // required this.category
   });
 
@@ -53,6 +56,7 @@ class _NewsScreenState extends State<NewsScreen> {
   late BannerAd _bannerAd;
   bool _isAdLoaded = false;
   final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
+  List<String> imageList = [ApiUrl.imageNotFound];
 
   @override
   void dispose() {
@@ -172,65 +176,66 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Consumer<BookmarkProvider> _addToBookmark() {
-    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
-      return Positioned(
-          top: Utils.scrHeight * .1,
-          right: Utils.scrHeight * .02,
-          child: Container(
-            width: Utils.scrHeight * .04,
-            height: Utils.scrHeight * .04,
-            padding: const EdgeInsets.all(8),
-            decoration: ShapeDecoration(
-              color: !isFav
-                  ? Colors.white.withOpacity(0)
-                  : Colors.white.withOpacity(0.3),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: Utils.scrHeight * .001,
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                log('bookmark on Tap');
-                if (_isLogin) {
-                  // provider.isFavorite ?
-                  UserData.addBookMark(_authToken, widget.newsId.toString())
-                      .then((value) {
-                    Utils.showSnackBar(context, value);
-                    if (value == 'Bookmark added successfully') {
-                      setState(() {
-                        isFav = !isFav;
-                      });
-                    } else if (value == 'Bookmark Remove successfully') {
-                      isFav = false;
-                    }
-                    // provider.toggleIsFavorite();
-                  });
-                } else {
-                  getPopUp(
-                      context,
-                      (p0) => FavoritePopup(
-                            onExit: () {
-                              Navigator.pop(p0);
-                            },
-                          ));
-                }
-              },
-              child: !isFav
-                  ? Utils.showSvgPicture('bookmarks',
-                      height: Utils.scrHeight * .020)
-                  : Utils.showSvgPicture('selected_bookmark',
-                      height: Utils.scrHeight * .020),
-            ),
-          ));
-    });
-  }
+  // Consumer<BookmarkProvider> _addToBookmark() {
+  //   return Consumer<BookmarkProvider>(builder: (context, provider, child) {
+  //     return Positioned(
+  //         top: Utils.scrHeight * .1,
+  //         right: Utils.scrHeight * .02,
+  //         child: Container(
+  //           width: Utils.scrHeight * .04,
+  //           height: Utils.scrHeight * .04,
+  //           padding: const EdgeInsets.all(8),
+  //           decoration: ShapeDecoration(
+  //             color: !isFav
+  //                 ? Colors.white.withOpacity(0)
+  //                 : Colors.white.withOpacity(0.3),
+  //             shape: RoundedRectangleBorder(
+  //               side: BorderSide(
+  //                 width: Utils.scrHeight * .001,
+  //                 color: Colors.white,
+  //               ),
+  //               borderRadius: BorderRadius.circular(30),
+  //             ),
+  //           ),
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               log('bookmark on Tap');
+  //               if (_isLogin) {
+  //                 // provider.isFavorite ?
+  //                 UserData.addBookMark(_authToken, widget.newsId.toString())
+  //                     .then((value) {
+  //                   Utils.showSnackBar(context, value);
+  //                   if (value == 'Bookmark added successfully') {
+  //                     setState(() {
+  //                       isFav = !isFav;
+  //                     });
+  //                   } else if (value == 'Bookmark Remove successfully') {
+  //                     isFav = false;
+  //                   }
+  //                   // provider.toggleIsFavorite();
+  //                 });
+  //               } else {
+  //                 getPopUp(
+  //                     context,
+  //                     (p0) => FavoritePopup(
+  //                           onExit: () {
+  //                             Navigator.pop(p0);
+  //                           },
+  //                         ));
+  //               }
+  //             },
+  //             child: !isFav
+  //                 ? Utils.showSvgPicture('bookmarks',
+  //                     height: Utils.scrHeight * .020)
+  //                 : Utils.showSvgPicture('selected_bookmark',
+  //                     height: Utils.scrHeight * .020),
+  //           ),
+  //         ));
+  //   });
+  // }
 
   Container topImageSection() {
+    // log("widget.images ${widget.images}");
     return Container(
       height: Utils.scrHeight * .335,
       width: double.infinity,
@@ -253,7 +258,18 @@ class _NewsScreenState extends State<NewsScreen> {
           bottomRight: Radius.circular(Utils.scrHeight * .022),
         ),
         // child: NewsVideoPlayer(),
-        child: CarouselImageSlider(images: widget.images!),
+        child: widget.video == null
+            ? CarouselImageSlider(
+                // Api Image's List Empty Case
+                images: (widget.images!.isNotEmpty)
+                    ? widget.images ?? imageList // Handled Null
+                    : imageList, // Empty Case
+              )
+            : NewsVideoPlayer(
+                t: widget.video,
+              ),
+
+        // child: CachedNetworkImage(
         // child: CachedNetworkImage(
         //   fit: BoxFit.cover,
         //   imageUrl: widget.image!,

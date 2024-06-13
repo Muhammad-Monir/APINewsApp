@@ -22,6 +22,7 @@ import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/story_provider.dart';
 import '../../provider/timer_provider.dart';
+import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../story/story_screen.dart';
@@ -47,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int page = 1;
   bool loading = false;
   bool hasMore = true;
+  List<String>? imageList = [ApiUrl.imageNotFound];
 
   @override
   void initState() {
@@ -274,12 +276,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // News Screen Design
   NewsScreen screenDesign(Datum data) {
     return NewsScreen(
-        newsId: data.id!,
-        // image: data.featuredImage ?? ApiUrl.imageNotFound,
-        images: data.featuredImage,
-        newsDec: data.description ?? 'News Description Not Found',
-        sourceLink: data.url ?? 'Url Not Found',
-        newsTitle: data.title ?? 'News Title Not Found');
+      newsId: data.id!,
+      // image: data.featuredImage ?? ApiUrl.imageNotFound,
+      images: data.featuredImage ?? imageList,
+      video: data.video,
+      newsDec: data.description ?? 'News Description Not Found',
+      sourceLink: data.url ?? 'Url Not Found',
+      newsTitle: data.title ?? 'News Title Not Found',
+    );
   }
 
   // Error Handling From Api

@@ -47,54 +47,6 @@ class _CarouselImageSliderState extends State<CarouselImageSlider> {
                 ),
               )
             : const SizedBox.shrink(),
-
-        // Profile Image
-        // Positioned(
-        //   top: 0,
-        //   left: 24.w,
-        //   child: Row(
-        //     children: [
-        //       CircleAvatar(
-        //         backgroundColor: const Color(0xFFFFFFFF),
-        //         radius: 40.r,
-        //         child: CircleAvatar(
-        //           radius: 38.r,
-        //           backgroundImage: AssetImage(widget.image),
-        //         ),
-        //       ),
-        //       // UIHelper.horizontalSpaceSmall,
-
-        //       // Label/ Title
-        //       // Padding(
-        //       //   padding: EdgeInsets.only(bottom: 24.h),
-        //       //   child: Text(widget.label,
-        //       //       style: TextFontStyle
-        //       //           .headline16StyleOpenSansTextMedium500),
-        //       // ),
-        //     ],
-        //   ),
-        // ),
-
-        // // Image Counter
-        // Positioned(
-        //   bottom: 10.h,
-        //   left: 24.w,
-        //   child: _buildImageCounter(),
-        // ),
-
-        // // Favourite Button
-        // Positioned(
-        //   top: 64.h,
-        //   right: 12.w,
-        //   child: _buildFavBtn(),
-        // ),
-
-        // // Card Panel
-        // Positioned(
-        //   top: 90.h,
-        //   left: 0.w,
-        //   child: widget.hasCard ? _buildCard() : const SizedBox.shrink(),
-        // )
       ],
     );
   }
