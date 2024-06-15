@@ -1,6 +1,7 @@
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
+import 'package:am_innnn/view/home/widgets/full_screen_view.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
 import 'package:am_innnn/view/splash/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -120,6 +121,13 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => StoryScreen(
             images: imageUrl,
+          ),
+        );
+      case RoutesName.fullScreen:
+        final String? image = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (context) => FullScreenView(
+            image: image,
           ),
         );
       // case RoutesName.newsDetails:

@@ -1,17 +1,22 @@
 // ignore_for_file: unnecessary_import
+import 'dart:developer';
+
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/styles.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:am_innnn/view/home/widgets/add_bookmark_widget.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../provider/news_provider.dart';
+import '../../../route/routes_name.dart';
 import 'custom_vertical_flip_page_turn.dart';
 
 class CustomFlipWidget extends StatefulWidget {
@@ -93,13 +98,26 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                         color: Colors.transparent,
                         child: Stack(
                           children: [
-                            // Container(
-                            //     height: 50,
-                            //     color: Colors.black,
-                            //     child: Text(
-                            //       'read news : ${index + 1} unreade news: ${widget.data[index]}',
-                            //       style: const TextStyle(color: Colors.white),
-                            //     )),
+                            GestureDetector(
+                              onTap: () {
+                                log('on tap fullscreen');
+                                widget.data[index].featuredImage!.isNotEmpty
+                                    ? Navigator.pushNamed(
+                                        context, RoutesName.fullScreen,
+                                        arguments: widget
+                                            .data[index].featuredImage!.first)
+                                    : ToastUtil.showShortToast(
+                                        'No Image Found');
+                                // FullScreenView(
+                                //     image: widget
+                                //         .data[index].featuredImage!.first);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 250,
+                                color: Colors.transparent,
+                              ),
+                            ),
                             appData.read(kKeyIsLoggedIn)
                                 //  ||
                                 //         Provider.of<BookmarkProvider>(context,

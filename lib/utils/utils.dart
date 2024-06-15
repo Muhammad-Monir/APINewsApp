@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 class Utils {
   static late double scrHeight;
   static late double scrWidth;
@@ -12,8 +13,11 @@ class Utils {
   }
 
   // Show SvgImage
-  static Widget showSvgPicture(String svg,
-          {double? height = 16, double? width = 16}) =>
+  static Widget showSvgPicture(
+    String svg, {
+    double? height = 16,
+    double? width = 16,
+  }) =>
       SvgPicture.asset(height: height, width: width, "assets/icons/$svg.svg");
 
   // Show PngImage
@@ -57,5 +61,3 @@ class Utils {
     'technology'
   ];
 }
-
-

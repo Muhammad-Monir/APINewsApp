@@ -131,17 +131,17 @@ class _NewsScreenState extends State<NewsScreen> {
             style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .02),
+        // SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
           // color: Colors.red,
           height: Utils.scrHeight * .3,
           child: Text(
             overflow: TextOverflow.ellipsis,
-            maxLines: 8,
+            maxLines: 9,
             textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 50),
+            Utils.truncateText(widget.newsDec!, 70),
             style:
-                regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
+                regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
         ),
         SizedBox(
@@ -235,7 +235,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Container topImageSection() {
     // log("widget.images ${widget.images}");
     return Container(
-      height: Utils.scrHeight * .335,
+      height: Utils.scrHeight * .400,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(

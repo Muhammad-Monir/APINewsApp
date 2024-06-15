@@ -1,12 +1,10 @@
 // ignore_for_file: unnecessary_null_comparison, unused_element
 import 'dart:developer';
-
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
@@ -18,7 +16,6 @@ import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -40,42 +37,64 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(
-              horizontal: Utils.scrHeight * .024,
-              vertical: Utils.scrHeight * .12),
-          children: [
-            Center(
-                child:
-                    Text('LOGO', style: largeTS(loginTextColor, fontSize: 64))),
-            SizedBox(height: Utils.scrHeight * .012),
-            Text('Welcome Back!',
-                style: semiBoldTS(loginTextColor, fontSize: 24)),
-            Text('Let’s get you logged in so you can start exploring',
-                style: regularTS(loginWelcomeColor, fontSize: 14)),
-            SizedBox(height: Utils.scrHeight * .03),
+        child: Center(
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(
+                horizontal: Utils.scrHeight * .024,
+                vertical: Utils.scrHeight * .12),
+            children: [
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.cover,
+                  height: 150,
+                ),
+                // child: Text(
+                //   'LOGO',
+                //   style: largeTS(loginTextColor, fontSize: 64),
+                // ),
+              ),
+              SizedBox(height: Utils.scrHeight * .012),
+              Center(
+                child: Text('Welcome to quikkbyte !',
+                    style: semiBoldTS(loginTextColor, fontSize: 24)),
+              ),
+              Center(
+                child: Text('Simple and emphasizes global reach',
+                    style: regularTS(loginWelcomeColor, fontSize: 14)),
+              ),
+              SizedBox(height: Utils.scrHeight * .03),
+              const Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: Center(
+                    child: Text(
+                  'Login With',
+                  style: TextStyle(fontSize: 16),
+                )),
+              ),
 
-            // Email Form Field Part
-            _buildEmailPart(),
+              // Email Form Field Part
+              // _buildEmailPart(),
 
-            // Password Form Field Part
-            _buildPasswordPart(),
+              // Password Form Field Part
+              // _buildPasswordPart(),
 
-            // Forgot Password Part
-            _buildForgotPassword(),
-            SizedBox(height: Utils.scrHeight * .03),
+              // Forgot Password Part
+              // _buildForgotPassword(),
+              // SizedBox(height: Utils.scrHeight * .03),
 
-            // Login Button
-            loginButton(),
-            SizedBox(height: Utils.scrHeight * .03),
+              // Login Button
+              // loginButton(),
+              // SizedBox(height: Utils.scrHeight * .03),
 
-            // Or Login Other Platform
-            _buildLoginOtherPlatform(),
+              // Or Login Other Platform
+              _buildLoginOtherPlatform(),
 
-            // Create Account Part
-            _buildRegisterPart()
-          ],
+              // Create Account Part
+              // _buildRegisterPart()
+            ],
+          ),
         ),
       ),
     );
@@ -132,9 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Column _buildLoginOtherPlatform() {
     return Column(
       children: [
-        Center(
-            child: Text('Or Log in with',
-                style: regularTS(const Color(0xff858E92), fontSize: 14))),
+        // Center(
+        //     child: Text('Or Log in with',
+        //         style: regularTS(const Color(0xff858E92), fontSize: 14))),
         SizedBox(height: Utils.scrHeight * .02),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
