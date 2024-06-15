@@ -74,7 +74,7 @@ class _CarouselImageSliderState extends State<CarouselImageSlider> {
           items: widget.images
               .map(
                 (item) => CachedNetworkImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   imageUrl: item,
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
@@ -85,7 +85,7 @@ class _CarouselImageSliderState extends State<CarouselImageSlider> {
               .toList(),
           carouselController: carouselController,
           options: CarouselOptions(
-            height: Utils.scrHeight * .335,
+            height: Utils.scrHeight * .400,
             scrollPhysics: const BouncingScrollPhysics(),
             aspectRatio: 2,
             viewportFraction: 1,

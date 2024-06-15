@@ -48,7 +48,11 @@ class _OnBoardingState extends State<OnBoarding> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: Utils.scrHeight * .056),
-              Center(child: Image.asset('assets/images/map.png')),
+              // Center(child: Image.asset('assets/images/location.jpg')),
+              Center(
+                  child: Image.asset(
+                'assets/images/map.png',
+              )),
               SizedBox(height: Utils.scrHeight * .023),
               const Text(
                 'Which Country and Language You',

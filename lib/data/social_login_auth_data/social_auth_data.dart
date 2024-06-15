@@ -35,7 +35,7 @@ class SocialAuthData {
       // Once signed in, return the UserCredential
       final UserCredential authResult =
           await _auth.signInWithCredential(credential);
-      ToastUtil.showLongToast(authResult.toString());
+      // ToastUtil.showLongToast(authResult.toString());
       if (authResult.user != null) {
         Provider.of<AuthenticationProvider>(context, listen: false).socialLogin(
             authResult.user!.email!,
@@ -43,6 +43,7 @@ class SocialAuthData {
             authResult.credential!.accessToken!,
             'google',
             context);
+        ToastUtil.showLongToast('Login Sussessfully');
       }
       log("google sing in info$authResult");
       // Return the current user

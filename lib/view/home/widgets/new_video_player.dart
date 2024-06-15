@@ -1,10 +1,8 @@
 // ignore_for_file: implementation_imports
 
 import 'dart:developer';
-
 import 'package:am_innnn/utils/color.dart';
 import 'package:chewie/chewie.dart';
-import 'package:chewie/src/helpers/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -234,19 +232,19 @@ class _NewsVideoPlayerState extends State<NewsVideoPlayer> {
       autoPlay: true,
       looping: true,
       // aspectRatio: 16 / 9,
-      // aspectRatio: videoController.value.aspectRatio,
-      aspectRatio: 16 / 11.3,
+      aspectRatio: videoController.value.aspectRatio,
+      // aspectRatio: 16 / 11.3,
       customControls: _buildCustomControls(),
       allowedScreenSleep: false,
       // fullScreenByDefault: true,
     );
 
     // Set up listeners and update UI as needed (similar to your initState logic)
-    videoController.addListener(() {
-      final value =
-          "${formatDuration(videoController.value.position)}/${formatDuration(videoController.value.duration)}";
-      positionValue.value = value;
-    });
+    // videoController.addListener(() {
+    //   final value =
+    //       "${formatDuration(videoController.value.position)}/${formatDuration(videoController.value.duration)}";
+    //   positionValue.value = value;
+    // });
     return controller;
   }
 }

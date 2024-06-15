@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison, unused_field, unused_element
 import 'dart:async';
 import 'dart:developer' as dev;
-
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
@@ -17,7 +16,6 @@ import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-
 import '../../model/news_model.dart';
 import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/story_provider.dart';
@@ -413,10 +411,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     width: Utils.scrHeight * 0.024),
                 label: 'Font'),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.language,
-                  size: Utils.scrHeight * 0.030,
-                ),
+                icon: Utils.showSvgPicture('language',
+                    height: Utils.scrHeight * 0.024,
+                    width: Utils.scrHeight * 0.024),
                 label: 'Language'),
             BottomNavigationBarItem(
                 icon: Utils.showSvgPicture('bookmark',
@@ -424,14 +421,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     width: Utils.scrHeight * 0.024),
                 label: 'BookMark'),
             BottomNavigationBarItem(
-                icon: provider.selectedIndex == 3
-                    ? Utils.showSvgPicture('share',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024)
-                    : Utils.showSvgPicture('share',
-                        height: Utils.scrHeight * 0.024,
-                        width: Utils.scrHeight * 0.024),
-                label: 'Share'),
+              icon: Utils.showSvgPicture('share',
+                  height: Utils.scrHeight * 0.024,
+                  width: Utils.scrHeight * 0.024),
+              label: 'Share',
+            ),
           ],
           useLegacyColorScheme: false,
           showSelectedLabels: true,
