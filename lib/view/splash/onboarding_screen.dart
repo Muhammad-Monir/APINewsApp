@@ -34,11 +34,12 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFirstTime = appData.read(kKeyIsFirstTime);
+    // bool isFirstTime = appData.read(kKeyIsFirstTime);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF4F9F9),
-        automaticallyImplyLeading: isFirstTime ? false : true,
+        // automaticallyImplyLeading: isFirstTime ? false : true,
+        automaticallyImplyLeading: true,
       ),
       backgroundColor: const Color(0xFFF4F9F9),
       body: SingleChildScrollView(
