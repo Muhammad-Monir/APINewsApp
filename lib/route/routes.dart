@@ -124,10 +124,10 @@ class Routes {
           ),
         );
       case RoutesName.fullScreen:
-        final String? image = settings.arguments as String?;
+        final List<String>? image = settings.arguments as List<String>?;
         return MaterialPageRoute(
           builder: (context) => FullScreenView(
-            image: image,
+            images: image,
           ),
         );
       // case RoutesName.newsDetails:

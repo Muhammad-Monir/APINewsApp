@@ -104,8 +104,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                                 widget.data[index].featuredImage!.isNotEmpty
                                     ? Navigator.pushNamed(
                                         context, RoutesName.fullScreen,
-                                        arguments: widget
-                                            .data[index].featuredImage!.first)
+                                        arguments:
+                                            widget.data[index].featuredImage!)
                                     : ToastUtil.showShortToast(
                                         'No Image Found');
                                 // FullScreenView(

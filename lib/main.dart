@@ -14,8 +14,10 @@ import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
@@ -48,7 +50,12 @@ void main() async {
   LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   LocalNotificationService.getToken();
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

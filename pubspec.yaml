@@ -78,6 +78,7 @@ dependencies:
   flutter_screenutil: ^5.9.1
   full_screen_image: ^2.0.0
   carousel_slider: ^4.2.1
+  device_preview: ^1.2.0
 
 
 dev_dependencies:

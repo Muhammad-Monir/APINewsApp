@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields
+// ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields, use_build_context_synchronously
 
 import 'dart:developer';
 
@@ -27,10 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _detectLocation();
+    // _detectLocation();
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(microseconds: 100),
       () {
+        _detectLocation();
         // if (appData.read(kKeyIsFirstTime)) {
         //   Navigator.pushNamedAndRemoveUntil(
         //     context,
@@ -38,11 +39,11 @@ class _SplashScreenState extends State<SplashScreen> {
         //     (route) => false,
         //   );
         // } else {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RoutesName.home,
-          (route) => false,
-        );
+        // Navigator.pushNamedAndRemoveUntil(
+        //   context,
+        //   RoutesName.home,
+        //   (route) => false,
+        // );
         // }
       },
     );
@@ -67,7 +68,12 @@ class _SplashScreenState extends State<SplashScreen> {
       if (countryName != null && countryName.isNotEmpty) {
         _country = countryName[0].country!;
         _countryCode = countryName[0].isoCountryCode!;
-        appData.writeIfNull(kKeyCountryCode, _countryCode.toLowerCase());
+        appData.write(kKeyCountryCode, _countryCode.toLowerCase());
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RoutesName.home,
+          (route) => false,
+        );
         log(_country);
         log("Country code by get geo locaiton${countryName[0].isoCountryCode!}");
       }

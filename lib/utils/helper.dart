@@ -9,7 +9,7 @@ Future<void> setInitValue() async {
   await appData.writeIfNull(kKeyIsLoggedIn, false);
   // await appData.writeIfNull(kKeyIsFirstTime, true);
   await appData.writeIfNull(kKeyCategory, []);
-  // await appData.writeIfNull(kKeyCountryCode, 'us');
+  await appData.writeIfNull(kKeyCountryCode, 'us');
   await appData.writeIfNull(kKeyLanguageCode, 'en');
   // await appData.writeIfNull(kKeyLanguageName, 'English');
   await appData.writeIfNull(kKeyLanguageId, 22);
