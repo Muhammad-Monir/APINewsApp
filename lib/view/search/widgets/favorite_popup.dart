@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../common_widgets/action_button.dart';
 import '../../../route/routes_name.dart';
 import '../../../utils/color.dart';
@@ -56,26 +55,26 @@ class CategoryPopup extends StatelessWidget {
           SizedBox(height: Utils.scrHeight * .02),
 
           // Register Part
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don’t have an account?  ",
-                style: mediumTS(loginWelcomeColor),
-                textAlign: TextAlign.center,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, RoutesName.register);
-                },
-                child: Text(
-                  "Register",
-                  style: mediumTS(const Color(0xff2E8540), isUnderline: true),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
-          )
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       "Don’t have an account?  ",
+          //       style: mediumTS(loginWelcomeColor),
+          //       textAlign: TextAlign.center,
+          //     ),
+          //     GestureDetector(
+          //       onTap: () {
+          //         Navigator.pushNamed(context, RoutesName.register);
+          //       },
+          //       child: Text(
+          //         "Register",
+          //         style: mediumTS(const Color(0xff2E8540), isUnderline: true),
+          //         textAlign: TextAlign.center,
+          //       ),
+          //     ),
+          //   ],
+          // )
         ],
       ),
     );
