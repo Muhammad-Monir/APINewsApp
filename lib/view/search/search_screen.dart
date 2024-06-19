@@ -46,6 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
   //     ? List<int>.from(appData.read(kKeyCategory))
   //     : List<int>.from(appData.read(kKeyCategory));
   List<int> selectedCategories = List<int>.from(appData.read(kKeyCategory));
+  List<String> imageList = [ApiUrl.imageNotFound];
 
   void _onFocusChange() {
     setState(() {
@@ -229,9 +230,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                   newsDec: e.description,
                                   sourceLink: e.url!,
                                   newsTitle: e.title!,
-                                  image:
-                                      // e.featuredImage ?? ApiUrl.imageNotFound,
-                                      e.featuredImage!.first,
+                                  image: (e.featuredImage!.isNotEmpty)
+                                      ? e.featuredImage!.first // Handled Null
+                                      : imageList.first,
+                                  imagesList: e.featuredImage,
                                 ),
                               ));
                         },
