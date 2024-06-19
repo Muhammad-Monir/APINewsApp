@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 
 import '../../../utils/api_url.dart';
 import '../../../utils/utils.dart';
@@ -73,13 +74,26 @@ class _CarouselImageSliderState extends State<CarouselImageSlider> {
         child: CarouselSlider(
           items: widget.images
               .map(
-                (item) => CachedNetworkImage(
-                  fit: BoxFit.fill,
-                  imageUrl: item,
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Image.network(ApiUrl.imageNotFound),
+                (item) => FullScreenWidget(
+                  disposeLevel: DisposeLevel.High,
+                  child: Hero(
+                    tag: 'tag',
+                    child: InteractiveViewer(
+                      maxScale: 5,
+                      minScale: 0.1,
+                      constrained: true,
+                      child: SizedBox(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl: item,
+                          placeholder: (context, url) =>
+                              const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) =>
+                              Image.network(ApiUrl.imageNotFound),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               )
               .toList(),

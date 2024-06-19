@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_import
 import 'dart:developer';
-
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../provider/news_provider.dart';
 import '../../../route/routes_name.dart';
 import 'custom_vertical_flip_page_turn.dart';
@@ -42,8 +40,8 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
   @override
   void initState() {
     controller.addListener(() {
-      //log('viewport- ${controller.viewportFraction} | page-${controller.page}');
-      //log('page- ${controller.page} | offset-${controller.offset}');
+      // log('viewport- ${controller.viewportFraction} | page-${controller.page}');
+      // log('page- ${controller.page} | offset-${controller.offset}');
       // log('page- ${controller.page} | offset-${controller.offset}');
       turnController.animCustom(
           controller.page ?? 0, (controller.page ?? 0).toInt());
@@ -106,8 +104,10 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
                                         context, RoutesName.fullScreen,
                                         arguments:
                                             widget.data[index].featuredImage!)
-                                    : ToastUtil.showShortToast(
-                                        'No Image Found');
+                                    : widget.data[index].video != null
+                                        ? null
+                                        : ToastUtil.showShortToast(
+                                            'No Image Found');
                                 // FullScreenView(
                                 //     image: widget
                                 //         .data[index].featuredImage!.first);

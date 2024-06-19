@@ -16,6 +16,7 @@ import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
+import '../../../utils/toast_util.dart';
 import '../../../utils/utils.dart';
 import '../../home/widgets/favorite_popup.dart';
 
@@ -25,6 +26,7 @@ class NewsDetailsScreen extends StatefulWidget {
   final String sourceLink;
   final String newsTitle;
   final int newsId;
+  final List<String>? imagesList;
 
   const NewsDetailsScreen({
     super.key,
@@ -33,6 +35,7 @@ class NewsDetailsScreen extends StatefulWidget {
     required this.sourceLink,
     required this.newsTitle,
     required this.newsId,
+    this.imagesList,
   });
 
   @override
@@ -112,27 +115,27 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: Utils.scrHeight * .027),
+        SizedBox(height: Utils.scrHeight * .015),
         SizedBox(
           // width: Utils.scrHeight * .342,
           child: Text(
             maxLines: 4,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 17 * fontSize.fontSize),
+            style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .02),
+        // SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
           height: Utils.scrHeight * .28,
           child: Text(
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
             maxLines: 8,
             Utils.truncateText(widget.newsDec ?? 'NA', 55),
             style:
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .09),
+        SizedBox(height: Utils.scrHeight * .02),
         socialLinkSection(),
       ],
     );
@@ -292,29 +295,41 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   }
 
   // News Image
-  Container topImageSection() {
-    return Container(
-        height: Utils.scrHeight * .3,
-        width: double.infinity,
-        decoration: BoxDecoration(
+  Widget topImageSection() {
+    return GestureDetector(
+      onTap: () {
+        log('on tap fullscreen');
+        widget.imagesList!.isNotEmpty
+            ? Navigator.pushNamed(context, RoutesName.fullScreen,
+                arguments: widget.imagesList!)
+            : ToastUtil.showShortToast('No Image Found');
+        // FullScreenView(
+        //     image: widget
+        //         .data[index].featuredImage!.first);
+      },
+      child: Container(
+          height: Utils.scrHeight * .4,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(Utils.scrHeight * .12),
+            bottomRight: Radius.circular(Utils.scrHeight * .12),
+          )),
+          child: ClipRRect(
             borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(Utils.scrHeight * .12),
-          bottomRight: Radius.circular(Utils.scrHeight * .12),
-        )),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(Utils.scrHeight * .022),
-            bottomRight: Radius.circular(Utils.scrHeight * .022),
-          ),
-          child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: widget.image!,
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                Image.network(ApiUrl.imageNotFound),
-          ),
-        ));
+              bottomLeft: Radius.circular(Utils.scrHeight * .022),
+              bottomRight: Radius.circular(Utils.scrHeight * .022),
+            ),
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: widget.image!,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  Image.network(ApiUrl.imageNotFound),
+            ),
+          )),
+    );
   }
 
   // App Banding Name

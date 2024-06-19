@@ -95,7 +95,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           } else if (snapshot.hasError) {
             return const Center(
                 child: Text(
-                    'Somthing Want Wrong') //Text(snapshot.hasError.toString()),
+                    'No Internet Connection') //Text(snapshot.hasError.toString()),
                 );
           } else {
             return Center(

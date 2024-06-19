@@ -6,6 +6,7 @@ import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../provider/news_provider.dart';
@@ -116,16 +117,26 @@ class StoryScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         log(images![index].image!);
                         log('my story image url ${ApiUrl.imageBaseUrl}${images![index].image}');
-                        return CachedNetworkImage(
-                          fit: BoxFit.contain,
-                          imageUrl:
-                              '${ApiUrl.imageBaseUrl}${images![index].image}',
-                          // imageUrl: imageUrl!,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              Image.network(ApiUrl.imageNotFound),
-                        );
+                        return FullScreenWidget(
+                            disposeLevel: DisposeLevel.High,
+                            child: Hero(
+                              tag: 'tag',
+                              child: InteractiveViewer(
+                                maxScale: 5,
+                                minScale: 0.1,
+                                constrained: true,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.contain,
+                                  imageUrl:
+                                      '${ApiUrl.imageBaseUrl}${images![index].image}',
+                                  // imageUrl: imageUrl!,
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.network(ApiUrl.imageNotFound),
+                                ),
+                              ),
+                            ));
                       }),
                 ),
               ),

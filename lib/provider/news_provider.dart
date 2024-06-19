@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:am_innnn/model/news_model.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../data/news_data.dart';
 import '../utils/app_constants.dart';
 import '../utils/di.dart';
@@ -13,13 +14,26 @@ class NewsProvider extends ChangeNotifier {
   int _page = 1;
   bool _isLoading = false;
   bool _hasMore = true;
+  String _massage = 'We Are Coming Soon Be Patient';
 
   List<Datum> get newes => _newes;
   bool get isLoading => _isLoading;
   bool get hasMore => _hasMore;
+  String get massage => _massage;
 
   Future<void> fetchNews() async {
     if (_isLoading) return;
+
+    // Check internet connection
+    bool isConnected = await InternetConnectionChecker().hasConnection;
+    if (!isConnected) {
+      ToastUtil.showShortToast('No internet connection');
+      _massage =
+          'Looks like your are offline. Please switch on your data or wifi.';
+      return;
+    } else {
+      _massage = 'We Are Coming Soon Be Patient';
+    }
 
     _isLoading = true;
     notifyListeners();
@@ -48,10 +62,10 @@ class NewsProvider extends ChangeNotifier {
         _hasMore = response.data!.data!.isNotEmpty;
         _page++;
         if (response.status == false) {
-          ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
+          ToastUtil.showShortToast('We Are Coming Soon Be Patient');
         }
       } else {
-        ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
+        ToastUtil.showShortToast('We Are Coming Soon Be Patient');
         _hasMore = false;
       }
     } catch (e) {

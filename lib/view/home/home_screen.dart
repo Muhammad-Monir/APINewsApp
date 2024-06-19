@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 .toList(),
                             data: provider.newes.map((e) => e).toList(),
                           )
-                        : _errorSection(context),
+                        : _errorSection(context, provider.massage),
 
                     // Show Tob TabBar
                     Provider.of<BarsVisibility>(context).showBars
@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   // Error Handling From Api
-  Widget _errorSection(BuildContext context) {
+  Widget _errorSection(BuildContext context, String massage) {
     return Center(
       child: Container(
         color: Colors.transparent,
@@ -295,7 +295,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            const Text('We Are Coming Soon Be Paction'),
+            Text(
+              massage == null || massage == ''
+                  ? 'We Are Coming Soon Be Patient'
+                  : massage,
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: Utils.scrHeight * .03),
             SizedBox(
               width: Utils.scrHeight * .2,
@@ -363,7 +368,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
 
       if (storyProvider.stories.isEmpty) {
-        return const Center(child: Text('We Are Coming Soon Be Paction'));
+        return Center(
+          child: Text(
+            storyProvider.massage == null || storyProvider.massage == ''
+                ? 'We Are Coming Soon Be Patient'
+                : storyProvider.massage,
+            textAlign: TextAlign.center,
+          ),
+        );
       }
 
       return PageView.builder(

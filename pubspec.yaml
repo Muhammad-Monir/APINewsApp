@@ -79,6 +79,7 @@ dependencies:
   full_screen_image: ^2.0.0
   carousel_slider: ^4.2.1
   device_preview: ^1.2.0
+  widget_zoom: ^0.0.4
 
 
 dev_dependencies:

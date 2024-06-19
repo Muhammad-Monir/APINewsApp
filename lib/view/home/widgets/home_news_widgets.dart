@@ -117,7 +117,7 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Column newsBody(FontSizeProvider fontSize) {
+  Widget newsBody(FontSizeProvider fontSize) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -126,7 +126,7 @@ class _NewsScreenState extends State<NewsScreen> {
           child: Text(
             // overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
             widget.newsTitle,
             style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
@@ -138,15 +138,15 @@ class _NewsScreenState extends State<NewsScreen> {
           child: Text(
             overflow: TextOverflow.ellipsis,
             maxLines: 9,
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
             Utils.truncateText(widget.newsDec!, 70),
             style:
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
         ),
-        SizedBox(
-          height: Utils.scrHeight * .02,
-        ),
+        // SizedBox(
+        //   height: Utils.scrHeight * .02,
+        // ),
       ],
     );
   }
@@ -233,7 +233,6 @@ class _NewsScreenState extends State<NewsScreen> {
   // }
 
   Container topImageSection() {
-    // log("widget.images ${widget.images}");
     return Container(
       height: Utils.scrHeight * .400,
       width: double.infinity,
