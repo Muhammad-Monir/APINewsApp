@@ -118,41 +118,41 @@ class VideoPage extends StatelessWidget {
               width: double.infinity,
               height: 250,
               color: Colors.transparent,
-              child: GestureDetector(
-                onTap: () {
-                  if (data.video != null) {
-                    videoControllerProvider.togglePlayPause();
-                  } else {
-                    // Handle cases where there is no video
-                    ToastUtil.showShortToast('No Video Available');
-                  }
-                },
-                child: data.video != null
-                    ? Consumer<VideoControllerProvider>(
-                        builder: (context, value, child) {
-                          return Positioned.fill(
-                            child: GestureDetector(
-                              onTap: () {
-                                value.togglePlayPause();
+              child: data.video != null
+                  ? GestureDetector(
+                      onTap: () {
+                        if (data.video != null) {
+                          videoControllerProvider.togglePlayPause();
+                        } else {
+                          // Handle cases where there is no video
+                          ToastUtil.showShortToast('No Video Available');
+                        }
+                      },
+                      child: data.video != null
+                          ? Consumer<VideoControllerProvider>(
+                              builder: (context, value, child) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    value.togglePlayPause();
+                                  },
+                                  child: Center(
+                                    child: Icon(
+                                      value.isPlaying
+                                          ? Icons.pause
+                                          : Icons.play_arrow,
+                                      color: !value.isPlaying ||
+                                              value.shouldShowControls()
+                                          ? Colors.white
+                                          : Colors.transparent,
+                                      size: 100,
+                                    ),
+                                  ),
+                                );
                               },
-                              child: Center(
-                                child: Icon(
-                                  value.isPlaying
-                                      ? Icons.pause
-                                      : Icons.play_arrow,
-                                  color: !value.isPlaying ||
-                                          value.shouldShowControls()
-                                      ? Colors.white
-                                      : Colors.transparent,
-                                  size: 100,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      )
-                    : const SizedBox.shrink(),
-              ),
+                            )
+                          : const SizedBox.shrink(),
+                    )
+                  : const SizedBox.shrink(),
             ),
           ),
           if (appData.read(kKeyIsLoggedIn))
@@ -160,7 +160,7 @@ class VideoPage extends StatelessWidget {
           else
             const SizedBox.shrink(),
           Positioned(
-            bottom: Utils.scrHeight * .1,
+            bottom: Utils.scrHeight * .09,
             left: Utils.scrHeight * .02,
             right: Utils.scrHeight * .02,
             child: GestureDetector(

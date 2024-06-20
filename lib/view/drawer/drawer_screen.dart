@@ -217,7 +217,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // Apps Terms and Conditions
           CustomDrawerItem(
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.termsOfUses);
+                // Navigator.pushNamed(context, RoutesName.termsOfUses);
+                _sideBarAction(
+                    'https://aminn.reigeeky.com/pages/terms-of-service');
               },
               text: 'Terms Of Uses',
               svgName: 'terms_of_uses',
