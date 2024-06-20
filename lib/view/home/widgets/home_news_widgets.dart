@@ -137,7 +137,7 @@ class _NewsScreenState extends State<NewsScreen> {
           height: Utils.scrHeight * .3,
           child: Text(
             overflow: TextOverflow.ellipsis,
-            maxLines: 9,
+            maxLines: 7,
             textAlign: TextAlign.left,
             Utils.truncateText(widget.newsDec!, 70),
             style:

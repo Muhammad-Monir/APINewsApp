@@ -23,10 +23,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-
 import 'firebase_options.dart';
 import 'provider/language_provider.dart';
-import 'services/notification_service.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
 
@@ -46,9 +44,9 @@ void main() async {
   //   statusBarIconBrightness: Brightness.light,
   // ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  LocalNotificationService.initialize();
+  // LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
-  LocalNotificationService.getToken();
+  // LocalNotificationService.getToken();
   runApp(const MyApp()
       // DevicePreview(
       //   enabled: !kReleaseMode,
