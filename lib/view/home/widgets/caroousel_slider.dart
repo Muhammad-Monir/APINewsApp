@@ -73,24 +73,23 @@ class _CarouselImageSliderState extends State<CarouselImageSlider> {
         },
         child: CarouselSlider(
           items: widget.images
+              .asMap()
+              .entries
               .map(
                 (item) => FullScreenWidget(
                   disposeLevel: DisposeLevel.High,
-                  child: Hero(
-                    tag: 'tag',
-                    child: InteractiveViewer(
-                      maxScale: 5,
-                      minScale: 0.1,
-                      constrained: true,
-                      child: SizedBox(
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: item,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              Image.network(ApiUrl.imageNotFound),
-                        ),
+                  child: InteractiveViewer(
+                    maxScale: 5,
+                    minScale: 0.1,
+                    constrained: true,
+                    child: SizedBox(
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: item.value,
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Image.network(ApiUrl.imageNotFound),
                       ),
                     ),
                   ),

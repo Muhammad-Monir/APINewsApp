@@ -4,7 +4,6 @@ import 'dart:developer' as dev;
 import 'package:am_innnn/common_widgets/action_button.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/model/story_model.dart';
-import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/provider/news_provider.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -308,10 +307,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 buttonColor: appThemeColor,
                 buttonName: 'Try Again',
                 onTap: () {
-                  Provider.of<LanguageProvider>(context, listen: false)
-                      .resetLanguage();
-                  appData.write(kKeyLanguageCode, 'en');
-                  appData.write(kKeyLanguageId, 2);
+                  // Provider.of<LanguageProvider>(context, listen: false)
+                  //     .resetLanguage();
+                  // appData.write(kKeyLanguageCode, 'en');
+                  // appData.write(kKeyLanguageId, 22);
                   Navigator.pushNamedAndRemoveUntil(
                       context, RoutesName.home, (route) => false);
                 },

@@ -9,6 +9,7 @@ import 'package:am_innnn/provider/notification_provider.dart';
 import 'package:am_innnn/provider/obscure_provider.dart';
 import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/provider/timer_provider.dart';
+import 'package:am_innnn/provider/video_controller_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/color.dart';
@@ -40,10 +41,10 @@ void main() async {
   diSetup();
   await GetStorage.init();
   initInternetChecker();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.white,
+  //   statusBarIconBrightness: Brightness.light,
+  // ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -80,18 +81,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CountryProvider()),
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Api News App',
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
-          colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
-          useMaterial3: true,
+      child: SafeArea(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Api News App',
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
+            colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
+            useMaterial3: true,
+          ),
+          initialRoute: RoutesName.splash,
+          onGenerateRoute: Routes.generateRoute,
         ),
-        initialRoute: RoutesName.splash,
-        onGenerateRoute: Routes.generateRoute,
       ),
     );
   }
@@ -99,7 +103,7 @@ class MyApp extends StatelessWidget {
 
 void rotation() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
+    statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
   ));
 

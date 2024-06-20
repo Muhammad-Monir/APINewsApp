@@ -115,7 +115,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: Utils.scrHeight * .015),
+        SizedBox(height: Utils.scrHeight * .010),
         SizedBox(
           // width: Utils.scrHeight * .342,
           child: Text(
@@ -135,7 +135,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .02),
+        // SizedBox(height: Utils.scrHeight * .01),
         socialLinkSection(),
       ],
     );
