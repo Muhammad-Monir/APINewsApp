@@ -24,10 +24,11 @@ class CustomTabBar extends StatelessWidget {
         vertical: Utils.scrHeight * .02,
       ),
       color: Colors.white,
-      height: Utils.scrHeight * .11,
+      // height: Utils.scrHeight * .11,
+      // height: Utils.scrHeight * .11,
       child: Column(
         children: [
-          SizedBox(height: Utils.scrHeight * .043),
+          // SizedBox(height: Utils.scrHeight * .043),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
