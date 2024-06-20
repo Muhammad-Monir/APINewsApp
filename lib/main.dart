@@ -9,6 +9,7 @@ import 'package:am_innnn/provider/notification_provider.dart';
 import 'package:am_innnn/provider/obscure_provider.dart';
 import 'package:am_innnn/provider/story_provider.dart';
 import 'package:am_innnn/provider/timer_provider.dart';
+import 'package:am_innnn/provider/video_controller_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/color.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CountryProvider()),
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
+        ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
       ],
       child: SafeArea(
