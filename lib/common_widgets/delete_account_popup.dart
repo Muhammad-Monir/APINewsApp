@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../route/routes_name.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
+import '../utils/toast_util.dart';
 import '../utils/utils.dart';
 
 class DeletePopup extends StatefulWidget {
@@ -55,8 +56,15 @@ class _DeletePopupState extends State<DeletePopup> {
               Provider.of<AuthenticationProvider>(context, listen: false)
                   .deleteUser(appData.read(kKeyToken))
                   .then((value) {
+                appData.remove(kKeyUserID);
+                appData.remove(kKeyToken);
+                appData.write(kKeyIsLoggedIn, false);
+                ToastUtil.showShortToast('Your Account Deleted Successfully');
                 Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesName.login, (route) => false);
+                  context,
+                  RoutesName.home,
+                  (route) => false,
+                );
               });
               // _deleteAccount();
             },

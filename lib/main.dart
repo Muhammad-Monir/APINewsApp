@@ -12,6 +12,7 @@ import 'package:am_innnn/provider/timer_provider.dart';
 import 'package:am_innnn/provider/video_controller_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/services/notification_service.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
@@ -27,6 +28,7 @@ import 'firebase_options.dart';
 import 'provider/language_provider.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {}
 
@@ -44,9 +46,9 @@ void main() async {
   //   statusBarIconBrightness: Brightness.light,
   // ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  // LocalNotificationService.initialize();
+  LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // LocalNotificationService.getToken();
+  LocalNotificationService.getToken();
   runApp(const MyApp()
       // DevicePreview(
       //   enabled: !kReleaseMode,
@@ -82,19 +84,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
       ],
-      child: SafeArea(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Api News App',
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
-            colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
-            useMaterial3: true,
-          ),
-          initialRoute: RoutesName.splash,
-          onGenerateRoute: Routes.generateRoute,
-        ),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, child) {
+            return SafeArea(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Api News App',
+                theme: ThemeData(
+                  appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
+                  colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
+                  useMaterial3: true,
+                ),
+                initialRoute: RoutesName.splash,
+                onGenerateRoute: Routes.generateRoute,
+              ),
+            );
+          }),
     );
   }
 }

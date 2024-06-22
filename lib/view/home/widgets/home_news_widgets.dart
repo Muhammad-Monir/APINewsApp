@@ -118,6 +118,7 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   Widget newsBody(FontSizeProvider fontSize) {
+    log(' is arabic or urdu: ${(appData.read(kKeyLanguageId) == 4 || appData.read(kKeyLanguageId) == 83)}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -126,7 +127,10 @@ class _NewsScreenState extends State<NewsScreen> {
           child: Text(
             // overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            textAlign: TextAlign.left,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
             widget.newsTitle,
             style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
@@ -138,7 +142,10 @@ class _NewsScreenState extends State<NewsScreen> {
           child: Text(
             overflow: TextOverflow.ellipsis,
             maxLines: 7,
-            textAlign: TextAlign.left,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
             Utils.truncateText(widget.newsDec!, 70),
             style:
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),

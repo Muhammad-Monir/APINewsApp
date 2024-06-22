@@ -28,25 +28,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // _detectLocation();
-    Future.delayed(
-      const Duration(microseconds: 100),
-      () {
-        _detectLocation();
-        // if (appData.read(kKeyIsFirstTime)) {
-        //   Navigator.pushNamedAndRemoveUntil(
-        //     context,
-        //     RoutesName.onBoarding,
-        //     (route) => false,
-        //   );
-        // } else {
-        // Navigator.pushNamedAndRemoveUntil(
-        //   context,
-        //   RoutesName.home,
-        //   (route) => false,
-        // );
-        // }
-      },
-    );
+    // Future.delayed(
+    //   const Duration(microseconds: 100),
+    //   () {
+    _detectLocation();
+    // if (appData.read(kKeyIsFirstTime)) {
+    //   Navigator.pushNamedAndRemoveUntil(
+    //     context,
+    //     RoutesName.onBoarding,
+    //     (route) => false,
+    //   );
+    // } else {
+    // Navigator.pushNamedAndRemoveUntil(
+    //   context,
+    //   RoutesName.home,
+    //   (route) => false,
+    // );
+    // }
+    // },
+    // );
     super.initState();
   }
 
