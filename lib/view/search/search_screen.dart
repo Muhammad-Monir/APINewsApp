@@ -12,7 +12,7 @@ import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
-import 'package:am_innnn/view/search/widgets/favorite_popup.dart';
+import 'package:am_innnn/view/search/widgets/category_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';

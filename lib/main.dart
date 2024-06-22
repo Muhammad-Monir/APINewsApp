@@ -12,6 +12,7 @@ import 'package:am_innnn/provider/timer_provider.dart';
 import 'package:am_innnn/provider/video_controller_provider.dart';
 import 'package:am_innnn/route/routes.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/services/notification_service.dart';
 import 'package:am_innnn/utils/color.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
@@ -23,12 +24,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-
 import 'firebase_options.dart';
 import 'provider/language_provider.dart';
-import 'services/notification_service.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {}
 
@@ -84,19 +84,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
         // Provider(create: (_) => AuthService(preferences!)),
       ],
-      child: SafeArea(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Api News App',
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
-            colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
-            useMaterial3: true,
-          ),
-          initialRoute: RoutesName.splash,
-          onGenerateRoute: Routes.generateRoute,
-        ),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, child) {
+            return SafeArea(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Api News App',
+                theme: ThemeData(
+                  appBarTheme: const AppBarTheme(scrolledUnderElevation: 0.0),
+                  colorScheme: ColorScheme.fromSeed(seedColor: appThemeColor),
+                  useMaterial3: true,
+                ),
+                initialRoute: RoutesName.splash,
+                onGenerateRoute: Routes.generateRoute,
+              ),
+            );
+          }),
     );
   }
 }

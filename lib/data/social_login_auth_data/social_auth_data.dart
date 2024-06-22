@@ -43,7 +43,7 @@ class SocialAuthData {
             authResult.credential!.accessToken!,
             'google',
             context);
-        ToastUtil.showLongToast('Login Sussessfully');
+        // ToastUtil.showLongToast('Login Sussessfully');
       }
       log("google sing in info$authResult");
       // Return the current user

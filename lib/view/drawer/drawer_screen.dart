@@ -259,8 +259,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     //     .clearList();
                     // Provider.of<StoryProvider>(context, listen: false)
                     //     .clearList();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, RoutesName.login, (route) => false);
+                    Navigator.pushNamed(context, RoutesName.login);
                   },
                   buttonColor: appThemeColor,
                   textColor: Colors.white,

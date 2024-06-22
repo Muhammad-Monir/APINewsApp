@@ -21,7 +21,8 @@ class CategoryPopup extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(Utils.scrHeight * .02)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Header Part
           Row(children: [

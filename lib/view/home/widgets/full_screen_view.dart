@@ -1,6 +1,5 @@
 import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import '../../../utils/api_url.dart';
 
 class FullScreenView extends StatelessWidget {
