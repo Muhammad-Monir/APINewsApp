@@ -119,8 +119,12 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         SizedBox(
           // width: Utils.scrHeight * .342,
           child: Text(
-            maxLines: 4,
+            maxLines: 3,
             widget.newsTitle,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
             style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
           ),
         ),
@@ -128,7 +132,10 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         SizedBox(
           height: Utils.scrHeight * .28,
           child: Text(
-            textAlign: TextAlign.left,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
             maxLines: 8,
             Utils.truncateText(widget.newsDec ?? 'NA', 55),
             style:

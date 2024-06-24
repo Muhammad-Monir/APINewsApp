@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../common_widgets/custom_divider.dart';
 import '../../../utils/api_url.dart';
+import '../../../utils/app_constants.dart';
 import '../../../utils/color.dart';
+import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 
@@ -56,6 +58,10 @@ class SearchListItem extends StatelessWidget {
                       // width: Utils.scrHeight * .25,
                       child: Text(title ?? '',
                           maxLines: 3,
+                          textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                                  appData.read(kKeyLanguageId) == 83)
+                              ? TextAlign.left
+                              : TextAlign.right,
                           overflow: TextOverflow.ellipsis,
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
@@ -63,6 +69,10 @@ class SearchListItem extends StatelessWidget {
                     Text(
                         DateFormat('dd MMM yyyy hh:mm a')
                             .format(DateTime.parse(time!)),
+                        textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                                appData.read(kKeyLanguageId) == 83)
+                            ? TextAlign.left
+                            : TextAlign.right,
                         style: regularTS(homeTabTextColor, fontSize: 13)),
                   ],
                 ),
