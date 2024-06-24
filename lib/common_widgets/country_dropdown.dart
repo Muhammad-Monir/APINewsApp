@@ -3,6 +3,7 @@ import 'package:am_innnn/model/country_model.dart';
 import 'package:am_innnn/provider/country_provider.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,10 +52,26 @@ class _CountryDropDownState extends State<CountryDropDown> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: Utils.scrHeight * .008),
-                    child: Text(
-                      country.name!,
-                      style: mediumTS(appTextColor),
-                      textAlign: TextAlign.center,
+                    child: Row(
+                      children: [
+                        CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl:
+                              'https://flagcdn.com/48x36/${country.code}.png',
+                          errorWidget: (context, url, error) =>
+                              Image.network('https://flagcdn.com/48x36/bd.png'),
+                          height: 20,
+                          width: 24,
+                        ),
+                        SizedBox(
+                          width: Utils.scrHeight * .008,
+                        ),
+                        Text(
+                          country.name!,
+                          style: mediumTS(appTextColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
                 );

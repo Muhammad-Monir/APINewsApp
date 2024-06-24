@@ -303,7 +303,7 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
       ),
       child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
+          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 14)),
     );
   }
 
