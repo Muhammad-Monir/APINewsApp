@@ -69,6 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
         _country = countryName[0].country!;
         _countryCode = countryName[0].isoCountryCode!;
         appData.write(kKeyCountryCode, _countryCode.toLowerCase());
+        appData.write(kKeyLanguageId, 22);
         Navigator.pushNamedAndRemoveUntil(
           context,
           RoutesName.home,
