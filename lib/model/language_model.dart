@@ -253,4 +253,9 @@ class LanguageData {
         "updated_at": updatedAt?.toIso8601String(),
         "deleted_at": deletedAt,
       };
+
+  @override
+  String toString() {
+    return 'LanguageData(id: $id, name: $name, code: $code, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+  }
 }

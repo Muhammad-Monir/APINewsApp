@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../provider/language_provider.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
 import '../utils/utils.dart';
@@ -79,8 +80,10 @@ class _CountryDropDownState extends State<CountryDropDown> {
               // value: countryData,
               value: provider.selectedCountry,
               onChanged: (CountryData? newValue) {
+                Provider.of<LanguageProvider>(context, listen: false)
+                    .fetchLanguages(id: newValue!.id);
                 provider.setSelectedCountry(newValue);
-                appData.write(kKeyCountryCode, newValue!.code);
+                appData.write(kKeyCountryCode, newValue.code);
                 appData.write(kKeyCountryName, newValue.name);
                 appData.write(kKeyCountryId, newValue.id);
               },

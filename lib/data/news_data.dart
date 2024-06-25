@@ -185,6 +185,29 @@ class NewsData {
     }
   }
 
+  static Future<LanguageModel> getAllLanguageByCountry(int countryId) async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse('${ApiUrl.newSingleLanguageUrl}/$countryId'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
+        return LanguageModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      log(error.toString());
+      rethrow;
+    }
+  }
+
   static Future<CountryModel> getAllCountry() async {
     try {
       // log('call get category');

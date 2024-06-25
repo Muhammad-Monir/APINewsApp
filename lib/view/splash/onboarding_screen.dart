@@ -137,6 +137,8 @@ class _OnBoardingState extends State<OnBoarding> {
 
   void initialSetData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Provider.of<LanguageProvider>(context, listen: false)
+      //     .fetchLanguages(id: appData.read(kKeyCountryId));
       Provider.of<LanguageProvider>(context, listen: false)
           .initializeSelectedLanguage();
       Provider.of<CountryProvider>(context, listen: false)

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../data/news_data.dart';
 import '../model/language_model.dart';
@@ -20,9 +22,11 @@ class LanguageProvider with ChangeNotifier {
     initializeSelectedLanguage();
   }
 
-  Future<void> fetchLanguages() async {
+  Future<void> fetchLanguages({int? id}) async {
     try {
-      final languageModel = await NewsData.getAllLanguage();
+      log('county code : ${appData.read(kKeyCountryId)}');
+      final languageModel = await NewsData.getAllLanguageByCountry(
+          id ?? appData.read(kKeyCountryId));
       _languages = languageModel.data;
       _isLoading = false;
       initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
@@ -45,10 +49,38 @@ class LanguageProvider with ChangeNotifier {
 
   void initializeSelectedLanguage() {
     int? languageId = appData.read(kKeyLanguageId);
-    if (languageId != null && _languages != null) {
-      _selectedLanguage =
-          _languages!.firstWhere((language) => language.id == languageId);
+    try {
+      log("languageId: $languageId, _languages: ${_languages.toString()}");
+      if (languageId != null && _languages != null) {
+        _selectedLanguage = _languages!.firstWhere(
+          (language) => language.id == languageId,
+          orElse: () => _languages!.firstWhere((language) => language.id == 22),
+        );
+      } else if (_languages != null) {
+        _selectedLanguage =
+            _languages!.firstWhere((language) => language.id == 22);
+      }
+      log("_selectedLanguage: ${_selectedLanguage.toString()}, ");
+    } catch (e) {
+      log('language initialize exception: $e ');
+      rethrow;
     }
     notifyListeners();
   }
+
+  // void initializeSelectedLanguage() {
+  //   int? languageId = appData.read(kKeyLanguageId);
+  //   try {
+  //     log("languageId: $languageId, _languages: ${_languages.toString()}");
+  //     if (languageId != null && _languages != null) {
+  //       _selectedLanguage =
+  //           _languages!.firstWhere((language) => language.id == languageId);
+  //       log("_selectedLanguage: ${_selectedLanguage.toString()}, ");
+  //     }
+  //   } catch (e) {
+  //     log('language initialize exception: $e ');
+  //     rethrow;
+  //   }
+  //   notifyListeners();
+  // }
 }

@@ -52,7 +52,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
                     padding: EdgeInsets.symmetric(
                         horizontal: Utils.scrHeight * .008),
                     child: Text(
-                      laguage.name!,
+                      laguage.name ?? '',
                       style: mediumTS(appTextColor),
                       textAlign: TextAlign.center,
                     ),
