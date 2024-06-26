@@ -351,7 +351,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         ),
       ),
       child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
+          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 14)),
     );
   }
 
