@@ -199,7 +199,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
         // Promo Code
         Positioned(
-          bottom: -Utils.scrHeight * .02,
+          bottom: -Utils.scrHeight * .01,
           right: Utils.scrHeight * .05,
           child: _buildAppBandingName(),
         ),
@@ -351,7 +351,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         ),
       ),
       child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
+          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 14)),
     );
   }
 
