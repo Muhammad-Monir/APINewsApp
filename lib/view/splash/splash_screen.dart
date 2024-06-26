@@ -1,14 +1,12 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields, use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../../route/routes_name.dart';
 import '../../services/locations_services.dart';
 

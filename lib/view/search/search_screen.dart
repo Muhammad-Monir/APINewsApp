@@ -244,7 +244,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ? e.featuredImage!.first
                               : ApiUrl.imageNotFound,
                           time: DateFormat('yyyy-MM-dd HH:mm')
-                              .format(e.createdAt!),
+                              .format(e.statusStartTime!),
                         ),
                       ))
                   .toList();
