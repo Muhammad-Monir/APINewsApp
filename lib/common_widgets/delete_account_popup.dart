@@ -5,6 +5,7 @@ import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../route/routes_name.dart';
@@ -45,7 +46,7 @@ class _DeletePopupState extends State<DeletePopup> {
           SizedBox(
             child: Text('Are you sure you want to Delete your account?',
                 textAlign: TextAlign.center,
-                style: mediumTS(homeTabTextColor, fontSize: 20)),
+                style: mediumTS(homeTabTextColor, fontSize: 20.sp)),
           ),
           SizedBox(height: Utils.scrHeight * .02),
           ActionButton(

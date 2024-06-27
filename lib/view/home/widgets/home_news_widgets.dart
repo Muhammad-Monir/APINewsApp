@@ -5,6 +5,7 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -132,7 +133,8 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
+            style:
+                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -147,8 +149,8 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             Utils.truncateText(widget.newsDec!, 70),
-            style:
-                regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
+            style: regularTS(appSecondTextColor,
+                fontSize: 13.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(
@@ -302,8 +304,8 @@ class _NewsScreenState extends State<NewsScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 14)),
+      child: Text('Quikkbyte',
+          style: mediumTS(redContainerColor, fontSize: 14.sp)),
     );
   }
 
