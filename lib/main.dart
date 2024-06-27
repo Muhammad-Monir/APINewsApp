@@ -29,6 +29,7 @@ import 'provider/language_provider.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> backgroundHandler(RemoteMessage message) async {}
 
@@ -49,6 +50,7 @@ void main() async {
   LocalNotificationService.initialize();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   LocalNotificationService.getToken();
+  tz.initializeTimeZones();
   runApp(const MyApp()
       // DevicePreview(
       //   enabled: !kReleaseMode,

@@ -92,8 +92,8 @@ class _BookMarksScreenState extends State<BookMarksScreen> {
                       imageName:
                           data[index].featuredImage ?? ApiUrl.imageNotFound,
                       title: data[index].title!,
-                      time: DateFormat('yyyy-MM-dd HH:mm')
-                          .format(data[index].statusStartTime!),
+                      time: DateFormat('yyyy-MM-dd hh:mm')
+                          .format(data[index].createdAt!),
                     );
                   },
                 )

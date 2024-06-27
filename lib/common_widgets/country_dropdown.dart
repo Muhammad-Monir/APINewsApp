@@ -82,6 +82,9 @@ class _CountryDropDownState extends State<CountryDropDown> {
               onChanged: (CountryData? newValue) {
                 Provider.of<LanguageProvider>(context, listen: false)
                     .fetchLanguages(id: newValue!.id);
+                Provider.of<LanguageProvider>(context, listen: false)
+                    .resetLanguage();
+
                 provider.setSelectedCountry(newValue);
                 appData.write(kKeyCountryCode, newValue.code);
                 appData.write(kKeyCountryName, newValue.name);

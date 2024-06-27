@@ -9,6 +9,9 @@ import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 class BookmarkItem extends StatelessWidget {
   const BookmarkItem({
     super.key,
@@ -27,6 +30,18 @@ class BookmarkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Parse the input timestamp
+    DateTime utcDateTime = DateTime.parse(time!);
+
+    // Get the IST time zone
+    final ist = tz.getLocation('Asia/Kolkata');
+
+    // Convert the UTC time to IST
+    final istDateTime = tz.TZDateTime.from(utcDateTime, ist);
+
+    // Format the date with time zone information
+    DateFormat formatter = DateFormat('dd MMM yyyy hh:mm a');
+    String formattedDate = formatter.format(istDateTime);
     return Column(
       children: [
         Row(
@@ -66,9 +81,9 @@ class BookmarkItem extends StatelessWidget {
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    Text(
-                        DateFormat('dd MMM yyyy hh:mm a')
-                            .format(DateTime.parse(time!)),
+                    Text(formattedDate,
+                        // DateFormat('dd MMM yyyy HH:MM a')
+                        //     .format(DateTime.parse(time!)),
                         textAlign: !(appData.read(kKeyLanguageId) == 4 ||
                                 appData.read(kKeyLanguageId) == 83)
                             ? TextAlign.left

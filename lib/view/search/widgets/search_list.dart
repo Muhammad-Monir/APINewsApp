@@ -66,9 +66,9 @@ class SearchListItem extends StatelessWidget {
                           style: regularTS(appTextColor, fontSize: 17)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    Text(
-                        DateFormat('dd MMM yyyy hh:mm a')
-                            .format(DateTime.parse(time!)),
+                    Text(time!,
+                        // DateFormat('dd MMM yyyy hh:MM a')
+                        //     .format(DateTime.parse(time!)),
                         textAlign: !(appData.read(kKeyLanguageId) == 4 ||
                                 appData.read(kKeyLanguageId) == 83)
                             ? TextAlign.left

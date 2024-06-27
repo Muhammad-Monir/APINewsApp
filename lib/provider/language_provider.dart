@@ -18,8 +18,8 @@ class LanguageProvider with ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   LanguageProvider() {
-    fetchLanguages();
-    initializeSelectedLanguage();
+    // fetchLanguages();
+    // initializeSelectedLanguage();
   }
 
   Future<void> fetchLanguages({int? id}) async {
@@ -29,7 +29,7 @@ class LanguageProvider with ChangeNotifier {
           id ?? appData.read(kKeyCountryId));
       _languages = languageModel.data;
       _isLoading = false;
-      initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
+      // initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
     } catch (e) {
       _errorMessage = e.toString();
       _isLoading = false;
