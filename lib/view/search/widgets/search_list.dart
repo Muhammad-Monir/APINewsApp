@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../common_widgets/custom_divider.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/app_constants.dart';
@@ -63,7 +64,7 @@ class SearchListItem extends StatelessWidget {
                               ? TextAlign.left
                               : TextAlign.right,
                           overflow: TextOverflow.ellipsis,
-                          style: regularTS(appTextColor, fontSize: 17)),
+                          style: regularTS(appTextColor, fontSize: 15.sp)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
                     Text(time!,
@@ -73,7 +74,7 @@ class SearchListItem extends StatelessWidget {
                                 appData.read(kKeyLanguageId) == 83)
                             ? TextAlign.left
                             : TextAlign.right,
-                        style: regularTS(homeTabTextColor, fontSize: 13)),
+                        style: regularTS(homeTabTextColor, fontSize: 13.sp)),
                   ],
                 ),
               ),

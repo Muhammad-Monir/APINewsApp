@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/styles.dart';
 import '../utils/utils.dart';
 
@@ -37,7 +38,7 @@ class ActionButton extends StatelessWidget {
               buttonName,
               style: semiBoldTS(
                   textColor ?? Colors.white, // Convert Color to int value
-                  fontSize: 18),
+                  fontSize: 18.sp),
             ),
           ],
         ),

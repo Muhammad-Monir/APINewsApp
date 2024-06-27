@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
 import '../utils/utils.dart';
@@ -30,7 +31,7 @@ class EmailFormField extends StatelessWidget {
       keyboardType: textInputType,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: regularTS(formHintColor, fontSize: 16),
+        hintStyle: regularTS(formHintColor, fontSize: 16.sp),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: Utils.scrHeight * .001,

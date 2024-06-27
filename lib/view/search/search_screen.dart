@@ -16,7 +16,7 @@ import 'package:am_innnn/view/search/widgets/category_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../common_widgets/action_button.dart';
@@ -105,7 +105,8 @@ class _SearchScreenState extends State<SearchScreen> {
     log('build widget');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search For', style: mediumTS(appBarColor, fontSize: 24)),
+        title:
+            Text('Search For', style: mediumTS(appBarColor, fontSize: 20.sp)),
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
@@ -153,7 +154,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   SizedBox(height: Utils.scrHeight * .024),
                   Text('Categories',
-                      style: semiBoldTS(appTextColor, fontSize: 20)),
+                      style: semiBoldTS(appTextColor, fontSize: 20.sp)),
                   SizedBox(height: Utils.scrHeight * .016),
 
                   // Select Category for search by category
@@ -198,7 +199,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   SizedBox(height: Utils.scrHeight * .010),
                   Text('All News',
-                      style: semiBoldTS(appTextColor, fontSize: 20)),
+                      style: semiBoldTS(appTextColor, fontSize: 20.sp)),
                   SizedBox(height: Utils.scrHeight * .010),
                   searchListItem()
                 ],
@@ -253,11 +254,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: searchList,
               );
             } else {
-              return const Center(child: Text('Data not found'));
+              return const Center(child: Text('No Data Found'));
             }
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
+            return const Center(
+              child: Text('No Data Found'),
             );
           }
           return const Center(

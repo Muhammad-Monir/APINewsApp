@@ -4,6 +4,7 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../model/language_model.dart';
 import '../provider/language_provider.dart';
@@ -42,7 +43,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
               isExpanded: true,
               hint: Text(
                 'Select Your Language',
-                style: regularTS(appBarColor, fontSize: 14),
+                style: regularTS(appBarColor, fontSize: 14.sp),
               ),
               // DropDownItem Showing
               items: provider.languages?.map((LanguageData laguage) {
@@ -111,7 +112,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
                         vertical: 8,
                       ),
                       hintText: 'Search for an item...',
-                      hintStyle: const TextStyle(fontSize: 12),
+                      hintStyle: TextStyle(fontSize: 12.sp),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

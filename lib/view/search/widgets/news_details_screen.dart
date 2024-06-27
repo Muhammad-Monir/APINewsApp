@@ -5,6 +5,7 @@ import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -125,7 +126,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                     appData.read(kKeyLanguageId) == 83)
                 ? TextAlign.left
                 : TextAlign.right,
-            style: semiBoldTS(appTextColor, fontSize: 16 * fontSize.fontSize),
+            style:
+                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -138,8 +140,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 : TextAlign.right,
             maxLines: 9,
             Utils.truncateText(widget.newsDec ?? 'NA', 55),
-            style:
-                regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
+            style: regularTS(appSecondTextColor,
+                fontSize: 13.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .01),
@@ -177,7 +179,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   child: Text('Tap to know more',
                       overflow: TextOverflow.ellipsis,
                       style: regularTS(Colors.black,
-                          fontSize: 14, isUnderline: true)),
+                          fontSize: 14.sp, isUnderline: true)),
                 ),
               ),
             ],
@@ -350,8 +352,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 14)),
+      child: Text('Quikkbyte',
+          style: mediumTS(redContainerColor, fontSize: 14.sp)),
     );
   }
 

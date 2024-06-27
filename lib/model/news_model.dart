@@ -2,10 +2,6 @@
 
 import 'dart:convert';
 
-import '../utils/api_url.dart';
-
-import 'dart:convert';
-
 class NewsModel {
   bool? status;
   String? message;

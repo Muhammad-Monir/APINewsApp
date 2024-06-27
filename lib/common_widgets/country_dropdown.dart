@@ -6,6 +6,7 @@ import 'package:am_innnn/utils/di.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../provider/language_provider.dart';
 import '../utils/color.dart';
@@ -44,7 +45,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
               isExpanded: true,
               hint: Text(
                 'Select Your Country',
-                style: regularTS(appBarColor, fontSize: 14),
+                style: regularTS(appBarColor, fontSize: 14.sp),
               ),
               // DropDownItem Showing
               items: provider.countries?.map((CountryData country) {
@@ -135,7 +136,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
                         vertical: 8,
                       ),
                       hintText: 'Search for an item...',
-                      hintStyle: const TextStyle(fontSize: 12),
+                      hintStyle: TextStyle(fontSize: 12.sp),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

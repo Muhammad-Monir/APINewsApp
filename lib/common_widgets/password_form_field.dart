@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../provider/obscure_provider.dart';
 import '../utils/color.dart';
@@ -29,7 +30,7 @@ class PasswordFormField extends StatelessWidget {
             // autovalidateMode: AutovalidateMode.always,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: regularTS(formHintColor, fontSize: 16),
+              hintStyle: regularTS(formHintColor, fontSize: 16.sp),
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       width: Utils.scrHeight * .001,
