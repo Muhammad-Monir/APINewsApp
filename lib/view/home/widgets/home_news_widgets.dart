@@ -141,7 +141,7 @@ class _NewsScreenState extends State<NewsScreen> {
           height: Utils.scrHeight * .3,
           child: Text(
             overflow: TextOverflow.ellipsis,
-            maxLines: 7,
+            maxLines: 9,
             textAlign: !(appData.read(kKeyLanguageId) == 4 ||
                     appData.read(kKeyLanguageId) == 83)
                 ? TextAlign.left
