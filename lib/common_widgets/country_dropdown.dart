@@ -82,7 +82,7 @@ class _CountryDropDownState extends State<CountryDropDown> {
               value: provider.selectedCountry,
               onChanged: (CountryData? newValue) {
                 Provider.of<LanguageProvider>(context, listen: false)
-                    .fetchLanguages(id: newValue!.id);
+                    .fetchLanguages(code: newValue!.code);
                 Provider.of<LanguageProvider>(context, listen: false)
                     .resetLanguage();
 

@@ -185,11 +185,12 @@ class NewsData {
     }
   }
 
-  static Future<LanguageModel> getAllLanguageByCountry(int countryId) async {
+  static Future<LanguageModel> getAllLanguageByCountry(
+      String countryCode) async {
     try {
       // log('call get category');
       final response = await http.get(
-        Uri.parse('${ApiUrl.newSingleLanguageUrl}/$countryId'),
+        Uri.parse('${ApiUrl.newSingleLanguageUrl}/$countryCode'),
         headers: {
           'Content-Type': 'application/json',
         },

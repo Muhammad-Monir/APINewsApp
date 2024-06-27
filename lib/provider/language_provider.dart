@@ -22,11 +22,11 @@ class LanguageProvider with ChangeNotifier {
     // initializeSelectedLanguage();
   }
 
-  Future<void> fetchLanguages({int? id}) async {
+  Future<void> fetchLanguages({String? code}) async {
     try {
       log('county code : ${appData.read(kKeyCountryId)}');
       final languageModel = await NewsData.getAllLanguageByCountry(
-          id ?? appData.read(kKeyCountryId));
+          code ?? appData.read(kKeyCountryCode));
       _languages = languageModel.data;
       _isLoading = false;
       // initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
