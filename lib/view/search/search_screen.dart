@@ -238,14 +238,15 @@ class _SearchScreenState extends State<SearchScreen> {
                               ));
                         },
                         child: SearchListItem(
-                          title: e.title,
-                          // imageName: e.featuredImage,
-                          imageName: e.featuredImage!.isNotEmpty
-                              ? e.featuredImage!.first
-                              : ApiUrl.imageNotFound,
-                          time: DateFormat('yyyy-MM-dd HH:mm')
-                              .format(e.statusStartTime!),
-                        ),
+                            title: e.title,
+                            // imageName: e.featuredImage,
+                            imageName: e.featuredImage!.isNotEmpty
+                                ? e.featuredImage!.first
+                                : ApiUrl.imageNotFound,
+                            time: e.formatedDate
+                            // DateFormat('yyyy-MM-dd HH:mm')
+                            //     .format(e.createdAt!),
+                            ),
                       ))
                   .toList();
               return Column(

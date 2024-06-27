@@ -136,7 +136,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                     appData.read(kKeyLanguageId) == 83)
                 ? TextAlign.left
                 : TextAlign.right,
-            maxLines: 8,
+            maxLines: 9,
             Utils.truncateText(widget.newsDec ?? 'NA', 55),
             style:
                 regularTS(appSecondTextColor, fontSize: 14 * fontSize.fontSize),
