@@ -9,7 +9,7 @@ import '../utils/di.dart';
 class LanguageProvider with ChangeNotifier {
   List<LanguageData>? _languages;
   LanguageData? _selectedLanguage;
-  bool _isLoading = true;
+  bool _isLoading = false;
   String? _errorMessage;
 
   List<LanguageData>? get languages => _languages;
@@ -22,11 +22,12 @@ class LanguageProvider with ChangeNotifier {
     // initializeSelectedLanguage();
   }
 
-  Future<void> fetchLanguages({int? id}) async {
+  Future<void> fetchLanguages({String? code}) async {
     try {
+      _isLoading = true;
       log('county code : ${appData.read(kKeyCountryId)}');
       final languageModel = await NewsData.getAllLanguageByCountry(
-          id ?? appData.read(kKeyCountryId));
+          code ?? appData.read(kKeyCountryCode));
       _languages = languageModel.data;
       _isLoading = false;
       // initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
@@ -54,11 +55,12 @@ class LanguageProvider with ChangeNotifier {
       if (languageId != null && _languages != null) {
         _selectedLanguage = _languages!.firstWhere(
           (language) => language.id == languageId,
-          orElse: () => _languages!.firstWhere((language) => language.id == 22),
+          orElse: () => _languages!
+              .firstWhere((language) => languageId == _languages!.first.id!),
         );
       } else if (_languages != null) {
-        _selectedLanguage =
-            _languages!.firstWhere((language) => language.id == 22);
+        _selectedLanguage = _languages!
+            .firstWhere((language) => language.id == _languages!.first.id!);
       }
       log("_selectedLanguage: ${_selectedLanguage.toString()}, ");
     } catch (e) {

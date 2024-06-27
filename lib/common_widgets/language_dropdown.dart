@@ -38,100 +38,105 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
           borderRadius: BorderRadius.circular(Utils.scrHeight * .012),
           border: Border.all(color: Colors.grey)),
       child: Consumer<LanguageProvider>(builder: (context, provider, child) {
-        return DropdownButtonHideUnderline(
-          child: DropdownButton2<LanguageData>(
-              isExpanded: true,
-              hint: Text(
-                'Select Your Language',
-                style: regularTS(appBarColor, fontSize: 14.sp),
-              ),
-              // DropDownItem Showing
-              items: provider.languages?.map((LanguageData laguage) {
-                return DropdownMenuItem<LanguageData>(
-                  value: laguage,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Utils.scrHeight * .008),
-                    child: Text(
-                      laguage.name ?? '',
-                      style: mediumTS(appTextColor),
-                      textAlign: TextAlign.center,
+        return !provider.isLoading
+            ? DropdownButtonHideUnderline(
+                child: DropdownButton2<LanguageData>(
+                    isExpanded: true,
+                    hint: Text(
+                      'Select Your Language',
+                      style: regularTS(appBarColor, fontSize: 14.sp),
                     ),
-                  ),
-                );
-              }).toList(),
-              value: provider.selectedLanguage,
-              onChanged: (LanguageData? newValue) {
-                provider.setSelectedLanguage(newValue);
-                appData.write(kKeyLanguageCode, newValue!.code);
-                appData.write(kKeyLanguageName, newValue.name);
-                appData.write(kKeyLanguageId, newValue.id);
-              },
+                    // DropDownItem Showing
+                    items: provider.languages?.map((LanguageData laguage) {
+                      return DropdownMenuItem<LanguageData>(
+                        value: laguage,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Utils.scrHeight * .008),
+                          child: Text(
+                            laguage.name ?? '',
+                            style: mediumTS(appTextColor),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    value: provider.languages!.first,
+                    onChanged: (LanguageData? newValue) {
+                      provider.setSelectedLanguage(newValue);
+                      appData.write(kKeyLanguageCode, newValue!.code);
+                      appData.write(kKeyLanguageName, newValue.name);
+                      appData.write(kKeyLanguageId, newValue.id);
+                    },
 
-              //DropDown Button Style
-              buttonStyleData: ButtonStyleData(
-                padding:
-                    EdgeInsets.symmetric(horizontal: Utils.scrHeight * .016),
-                height: Utils.scrHeight * .040,
-                // width: Utils.scrHeight * .040,
-              ),
-              dropdownStyleData: DropdownStyleData(
-                direction: DropdownDirection.left,
-                maxHeight: Utils.scrHeight * .5,
-                width: Utils.scrHeight * .350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Utils.scrHeight * .015),
-                ),
-              ),
-              menuItemStyleData: MenuItemStyleData(
-                padding:
-                    EdgeInsets.symmetric(horizontal: Utils.scrHeight * .008),
-              ),
-              iconStyleData: const IconStyleData(
-                openMenuIcon: Icon(Icons.arrow_drop_up),
-              ),
-              dropdownSearchData: DropdownSearchData(
-                searchController: textEditingController,
-                searchInnerWidgetHeight: 50,
-                searchInnerWidget: Container(
-                  height: 50,
-                  padding: const EdgeInsets.only(
-                    top: 8,
-                    bottom: 4,
-                    right: 8,
-                    left: 8,
-                  ),
-                  child: TextFormField(
-                    expands: true,
-                    maxLines: null,
-                    controller: textEditingController,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 8,
-                      ),
-                      hintText: 'Search for an item...',
-                      hintStyle: TextStyle(fontSize: 12.sp),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                    //DropDown Button Style
+                    buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Utils.scrHeight * .016),
+                      height: Utils.scrHeight * .040,
+                      // width: Utils.scrHeight * .040,
+                    ),
+                    dropdownStyleData: DropdownStyleData(
+                      direction: DropdownDirection.left,
+                      maxHeight: Utils.scrHeight * .5,
+                      width: Utils.scrHeight * .350,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Utils.scrHeight * .015),
                       ),
                     ),
-                  ),
-                ),
-                searchMatchFn: (item, searchValue) {
-                  return item.value!.name!
-                      .toLowerCase()
-                      .contains(searchValue.toLowerCase());
-                },
-              ),
-              //This to clear the search value when you close the menu
-              onMenuStateChange: (isOpen) {
-                if (!isOpen) {
-                  textEditingController.clear();
-                }
-              }),
-        );
+                    menuItemStyleData: MenuItemStyleData(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Utils.scrHeight * .008),
+                    ),
+                    iconStyleData: const IconStyleData(
+                      openMenuIcon: Icon(Icons.arrow_drop_up),
+                    ),
+                    dropdownSearchData: DropdownSearchData(
+                      searchController: textEditingController,
+                      searchInnerWidgetHeight: 50,
+                      searchInnerWidget: Container(
+                        height: 50,
+                        padding: const EdgeInsets.only(
+                          top: 8,
+                          bottom: 4,
+                          right: 8,
+                          left: 8,
+                        ),
+                        child: TextFormField(
+                          expands: true,
+                          maxLines: null,
+                          controller: textEditingController,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 8,
+                            ),
+                            hintText: 'Search for an item...',
+                            hintStyle: TextStyle(fontSize: 12.sp),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      ),
+                      searchMatchFn: (item, searchValue) {
+                        return item.value!.name!
+                            .toLowerCase()
+                            .contains(searchValue.toLowerCase());
+                      },
+                    ),
+                    //This to clear the search value when you close the menu
+                    onMenuStateChange: (isOpen) {
+                      if (!isOpen) {
+                        textEditingController.clear();
+                      }
+                    }),
+              )
+            : const SizedBox(
+                width: double.infinity,
+                child: Center(child: CircularProgressIndicator()));
       }),
     );
   }

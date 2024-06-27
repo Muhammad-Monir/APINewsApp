@@ -1,6 +1,8 @@
 import 'dart:developer';
+
 import 'package:am_innnn/model/country_model.dart';
 import 'package:flutter/material.dart';
+
 import '../data/news_data.dart';
 import '../utils/app_constants.dart';
 import '../utils/di.dart';
@@ -50,6 +52,9 @@ class CountryProvider with ChangeNotifier {
     if (countryCode != null && _countries != null) {
       _selectedCountry = _countries!.firstWhere(
         (country) => country.code == countryCode,
+        // orElse: () {
+        //   // Provider
+        // },
       );
     }
     notifyListeners();

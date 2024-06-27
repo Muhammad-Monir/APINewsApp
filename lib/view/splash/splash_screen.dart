@@ -1,12 +1,14 @@
 // ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields, use_build_context_synchronously
 
 import 'dart:developer';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import '../../route/routes_name.dart';
 import '../../services/locations_services.dart';
 
@@ -68,6 +70,8 @@ class _SplashScreenState extends State<SplashScreen> {
         _countryCode = countryName[0].isoCountryCode!;
         appData.write(kKeyCountryCode, _countryCode.toLowerCase());
         appData.write(kKeyLanguageId, 22);
+        Provider.of<LanguageProvider>(context, listen: false)
+            .fetchLanguages(code: _countryCode.toLowerCase());
         Navigator.pushNamedAndRemoveUntil(
           context,
           RoutesName.home,
