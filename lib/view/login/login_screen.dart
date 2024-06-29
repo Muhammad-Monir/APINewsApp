@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
@@ -38,61 +39,78 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Form(
         key: _formKey,
         child: Center(
-          child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(
-                horizontal: Utils.scrHeight * .024,
-                vertical: Utils.scrHeight * .12),
+          child: Stack(
+            clipBehavior: Clip.none,
             children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  fit: BoxFit.cover,
-                  height: 150,
+              ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(
+                    horizontal: Utils.scrHeight * .024,
+                    vertical: Utils.scrHeight * .12),
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.cover,
+                      height: 150,
+                    ),
+                    // child: Text(
+                    //   'LOGO',
+                    //   style: largeTS(loginTextColor, fontSize: 64),
+                    // ),
+                  ),
+
+                  SizedBox(height: Utils.scrHeight * .012),
+                  Center(
+                    child: Text('Welcome to quikkbyte !',
+                        style: semiBoldTS(loginTextColor, fontSize: 24)),
+                  ),
+                  Center(
+                    child: Text('Simple and emphasizes global reach',
+                        style: regularTS(loginWelcomeColor, fontSize: 14)),
+                  ),
+                  SizedBox(height: Utils.scrHeight * .03),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Center(
+                        child: Text(
+                      'Login With',
+                      style: TextStyle(fontSize: 16),
+                    )),
+                  ),
+
+                  // Email Form Field Part
+                  // _buildEmailPart(),
+
+                  // Password Form Field Part
+                  // _buildPasswordPart(),
+
+                  // Forgot Password Part
+                  // _buildForgotPassword(),
+                  // SizedBox(height: Utils.scrHeight * .03),
+
+                  // Login Button
+                  // loginButton(),
+                  // SizedBox(height: Utils.scrHeight * .03),
+
+                  // Or Login Other Platform
+                  _buildLoginOtherPlatform(),
+
+                  // Create Account Part
+                  // _buildRegisterPart()
+                ],
+              ),
+              Positioned.fill(
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: isLoading,
+                  builder: (context, value, child) {
+                    return value
+                        ? const Center(child: CircularProgressIndicator())
+                        : const SizedBox
+                            .shrink(); // You can change Container() to any other widget you want to display when not loading
+                  },
                 ),
-                // child: Text(
-                //   'LOGO',
-                //   style: largeTS(loginTextColor, fontSize: 64),
-                // ),
-              ),
-              SizedBox(height: Utils.scrHeight * .012),
-              Center(
-                child: Text('Welcome to quikkbyte !',
-                    style: semiBoldTS(loginTextColor, fontSize: 24)),
-              ),
-              Center(
-                child: Text('Simple and emphasizes global reach',
-                    style: regularTS(loginWelcomeColor, fontSize: 14)),
-              ),
-              SizedBox(height: Utils.scrHeight * .03),
-              const Padding(
-                padding: EdgeInsets.only(right: 20),
-                child: Center(
-                    child: Text(
-                  'Login With',
-                  style: TextStyle(fontSize: 16),
-                )),
-              ),
-
-              // Email Form Field Part
-              // _buildEmailPart(),
-
-              // Password Form Field Part
-              // _buildPasswordPart(),
-
-              // Forgot Password Part
-              // _buildForgotPassword(),
-              // SizedBox(height: Utils.scrHeight * .03),
-
-              // Login Button
-              // loginButton(),
-              // SizedBox(height: Utils.scrHeight * .03),
-
-              // Or Login Other Platform
-              _buildLoginOtherPlatform(),
-
-              // Create Account Part
-              // _buildRegisterPart()
+              )
             ],
           ),
         ),
@@ -160,7 +178,10 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             PlatformButton(
               onTap: () async {
-                await SocialAuthData.signInWithGoogle(context);
+                isLoading.value = true;
+                await SocialAuthData.signInWithGoogle(context).then((value) {
+                  isLoading.value = false;
+                });
                 // .then((user) {
                 //   if (user != null) {
                 //     Navigator.pushNamed(context, RoutesName.home);

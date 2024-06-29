@@ -53,9 +53,9 @@ class _SplashScreenState extends State<SplashScreen> {
   setNewLocation(double let, double lng) {
     longitude = lng;
     latitude = let;
-    log(longitude.toString());
-    log(latitude.toString());
-    log(_country);
+    // log(longitude.toString());
+    // log(latitude.toString());
+    // log(_country);
   }
 
   void _detectLocation() async {
@@ -78,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
           (route) => false,
         );
         log(_country);
-        log("Country code by get geo locaiton${countryName[0].isoCountryCode!}");
+        // log("Country code by get geo locaiton${countryName[0].isoCountryCode!}");
       }
     } catch (e) {
       log(e.toString());

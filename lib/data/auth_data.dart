@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:am_innnn/data/user_data.dart';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -10,7 +10,6 @@ import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
 import '../provider/news_provider.dart';
 import '../provider/story_provider.dart';
 import '../route/routes_name.dart';
@@ -94,16 +93,24 @@ class AuthenticationProvider with ChangeNotifier {
         log('social signin response: $data');
         UserData.userProfile(data["token"], context).then((value) async {
           log('login user id = ${appData.read(kKeyUserID)}');
+          _navigateToHome(context);
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
-        Utils.showSnackBar(context, data["message"]);
-        _navigateToHome(context);
+        ToastUtil.showLongToast(data["message"]);
+
+        // Provider.of<LanguageProvider>(context, listen: false)
+        //     .fetchLanguages(code: appData.read(kKeyCountryCode));
+      } else if (response.statusCode == 403) {
+        _isLoading = false;
+        throw Exception(
+            'Your Account Is Deleted. Please Use Different Account');
       } else {
-        throw Exception('Failed to login');
+        throw Exception('Login Failed');
       }
     } catch (error) {
-      Utils.showSnackBar(context, "$error");
+      _isLoading = false;
+      ToastUtil.showLongToast("$error");
       rethrow;
     }
   }
@@ -298,18 +305,18 @@ class AuthenticationProvider with ChangeNotifier {
         ToastUtil.showShortToast(data["message"]);
         log('Account Delete Successful');
       } else {
-        throw Exception('Logout failed - ${response.statusCode}');
+        throw Exception('Delete failed - ${response.statusCode}');
       }
     } catch (error) {
-      log('Error during logout: $error');
-      throw Exception('Error during logout');
+      log('Error during Delete: $error');
+      throw Exception('Error during Delete');
     }
   }
 
   _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
-      RoutesName.bottomNavigationBar,
+      RoutesName.home,
       (route) => false,
     );
   }

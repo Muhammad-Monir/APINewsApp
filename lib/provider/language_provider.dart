@@ -19,18 +19,19 @@ class LanguageProvider with ChangeNotifier {
 
   LanguageProvider() {
     // fetchLanguages();
-    // initializeSelectedLanguage();
+    initializeSelectedLanguage();
   }
 
   Future<void> fetchLanguages({String? code}) async {
     try {
       _isLoading = true;
-      log('county code : ${appData.read(kKeyCountryId)}');
+      log('county code kKeyCountryId : ${appData.read(kKeyCountryCode)}');
+      log('county code kKeyCountryId : $code');
       final languageModel = await NewsData.getAllLanguageByCountry(
           code ?? appData.read(kKeyCountryCode));
       _languages = languageModel.data;
       _isLoading = false;
-      // initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
+      initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
     } catch (e) {
       _errorMessage = e.toString();
       _isLoading = false;
@@ -55,12 +56,15 @@ class LanguageProvider with ChangeNotifier {
       if (languageId != null && _languages != null) {
         _selectedLanguage = _languages!.firstWhere(
           (language) => language.id == languageId,
-          orElse: () => _languages!
-              .firstWhere((language) => languageId == _languages!.first.id!),
+          // orElse: () => _languages!
+          //     .firstWhere((language) => languageId == _languages!.first.id!),
+          orElse: () => _languages!.first,
         );
       } else if (_languages != null) {
-        _selectedLanguage = _languages!
-            .firstWhere((language) => language.id == _languages!.first.id!);
+        log(" else if languageId: $languageId, _languages: ${_languages.toString()}");
+        // _selectedLanguage = _languages!
+        //     .firstWhere((language) => language.id == _languages!.first.id!);
+        _selectedLanguage = _languages!.first;
       }
       log("_selectedLanguage: ${_selectedLanguage.toString()}, ");
     } catch (e) {
