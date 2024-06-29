@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:am_innnn/common_widgets/country_dropdown.dart';
 import 'package:am_innnn/common_widgets/language_dropdown.dart';
 import 'package:am_innnn/data/user_data.dart';
@@ -13,7 +12,6 @@ import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../route/routes_name.dart';
 
@@ -85,13 +83,16 @@ class _OnBoardingState extends State<OnBoarding> {
                         Provider.of<LanguageProvider>(context, listen: false)
                             .selectedLanguage;
 
+                    log('selectedCountry = $selectedCountry ---- selectedLanguage = $selectedLanguage');
+
                     if (selectedCountry == null || selectedLanguage == null) {
                       log('not selected');
                       ToastUtil.showShortToast('Select Country & Laguage');
                     } else {
-                      log('selected');
+                      log('selected id : ${selectedLanguage.id}');
                       appData.write(kKeyIsFirstTime, false);
                       if (appData.read(kKeyIsLoggedIn)) {
+                        appData.write(kKeyLanguageId, selectedLanguage.id);
                         UserData.addCountryLanguage(
                                 selectedCountry.id!, selectedLanguage.id!)
                             .then((value) {
@@ -141,8 +142,10 @@ class _OnBoardingState extends State<OnBoarding> {
       //     .fetchLanguages(id: appData.read(kKeyCountryId));
       // Provider.of<LanguageProvider>(context, listen: false)
       //     .initializeSelectedLanguage();
+
       Provider.of<CountryProvider>(context, listen: false)
           .initializeSelectedCountry();
+      Provider.of<CountryProvider>(context, listen: false).fetchCountries();
     });
   }
 }

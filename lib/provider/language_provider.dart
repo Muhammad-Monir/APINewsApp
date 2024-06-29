@@ -19,7 +19,7 @@ class LanguageProvider with ChangeNotifier {
 
   LanguageProvider() {
     // fetchLanguages();
-    // initializeSelectedLanguage();
+    initializeSelectedLanguage();
   }
 
   Future<void> fetchLanguages({String? code}) async {
@@ -30,7 +30,7 @@ class LanguageProvider with ChangeNotifier {
           code ?? appData.read(kKeyCountryCode));
       _languages = languageModel.data;
       _isLoading = false;
-      // initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
+      initializeSelectedLanguage(); // Ensure that selected language is set after fetching languages
     } catch (e) {
       _errorMessage = e.toString();
       _isLoading = false;
@@ -55,12 +55,15 @@ class LanguageProvider with ChangeNotifier {
       if (languageId != null && _languages != null) {
         _selectedLanguage = _languages!.firstWhere(
           (language) => language.id == languageId,
-          orElse: () => _languages!
-              .firstWhere((language) => languageId == _languages!.first.id!),
+          // orElse: () => _languages!
+          //     .firstWhere((language) => languageId == _languages!.first.id!),
+          orElse: () => _languages!.first,
         );
       } else if (_languages != null) {
-        _selectedLanguage = _languages!
-            .firstWhere((language) => language.id == _languages!.first.id!);
+        log(" else if languageId: $languageId, _languages: ${_languages.toString()}");
+        // _selectedLanguage = _languages!
+        //     .firstWhere((language) => language.id == _languages!.first.id!);
+        _selectedLanguage = _languages!.first;
       }
       log("_selectedLanguage: ${_selectedLanguage.toString()}, ");
     } catch (e) {

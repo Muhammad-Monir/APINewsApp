@@ -99,8 +99,10 @@ class AuthenticationProvider with ChangeNotifier {
         appData.write(kKeyToken, data["token"]);
         Utils.showSnackBar(context, data["message"]);
         _navigateToHome(context);
+      } else if (response.statusCode == 403) {
+        throw Exception('Your Account Is Deleted. Please Use Diffrent Account');
       } else {
-        throw Exception('Failed to login');
+        throw Exception('Login Failed');
       }
     } catch (error) {
       Utils.showSnackBar(context, "$error");
@@ -298,11 +300,11 @@ class AuthenticationProvider with ChangeNotifier {
         ToastUtil.showShortToast(data["message"]);
         log('Account Delete Successful');
       } else {
-        throw Exception('Logout failed - ${response.statusCode}');
+        throw Exception('Delete failed - ${response.statusCode}');
       }
     } catch (error) {
-      log('Error during logout: $error');
-      throw Exception('Error during logout');
+      log('Error during Delete: $error');
+      throw Exception('Error during Delete');
     }
   }
 

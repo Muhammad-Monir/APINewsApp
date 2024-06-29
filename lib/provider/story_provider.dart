@@ -26,7 +26,7 @@ class StoryProvider with ChangeNotifier {
     if (!isConnected) {
       ToastUtil.showShortToast('No internet connection');
       _massage =
-          'Looks like your are offline. Please switch on your data or wifi.';
+          'Looks like your are offline.\nPlease switch on your data or WIFI and try again.';
       return;
     } else {
       _massage = 'We Are Coming Soon Be Patient';
