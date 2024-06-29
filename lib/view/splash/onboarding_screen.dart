@@ -89,10 +89,10 @@ class _OnBoardingState extends State<OnBoarding> {
                       log('not selected');
                       ToastUtil.showShortToast('Select Country & Laguage');
                     } else {
+                      appData.write(kKeyLanguageId, selectedLanguage.id);
                       log('selected id : ${selectedLanguage.id}');
                       appData.write(kKeyIsFirstTime, false);
                       if (appData.read(kKeyIsLoggedIn)) {
-                        appData.write(kKeyLanguageId, selectedLanguage.id);
                         UserData.addCountryLanguage(
                                 selectedCountry.id!, selectedLanguage.id!)
                             .then((value) {

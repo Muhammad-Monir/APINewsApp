@@ -122,14 +122,16 @@ class NewsData {
     try {
       // log('call get story');
       final response = await http.get(
-        Uri.parse('${ApiUrl.newStoryUrl}?page=$page'),
+        Uri.parse(
+            '${ApiUrl.newStoryUrl}?country_code=${appData.read(kKeyCountryCode)}&language_id=${appData.read(kKeyLanguageId)}&page=$page'),
+        // ?country_code=in&language_code=en
         headers: {
           'Content-Type': 'application/json',
         },
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // log(data.toString());
+        // log("story data$data");
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load Story: ${response.statusCode}');

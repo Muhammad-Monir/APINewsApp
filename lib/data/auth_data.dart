@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:am_innnn/data/user_data.dart';
+import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -94,10 +95,12 @@ class AuthenticationProvider with ChangeNotifier {
         log('social signin response: $data');
         UserData.userProfile(data["token"], context).then((value) async {
           log('login user id = ${appData.read(kKeyUserID)}');
+          Provider.of<LanguageProvider>(context, listen: false)
+              .fetchLanguages(code: appData.read(kKeyCountryCode));
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
-        Utils.showSnackBar(context, data["message"]);
+        ToastUtil.showLongToast(data["message"]);
         _navigateToHome(context);
       } else if (response.statusCode == 403) {
         throw Exception('Your Account Is Deleted. Please Use Diffrent Account');
@@ -105,7 +108,7 @@ class AuthenticationProvider with ChangeNotifier {
         throw Exception('Login Failed');
       }
     } catch (error) {
-      Utils.showSnackBar(context, "$error");
+      ToastUtil.showLongToast("$error");
       rethrow;
     }
   }
