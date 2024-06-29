@@ -98,6 +98,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 child: Text(
                     'No Internet Connection') //Text(snapshot.hasError.toString()),
                 );
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+                child: Text(
+                    'No Internet Connection') //Text(snapshot.hasError.toString()),
+                );
           } else {
             return Center(
               child: Container(),

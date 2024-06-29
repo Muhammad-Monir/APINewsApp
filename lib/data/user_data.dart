@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:am_innnn/model/user_profile_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
@@ -20,7 +21,6 @@ class UserData {
   static Future<ProfileModel> userProfile(
       String authToken, BuildContext context) async {
     try {
-      // final sharedInstance = Provider.of<AuthService>(context, listen: false);
       final response = await http.get(
         Uri.parse(ApiUrl.newUserProfileUrl),
         headers: {
@@ -30,6 +30,7 @@ class UserData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
+        log('my user data is : $data');
 
         // log('id is : ${data["data"]["id"]}');
         // Save User Id Localy
@@ -39,13 +40,17 @@ class UserData {
         final language = data["data"]["language"];
         final country = data["data"]["country"];
 
+        log('__after login kaka ${language["id"]}');
+
         if (language != null) {
+          log('__after login kaka language $language country $country');
           appData.write(kKeyLanguageId, language["id"]);
         } else {
           appData.write(kKeyLanguageId, 22);
         }
 
         if (country != null) {
+          log('__after login kaka  ${country["code"]}');
           appData.write(kKeyCountryCode, country["code"]);
           Provider.of<LanguageProvider>(context, listen: false)
               .fetchLanguages(code: country["code"]);
@@ -60,7 +65,6 @@ class UserData {
         List<int> categories = List<int>.from(data["data"]["categories"]);
         appData.write(kKeyCategory, categories);
 
-        log('*********save the ln cn ca is calling');
         return ProfileModel.fromJson(data);
       } else {
         throw Exception('code  ${response.statusCode}');

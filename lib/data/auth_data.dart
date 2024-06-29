@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
@@ -11,7 +10,6 @@ import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
 import '../provider/news_provider.dart';
 import '../provider/story_provider.dart';
 import '../route/routes_name.dart';
@@ -95,14 +93,18 @@ class AuthenticationProvider with ChangeNotifier {
         log('social signin response: $data');
         UserData.userProfile(data["token"], context).then((value) async {
           log('login user id = ${appData.read(kKeyUserID)}');
+          _navigateToHome(context);
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
         ToastUtil.showLongToast(data["message"]);
-        _navigateToHome(context);
+
+        // Provider.of<LanguageProvider>(context, listen: false)
+        //     .fetchLanguages(code: appData.read(kKeyCountryCode));
       } else if (response.statusCode == 403) {
         _isLoading = false;
-        throw Exception('Your Account Is Deleted. Please Use Diffrent Account');
+        throw Exception(
+            'Your Account Is Deleted. Please Use Different Account');
       } else {
         throw Exception('Login Failed');
       }
@@ -314,7 +316,7 @@ class AuthenticationProvider with ChangeNotifier {
   _navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
-      RoutesName.bottomNavigationBar,
+      RoutesName.home,
       (route) => false,
     );
   }

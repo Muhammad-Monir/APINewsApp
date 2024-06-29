@@ -25,7 +25,8 @@ class LanguageProvider with ChangeNotifier {
   Future<void> fetchLanguages({String? code}) async {
     try {
       _isLoading = true;
-      log('county code : ${appData.read(kKeyCountryId)}');
+      log('county code kKeyCountryId : ${appData.read(kKeyCountryCode)}');
+      log('county code kKeyCountryId : $code');
       final languageModel = await NewsData.getAllLanguageByCountry(
           code ?? appData.read(kKeyCountryCode));
       _languages = languageModel.data;

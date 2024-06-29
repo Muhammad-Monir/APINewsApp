@@ -86,19 +86,18 @@ class _OnBoardingState extends State<OnBoarding> {
                     log('selectedCountry = $selectedCountry ---- selectedLanguage = $selectedLanguage');
 
                     if (selectedCountry == null || selectedLanguage == null) {
-                      log('not selected');
                       ToastUtil.showShortToast('Select Country & Laguage');
                     } else {
-                      appData.write(kKeyLanguageId, selectedLanguage.id);
-                      log('selected id : ${selectedLanguage.id}');
                       appData.write(kKeyIsFirstTime, false);
                       if (appData.read(kKeyIsLoggedIn)) {
+                        log('if log work on onboarding');
                         UserData.addCountryLanguage(
                                 selectedCountry.id!, selectedLanguage.id!)
                             .then((value) {
                           navigateToHome(context);
                         });
                       } else {
+                        appData.write(kKeyLanguageId, selectedLanguage.id);
                         navigateToHome(context);
                       }
                     }
@@ -138,8 +137,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
   void initialSetData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Provider.of<LanguageProvider>(context, listen: false)
-      //     .fetchLanguages(id: appData.read(kKeyCountryId));
+      Provider.of<LanguageProvider>(context, listen: false).fetchLanguages();
       // Provider.of<LanguageProvider>(context, listen: false)
       //     .initializeSelectedLanguage();
 
