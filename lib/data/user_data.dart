@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -7,8 +9,10 @@ import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../model/bookmark_model.dart';
+import '../provider/language_provider.dart';
 import '../utils/di.dart';
 
 class UserData {
@@ -43,6 +47,8 @@ class UserData {
 
         if (country != null) {
           appData.write(kKeyCountryCode, country["code"]);
+          Provider.of<LanguageProvider>(context, listen: false)
+              .fetchLanguages(code: country["code"]);
         } else {
           appData.write(kKeyCountryCode, 'in');
         }

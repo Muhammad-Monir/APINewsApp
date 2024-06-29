@@ -95,19 +95,19 @@ class AuthenticationProvider with ChangeNotifier {
         log('social signin response: $data');
         UserData.userProfile(data["token"], context).then((value) async {
           log('login user id = ${appData.read(kKeyUserID)}');
-          Provider.of<LanguageProvider>(context, listen: false)
-              .fetchLanguages(code: appData.read(kKeyCountryCode));
         });
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
         ToastUtil.showLongToast(data["message"]);
         _navigateToHome(context);
       } else if (response.statusCode == 403) {
+        _isLoading = false;
         throw Exception('Your Account Is Deleted. Please Use Diffrent Account');
       } else {
         throw Exception('Login Failed');
       }
     } catch (error) {
+      _isLoading = false;
       ToastUtil.showLongToast("$error");
       rethrow;
     }
