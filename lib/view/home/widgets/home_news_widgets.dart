@@ -134,7 +134,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 : TextAlign.right,
             widget.newsTitle,
             style:
-                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
+                semiBoldTS(appTextColor, fontSize: 16.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -150,7 +150,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 : TextAlign.right,
             Utils.truncateText(widget.newsDec!, 70),
             style: regularTS(appSecondTextColor,
-                fontSize: 13.sp * fontSize.fontSize),
+                fontSize: 14.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(
@@ -243,7 +243,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   Container topImageSection() {
     return Container(
-      height: Utils.scrHeight * .400,
+      height: Utils.scrHeight * .35,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
