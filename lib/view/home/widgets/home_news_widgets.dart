@@ -1,55 +1,61 @@
-// ignore_for_file: use_build_context_synchronously, unused_element
+// ignore_for_file: use_build_context_synchronously, unused_element, unused_field
 import 'dart:developer';
-import 'package:am_innnn/services/auth_service.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
+import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../data/user_data.dart';
-import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
-import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
-import 'favorite_popup.dart';
+import 'new_video_player.dart';
 
 class NewsScreen extends StatefulWidget {
   final VoidCallback? startOnTap;
   final VoidCallback? homeOnTap;
   final VoidCallback? refreshOnTap;
   final String? image;
+  final String? video;
+  final List<String>? images;
   final String? newsDec;
   final String sourceLink;
   final String newsTitle;
   final int newsId;
-  final String category;
+  // final String category;
 
-  const NewsScreen(
-      {super.key,
-      this.startOnTap,
-      this.homeOnTap,
-      this.image,
-      required this.newsDec,
-      required this.sourceLink,
-      required this.newsTitle,
-      this.refreshOnTap,
-      required this.newsId,
-      required this.category});
+  const NewsScreen({
+    super.key,
+    this.startOnTap,
+    this.homeOnTap,
+    this.image,
+    required this.newsDec,
+    required this.sourceLink,
+    required this.newsTitle,
+    this.refreshOnTap,
+    required this.newsId,
+    required this.images,
+    this.video,
+    // required this.category
+  });
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  bool _isLogin = false;
-  late String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   int? userId;
   bool isFav = false;
   late BannerAd _bannerAd;
   bool _isAdLoaded = false;
   final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
+  List<String> imageList = [ApiUrl.imageNotFound];
 
   @override
   void dispose() {
@@ -59,17 +65,8 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   void initState() {
-    isLoggedIn();
     _initBannerAd();
     super.initState();
-  }
-
-  // Check Is Login or Not
-  void isLoggedIn() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
   }
 
   @override
@@ -114,42 +111,51 @@ class _NewsScreenState extends State<NewsScreen> {
   Container _newsSection(FontSizeProvider fontSize) {
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: Utils.scrHeight * .02,
+        // vertical: Utils.scrHeight * .02,
         horizontal: Utils.scrHeight * .024,
       ),
       child: newsBody(fontSize),
     );
   }
 
-  Column newsBody(FontSizeProvider fontSize) {
+  Widget newsBody(FontSizeProvider fontSize) {
+    log(' is arabic or urdu: ${(appData.read(kKeyLanguageId) == 4 || appData.read(kKeyLanguageId) == 83)}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: Utils.scrHeight * .027),
+        SizedBox(height: Utils.scrHeight * .025),
         SizedBox(
           child: Text(
-            overflow: TextOverflow.ellipsis,
+            // overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            textAlign: TextAlign.justify,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 19),
+            style:
+                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .02),
+        // SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
+          // color: Colors.red,
           height: Utils.scrHeight * .3,
           child: Text(
             overflow: TextOverflow.ellipsis,
-            maxLines: 5,
-            textAlign: TextAlign.justify,
-            Utils.truncateText(widget.newsDec!, 40),
-            style:
-                regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
+            maxLines: 9,
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
+            Utils.truncateText(widget.newsDec!, 70),
+            style: regularTS(appSecondTextColor,
+                fontSize: 13.sp * fontSize.fontSize),
           ),
         ),
-        SizedBox(
-          height: Utils.scrHeight * .02,
-        ),
+        // SizedBox(
+        //   height: Utils.scrHeight * .02,
+        // ),
       ],
     );
   }
@@ -177,87 +183,115 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 
-  Consumer<BookmarkProvider> _addToBookmark() {
-    return Consumer<BookmarkProvider>(builder: (context, provider, child) {
-      return Positioned(
-          top: Utils.scrHeight * .1,
-          right: Utils.scrHeight * .02,
-          child: Container(
-            width: Utils.scrHeight * .04,
-            height: Utils.scrHeight * .04,
-            padding: const EdgeInsets.all(8),
-            decoration: ShapeDecoration(
-              color: !isFav
-                  ? Colors.white.withOpacity(0)
-                  : Colors.white.withOpacity(0.3),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: Utils.scrHeight * .001,
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                log('bookmark on Tap');
-                if (_isLogin) {
-                  // provider.isFavorite ?
-                  UserData.addBookMark(_authToken, widget.newsId.toString())
-                      .then((value) {
-                    Utils.showSnackBar(context, value);
-                    if (value == 'Bookmark added successfully') {
-                      setState(() {
-                        isFav = !isFav;
-                      });
-                    } else if (value == 'Bookmark Remove successfully') {
-                      isFav = false;
-                    }
-                    // provider.toggleIsFavorite();
-                  });
-                } else {
-                  getPopUp(
-                      context,
-                      (p0) => FavoritePopup(
-                            onExit: () {
-                              Navigator.pop(p0);
-                            },
-                          ));
-                }
-              },
-              child: !isFav
-                  ? Utils.showSvgPicture('bookmarks',
-                      height: Utils.scrHeight * .020)
-                  : Utils.showSvgPicture('selected_bookmark',
-                      height: Utils.scrHeight * .020),
-            ),
-          ));
-    });
-  }
+  // Consumer<BookmarkProvider> _addToBookmark() {
+  //   return Consumer<BookmarkProvider>(builder: (context, provider, child) {
+  //     return Positioned(
+  //         top: Utils.scrHeight * .1,
+  //         right: Utils.scrHeight * .02,
+  //         child: Container(
+  //           width: Utils.scrHeight * .04,
+  //           height: Utils.scrHeight * .04,
+  //           padding: const EdgeInsets.all(8),
+  //           decoration: ShapeDecoration(
+  //             color: !isFav
+  //                 ? Colors.white.withOpacity(0)
+  //                 : Colors.white.withOpacity(0.3),
+  //             shape: RoundedRectangleBorder(
+  //               side: BorderSide(
+  //                 width: Utils.scrHeight * .001,
+  //                 color: Colors.white,
+  //               ),
+  //               borderRadius: BorderRadius.circular(30),
+  //             ),
+  //           ),
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               log('bookmark on Tap');
+  //               if (_isLogin) {
+  //                 // provider.isFavorite ?
+  //                 UserData.addBookMark(_authToken, widget.newsId.toString())
+  //                     .then((value) {
+  //                   Utils.showSnackBar(context, value);
+  //                   if (value == 'Bookmark added successfully') {
+  //                     setState(() {
+  //                       isFav = !isFav;
+  //                     });
+  //                   } else if (value == 'Bookmark Remove successfully') {
+  //                     isFav = false;
+  //                   }
+  //                   // provider.toggleIsFavorite();
+  //                 });
+  //               } else {
+  //                 getPopUp(
+  //                     context,
+  //                     (p0) => FavoritePopup(
+  //                           onExit: () {
+  //                             Navigator.pop(p0);
+  //                           },
+  //                         ));
+  //               }
+  //             },
+  //             child: !isFav
+  //                 ? Utils.showSvgPicture('bookmarks',
+  //                     height: Utils.scrHeight * .020)
+  //                 : Utils.showSvgPicture('selected_bookmark',
+  //                     height: Utils.scrHeight * .020),
+  //           ),
+  //         ));
+  //   });
+  // }
 
   Container topImageSection() {
     return Container(
-        height: Utils.scrHeight * .335,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(Utils.scrHeight * .12),
-          bottomRight: Radius.circular(Utils.scrHeight * .12),
-        )),
-        child: ClipRRect(
+      height: Utils.scrHeight * .400,
+      width: double.infinity,
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(Utils.scrHeight * .022),
-            bottomRight: Radius.circular(Utils.scrHeight * .022),
-          ),
-          child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: widget.image!,
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                Image.network(ApiUrl.imageNotFound),
-          ),
-        ));
+        bottomLeft: Radius.circular(Utils.scrHeight * .12),
+        bottomRight: Radius.circular(Utils.scrHeight * .12),
+      )),
+      // child: FullScreenWidget(
+      //   disposeLevel: DisposeLevel.Medium,
+      //   child: Hero(
+      //     tag: 'teg',
+      //     child: InteractiveViewer(
+      //       maxScale: 5,
+      //       minScale: 0.1,
+      //       constrained: true,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(Utils.scrHeight * .022),
+          bottomRight: Radius.circular(Utils.scrHeight * .022),
+        ),
+        // child: NewsVideoPlayer(),
+        child: widget.video == null
+            ? CarouselImageSlider(
+                // Api Image's List Empty Case
+                images: (widget.images!.isNotEmpty)
+                    ? widget.images ?? imageList // Handled Null
+                    : imageList, // Empty Case
+              )
+            : Container(
+                color: Colors.black,
+                child: NewsVideoPlayer(
+                  t: widget.video,
+                ),
+              ),
+
+        // child: CachedNetworkImage(
+        // child: CachedNetworkImage(
+        //   fit: BoxFit.cover,
+        //   imageUrl: widget.image!,
+        //   placeholder: (context, url) =>
+        //       const Center(child: CircularProgressIndicator()),
+        //   errorWidget: (context, url, error) =>
+        //       Image.network(ApiUrl.imageNotFound),
+        // ),
+      ),
+      // ),
+      //   ),
+      // )
+    );
   }
 
   Widget _buildPromoCode() {
@@ -270,8 +304,8 @@ class _NewsScreenState extends State<NewsScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
+      child: Text('Quikkbyte',
+          style: mediumTS(redContainerColor, fontSize: 14.sp)),
     );
   }
 

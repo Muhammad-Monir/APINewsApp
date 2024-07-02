@@ -4,20 +4,33 @@ import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:http/http.dart' as http;
+import '../model/country_model.dart';
+import '../model/language_model.dart';
 import '../model/news_model.dart';
+import '../utils/app_constants.dart';
+import '../utils/di.dart';
+import '../utils/toast_util.dart';
 
 class NewsData {
   static bool isLastPage = false;
-  static Future<NewsModel> fetchAllNews({String? category}) async {
+  static Future<NewsModel> fetchAllNews(
+      {String? category, int page = 1}) async {
+    log('Contry ${appData.read(kKeyCountryCode)}');
+    log(' laguage ${appData.read(kKeyLanguageId)}');
+    log(' Category ${appData.read(kKeyCategory)}');
     try {
       final response = await http.get(category == null
-          ? Uri.parse(ApiUrl.allNewsUrl)
-          : Uri.parse('${ApiUrl.allNewsUrl}?category=$category'));
+          ? Uri.parse(
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&page=$page')
+          : Uri.parse(
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&page=$page'));
       if (response.statusCode == 200) {
-        // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return NewsModel.fromJson(data);
+      } else if (response.statusCode == 404) {
+        ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
+        throw Exception('Failed to load news');
       } else {
         // If the server did not return a 200 OK response, throw an exception
         throw Exception('Failed to load news');
@@ -28,13 +41,20 @@ class NewsData {
     }
   }
 
-  static Future<NewsModel> searchText({String? searchTitle}) async {
+  static Future<NewsModel> searchText(
+      {String? category, String? searchTitle}) async {
     try {
-      final response =
-          await http.get(Uri.parse('${ApiUrl.allNewsUrl}?title=$searchTitle'));
+      final response = await http.get(category == null
+          ? Uri.parse(
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&title=$searchTitle')
+          : Uri.parse(
+              '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&title=$searchTitle'));
+      // final response =
+      //     await http.get(Uri.parse('${ApiUrl.allNewsUrl}?title=$searchTitle'));
       if (response.statusCode == 200) {
         // If the server returns a 200 OK response, parse the JSON
         final Map<String, dynamic> data = json.decode(response.body);
+        // log('search data si s: ${data.toString()}');
         return NewsModel.fromJson(data);
       } else {
         // If the server did not return a 200 OK response, throw an exception
@@ -102,14 +122,16 @@ class NewsData {
     try {
       // log('call get story');
       final response = await http.get(
-        Uri.parse('${ApiUrl.newStoryUrl}?page=$page'),
+        Uri.parse(
+            '${ApiUrl.newStoryUrl}?country_code=${appData.read(kKeyCountryCode)}&language_id=${appData.read(kKeyLanguageId)}&page=$page'),
+        // ?country_code=in&language_code=en
         headers: {
           'Content-Type': 'application/json',
         },
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // log(data.toString());
+        // log("story data$data");
         return StoryModel.fromJson(data);
       } else {
         throw Exception('Failed to load Story: ${response.statusCode}');
@@ -138,6 +160,76 @@ class NewsData {
       }
     } catch (error) {
       // log(error.toString());
+      rethrow;
+    }
+  }
+
+  static Future<LanguageModel> getAllLanguage() async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse(ApiUrl.newLanguageUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
+        return LanguageModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      log(error.toString());
+      rethrow;
+    }
+  }
+
+  static Future<LanguageModel> getAllLanguageByCountry(
+      String countryCode) async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse('${ApiUrl.newSingleLanguageUrl}/$countryCode'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
+        return LanguageModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      log(error.toString());
+      rethrow;
+    }
+  }
+
+  static Future<CountryModel> getAllCountry() async {
+    try {
+      // log('call get category');
+      final response = await http.get(
+        Uri.parse(ApiUrl.newCountryUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // log(data.toString());
+        return CountryModel.fromJson(data);
+      } else {
+        // log(response.statusCode.toString());
+        throw Exception('Failed to load category: ${response.statusCode}');
+      }
+    } catch (error) {
+      log(error.toString());
       rethrow;
     }
   }

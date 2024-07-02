@@ -1,10 +1,10 @@
-
 import 'dart:ui';
 
 const Color appThemeColor = Color(0xff0065FF);
 const Color appTextColor = Color(0xFF141414);
 const Color appSecondTextColor = Color(0xFF576374);
 const Color redContainerColor = Color(0xFFFF0000);
+const Color inActiveColor = Color.fromARGB(255, 231, 106, 106);
 const Color homeTabTextColor = Color(0xFF586374);
 const Color formHintColor = Color(0xFFC1BDBD);
 const Color loginTextColor = Color(0xFF1F1F1F);

@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/toast_util.dart';
@@ -26,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
   final _phoneNumberController = TextEditingController();
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
 
   @override
   Widget build(BuildContext context) {

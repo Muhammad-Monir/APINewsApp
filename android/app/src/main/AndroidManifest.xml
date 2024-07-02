@@ -4,6 +4,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.GALLERY" />
+
+    <!-- Provide required visibility configuration for API level 30 and above -->
+<queries>
+  <!-- If your application checks for inAppBrowserView launch mode support -->
+  <intent>
+    <action android:name="android.support.customtabs.action.CustomTabsService" />
+  </intent>
+</queries>
     <application
         android:label="Quikkbyte"
         android:name="${applicationName}"

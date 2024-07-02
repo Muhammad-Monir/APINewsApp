@@ -1,7 +1,9 @@
 import 'package:am_innnn/model/story_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/drawer/widget/edit_profile_screen.dart';
+import 'package:am_innnn/view/home/widgets/full_screen_view.dart';
 import 'package:am_innnn/view/login/widgets/verify_account.dart';
+import 'package:am_innnn/view/splash/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import '../view/bookmarks/bookmarks_screen.dart';
 import '../view/change_password/change_password_screen.dart';
@@ -25,7 +27,8 @@ class Routes {
       case RoutesName.home:
         // final Map<String, dynamic>? category =
         //     settings.arguments as Map<String, dynamic>?;
-        final String? category = settings.arguments as String?;
+        // final String? category = settings.arguments as String?;
+        final List<int>? category = settings.arguments as List<int>?;
         return MaterialPageRoute(
           builder: (context) => HomeScreen(
             category: category,
@@ -42,6 +45,10 @@ class Routes {
       case RoutesName.splash:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
+        );
+      case RoutesName.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoarding(),
         );
       case RoutesName.search:
         return MaterialPageRoute(
@@ -114,6 +121,13 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) => StoryScreen(
             images: imageUrl,
+          ),
+        );
+      case RoutesName.fullScreen:
+        final List<String>? image = settings.arguments as List<String>?;
+        return MaterialPageRoute(
+          builder: (context) => FullScreenView(
+            images: image,
           ),
         );
       // case RoutesName.newsDetails:

@@ -1,20 +1,26 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+
 import 'package:am_innnn/model/user_profile_model.dart';
-import 'package:am_innnn/services/auth_service.dart';
 import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/toast_util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+
 import '../model/bookmark_model.dart';
-import 'dart:io';
+import '../provider/language_provider.dart';
+import '../utils/di.dart';
 
 class UserData {
   // Get profile data
   static Future<ProfileModel> userProfile(
       String authToken, BuildContext context) async {
     try {
-      final sharedInstance = Provider.of<AuthService>(context, listen: false);
       final response = await http.get(
         Uri.parse(ApiUrl.newUserProfileUrl),
         headers: {
@@ -24,10 +30,41 @@ class UserData {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
+        log('my user data is : $data');
+
         // log('id is : ${data["data"]["id"]}');
-        sharedInstance.saveUserId(data["data"]["id"]);
-        // int? id = await AuthService.getUserID();
-        // log('user id is : $id');
+        // Save User Id Localy
+        appData.write(kKeyUserID, data["data"]["id"]);
+
+        // Check if language and country data are not null before accessing them
+        final language = data["data"]["language"];
+        final country = data["data"]["country"];
+
+        log('__after login kaka ${language["id"]}');
+
+        if (language != null) {
+          log('__after login kaka language $language country $country');
+          appData.write(kKeyLanguageId, language["id"]);
+        } else {
+          appData.write(kKeyLanguageId, 22);
+        }
+
+        if (country != null) {
+          log('__after login kaka  ${country["code"]}');
+          appData.write(kKeyCountryCode, country["code"]);
+          Provider.of<LanguageProvider>(context, listen: false)
+              .fetchLanguages(code: country["code"]);
+        } else {
+          appData.write(kKeyCountryCode, 'in');
+        }
+
+        // appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
+        // appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
+
+        // save the categories
+        List<int> categories = List<int>.from(data["data"]["categories"]);
+        appData.write(kKeyCategory, categories);
+
         return ProfileModel.fromJson(data);
       } else {
         throw Exception('code  ${response.statusCode}');
@@ -154,6 +191,62 @@ class UserData {
     } catch (error) {
       log('Error: $error');
       return null;
+    }
+  }
+
+  // Update Categories
+  static Future<String> addCategory(List<int> categoryList) async {
+    try {
+      final response = await http.post(
+        Uri.parse(ApiUrl.addCategoryUrl),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${appData.read(kKeyToken)}'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'categories': categoryList,
+        }),
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
+        ToastUtil.showShortToast(data["message"]);
+        return data["message"];
+      } else {
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      throw Exception(error);
+    }
+  }
+
+  // Update Categories
+  static Future<String> addCountryLanguage(
+      int countryId, int languageId) async {
+    try {
+      final response = await http.post(
+        Uri.parse(ApiUrl.addCountryLanguage),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${appData.read(kKeyToken)}'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'country_id': countryId,
+          'language_id': languageId,
+        }),
+      );
+      // Check if the request was successful (status code 200)
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        log(data.toString());
+        ToastUtil.showShortToast(data["message"]);
+        return data["message"];
+      } else {
+        throw Exception(response.statusCode);
+      }
+    } catch (error) {
+      throw Exception(error);
     }
   }
 }

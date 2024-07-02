@@ -1,8 +1,7 @@
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/color.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
@@ -66,7 +65,7 @@ class CustomCategoryItems extends StatelessWidget {
                 title,
                 style: semiBoldTS(
                   isSelected ? Colors.white : appThemeColor,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ),

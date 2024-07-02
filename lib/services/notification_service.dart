@@ -1,17 +1,19 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:am_innnn/data/notification_data.dart';
 import 'package:am_innnn/services/get_device_info.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'auth_service.dart';
+import '../utils/di.dart';
 
 //import '../networks/api_acess.dart';
 //import 'di.dart';
@@ -113,12 +115,14 @@ class LocalNotificationService {
       String? deviceId = await GetDeviceInfo.getDeviceInfo();
       log(deviceId.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool isLoggedIn = AuthService(prefs).isLoggedIn();
-      log(AuthService(prefs).isLoggedIn().toString());
-      if (isLoggedIn) {
-        log(AuthService(prefs).getUserID().toString());
+      // bool isLoggedIn = AuthService(prefs).isLoggedIn();
+      // log(AuthService(prefs).isLoggedIn().toString());
+      // if (isLoggedIn) {
+      if (appData.read(kKeyIsLoggedIn)) {
+        // log(AuthService(prefs).getUserID().toString());
         NotificationData.storeNotification(token, deviceId.toString(),
-            userId: AuthService(prefs).getUserID().toString(),
+            // userId: AuthService(prefs).getUserID().toString(),
+            userId: appData.read(kKeyUserID),
             isActive: activeStatus);
       } else {
         NotificationData.storeNotification(token, deviceId.toString());

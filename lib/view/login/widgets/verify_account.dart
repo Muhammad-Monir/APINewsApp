@@ -23,7 +23,7 @@ class VerifyAccountScreen extends StatefulWidget {
 class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
   final _otpController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
 
   @override
   Widget build(BuildContext context) {

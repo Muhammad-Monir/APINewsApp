@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../common_widgets/custom_divider.dart';
 import '../../../utils/api_url.dart';
+import '../../../utils/app_constants.dart';
 import '../../../utils/color.dart';
+import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
 import '../../../utils/utils.dart';
 
@@ -37,7 +39,7 @@ class SearchListItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Utils.scrHeight * .008),
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: imageName ?? '',
+                    imageUrl: imageName ?? ApiUrl.imageNotFound,
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
@@ -56,14 +58,22 @@ class SearchListItem extends StatelessWidget {
                       // width: Utils.scrHeight * .25,
                       child: Text(title ?? '',
                           maxLines: 3,
+                          textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                                  appData.read(kKeyLanguageId) == 83)
+                              ? TextAlign.left
+                              : TextAlign.right,
                           overflow: TextOverflow.ellipsis,
-                          style: regularTS(appTextColor, fontSize: 17)),
+                          style: regularTS(appTextColor, fontSize: 15.sp)),
                     ),
                     SizedBox(height: Utils.scrHeight * .004),
-                    Text(
-                        DateFormat('dd MMM yyyy hh:mm a')
-                            .format(DateTime.parse(time!)),
-                        style: regularTS(homeTabTextColor, fontSize: 13)),
+                    Text(time!,
+                        // DateFormat('dd MMM yyyy hh:MM a')
+                        //     .format(DateTime.parse(time!)),
+                        textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                                appData.read(kKeyLanguageId) == 83)
+                            ? TextAlign.left
+                            : TextAlign.right,
+                        style: regularTS(homeTabTextColor, fontSize: 13.sp)),
                   ],
                 ),
               ),

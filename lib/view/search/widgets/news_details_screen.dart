@@ -1,18 +1,23 @@
 // ignore_for_file: use_build_context_synchronously, unused_element
 import 'dart:developer';
+
 import 'package:am_innnn/route/routes_name.dart';
-import 'package:am_innnn/services/auth_service.dart';
+import 'package:am_innnn/utils/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../data/user_data.dart';
 import '../../../provider/bookmark_provider.dart';
 import '../../../provider/font_size_provider.dart';
 import '../../../utils/api_url.dart';
 import '../../../utils/color.dart';
+import '../../../utils/di.dart';
 import '../../../utils/styles.dart';
+import '../../../utils/toast_util.dart';
 import '../../../utils/utils.dart';
 import '../../home/widgets/favorite_popup.dart';
 
@@ -22,6 +27,7 @@ class NewsDetailsScreen extends StatefulWidget {
   final String sourceLink;
   final String newsTitle;
   final int newsId;
+  final List<String>? imagesList;
 
   const NewsDetailsScreen({
     super.key,
@@ -30,6 +36,7 @@ class NewsDetailsScreen extends StatefulWidget {
     required this.sourceLink,
     required this.newsTitle,
     required this.newsId,
+    this.imagesList,
   });
 
   @override
@@ -37,8 +44,8 @@ class NewsDetailsScreen extends StatefulWidget {
 }
 
 class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
-  bool _isLogin = false;
-  late String? _authToken = '';
+  final _isLogin = appData.read(kKeyIsLoggedIn);
+  final _authToken = appData.read(kKeyToken);
   int? userId;
   bool isFav = false;
   late BannerAd _bannerAd;
@@ -53,18 +60,18 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
   @override
   void initState() {
-    isLoggedIn();
+    // isLoggedIn();
     _initBannerAd();
     super.initState();
   }
 
   // Check Is Login or Not
-  void isLoggedIn() {
-    _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
-    if (_isLogin) {
-      _authToken = Provider.of<AuthService>(context, listen: false).getToken();
-    }
-  }
+  // void isLoggedIn() {
+  //   _isLogin = Provider.of<AuthService>(context, listen: false).isLoggedIn();
+  //   if (_isLogin) {
+  //     _authToken = Provider.of<AuthService>(context, listen: false).getToken();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -104,27 +111,40 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
     );
   }
 
+  // News Title & News Description
   Column newsBody(FontSizeProvider fontSize) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: Utils.scrHeight * .027),
+        SizedBox(height: Utils.scrHeight * .010),
         SizedBox(
           // width: Utils.scrHeight * .342,
           child: Text(
+            maxLines: 3,
             widget.newsTitle,
-            style: semiBoldTS(appTextColor, fontSize: 19 * fontSize.fontSize),
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
+            style:
+                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
           ),
         ),
-        SizedBox(height: Utils.scrHeight * .02),
+        // SizedBox(height: Utils.scrHeight * .02),
         SizedBox(
           height: Utils.scrHeight * .28,
           child: Text(
-            Utils.truncateText(widget.newsDec!, 55),
-            style:
-                regularTS(appSecondTextColor, fontSize: 15 * fontSize.fontSize),
+            textAlign: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83)
+                ? TextAlign.left
+                : TextAlign.right,
+            maxLines: 9,
+            Utils.truncateText(widget.newsDec ?? 'NA', 55),
+            style: regularTS(appSecondTextColor,
+                fontSize: 13.sp * fontSize.fontSize),
           ),
         ),
+        // SizedBox(height: Utils.scrHeight * .01),
         socialLinkSection(),
       ],
     );
@@ -158,8 +178,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   },
                   child: Text('Tap to know more',
                       overflow: TextOverflow.ellipsis,
-                      style: regularTS(appThemeColor,
-                          fontSize: 14, isUnderline: true)),
+                      style: regularTS(Colors.black,
+                          fontSize: 14.sp, isUnderline: true)),
                 ),
               ),
             ],
@@ -181,7 +201,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
 
         // Promo Code
         Positioned(
-          bottom: -Utils.scrHeight * .02,
+          bottom: -Utils.scrHeight * .01,
           right: Utils.scrHeight * .05,
           child: _buildAppBandingName(),
         ),
@@ -284,29 +304,41 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   }
 
   // News Image
-  Container topImageSection() {
-    return Container(
-        height: Utils.scrHeight * .3,
-        width: double.infinity,
-        decoration: BoxDecoration(
+  Widget topImageSection() {
+    return GestureDetector(
+      onTap: () {
+        log('on tap fullscreen');
+        widget.imagesList!.isNotEmpty
+            ? Navigator.pushNamed(context, RoutesName.fullScreen,
+                arguments: widget.imagesList!)
+            : ToastUtil.showShortToast('No Image Found');
+        // FullScreenView(
+        //     image: widget
+        //         .data[index].featuredImage!.first);
+      },
+      child: Container(
+          height: Utils.scrHeight * .4,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(Utils.scrHeight * .12),
+            bottomRight: Radius.circular(Utils.scrHeight * .12),
+          )),
+          child: ClipRRect(
             borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(Utils.scrHeight * .12),
-          bottomRight: Radius.circular(Utils.scrHeight * .12),
-        )),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(Utils.scrHeight * .022),
-            bottomRight: Radius.circular(Utils.scrHeight * .022),
-          ),
-          child: CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: widget.image!,
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) =>
-                Image.network(ApiUrl.imageNotFound),
-          ),
-        ));
+              bottomLeft: Radius.circular(Utils.scrHeight * .022),
+              bottomRight: Radius.circular(Utils.scrHeight * .022),
+            ),
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: widget.image!,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) =>
+                  Image.network(ApiUrl.imageNotFound),
+            ),
+          )),
+    );
   }
 
   // App Banding Name
@@ -320,8 +352,8 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      child:
-          Text('Quikkbyte', style: mediumTS(redContainerColor, fontSize: 20)),
+      child: Text('Quikkbyte',
+          style: mediumTS(redContainerColor, fontSize: 14.sp)),
     );
   }
 

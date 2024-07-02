@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, unused_element
 import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
-import 'package:am_innnn/utils/toast_util.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../common_widgets/password_form_field.dart';
-import '../../data/social_login_auth_data/facebook_auth_data.dart';
 import '../../route/routes_name.dart';
 import '../../services/notification_service.dart';
 import '../../utils/color.dart';
@@ -18,7 +16,6 @@ import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -27,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
@@ -40,60 +38,103 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(
-              horizontal: Utils.scrHeight * .024,
-              vertical: Utils.scrHeight * .12),
-          children: [
-            Center(
-                child:
-                    Text('LOGO', style: largeTS(loginTextColor, fontSize: 64))),
-            SizedBox(height: Utils.scrHeight * .012),
-            Text('Welcome Back!',
-                style: semiBoldTS(loginTextColor, fontSize: 24)),
-            Text('Let’s get you logged in so you can start exploring',
-                style: regularTS(loginWelcomeColor, fontSize: 14)),
-            SizedBox(height: Utils.scrHeight * .03),
+        child: Center(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(
+                    horizontal: Utils.scrHeight * .024,
+                    vertical: Utils.scrHeight * .12),
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.cover,
+                      height: 150,
+                    ),
+                    // child: Text(
+                    //   'LOGO',
+                    //   style: largeTS(loginTextColor, fontSize: 64),
+                    // ),
+                  ),
 
-            // Email Form Field Part
-            _buildEmailPart(),
+                  SizedBox(height: Utils.scrHeight * .012),
+                  Center(
+                    child: Text('Welcome to quikkbyte !',
+                        style: semiBoldTS(loginTextColor, fontSize: 24)),
+                  ),
+                  Center(
+                    child: Text('Simple and emphasizes global reach',
+                        style: regularTS(loginWelcomeColor, fontSize: 14)),
+                  ),
+                  SizedBox(height: Utils.scrHeight * .03),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Center(
+                        child: Text(
+                      'Login With',
+                      style: TextStyle(fontSize: 16),
+                    )),
+                  ),
 
-            // Password Form Field Part
-            _buildPasswordPart(),
+                  // Email Form Field Part
+                  // _buildEmailPart(),
 
-            // Forgot Password Part
-            _buildForgotPassword(),
-            SizedBox(height: Utils.scrHeight * .03),
+                  // Password Form Field Part
+                  // _buildPasswordPart(),
 
-            // Login Button
-            loginButton(),
-            SizedBox(height: Utils.scrHeight * .03),
+                  // Forgot Password Part
+                  // _buildForgotPassword(),
+                  // SizedBox(height: Utils.scrHeight * .03),
 
-            // Or Login Other Platform
-            // _buildLoginOtherPlatform(),
+                  // Login Button
+                  // loginButton(),
+                  // SizedBox(height: Utils.scrHeight * .03),
 
-            // Create Account Part
-            _buildRegisterPart()
-          ],
+                  // Or Login Other Platform
+                  _buildLoginOtherPlatform(),
+
+                  // Create Account Part
+                  // _buildRegisterPart()
+                ],
+              ),
+              Positioned.fill(
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: isLoading,
+                  builder: (context, value, child) {
+                    return value
+                        ? const Center(child: CircularProgressIndicator())
+                        : const SizedBox
+                            .shrink(); // You can change Container() to any other widget you want to display when not loading
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Consumer<AuthProvider> loginButton() {
-    return Consumer<AuthProvider>(builder: (context, provider, child) {
+  Consumer<AuthenticationProvider> loginButton() {
+    return Consumer<AuthenticationProvider>(
+        builder: (context, provider, child) {
       return ActionButton(
           onTap: () {
             if (_formKey.currentState!.validate()) {
               final email = _emailController.text;
               final password = _passwordController.text;
-              Provider.of<AuthProvider>(context, listen: false)
+              Provider.of<AuthenticationProvider>(context, listen: false)
                   .login(email, password, context)
                   .then((value) {
                 LocalNotificationService.getToken();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutesName.home, (route) => false);
+                log('*********auth is calling');
+                // Provider.of<NewsProvider>(context, listen: false).clearList();
+                // Provider.of<StoryProvider>(context, listen: false).clearList();
+                // Navigator.pushNamedAndRemoveUntil(
+                //     context, RoutesName.home, (route) => false);
               });
             }
           },
@@ -128,46 +169,50 @@ class _LoginScreenState extends State<LoginScreen> {
   Column _buildLoginOtherPlatform() {
     return Column(
       children: [
-        Center(
-            child: Text('Or Log in with',
-                style: regularTS(const Color(0xff858E92), fontSize: 14))),
+        // Center(
+        //     child: Text('Or Log in with',
+        //         style: regularTS(const Color(0xff858E92), fontSize: 14))),
         SizedBox(height: Utils.scrHeight * .02),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             PlatformButton(
               onTap: () async {
-                await SocialAuthData.signInWithGoogle().then((user) {
-                  if (user != null) {
-                    Navigator.pushNamed(context, RoutesName.home);
-                    // Utils.showSnackBar(context, user.email!);
-                    // log('\nUser: ${user.displayName}');
-                    // log('\nUserAdditionalInfo: ${user.email}');
-                  }
+                isLoading.value = true;
+                await SocialAuthData.signInWithGoogle(context).then((value) {
+                  isLoading.value = false;
                 });
+                // .then((user) {
+                //   if (user != null) {
+                //     Navigator.pushNamed(context, RoutesName.home);
+                //     // Utils.showSnackBar(context, user.email!);
+                //     // log('\nUser: ${user.displayName}');
+                //     // log('\nUserAdditionalInfo: ${user.email}');
+                //   }
+                // });
               },
               icon: 'google',
             ),
-            PlatformButton(
-              icon: 'twitter',
-              onTap: () {
-                SocialAuthData.signInWithTwitter();
-              },
-            ),
-            PlatformButton(
-              onTap: () {
-                FacebookAuthData().signInWithFacebook().then((user) {
-                  if (user != null) {
-                    ToastUtil.showLongToast(
-                        '\nUser: ${user.user!.displayName}');
-                    ToastUtil.showLongToast('\nUser: ${user.user!.email}');
-                    log('\nUser: ${user.user!.displayName}');
-                    log('\nUserAdditionalInfo: ${user.user!.email}');
-                  }
-                });
-              },
-              icon: 'facebook',
-            ),
+            // PlatformButton(
+            //   icon: 'twitter',
+            //   onTap: () {
+            //     SocialAuthData.signInWithTwitter();
+            //   },
+            // ),
+            // PlatformButton(
+            //   onTap: () {
+            //     FacebookAuthData().signInWithFacebook().then((user) {
+            //       if (user != null) {
+            //         ToastUtil.showLongToast(
+            //             '\nUser: ${user.user!.displayName}');
+            //         ToastUtil.showLongToast('\nUser: ${user.user!.email}');
+            //         log('\nUser: ${user.user!.displayName}');
+            //         log('\nUserAdditionalInfo: ${user.user!.email}');
+            //       }
+            //     });
+            //   },
+            //   icon: 'facebook',
+            // ),
             const PlatformButton(icon: 'apple'),
           ],
         ),

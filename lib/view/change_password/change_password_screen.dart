@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/view/change_password/widgets/reset_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/password_form_field.dart';
@@ -26,7 +27,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final _resetCodeController = TextEditingController();
   final _newPasswordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               Text(
                   'Reset code was sent to your email. Please enter the code and create new password.',
                   textAlign: TextAlign.center,
-                  style: regularTS(loginTextColor, fontSize: 14)),
+                  style: regularTS(loginTextColor, fontSize: 14.sp)),
               SizedBox(height: Utils.scrHeight * 0.048)
             ]),
 
@@ -109,7 +110,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
             hintText: 'OTP',
-            hintStyle: regularTS(loginTextColor, fontSize: 16),
+            hintStyle: regularTS(loginTextColor, fontSize: 16.sp),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                     width: Utils.scrHeight * .001, color: Colors.grey.shade300),

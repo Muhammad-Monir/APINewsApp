@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable
 import 'dart:developer';
 import 'dart:io';
 import 'package:am_innnn/model/story_model.dart';
@@ -6,7 +6,11 @@ import 'package:am_innnn/view/story/widgets/my_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:full_screen_image/full_screen_image.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../provider/news_provider.dart';
+import '../../route/routes_name.dart';
 import '../../utils/api_url.dart';
 import '../../utils/utils.dart';
 
@@ -19,9 +23,29 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(videoUrl!);
     final hasImages = images != null && images!.isNotEmpty;
     return Scaffold(
-        backgroundColor: const Color(0xffF6F5F3),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: GestureDetector(
+            onTap: () {
+              Provider.of<NewsProvider>(context, listen: false).clearList();
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RoutesName.home,
+                (route) => false,
+              );
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+        ),
+        // backgroundColor: const Color(0xffF6F5F3),
+        backgroundColor: const Color(0xff000000),
         // Share Icon Part
         floatingActionButton:
             // Row(
@@ -49,6 +73,7 @@ class StoryScreen extends StatelessWidget {
             // horizontal: Utils.scrHeight * .04,
           ),
           child: FloatingActionButton(
+            // backgroundColor: Colors.transparent,
             shape: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(Utils.scrHeight * .1),
@@ -73,8 +98,9 @@ class StoryScreen extends StatelessWidget {
                 child: SizedBox(
                     width: double.infinity,
                     child: AspectRatio(
-                        aspectRatio: 1,
+                        aspectRatio: 0.48,
                         child: MyPlayer(
+                          title: title,
                           t: '${ApiUrl.imageBaseUrl}$videoUrl',
                         ))),
               ),
@@ -90,28 +116,39 @@ class StoryScreen extends StatelessWidget {
                       itemCount: images!.length,
                       itemBuilder: (context, index) {
                         log(images![index].image!);
-                        return CachedNetworkImage(
-                          fit: BoxFit.contain,
-                          imageUrl:
-                              '${ApiUrl.imageBaseUrl}${images![index].image}',
-                          // imageUrl: imageUrl!,
-                          placeholder: (context, url) =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) =>
-                              Image.network(ApiUrl.imageNotFound),
-                        );
+                        log('my story image url ${ApiUrl.imageBaseUrl}${images![index].image}');
+                        return FullScreenWidget(
+                            disposeLevel: DisposeLevel.High,
+                            child: Hero(
+                              tag: 'tag',
+                              child: InteractiveViewer(
+                                maxScale: 5,
+                                minScale: 0.1,
+                                constrained: true,
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.contain,
+                                  imageUrl:
+                                      '${ApiUrl.imageBaseUrl}${images![index].image}',
+                                  // imageUrl: imageUrl!,
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.network(ApiUrl.imageNotFound),
+                                ),
+                              ),
+                            ));
                       }),
                 ),
               ),
 
-            // Show Story Image
-            if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
-              Center(
-                child: Text(
-                  title!,
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ),
+            // // Show Story Text
+            // if (!hasImages && (videoUrl == null || videoUrl!.isEmpty))
+            //   Center(
+            //     child: Text(
+            //       title!,
+            //       style: const TextStyle(fontSize: 20, color: Colors.black),
+            //     ),
+            //   ),
           ],
         ));
   }

@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../route/routes_name.dart';
 import '../utils/color.dart';
 import '../utils/styles.dart';
@@ -11,11 +11,18 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: mediumTS(appBarColor, fontSize: 24)),
+      title: Text(title, style: mediumTS(appBarColor, fontSize: 24.sp)),
       leading: GestureDetector(
-          onTap:(){
-            Navigator.pushReplacementNamed(context, RoutesName.home,);
-          },child: const Icon(Icons.arrow_back,color: Colors.black,)),
+          onTap: () {
+            Navigator.pushReplacementNamed(
+              context,
+              RoutesName.home,
+            );
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          )),
     );
   }
 

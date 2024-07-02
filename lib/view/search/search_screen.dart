@@ -1,15 +1,27 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, unused_field
 import 'dart:developer';
+
 import 'package:am_innnn/common_widgets/email_form_field.dart';
 import 'package:am_innnn/data/news_data.dart';
 import 'package:am_innnn/data/search_data.dart';
+import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/category_model.dart';
 import 'package:am_innnn/model/news_model.dart';
 import 'package:am_innnn/route/routes_name.dart';
+import 'package:am_innnn/utils/api_url.dart';
+import 'package:am_innnn/utils/app_constants.dart';
+import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/search/widgets/category_item.dart';
+import 'package:am_innnn/view/search/widgets/category_popup.dart';
 import 'package:am_innnn/view/search/widgets/news_details_screen.dart';
 import 'package:am_innnn/view/search/widgets/search_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../common_widgets/action_button.dart';
+import '../../provider/news_provider.dart';
+import '../../provider/story_provider.dart';
 import '../../utils/color.dart';
 import '../../utils/styles.dart';
 import '../../utils/utils.dart';
@@ -22,6 +34,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final isLogin = appData.read(kKeyIsLoggedIn);
   String? selectedCategory = '';
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -29,6 +42,11 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool _isKeyboardOpen = false;
   late Future<NewsModel> fetchAllNews;
+  // List<int> selectedCategories = appData.read(kKeyIsLoggedIn)
+  //     ? List<int>.from(appData.read(kKeyCategory))
+  //     : List<int>.from(appData.read(kKeyCategory));
+  List<int> selectedCategories = List<int>.from(appData.read(kKeyCategory));
+  List<String> imageList = [ApiUrl.imageNotFound];
 
   void _onFocusChange() {
     setState(() {
@@ -44,15 +62,18 @@ class _SearchScreenState extends State<SearchScreen> {
     super.initState();
     // fetchNews(_searchController.text);
     _focusNode.addListener(_onFocusChange);
-    searchDataStream.fetchSearchStream(searchTitle: '');
+    // searchDataStream.fetchSearchStream(searchTitle: '');
     // _searchController.addListener(_onSearchTextChanged);
   }
 
   Future<NewsModel> fetchNews(String? searchText) async {
+    log('search text : $searchText');
     if (searchText == null) {
       // Fetch All News
       fetchAllNews = NewsData.fetchAllNews();
     } else {
+      log('else search text is: $searchText');
+
       // Fetch News filter by Category
       fetchAllNews = NewsData.searchText(searchTitle: searchText);
     }
@@ -84,81 +105,105 @@ class _SearchScreenState extends State<SearchScreen> {
     log('build widget');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search For', style: mediumTS(appBarColor, fontSize: 24)),
+        title:
+            Text('Search For', style: mediumTS(appBarColor, fontSize: 20.sp)),
       ),
-      body: GestureDetector(
-        // onTap: () {
-        //   FocusScope.of(context).requestFocus(FocusNode());
-        //   searchDataStream.fetchSearchStream(searchTitle: '');
-        // },
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Utils.scrHeight * .024,
-            vertical: Utils.scrHeight * .016,
-          ),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                // Search Filed for search by title
-                Focus(
-                  focusNode: _focusNode,
-                  child: EmailFormField(
-                    onFiledSubmitt: (value) {
-                      log('submitte called $value');
-                      if (value!.isNotEmpty) {
-                        // searchDataStream.fetchSearchStream(
-                        //     searchTitle: _searchController.text);
-                        fetchNews(_searchController.text);
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          // onTap: () {
+          //   FocusScope.of(context).requestFocus(FocusNode());
+          //   searchDataStream.fetchSearchStream(searchTitle: '');
+          // },
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Utils.scrHeight * .024,
+              vertical: Utils.scrHeight * .016,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  // Search Filed for search by title
+                  Focus(
+                    focusNode: _focusNode,
+                    child: EmailFormField(
+                      onFiledSubmitt: (value) {
+                        log('submitte called $value');
+                        if (value!.isNotEmpty) {
+                          log('if submitte called $value');
+
+                          // searchDataStream.fetchSearchStream(
+                          //     searchTitle: _searchController.text);
+                          fetchNews(_searchController.text);
+                        } else {
+                          log('else submitte called $value');
+
+                          // searchDataStream.fetchSearchStream(searchTitle: '');
+                          fetchNews(_searchController.text);
+                        }
+                      },
+                      // onChanged: (value) {
+                      //   if (value!.isNotEmpty || value != null) {
+                      //     searchDataStream.fetchSearchStream(searchTitle: value);
+                      //   }
+                      // },
+                      emailController: _searchController,
+                      hintText: 'Search news',
+                      validate: false,
+                    ),
+                  ),
+                  SizedBox(height: Utils.scrHeight * .024),
+                  Text('Categories',
+                      style: semiBoldTS(appTextColor, fontSize: 20.sp)),
+                  SizedBox(height: Utils.scrHeight * .016),
+
+                  // Select Category for search by category
+                  SizedBox(
+                    height: Utils.scrHeight * .62,
+                    child: selectCategorySection(),
+                  ),
+
+                  // Search button
+                  ActionButton(
+                    onTap: () {
+                      appData.write(kKeyCategory, selectedCategories);
+                      if (appData.read(kKeyIsLoggedIn)) {
+                        UserData.addCategory(selectedCategories).then((value) {
+                          UserData.userProfile(appData.read(kKeyToken), context)
+                              .then((value) {
+                            navigateToHome();
+                          });
+                        });
                       } else {
-                        // searchDataStream.fetchSearchStream(searchTitle: '');
-                        fetchNews(_searchController.text);
+                        navigateToHome();
+                        // if (Provider.of<NewsProvider>(context, listen: false)
+                        //     .newes
+                        //     .isNotEmpty) {
+                        //   Provider.of<NewsProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Provider.of<BookmarkProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Navigator.pushNamed(context, RoutesName.home,
+                        //       arguments: selectedCategories);
+                        // } else {
+                        //   Provider.of<BookmarkProvider>(context, listen: false)
+                        //       .clearList();
+                        //   Navigator.pushNamed(context, RoutesName.home,
+                        //       arguments: selectedCategories);
+                        // }
                       }
                     },
-                    // onChanged: (value) {
-                    //   if (value!.isNotEmpty || value != null) {
-                    //     searchDataStream.fetchSearchStream(searchTitle: value);
-                    //   }
-                    // },
-                    emailController: _searchController,
-                    hintText: 'Search news',
-                    validate: false,
+                    buttonColor: appThemeColor,
+                    textColor: Colors.white,
+                    buttonName: 'Search',
                   ),
-                ),
-                SizedBox(height: Utils.scrHeight * .024),
-                Text('Categories',
-                    style: semiBoldTS(appTextColor, fontSize: 20)),
-                SizedBox(height: Utils.scrHeight * .016),
-
-                // Select Category for search by category
-                SizedBox(
-                  height: Utils.scrHeight * .62,
-                  child: selectCategorySection(),
-                ),
-
-                // Search button
-                // ActionButton(
-                //   onTap: () {
-                //     log('Selected category: $selectedCategory');
-                //     log('Select search: ${_searchController.text}');
-                //     Map<String, dynamic> filter = {
-                //       'selectedCategory': selectedCategory,
-                //       'searchText': _searchController.text,
-                //     };
-                //     log('Select search: $filter');
-                //     // Navigate to next page with selected category
-                //     Navigator.pushNamed(context, RoutesName.home,
-                //         arguments: filter);
-                //   },
-                //   buttonColor: appThemeColor,
-                //   textColor: Colors.white,
-                //   buttonName: 'Search',
-                // ),
-                SizedBox(height: Utils.scrHeight * .010),
-                Text('All News', style: semiBoldTS(appTextColor, fontSize: 20)),
-                SizedBox(height: Utils.scrHeight * .010),
-                searchListItem()
-              ],
+                  SizedBox(height: Utils.scrHeight * .010),
+                  Text('All News',
+                      style: semiBoldTS(appTextColor, fontSize: 20.sp)),
+                  SizedBox(height: Utils.scrHeight * .010),
+                  searchListItem()
+                ],
+              ),
             ),
           ),
         ),
@@ -172,11 +217,12 @@ class _SearchScreenState extends State<SearchScreen> {
         future: fetchNews(_searchController.text),
         builder: (context, AsyncSnapshot<NewsModel> snapshot) {
           if (snapshot.hasData) {
-            final data = snapshot.data!.data;
+            final data = snapshot.data!.data!.data;
             if (data!.isNotEmpty) {
               searchList = data
                   .map((e) => GestureDetector(
                         onTap: () {
+                          log('search data is : ${e.title}');
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -185,26 +231,34 @@ class _SearchScreenState extends State<SearchScreen> {
                                   newsDec: e.description,
                                   sourceLink: e.url!,
                                   newsTitle: e.title!,
-                                  image: e.featuredImage!,
+                                  image: (e.featuredImage!.isNotEmpty)
+                                      ? e.featuredImage!.first // Handled Null
+                                      : imageList.first,
+                                  imagesList: e.featuredImage,
                                 ),
                               ));
                         },
                         child: SearchListItem(
-                          title: e.title,
-                          imageName: e.featuredImage,
-                          time: e.createdAt,
-                        ),
+                            title: e.title,
+                            // imageName: e.featuredImage,
+                            imageName: e.featuredImage!.isNotEmpty
+                                ? e.featuredImage!.first
+                                : ApiUrl.imageNotFound,
+                            time: e.formatedDate
+                            // DateFormat('yyyy-MM-dd HH:mm')
+                            //     .format(e.createdAt!),
+                            ),
                       ))
                   .toList();
               return Column(
                 children: searchList,
               );
             } else {
-              return const Center(child: Text('Data not found'));
+              return const Center(child: Text('No Data Found'));
             }
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
+            return const Center(
+              child: Text('No Data Found'),
             );
           }
           return const Center(
@@ -233,19 +287,44 @@ class _SearchScreenState extends State<SearchScreen> {
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
                 return CustomCategoryItems(
-                  isSelected: selectedCategory == data[index].title,
+                  isSelected: selectedCategories.contains(data[index].id),
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.home,
-                        arguments: data[index].title);
-                    log('Selected category: ${data[index].title}');
                     setState(() {
-                      selectedCategory = data[index].title;
-                      // Navigator.pushNamed(context, RoutesName.home,
-                      //     arguments: selectedCategory);
+                      if (selectedCategories.contains(data[index].id)) {
+                        selectedCategories.remove(data[index].id);
+                      } else {
+                        if (appData.read(kKeyIsLoggedIn)) {
+                          selectedCategories.add(data[index].id!);
+                        } else {
+                          if (selectedCategories.isNotEmpty) {
+                            getPopUp(
+                              context,
+                              (p0) => CategoryPopup(
+                                onExit: () => Navigator.pop(context),
+                              ),
+                            );
+                          } else {
+                            selectedCategories.add(data[index].id!);
+                            log('selected category is : $selectedCategories');
+                          }
+                        }
+                      }
                     });
                   },
+                  // isSelected: selectedCategories[index] == data[index].title,
+                  // onTap: () {
+                  //   // Navigator.pushNamed(context, RoutesName.home,
+                  //   //     arguments: data[index].title);
+                  //   log('Selected category: ${data[index].title}');
+                  //   setState(() {
+                  //     selectedCategory = data[index].title;
+                  //     // Navigator.pushNamed(context, RoutesName.home,
+                  //     //     arguments: selectedCategory);
+                  //   });
+                  // },
+
                   title: data[index].title!,
-                  image: data[index].image ?? '',
+                  image: data[index].image ?? ApiUrl.imageNotFound,
                 );
               },
             );
@@ -259,5 +338,35 @@ class _SearchScreenState extends State<SearchScreen> {
             );
           }
         });
+  }
+
+  void getPopUp(
+    BuildContext context,
+    Widget Function(BuildContext) childBuilder,
+  ) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+              backgroundColor: Colors.transparent,
+              child: childBuilder(context));
+        });
+  }
+
+  void navigateToHome() {
+    if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home,
+          arguments: selectedCategories);
+    } else {
+      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
+      Provider.of<NewsProvider>(context, listen: false).clearList();
+      Provider.of<StoryProvider>(context, listen: false).clearList();
+      Navigator.pushNamed(context, RoutesName.home,
+          arguments: selectedCategories);
+    }
   }
 }

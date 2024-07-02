@@ -18,9 +18,10 @@ class BookMarkDataStream extends MyStreamBase<BookmarkModel> {
           'Authorization': 'Bearer $authToken'
         },
       );
+      log('response code: ${response.statusCode}');
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // log(data.toString());
+        log(data.toString());
         bookmarkModel = BookmarkModel.fromJson(data);
       }
       return handleSuccessWithReturn(bookmarkModel!);

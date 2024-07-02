@@ -31,7 +31,7 @@ class CustomDrawerItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(
             horizontal: Utils.scrHeight * .016,
-            vertical: Utils.scrHeight * .016),
+            vertical: Utils.scrHeight * .014),
         alignment: Alignment.center,
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class CustomDrawerItem extends StatelessWidget {
                         : const SizedBox.shrink(),
               ],
             ),
-            SizedBox(height: Utils.scrHeight * .01),
+            SizedBox(height: Utils.scrHeight * .015),
             const CustomDivider()
           ],
         ),

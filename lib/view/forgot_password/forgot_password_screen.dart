@@ -1,12 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/view/change_password/change_password_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/email_form_field.dart';
 import '../../utils/color.dart';
@@ -23,7 +21,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final AuthProvider _authProvider = AuthProvider();
+  final AuthenticationProvider _authProvider = AuthenticationProvider();
 
   @override
   Widget build(BuildContext context) {
