@@ -317,7 +317,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
         //         .data[index].featuredImage!.first);
       },
       child: Container(
-          height: Utils.scrHeight * .4,
+          height: Utils.scrHeight * .35,
           width: double.infinity,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
