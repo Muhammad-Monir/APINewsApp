@@ -133,8 +133,14 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             widget.newsTitle,
-            style:
-                semiBoldTS(appTextColor, fontSize: 16.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ? semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize)
+                : semiBoldTSNirmala(appTextColor,
+                    fontSize: 12.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -149,8 +155,15 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             Utils.truncateText(widget.newsDec!, 70),
-            style: regularTS(appSecondTextColor,
-                fontSize: 14.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ? regularTS(appSecondTextColor,
+                    fontSize: 13.sp * fontSize.fontSize)
+                : regularTSNirmala(appSecondTextColor,
+                    fontSize: 10.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(

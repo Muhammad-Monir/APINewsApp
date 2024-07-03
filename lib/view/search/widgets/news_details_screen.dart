@@ -126,8 +126,14 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                     appData.read(kKeyLanguageId) == 83)
                 ? TextAlign.left
                 : TextAlign.right,
-            style:
-                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ? semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize)
+                : semiBoldTSNirmala(appTextColor,
+                    fontSize: 12.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -140,8 +146,15 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                 : TextAlign.right,
             maxLines: 9,
             Utils.truncateText(widget.newsDec ?? 'NA', 55),
-            style: regularTS(appSecondTextColor,
-                fontSize: 13.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ? regularTS(appSecondTextColor,
+                    fontSize: 13.sp * fontSize.fontSize)
+                : regularTSNirmala(appSecondTextColor,
+                    fontSize: 10.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .01),
@@ -176,8 +189,10 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   onTap: () async {
                     await launchUrl(Uri.parse(widget.sourceLink));
                   },
-                  child: Text('Tap to know more',
+                  child: Text('read: ${widget.sourceLink}',
+                      // 'Tap to know more',
                       overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: regularTS(Colors.black,
                           fontSize: 14.sp, isUnderline: true)),
                 ),
