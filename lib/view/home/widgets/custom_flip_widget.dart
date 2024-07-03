@@ -168,7 +168,7 @@ class VideoPage extends StatelessWidget {
                 await launchUrl(Uri.parse(data.url!));
               },
               child: Text(
-                data.url!,
+                'read: ${data.url!}',
                 // 'Tap to know more',\
                 maxLines: 1,
                 style: regularTS(Colors.black, fontSize: 14, isUnderline: true),
