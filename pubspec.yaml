@@ -126,6 +126,9 @@ flutter:
     - family: Nirmala
       fonts:
         - asset: assets/fonts/Nirmala.ttf
+    - family: SUTOMJ
+      fonts:
+        - asset: assets/fonts/SUTOMJ.TTF
     - family: Roboto Regular
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf

@@ -189,8 +189,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   onTap: () async {
                     await launchUrl(Uri.parse(widget.sourceLink));
                   },
-                  child: Text('read: ${widget.sourceLink}',
-                      // 'Tap to know more',
+                  child: Text(
+                      // 'read: ${widget.sourceLink}',
+                      'Tap to know more',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: regularTS(Colors.black,

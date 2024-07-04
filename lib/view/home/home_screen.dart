@@ -13,6 +13,7 @@ import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../model/news_model.dart';
@@ -46,15 +47,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool loading = false;
   bool hasMore = true;
   List<String>? imageList = [ApiUrl.imageNotFound];
+  bool isConnected = false;
 
   @override
   void initState() {
     dev.log('initstate call');
+    isConnect();
     storyPageController.addListener(() {
       _scroolListener();
     });
     fetchData();
-
     // Provider.of<StoryProvider>(context, listen: false).fetchStories();
     // Provider.of<NewsProvider>(context, listen: false).fetchNews();
     // fetchStory = NewsData.fetchStory(page);
@@ -65,6 +67,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
+  }
+
+  void isConnect() async {
+    isConnected = await InternetConnectionChecker().hasConnection;
   }
 
   // News Scrool Listener
@@ -295,9 +301,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             const Spacer(),
             Text(
-              massage == null || massage == ''
-                  ? 'We Are Coming Soon Be Patient'
-                  : massage,
+              !isConnected
+                  ? 'Looks like your are offline.\nPlease switch on your data or WIFI and try again.'
+                  : massage == null || massage == ''
+                      ? 'We Are Coming Soon Be Patient'
+                      : massage,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: Utils.scrHeight * .03),
