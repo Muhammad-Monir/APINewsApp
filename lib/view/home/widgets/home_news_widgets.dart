@@ -138,11 +138,8 @@ class _NewsScreenState extends State<NewsScreen> {
                     appData.read(kKeyLanguageId) == 76 ||
                     appData.read(kKeyLanguageId) == 77 ||
                     appData.read(kKeyLanguageId) == 49)
-                ? ((appData.read(kKeyLanguageId)) == 11)
-                    ? regularTSSMJ(appSecondTextColor,
-                        fontSize: 14.sp * fontSize.fontSize)
-                    : regularTS(appSecondTextColor,
-                        fontSize: 15.sp * fontSize.fontSize)
+                ? regularTS(appSecondTextColor,
+                    fontSize: 15.sp * fontSize.fontSize)
                 : semiBoldTSNirmala(appTextColor,
                     fontSize: 12.sp * fontSize.fontSize),
           ),
@@ -164,11 +161,13 @@ class _NewsScreenState extends State<NewsScreen> {
                     appData.read(kKeyLanguageId) == 76 ||
                     appData.read(kKeyLanguageId) == 77 ||
                     appData.read(kKeyLanguageId) == 49)
-                ? ((appData.read(kKeyLanguageId)) == 11)
-                    ? regularTSSMJ(appSecondTextColor,
-                        fontSize: 12.sp * fontSize.fontSize)
-                    : regularTS(appSecondTextColor,
-                        fontSize: 13.sp * fontSize.fontSize)
+                ?
+                // ((appData.read(kKeyLanguageId)) == 11)
+                //     ? regularTSSMJ(appSecondTextColor,
+                //         fontSize: 12.sp * fontSize.fontSize)
+                //     :
+                regularTS(appSecondTextColor,
+                    fontSize: 13.sp * fontSize.fontSize)
                 : regularTSNirmala(appSecondTextColor,
                     fontSize: 10.sp * fontSize.fontSize),
           ),
