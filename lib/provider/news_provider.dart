@@ -59,7 +59,7 @@ class NewsProvider extends ChangeNotifier {
         _page++;
         if (response.status == false) {
           log('----------news provider call');
-          ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
+          ToastUtil.showShortToast('Hope World is doing good \u{1F600}');
         }
       } else {
         // ToastUtil.showShortToast('Guess World is doing good \u{1F600}');

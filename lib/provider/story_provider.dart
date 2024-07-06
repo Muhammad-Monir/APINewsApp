@@ -39,7 +39,7 @@ class StoryProvider with ChangeNotifier {
     try {
       final response = await NewsData.fetchStory(_page);
       if (response.status == false) {
-        ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
+        ToastUtil.showShortToast('Hope World is doing good \u{1F600}');
       }
 
       if (response.storyboard?.data != null && response.status == true) {
@@ -47,7 +47,7 @@ class StoryProvider with ChangeNotifier {
         _hasMore = response.storyboard!.data!.isNotEmpty;
         _page++;
         if (response.status == false) {
-          ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
+          ToastUtil.showShortToast('Hope World is doing good \u{1F600}');
         }
       } else {
         // ToastUtil.showShortToast('Guess World is doing good \u{1F600}');

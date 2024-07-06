@@ -77,7 +77,7 @@ TextStyle semiBoldTSNirmala(Color color,
         decorationColor: isUnderline ? appThemeColor : Colors.transparent,
         color: color,
         fontSize: fontSize,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Nirmala');
 
 TextStyle largeTSNirmala(Color color, {double? fontSize = 24}) => TextStyle(
