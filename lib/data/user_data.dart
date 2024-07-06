@@ -32,7 +32,6 @@ class UserData {
         final Map<String, dynamic> data = json.decode(response.body);
         log('my user data is : $data');
 
-        // log('id is : ${data["data"]["id"]}');
         // Save User Id Localy
         appData.write(kKeyUserID, data["data"]["id"]);
 
@@ -40,26 +39,19 @@ class UserData {
         final language = data["data"]["language"];
         final country = data["data"]["country"];
 
-        log('__after login kaka ${language["id"]}');
-
         if (language != null) {
-          log('__after login kaka language $language country $country');
           appData.write(kKeyLanguageId, language["id"]);
         } else {
           appData.write(kKeyLanguageId, 22);
         }
 
         if (country != null) {
-          log('__after login kaka  ${country["code"]}');
           appData.write(kKeyCountryCode, country["code"]);
           Provider.of<LanguageProvider>(context, listen: false)
               .fetchLanguages(code: country["code"]);
         } else {
           appData.write(kKeyCountryCode, 'in');
         }
-
-        // appData.write(kKeyLanguageId, data["data"]["language"]["id"]);
-        // appData.write(kKeyCountryCode, data["data"]["country"]["code"]);
 
         // save the categories
         List<int> categories = List<int>.from(data["data"]["categories"]);

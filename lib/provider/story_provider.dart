@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 import '../data/news_data.dart';
 import '../model/story_model.dart';
 import '../utils/toast_util.dart'; // Update with the actual path
@@ -37,21 +38,20 @@ class StoryProvider with ChangeNotifier {
 
     try {
       final response = await NewsData.fetchStory(_page);
+      if (response.status == false) {
+        ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
+      }
 
-      if (response.storyboard?.data != null) {
+      if (response.storyboard?.data != null && response.status == true) {
         _stories.addAll(response.storyboard!.data!);
         _hasMore = response.storyboard!.data!.isNotEmpty;
         _page++;
         if (response.status == false) {
-          ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
+          ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
         }
-        // if (response.storyboard!.nextPageUrl == null) {
-        // if (!hasMore) {
-        //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');
-        // }
       } else {
+        // ToastUtil.showShortToast('Guess World is doing good \u{1F600}');
         _hasMore = false;
-        ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
       }
     } catch (e) {
       debugPrint(e.toString());

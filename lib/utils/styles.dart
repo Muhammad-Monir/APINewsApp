@@ -34,7 +34,7 @@ TextStyle semiBoldTS(Color color,
       decorationColor: isUnderline ? appThemeColor : Colors.transparent,
       color: color,
       fontSize: fontSize,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
     ));
 
 TextStyle largeTS(Color color, {double? fontSize = 24}) => GoogleFonts.roboto(
@@ -77,7 +77,7 @@ TextStyle semiBoldTSNirmala(Color color,
         decorationColor: isUnderline ? appThemeColor : Colors.transparent,
         color: color,
         fontSize: fontSize,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         fontFamily: 'Nirmala');
 
 TextStyle largeTSNirmala(Color color, {double? fontSize = 24}) => TextStyle(

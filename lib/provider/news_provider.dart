@@ -47,25 +47,22 @@ class NewsProvider extends ChangeNotifier {
         response = await NewsData.fetchAllNews(page: _page);
       } else {
         log('----------else');
+        log('----------news provider call');
         String categoriesString = appData.read(kKeyCategory).join(',');
-        log('---------- categoriesString: $categoriesString');
         response = await NewsData.fetchAllNews(
             category: categoriesString, page: _page);
       }
-      // if (response.data!.nextPageUrl == null) {
-      //   ToastUtil.showShortToast('We Are Coming Soon Be Paction');
-      // }
 
       if (response.data?.data != null) {
-        // if (response.data!.nextPageUrl != null)
         _newes.addAll(response.data!.data!);
         _hasMore = response.data!.data!.isNotEmpty;
         _page++;
         if (response.status == false) {
-          ToastUtil.showShortToast('We Are Coming Soon Be Patient');
+          log('----------news provider call');
+          ToastUtil.showShortToast('Guess world is doing good \u{1F600}');
         }
       } else {
-        ToastUtil.showShortToast('We Are Coming Soon Be Patient');
+        // ToastUtil.showShortToast('Guess World is doing good \u{1F600}');
         _hasMore = false;
       }
     } catch (e) {
