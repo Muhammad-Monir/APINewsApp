@@ -96,9 +96,6 @@ class AuthenticationProvider with ChangeNotifier {
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
         ToastUtil.showLongToast(data["message"]);
-
-        // Provider.of<LanguageProvider>(context, listen: false)
-        //     .fetchLanguages(code: appData.read(kKeyCountryCode));
       } else if (response.statusCode == 403) {
         _isLoading = false;
         throw Exception(
@@ -312,6 +309,7 @@ class AuthenticationProvider with ChangeNotifier {
   }
 
   _navigateToHome(BuildContext context) {
+    log('navigate to home page  _navigateToHome');
     Navigator.pushNamedAndRemoveUntil(
       context,
       RoutesName.home,

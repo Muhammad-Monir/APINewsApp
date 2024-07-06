@@ -92,16 +92,16 @@ class _DrawerScreenState extends State<DrawerScreen> {
             final data = snapshot.data!;
             //Showing the user name and email
             return buildUserInformationPart(
-                data.data!.username, data.data!.email);
+                data.data!.username ?? '', data.data!.email ?? '');
           } else if (snapshot.hasError) {
             return const Center(
                 child: Text(
-                    'No Internet Connection') //Text(snapshot.hasError.toString()),
+                    'Something Want"s Wrong') //Text(snapshot.hasError.toString()),
                 );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-                child: Text(
-                    'No Internet Connection') //Text(snapshot.hasError.toString()),
+                child:
+                    CircularProgressIndicator() //Text(snapshot.hasError.toString()),
                 );
           } else {
             return Center(

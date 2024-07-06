@@ -9,7 +9,6 @@ import '../model/language_model.dart';
 import '../model/news_model.dart';
 import '../utils/app_constants.dart';
 import '../utils/di.dart';
-import '../utils/toast_util.dart';
 
 class NewsData {
   static bool isLastPage = false;
@@ -29,7 +28,7 @@ class NewsData {
         // log(data.toString());
         return NewsModel.fromJson(data);
       } else if (response.statusCode == 404) {
-        ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
+        // ToastUtil.showShortToast('We Are Coming Soon Be Patient ');
         throw Exception('Failed to load news');
       } else {
         // If the server did not return a 200 OK response, throw an exception

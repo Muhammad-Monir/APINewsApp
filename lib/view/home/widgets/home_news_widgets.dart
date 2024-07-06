@@ -138,10 +138,9 @@ class _NewsScreenState extends State<NewsScreen> {
                     appData.read(kKeyLanguageId) == 76 ||
                     appData.read(kKeyLanguageId) == 77 ||
                     appData.read(kKeyLanguageId) == 49)
-                ? regularTS(appSecondTextColor,
-                    fontSize: 15.sp * fontSize.fontSize)
+                ? semiBoldTS(appTextColor, fontSize: 17.sp * fontSize.fontSize)
                 : semiBoldTSNirmala(appTextColor,
-                    fontSize: 12.sp * fontSize.fontSize),
+                    fontSize: 17.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -167,9 +166,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 //         fontSize: 12.sp * fontSize.fontSize)
                 //     :
                 regularTS(appSecondTextColor,
-                    fontSize: 13.sp * fontSize.fontSize)
+                    fontSize: 14.sp * fontSize.fontSize)
                 : regularTSNirmala(appSecondTextColor,
-                    fontSize: 10.sp * fontSize.fontSize),
+                    fontSize: 14.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(
