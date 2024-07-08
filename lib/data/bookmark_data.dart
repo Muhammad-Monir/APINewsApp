@@ -21,7 +21,7 @@ class BookMarkDataStream extends MyStreamBase<BookmarkModel> {
       log('response code: ${response.statusCode}');
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        log(data.toString());
+        log("book mark Data is ${data.toString()}");
         bookmarkModel = BookmarkModel.fromJson(data);
       }
       return handleSuccessWithReturn(bookmarkModel!);

@@ -61,7 +61,7 @@ class Data {
   dynamic image;
   dynamic video;
   String? isTop;
-  String? languageId;
+  int? languageId;
   String? content;
   String? status;
   String? ready;
@@ -104,7 +104,7 @@ class Data {
     dynamic image,
     dynamic video,
     String? isTop,
-    String? languageId,
+    int? languageId,
     String? content,
     String? status,
     String? ready,

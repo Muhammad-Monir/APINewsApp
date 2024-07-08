@@ -27,7 +27,7 @@ class CheckBookmarkStream extends MyStreamBase<CheckBookmarkModel> {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
-        // log("Check bookmark News :$data");
+        log("Check bookmark News :$data");
         model = CheckBookmarkModel.fromJson(data);
       }
       return handleSuccessWithReturn(model!);
