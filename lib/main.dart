@@ -41,7 +41,7 @@ void main() async {
   );
   diSetup();
   await GetStorage.init();
-  initInternetChecker();
+  // initInternetChecker();
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
   //   statusBarColor: Colors.white,
   //   statusBarIconBrightness: Brightness.light,
