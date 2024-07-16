@@ -393,6 +393,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   _initBannerAd() {
     _bannerAd = BannerAd(
       size: AdSize.banner,
+      // adUnitId: ' ca-app-pub-6659386038146270/5998234739',
       adUnitId: 'ca-app-pub-3940256099942544/9214589741',
       // adUnitId: adUnitId,
       listener: BannerAdListener(
