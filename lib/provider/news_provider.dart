@@ -29,7 +29,7 @@ class NewsProvider extends ChangeNotifier {
     if (!isConnected) {
       ToastUtil.showShortToast('No internet connection');
       _massage =
-          'Looks like your are offline.\nPlease switch on your data or WIFI and try again.';
+          'Looks like you are offline.\nPlease switch on your data or WIFI and try again.';
       return;
     } else {
       _massage = 'We Are Coming Soon Be Patient';

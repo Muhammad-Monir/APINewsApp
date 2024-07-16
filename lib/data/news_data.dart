@@ -25,7 +25,7 @@ class NewsData {
               '${ApiUrl.allNewsUrl}?language=${appData.read(kKeyLanguageId).toString()}&country=${appData.read(kKeyCountryCode)}&category=$category&page=$page'));
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        log(data.toString());
+        // log(data.toString());
         return NewsModel.fromJson(data);
       } else if (response.statusCode == 404) {
         // ToastUtil.showShortToast('We Are Coming Soon Be Patient ');

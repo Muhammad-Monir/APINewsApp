@@ -294,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             const Spacer(),
             Text(
               !isConnected
-                  ? 'Looks like your are offline.\nPlease switch on your data or WIFI and try again.'
+                  ? 'Looks like you are offline.\nPlease switch on your data or WIFI and try again.'
                   : massage == null || massage == ''
                       ? 'We Are Coming Soon Be Patient'
                       : massage,
