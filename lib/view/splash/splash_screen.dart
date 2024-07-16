@@ -28,34 +28,26 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // _detectLocation();
-    // Future.delayed(
-    //   const Duration(microseconds: 100),
-    //   () {
-    _detectLocation();
-    // if (appData.read(kKeyIsFirstTime)) {
-    //   Navigator.pushNamedAndRemoveUntil(
-    //     context,
-    //     RoutesName.onBoarding,
-    //     (route) => false,
-    //   );
-    // } else {
-    // Navigator.pushNamedAndRemoveUntil(
-    //   context,
-    //   RoutesName.home,
-    //   (route) => false,
-    // );
-    // }
-    // },
-    // );
+    Future.delayed(
+      const Duration(microseconds: 100),
+      () {
+        if (appData.read(kKeyIsFirstTime)) {
+          _detectLocation();
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesName.home,
+            (route) => false,
+          );
+        }
+      },
+    );
     super.initState();
   }
 
   setNewLocation(double let, double lng) {
     longitude = lng;
     latitude = let;
-    // log(longitude.toString());
-    // log(latitude.toString());
-    // log(_country);
   }
 
   void _detectLocation() async {
@@ -72,6 +64,8 @@ class _SplashScreenState extends State<SplashScreen> {
         appData.write(kKeyLanguageId, 22);
         Provider.of<LanguageProvider>(context, listen: false)
             .fetchLanguages(code: _countryCode.toLowerCase());
+
+        appData.write(kKeyIsFirstTime, false);
         Navigator.pushNamedAndRemoveUntil(
           context,
           RoutesName.home,

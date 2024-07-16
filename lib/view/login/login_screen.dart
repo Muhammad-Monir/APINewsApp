@@ -181,15 +181,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 isLoading.value = true;
                 await SocialAuthData.signInWithGoogle(context).then((value) {
                   isLoading.value = false;
+                }).then((user) {
+                  if (user != null) {
+                    log('log in and navigate to home');
+                    Navigator.pushNamed(context, RoutesName.home);
+                    // Utils.showSnackBar(context, user.email!);
+                    // log('\nUser: ${user.displayName}');
+                    // log('\nUserAdditionalInfo: ${user.email}');
+                  }
                 });
-                // .then((user) {
-                //   if (user != null) {
-                //     Navigator.pushNamed(context, RoutesName.home);
-                //     // Utils.showSnackBar(context, user.email!);
-                //     // log('\nUser: ${user.displayName}');
-                //     // log('\nUserAdditionalInfo: ${user.email}');
-                //   }
-                // });
               },
               icon: 'google',
             ),

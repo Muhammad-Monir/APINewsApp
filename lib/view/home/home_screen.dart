@@ -13,6 +13,7 @@ import 'package:am_innnn/view/home/widgets/custom_flip_widget.dart';
 import 'package:am_innnn/view/home/widgets/home_news_widgets.dart';
 import 'package:am_innnn/view/home/widgets/tab_bar_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../model/news_model.dart';
@@ -46,25 +47,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool loading = false;
   bool hasMore = true;
   List<String>? imageList = [ApiUrl.imageNotFound];
+  bool isConnected = false;
 
   @override
   void initState() {
     dev.log('initstate call');
+    isConnect();
     storyPageController.addListener(() {
       _scroolListener();
     });
     fetchData();
-
-    // Provider.of<StoryProvider>(context, listen: false).fetchStories();
-    // Provider.of<NewsProvider>(context, listen: false).fetchNews();
-    // fetchStory = NewsData.fetchStory(page);
-    // fetchStory =
-    //     Provider.of<StoryProvider>(context, listen: false).fetchStories();
-
-    // fetchStory = _fetchStory(page + 1);
     // Close keyboard
     FocusManager.instance.primaryFocus?.unfocus();
     super.initState();
+  }
+
+  void isConnect() async {
+    isConnected = await InternetConnectionChecker().hasConnection;
   }
 
   // News Scrool Listener
@@ -106,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    dev.log('${appData.read(kKeyCountryCode)}');
     return Scaffold(
       bottomNavigationBar: Provider.of<BarsVisibility>(context).showBars
           ? _bottomNavigationMenu(context)
@@ -295,9 +293,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: [
             const Spacer(),
             Text(
-              massage == null || massage == ''
-                  ? 'We Are Coming Soon Be Patient'
-                  : massage,
+              !isConnected
+                  ? 'Looks like you are offline.\nPlease switch on your data or WIFI and try again.'
+                  : massage == null || massage == ''
+                      ? 'We Are Coming Soon Be Patient'
+                      : massage,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: Utils.scrHeight * .03),
@@ -520,20 +520,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     try {
       // newsPageController.jumpToPage(0);
-      // await fetchNews();
       Provider.of<NewsProvider>(context, listen: false).clearList();
       Provider.of<StoryProvider>(context, listen: false).clearList();
-      // Provider.of<BookmarkProvider>(context, listen: false).clearList();
       fetchData();
-      // if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty) {
-      //   Provider.of<NewsProvider>(context, listen: false).clearList();
-      //   fetchData();
-      //   // Provider.of<NewsProvider>(context, listen: false).fetchNews();
-      // } else {
-      //   Provider.of<NewsProvider>(context, listen: false).clearList();
-      //   fetchData();
-      //   // Provider.of<NewsProvider>(context, listen: false).fetchNews();
-      // }
       setState(() {
         _isRefresh = false;
       });
@@ -562,27 +551,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    // newsPageController.dispose();
     storyPageController.dispose();
     super.dispose();
   }
 
   void fetchData() {
-    // Provider.of<StoryProvider>(context, listen: false).clearList();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (Provider.of<NewsProvider>(context, listen: false).newes.isNotEmpty ||
-          Provider.of<StoryProvider>(context, listen: false)
-              .stories
-              .isNotEmpty) {
-        Provider.of<StoryProvider>(context, listen: false).clearList();
-        Provider.of<NewsProvider>(context, listen: false).clearList();
-        Provider.of<StoryProvider>(context, listen: false).fetchStories();
-        Provider.of<NewsProvider>(context, listen: false).fetchNews();
-      } else {
-        Provider.of<StoryProvider>(context, listen: false).fetchStories();
-        Provider.of<StoryProvider>(context, listen: false).clearList();
-        Provider.of<NewsProvider>(context, listen: false).fetchNews();
-        Provider.of<StoryProvider>(context, listen: false).fetchStories();
+      if (mounted) {
+        if (Provider.of<NewsProvider>(context, listen: false)
+                .newes
+                .isNotEmpty ||
+            Provider.of<StoryProvider>(context, listen: false)
+                .stories
+                .isNotEmpty) {
+          dev.log('fetchData call if ');
+          Provider.of<StoryProvider>(context, listen: false).clearList();
+          Provider.of<NewsProvider>(context, listen: false).clearList();
+          Provider.of<StoryProvider>(context, listen: false).fetchStories();
+          Provider.of<NewsProvider>(context, listen: false).fetchNews();
+        } else {
+          dev.log('fetchData call else ');
+          Provider.of<StoryProvider>(context, listen: false).fetchStories();
+          Provider.of<StoryProvider>(context, listen: false).clearList();
+          Provider.of<NewsProvider>(context, listen: false).fetchNews();
+          Provider.of<StoryProvider>(context, listen: false).fetchStories();
+        }
       }
     });
   }

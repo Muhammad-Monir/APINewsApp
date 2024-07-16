@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:am_innnn/data/user_data.dart';
-import 'package:am_innnn/provider/language_provider.dart';
 import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
@@ -48,7 +47,6 @@ class AuthenticationProvider with ChangeNotifier {
           // log('login user id = ${appData.read(kKeyUserID)}');
           Provider.of<NewsProvider>(context, listen: false).clearList();
           Provider.of<StoryProvider>(context, listen: false).clearList();
-
           log('*********user profile is calling');
           Navigator.pushNamedAndRemoveUntil(
               context, RoutesName.home, (route) => false);
@@ -98,9 +96,6 @@ class AuthenticationProvider with ChangeNotifier {
         appData.write(kKeyIsLoggedIn, true);
         appData.write(kKeyToken, data["token"]);
         ToastUtil.showLongToast(data["message"]);
-
-        // Provider.of<LanguageProvider>(context, listen: false)
-        //     .fetchLanguages(code: appData.read(kKeyCountryCode));
       } else if (response.statusCode == 403) {
         _isLoading = false;
         throw Exception(
@@ -314,6 +309,7 @@ class AuthenticationProvider with ChangeNotifier {
   }
 
   _navigateToHome(BuildContext context) {
+    log('navigate to home page  _navigateToHome');
     Navigator.pushNamedAndRemoveUntil(
       context,
       RoutesName.home,

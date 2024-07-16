@@ -49,8 +49,8 @@ class CheckBookmarkModel {
 
 class CheckData {
   int? id;
-  String? userId;
-  String? newsId;
+  int? userId;
+  int? newsId;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -64,8 +64,8 @@ class CheckData {
 
   CheckData copyWith({
     int? id,
-    String? userId,
-    String? newsId,
+    int? userId,
+    int? newsId,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) =>

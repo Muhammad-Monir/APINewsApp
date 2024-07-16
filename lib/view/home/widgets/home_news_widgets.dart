@@ -133,8 +133,14 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             widget.newsTitle,
-            style:
-                semiBoldTS(appTextColor, fontSize: 15.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ? semiBoldTS(appTextColor, fontSize: 17.sp * fontSize.fontSize)
+                : semiBoldTSNirmala(appTextColor,
+                    fontSize: 17.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(height: Utils.scrHeight * .02),
@@ -149,8 +155,20 @@ class _NewsScreenState extends State<NewsScreen> {
                 ? TextAlign.left
                 : TextAlign.right,
             Utils.truncateText(widget.newsDec!, 70),
-            style: regularTS(appSecondTextColor,
-                fontSize: 13.sp * fontSize.fontSize),
+            style: !(appData.read(kKeyLanguageId) == 4 ||
+                    appData.read(kKeyLanguageId) == 83 ||
+                    appData.read(kKeyLanguageId) == 76 ||
+                    appData.read(kKeyLanguageId) == 77 ||
+                    appData.read(kKeyLanguageId) == 49)
+                ?
+                // ((appData.read(kKeyLanguageId)) == 11)
+                //     ? regularTSSMJ(appSecondTextColor,
+                //         fontSize: 12.sp * fontSize.fontSize)
+                //     :
+                regularTS(appSecondTextColor,
+                    fontSize: 14.sp * fontSize.fontSize)
+                : regularTSNirmala(appSecondTextColor,
+                    fontSize: 14.sp * fontSize.fontSize),
           ),
         ),
         // SizedBox(
@@ -243,7 +261,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   Container topImageSection() {
     return Container(
-      height: Utils.scrHeight * .400,
+      height: Utils.scrHeight * .35,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -328,6 +346,7 @@ class _NewsScreenState extends State<NewsScreen> {
     _bannerAd = BannerAd(
       size: AdSize.banner,
       adUnitId: 'ca-app-pub-3940256099942544/9214589741',
+      // adUnitId: ' ca-app-pub-6659386038146270/59982347391',
       // adUnitId: adUnitId,
       listener: BannerAdListener(
         onAdLoaded: (ad) {
