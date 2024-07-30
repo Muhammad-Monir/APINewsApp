@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_login/twitter_login.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../utils/toast_util.dart';
 
 class SocialAuthData {
@@ -64,6 +65,46 @@ class SocialAuthData {
   //     await FirebaseAuth.instance.signInWithProvider(twitterProvider);
   //   }
   // }
+
+  static Future<User?> signInWithApple(BuildContext context) async {
+    try {
+      // Trigger the Apple Sign In flow
+      final AuthorizationCredentialAppleID appleCredential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      // Create a new credential
+      final OAuthCredential credential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      // Once signed in, return the UserCredential
+      final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (authResult.user != null) {
+        Provider.of<AuthenticationProvider>(context, listen: false).socialLogin(
+            authResult.user!.email!,
+            authResult.user!.displayName ?? '',
+            appleCredential.authorizationCode,
+            'apple',
+            context);
+      }
+
+      log("Apple sign in info: $authResult");
+      // Return the current user
+      return authResult.user;
+    } catch (error) {
+      ToastUtil.showLongToast(error.toString());
+      log(error.toString());
+      return null;
+    }
+  }
 
   static final TwitterLogin twitterLogin = TwitterLogin(
       apiKey: 'f5sqyyJGNPQIYdKvHcDPFXX6G',

@@ -71,37 +71,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (storyPageController.position.pixels ==
         storyPageController.position.maxScrollExtent) {
       Provider.of<StoryProvider>(context, listen: false).fetchStories();
-      // setState(() {
-      //   // page = page + 1;
-      // });
-      // fetchStory = NewsData.fetchStory(page);
-      // // fetchStory = _fetchStory(page + 1);
-      // dev.log('scrool');
     }
   }
-
-  // Get All Story Data
-  // Future<StoryModel> _fetchStory(int page) async {
-  //   setState(() {
-  //     loading = true;
-  //   });
-  //   try {
-  //     final response = await NewsData.fetchStory(page);
-  //     setState(() {
-  //       storyData.addAll(response.storyboard!.data!);
-  //       this.page = page;
-  //       hasMore = response.storyboard!.data!.isNotEmpty;
-  //     });
-  //     return response;
-  //   } catch (e) {
-  //     dev.log(e.toString());
-  //     rethrow;
-  //   } finally {
-  //     setState(() {
-  //       loading = false;
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -123,73 +94,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  //News Section and fetch the news from api
-  // FutureBuilder<NewsModel> _newsSection() {
-  //   return FutureBuilder<NewsModel>(
-  //     future: fetchNews(),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasError) {
-  //         return const Center(child: CircularProgressIndicator());
-  //       }
-  //       if (snapshot.hasData) {
-  //         final data = snapshot.data!.data!.data!;
-  //         return !_isRefresh
-  //             ? GestureDetector(
-  //                 onTap: () {
-  //                   dev.log('barsVisibility on tap');
-  //                   Provider.of<BarsVisibility>(context, listen: false)
-  //                       .toggleBars();
-  //                   if (Provider.of<BarsVisibility>(context, listen: false)
-  //                       .showBars) {
-  //                     // Timer(const Duration(seconds: 3), () {
-  //                     Provider.of<BarsVisibility>(context, listen: false)
-  //                         .hideBars();
-  //                     Provider.of<BarsVisibility>(context, listen: false)
-  //                         .toggleBars();
-  //                     // });
-  //                   }
-  //                 },
-  //                 child: Stack(
-  //                   children: [
-  //                     // Flip Animation & News Screen Widget
-  //                     data.isNotEmpty
-  //                         ? CustomFlipWidget(
-  //                             pages: data.map((e) => screenDesign(e)).toList(),
-  //                             data: data.map((e) => e).toList(),
-  //                           )
-  //                         : _errorSection(context),
-
-  //                     // Show Tob TabBar
-  //                     Provider.of<BarsVisibility>(context).showBars
-  //                         ? Positioned(
-  //                             top: 0,
-  //                             right: 0,
-  //                             left: 0,
-  //                             child: CustomTabBar(
-  //                                 homeOnTap: () =>
-  //                                     Scaffold.of(context).openDrawer(),
-  //                                 startOnTap: () {
-  //                                   dev.log('startOnTap');
-  //                                   // searchCategory = '';
-  //                                   _refreshData();
-  //                                 },
-  //                                 refreshOnTap: () {
-  //                                   // searchCategory = '';
-  //                                   // _refreshData();
-  //                                   Navigator.pushNamedAndRemoveUntil(context,
-  //                                       RoutesName.home, (route) => false);
-  //                                 }))
-  //                         : const SizedBox(),
-  //                   ],
-  //                 ),
-  //               )
-  //             : const Center(child: CircularProgressIndicator());
-  //       } else {
-  //         return const Center(child: CircularProgressIndicator());
-  //       }
-  //     },
-  //   );
-  // }
   Consumer<NewsProvider> _buildNewsSection() {
     return Consumer<NewsProvider>(
       builder: (context, provider, child) {
@@ -323,41 +227,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  // Fetch all Story Form api
-  // FutureBuilder<StoryModel> _storySection() {
-  //   return FutureBuilder<StoryModel>(
-  //       future: fetchStory,
-  //       builder: (context, snapshot) {
-  //         // Remove the bottom navigation when go to story page
-  //         if (snapshot.hasData) {
-  //           final data = snapshot.data!.storyboard!.data;
-  //           if (Provider.of<BarsVisibility>(context, listen: false).showBars) {
-  //             Timer(const Duration(seconds: 1), () {
-  //               Provider.of<BarsVisibility>(context, listen: false).hideBars();
-  //             });
-  //           }
-  //           return PageView.builder(
-  //               controller: storyPageController,
-  //               scrollDirection: Axis.vertical,
-  //               itemCount: data!.length,
-  //               itemBuilder: (context, index) {
-  //                 // Story Screen Widget
-  //                 return StoryScreen(
-  //                     images: data[index].images,
-  //                     videoUrl: data[index].video ?? '',
-  //                     title: data[index].title ?? '');
-  //               });
-  //         } else if (snapshot.hasError) {
-  //           return const Center(
-  //             child: Text('No Story Found'),
-  //           );
-  //         } else {
-  //           return const Center(
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         }
-  //       });
-  // }
   Consumer<StoryProvider> _buildStorySection() {
     return Consumer<StoryProvider>(builder: (context, storyProvider, _) {
       // dev.log(storyProvider.stories.first.video!);
@@ -476,34 +345,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return fetchAllNews;
   }
 
-  // Fetch News for All News, With Category and Search Title
-  // Future<NewsModel> fetchNews() async {
-  //   if (_isLogin) {
-  //     if (widget.category == null) {
-  //       // Fetch All News
-  //       fetchAllNews = newsDataStream.fetchNewsStream(authToken: _authToken);
-  //     } else {
-  //       // Fetch News filter by Category
-  //       fetchAllNews =
-  //           newsDataStream.fetchNewsStream(category: widget.category);
-  //     }
-  //   } else {
-  //     if (widget.category == null) {
-  //       // Fetch All News
-  //       fetchAllNews = newsDataStream.fetchNewsStream();
-  //     } else {
-  //       // Fetch News filter by Category
-  //       fetchAllNews =
-  //           newsDataStream.fetchNewsStream(category: widget.category);
-  //     }
-  //   }
-  //   return fetchAllNews;
-  // }
-
   // Share App Url to anyone
   void shareContent(BuildContext context) async {
     try {
-      await Share.share('https://flutter.dev/');
+      await Share.share('https://quikkbyte.com');
     } catch (e) {
       Utils.showSnackBar(context, '$e');
     }
