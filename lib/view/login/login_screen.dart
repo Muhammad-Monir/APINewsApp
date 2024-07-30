@@ -213,7 +213,23 @@ class _LoginScreenState extends State<LoginScreen> {
             //   },
             //   icon: 'facebook',
             // ),
-            const PlatformButton(icon: 'apple'),
+            PlatformButton(
+              onTap: () async {
+                isLoading.value = true;
+                await SocialAuthData.signInWithApple(context).then((value) {
+                  isLoading.value = false;
+                }).then((user) {
+                  if (user != null) {
+                    log('log in and navigate to home');
+                    Navigator.pushNamed(context, RoutesName.home);
+                    // Utils.showSnackBar(context, user.email!);
+                    // log('\nUser: ${user.displayName}');
+                    // log('\nUserAdditionalInfo: ${user.email}');
+                  }
+                });
+              },
+              icon: 'apple',
+            ),
           ],
         ),
         SizedBox(height: Utils.scrHeight * .02)

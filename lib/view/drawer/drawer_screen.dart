@@ -191,31 +191,32 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
           // Share App Link
           CustomDrawerItem(
-              onTap: () async {
-                try {
-                  await Share.share('https://flutter.dev/');
-                } catch (e) {
-                  Utils.showSnackBar(context, '$e');
-                }
+              onTap: () {
+                ToastUtil.showShortToast("Comming soon");
               },
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
           // Rate this app
-          const CustomDrawerItem(
+          CustomDrawerItem(
+              onTap: () {
+                ToastUtil.showShortToast("Comming soon");
+              },
               text: 'Rate this App',
               svgName: 'rating',
               icon: Icons.arrow_forward_ios),
           // FeddBack the app
           CustomDrawerItem(
-              onTap: () {},
+              onTap: () {
+                ToastUtil.showShortToast("Comming soon");
+              },
               text: 'Feedback',
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
           // Contact Us
           CustomDrawerItem(
               onTap: () {
-                _sideBarAction('https://aminn.reigeeky.com/contact');
+                _sideBarAction('https://quikkbyte.com/contact');
               },
               text: 'Contact Us',
               svgName: 'contact_us',
@@ -224,8 +225,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           CustomDrawerItem(
               onTap: () {
                 // Navigator.pushNamed(context, RoutesName.termsOfUses);
-                _sideBarAction(
-                    'https://aminn.reigeeky.com/pages/terms-of-service');
+                _sideBarAction('https://quikkbyte.com/pages/terms-of-service');
               },
               text: 'Terms Of Uses',
               svgName: 'terms_of_uses',
@@ -234,8 +234,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           CustomDrawerItem(
               onTap: () {
                 // Navigator.pushNamed(context, RoutesName.privacyPolicy);
-                _sideBarAction(
-                    'http://aminn.reigeeky.com/pages/privacy-policy');
+                _sideBarAction('https://quikkbyte.com/pages/privacy-policy');
               },
               text: 'Privacy & Policy',
               svgName: 'privacy&policy',
