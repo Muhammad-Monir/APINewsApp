@@ -25,9 +25,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
-
 import 'firebase_options.dart';
 import 'provider/language_provider.dart';
+import 'services/notification_service.dart';
 import 'utils/helper.dart';
 import 'utils/toast_util.dart';
 
@@ -47,8 +47,8 @@ void main() async {
   //   statusBarIconBrightness: Brightness.light,
   // ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  // LocalNotificationService.initialize();
-  // LocalNotificationService.getToken();
+  LocalNotificationService.initialize();
+  LocalNotificationService.getToken();
   tz.initializeTimeZones();
   runApp(const MyApp()
       // DevicePreview(

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields, unused_field
 import 'dart:developer';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
@@ -12,8 +13,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/delete_account_popup.dart';
 import '../../provider/notification_provider.dart';

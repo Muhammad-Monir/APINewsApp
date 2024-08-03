@@ -54,7 +54,7 @@ class _NewsScreenState extends State<NewsScreen> {
   bool isFav = false;
   late BannerAd _bannerAd;
   bool _isAdLoaded = false;
-  final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
+  // final adUnitId = 'ca-app-pub-6659386038146270/8006413063';
   List<String> imageList = [ApiUrl.imageNotFound];
 
   @override
@@ -345,6 +345,9 @@ class _NewsScreenState extends State<NewsScreen> {
   _initBannerAd() {
     _bannerAd = BannerAd(
       size: AdSize.banner,
+      // adUnitId: 'ca-app-pub-6659386038146270/6743477796',
+
+      // old baner unit id
       adUnitId: 'ca-app-pub-3940256099942544/9214589741',
       // adUnitId: ' ca-app-pub-6659386038146270/59982347391',
       // adUnitId: adUnitId,
@@ -355,6 +358,8 @@ class _NewsScreenState extends State<NewsScreen> {
           });
         },
         onAdFailedToLoad: (ad, error) {
+          log(error.toString());
+
           ad.dispose();
         },
         onAdOpened: (ad) {
