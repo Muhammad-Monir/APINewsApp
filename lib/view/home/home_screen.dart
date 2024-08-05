@@ -21,6 +21,7 @@ import '../../provider/bottom_navigation_provider.dart';
 import '../../provider/story_provider.dart';
 import '../../provider/timer_provider.dart';
 import '../../utils/api_url.dart';
+import '../../utils/toast_util.dart';
 import '../../utils/utils.dart';
 import '../drawer/drawer_screen.dart';
 import '../story/story_screen.dart';
@@ -70,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void _scroolListener() {
     if (storyPageController.position.pixels ==
         storyPageController.position.maxScrollExtent) {
+      ToastUtil.showShortToast('Loading....');
       Provider.of<StoryProvider>(context, listen: false).fetchStories();
     }
   }

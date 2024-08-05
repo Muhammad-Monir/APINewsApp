@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:am_innnn/route/routes_name.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -393,8 +394,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   _initBannerAd() {
     _bannerAd = BannerAd(
       size: AdSize.banner,
-      // adUnitId: ' ca-app-pub-6659386038146270/5998234739',
-      adUnitId: 'ca-app-pub-3940256099942544/9214589741',
+      adUnitId: kDebugMode
+          ? 'ca-app-pub-3940256099942544/9214589741'
+          : 'ca-app-pub-6659386038146270/5998234739',
       // adUnitId: adUnitId,
       listener: BannerAdListener(
         onAdLoaded: (ad) {

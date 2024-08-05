@@ -46,6 +46,7 @@ class _CustomFlipWidgetState extends State<CustomFlipWidget> {
       Provider.of<VideoControllerProvider>(context, listen: false).pause();
 
       if (controller.page == (widget.pages.length - 1)) {
+        ToastUtil.showShortToast('Loading....');
         Provider.of<NewsProvider>(context, listen: false).fetchNews();
       }
     });
