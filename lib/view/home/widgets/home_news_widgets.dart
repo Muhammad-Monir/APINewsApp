@@ -4,6 +4,7 @@ import 'package:am_innnn/utils/api_url.dart';
 import 'package:am_innnn/utils/app_constants.dart';
 import 'package:am_innnn/utils/di.dart';
 import 'package:am_innnn/view/home/widgets/caroousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -348,7 +349,9 @@ class _NewsScreenState extends State<NewsScreen> {
       // adUnitId: 'ca-app-pub-6659386038146270/6743477796',
 
       // old baner unit id
-      adUnitId: 'ca-app-pub-3940256099942544/9214589741',
+      adUnitId: kDebugMode
+          ? 'ca-app-pub-3940256099942544/9214589741'
+          : 'ca-app-pub-6659386038146270/5998234739',
       // adUnitId: ' ca-app-pub-6659386038146270/59982347391',
       // adUnitId: adUnitId,
       listener: BannerAdListener(

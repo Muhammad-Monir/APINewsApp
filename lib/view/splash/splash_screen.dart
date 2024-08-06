@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields, use_build_context_synchronously
+// ignore_for_file: unnecessary_null_comparison, unused_field, unused_element, prefer_final_fields, use_build_context_synchronously, unused_local_variable
 
 import 'dart:developer';
 import 'package:am_innnn/provider/language_provider.dart';
@@ -57,6 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!serviceEnabled) {
       showNoInternetDialog();
       return;
+    } else {
+      _detectLocation();
     }
 
     // permission = await Geolocator.checkPermission();
@@ -77,7 +79,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // When we reach here, permissions are granted, and we can
     // continue accessing the position of the device.
-    _detectLocation();
   }
 
   void showNoInternetDialog() async {

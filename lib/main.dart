@@ -47,8 +47,8 @@ void main() async {
   //   statusBarIconBrightness: Brightness.light,
   // ));
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  LocalNotificationService.initialize();
-  LocalNotificationService.getToken();
+  await LocalNotificationService.initialize();
+  await LocalNotificationService.getToken();
   tz.initializeTimeZones();
   runApp(const MyApp()
       // DevicePreview(
@@ -83,7 +83,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StoryProvider()),
         ChangeNotifierProvider(create: (_) => NewsProvider()),
         ChangeNotifierProvider(create: (_) => VideoControllerProvider()),
-        // Provider(create: (_) => AuthService(preferences!)),
       ],
       child: ScreenUtilInit(
           designSize: const Size(375, 812),
