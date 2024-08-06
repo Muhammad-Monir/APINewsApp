@@ -24,10 +24,10 @@ class LocalNotificationService {
   static final FirebaseMessaging _firebaseMessaging =
       FirebaseMessaging.instance;
 
-  static void initialize() {
+  static Future<void> initialize() async {
     // initializationSettings  for Android
     if (Platform.isAndroid) {
-      _notificationsPlugin
+      await _notificationsPlugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()!
           .requestNotificationsPermission();
@@ -67,7 +67,7 @@ class LocalNotificationService {
       (message) {},
     );
 
-    _notificationsPlugin.initialize(initializationSettings,
+    await _notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: ((details) {
       {}
     }));

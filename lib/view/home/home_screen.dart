@@ -350,7 +350,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Share App Url to anyone
   void shareContent(BuildContext context) async {
     try {
-      await Share.share('https://quikkbyte.com');
+      await Share.share(
+          'https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte&pli=1');
     } catch (e) {
       Utils.showSnackBar(context, '$e');
     }

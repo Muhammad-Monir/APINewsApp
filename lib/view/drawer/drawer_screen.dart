@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields, unused_field
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/user_data.dart';
 import 'package:am_innnn/model/user_profile_model.dart';
@@ -12,9 +12,9 @@ import 'package:am_innnn/view/drawer/widget/custom_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/delete_account_popup.dart';
 import '../../provider/notification_provider.dart';
@@ -24,6 +24,8 @@ import '../../utils/di.dart';
 import '../../utils/styles.dart';
 import '../../utils/toast_util.dart';
 import '../../utils/utils.dart';
+
+enum Availability { loading, available, unavailable }
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -37,10 +39,27 @@ class _DrawerScreenState extends State<DrawerScreen> {
   String? _authToken = appData.read(kKeyToken);
   final AuthenticationProvider _authProvider = AuthenticationProvider();
   String? localImagePath;
+  final InAppReview _inAppReview = InAppReview.instance;
+  Availability _availability = Availability.loading;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final isAvailable = await _inAppReview.isAvailable();
+        log('isAvailable: $isAvailable');
+
+        setState(() {
+          _availability =
+              isAvailable ? Availability.available : Availability.unavailable;
+          log('_availability: $_availability');
+        });
+      } catch (e) {
+        log('Error checking availability: $e');
+        setState(() => _availability = Availability.unavailable);
+      }
+    });
   }
 
   @override
@@ -193,24 +212,21 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // Share App Link
           CustomDrawerItem(
               onTap: () {
-                ToastUtil.showShortToast("Comming soon");
+                _sideBarAction(
+                    "https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte&pli=1");
               },
               text: 'App Share',
               svgName: 'drawer_share',
               icon: Icons.arrow_forward_ios),
           // Rate this app
           CustomDrawerItem(
-              onTap: () {
-                ToastUtil.showShortToast("Comming soon");
-              },
+              onTap: _rateApp,
               text: 'Rate this App',
               svgName: 'rating',
               icon: Icons.arrow_forward_ios),
           // FeddBack the app
           CustomDrawerItem(
-              onTap: () {
-                ToastUtil.showShortToast("Comming soon");
-              },
+              onTap: _rateApp,
               text: 'Feedback',
               svgName: 'feedback',
               icon: Icons.arrow_forward_ios),
@@ -343,6 +359,34 @@ class _DrawerScreenState extends State<DrawerScreen> {
       await launchUrlString(url);
     } else {
       ToastUtil.showShortToast('No apps found to perform this action');
+    }
+  }
+
+  Future<void> _rateApp() async {
+    try {
+      if (_availability == Availability.available) {
+        log('In-app review is available');
+        await _inAppReview.requestReview();
+      } else {
+        log('In-app review is not available, redirecting to store listing');
+        _openStoreListing();
+      }
+    } catch (e) {
+      log('Exception during in-app review request: $e');
+      _openStoreListing();
+    }
+  }
+
+  void _openStoreListing() async {
+    const appStoreUrl = 'https://apps.apple.com/app/idYOUR_APP_ID';
+    const playStoreUrl =
+        'https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte';
+
+    final url = Platform.isIOS ? appStoreUrl : playStoreUrl;
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      log('Could not launch $url');
     }
   }
 }
