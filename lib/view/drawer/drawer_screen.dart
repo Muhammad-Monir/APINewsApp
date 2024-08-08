@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../common_widgets/action_button.dart';
 import '../../common_widgets/delete_account_popup.dart';
@@ -212,8 +213,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           // Share App Link
           CustomDrawerItem(
               onTap: () {
-                _sideBarAction(
-                    "https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte&pli=1");
+                shareContent(context);
+                // _sideBarAction(
+                //     "https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte&pli=1");
               },
               text: 'App Share',
               svgName: 'drawer_share',
@@ -225,11 +227,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
               svgName: 'rating',
               icon: Icons.arrow_forward_ios),
           // FeddBack the app
-          CustomDrawerItem(
-              onTap: _rateApp,
-              text: 'Feedback',
-              svgName: 'feedback',
-              icon: Icons.arrow_forward_ios),
+          // CustomDrawerItem(
+          //     onTap: _rateApp,
+          //     text: 'Feedback',
+          //     svgName: 'feedback',
+          //     icon: Icons.arrow_forward_ios),
           // Contact Us
           CustomDrawerItem(
               onTap: () {
@@ -309,6 +311,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 
+  void shareContent(BuildContext context) async {
+    try {
+      await Share.share(
+          'https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte&pli=1');
+    } catch (e) {
+      Utils.showSnackBar(context, '$e');
+    }
+  }
+
   void getPopUp(
     BuildContext context,
     Widget Function(BuildContext) childBuilder,
@@ -363,6 +374,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
   }
 
   Future<void> _rateApp() async {
+    log('message ${Availability.available}');
+    log('message ${Availability.unavailable}');
     try {
       if (_availability == Availability.available) {
         log('In-app review is available');

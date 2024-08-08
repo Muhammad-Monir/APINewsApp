@@ -1,4 +1,6 @@
 import 'package:am_innnn/utils/color.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 final class ToastUtil {
@@ -9,6 +11,16 @@ final class ToastUtil {
         msg: trn,
         toastLength: Toast.LENGTH_LONG,
         backgroundColor: appThemeColor);
+  }
+
+  static void showLoginToast(String message) {
+    String trn = message;
+    Fluttertoast.showToast(
+        gravity: ToastGravity.TOP,
+        fontSize: 16.sp,
+        msg: trn,
+        toastLength: Toast.LENGTH_LONG,
+        backgroundColor: Colors.red);
   }
 
   static void showShortToast(String message) {
