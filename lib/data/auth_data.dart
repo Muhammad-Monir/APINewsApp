@@ -98,8 +98,10 @@ class AuthenticationProvider with ChangeNotifier {
         ToastUtil.showLongToast(data["message"]);
       } else if (response.statusCode == 403) {
         _isLoading = false;
-        throw Exception(
-            'Your Account Is Deleted. Please Use Different Account');
+        ToastUtil.showLoginToast(
+            'Your Account Is Deleted. Please Use Another  Account');
+        // throw Exception(
+        //     'Your Account Is Deleted. Please Use Different Account');
       } else {
         throw Exception('Login Failed');
       }

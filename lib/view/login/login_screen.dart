@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison, unused_element
 import 'dart:developer';
+import 'dart:io';
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/data/social_login_auth_data/social_auth_data.dart';
 import 'package:am_innnn/view/login/widgets/custom_platform_button.dart';
@@ -213,23 +214,27 @@ class _LoginScreenState extends State<LoginScreen> {
             //   },
             //   icon: 'facebook',
             // ),
-            PlatformButton(
-              onTap: () async {
-                isLoading.value = true;
-                await SocialAuthData.signInWithApple(context).then((value) {
-                  isLoading.value = false;
-                }).then((user) {
-                  if (user != null) {
-                    log('log in and navigate to home');
-                    Navigator.pushNamed(context, RoutesName.home);
-                    // Utils.showSnackBar(context, user.email!);
-                    // log('\nUser: ${user.displayName}');
-                    // log('\nUserAdditionalInfo: ${user.email}');
-                  }
-                });
-              },
-              icon: 'apple',
-            ),
+
+            Platform.isAndroid
+                ? const SizedBox.shrink()
+                : PlatformButton(
+                    onTap: () async {
+                      isLoading.value = true;
+                      await SocialAuthData.signInWithApple(context)
+                          .then((value) {
+                        isLoading.value = false;
+                      }).then((user) {
+                        if (user != null) {
+                          log('log in and navigate to home');
+                          Navigator.pushNamed(context, RoutesName.home);
+                          // Utils.showSnackBar(context, user.email!);
+                          // log('\nUser: ${user.displayName}');
+                          // log('\nUserAdditionalInfo: ${user.email}');
+                        }
+                      });
+                    },
+                    icon: 'apple',
+                  ),
           ],
         ),
         SizedBox(height: Utils.scrHeight * .02)
