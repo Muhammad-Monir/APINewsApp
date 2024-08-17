@@ -136,26 +136,9 @@ class AuthenticationProvider with ChangeNotifier {
       if (response.statusCode == 201) {
         _isLoading = false;
         final Map<String, dynamic> data = json.decode(response.body);
-        // ToastUtil.showShortToast(data["message"]);
-        // ToastUtil.showShortToast('User registered successfully.');
         return {'success': true};
       } else if (response.statusCode == 403) {
         final Map<String, dynamic> errorResponse = json.decode(response.body);
-        // log(errorResponse.toString());
-        // log("${errorResponse["message"]["phone"]}");
-        // if (errorResponse["message"]["email"] == null) {
-        //   ToastUtil.showLongToast("${errorResponse["message"]["phone"][0]}");
-        // } else if (errorResponse["message"]["phone"] == null) {
-        //   ToastUtil.showLongToast("${errorResponse["message"]["email"][0]}");
-        // } else if (errorResponse["message"]["phone"] != null ||
-        //     errorResponse["message"]["email"] != null) {
-        //   ToastUtil.showLongToast(
-        //       "${errorResponse["message"]["email"][0]}\n${errorResponse["message"]["phone"][0]}");
-        // } else if (errorResponse["message"]["phone"] == null ||
-        //     errorResponse["message"]["email"] == null) {
-        //   ToastUtil.showLongToast("${errorResponse["message"]}");
-        // }
-
         return {'success': false, 'errors': errorResponse['message']};
       } else {
         return {

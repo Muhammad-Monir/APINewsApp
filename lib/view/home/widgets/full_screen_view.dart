@@ -82,7 +82,8 @@ class FullScreenCarouselImageSlider extends StatefulWidget {
 
 class _FullScreenCarouselImageSliderState
     extends State<FullScreenCarouselImageSlider> {
-  final CarouselController carouselController = CarouselController();
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
 
   int currentIndex = 0;
   @override

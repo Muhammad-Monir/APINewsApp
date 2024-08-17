@@ -8,6 +8,7 @@ class NotificationData {
   static Future<void> storeNotification(String fcmToken, String deviceId,
       {String? userId, bool? isActive}) async {
     try {
+      log('storeNotification userID: $userId');
       Object body = (userId != null && isActive != null)
           ? jsonEncode(<String, dynamic>{
               'user_id': userId,

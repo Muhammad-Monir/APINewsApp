@@ -56,16 +56,6 @@ class SocialAuthData {
     }
   }
 
-  // static Future<void> signInWithTwitter() async {
-  //   TwitterAuthProvider twitterProvider = TwitterAuthProvider();
-
-  //   if (kIsWeb) {
-  //     await FirebaseAuth.instance.signInWithPopup(twitterProvider);
-  //   } else {
-  //     await FirebaseAuth.instance.signInWithProvider(twitterProvider);
-  //   }
-  // }
-
   static Future<User?> signInWithApple(BuildContext context) async {
     try {
       // Trigger the Apple Sign In flow
@@ -122,13 +112,6 @@ class SocialAuthData {
 
         final userDetails = authResult.user;
         ToastUtil.showShortToast(userDetails!.name);
-        // save all the data
-        // final name = userDetails!.name;
-        // final email = _auth.currentUser!.email;
-        // final imageUrl = userDetails.thumbnailImage;
-        // final uid = userDetails.id.toString();
-        // final provider = "TWITTER";
-        // final hasError = false;
       } catch (e) {
         log(e.toString());
       }

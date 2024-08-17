@@ -19,7 +19,8 @@ class CarouselImageSlider extends StatefulWidget {
 }
 
 class _CarouselImageSliderState extends State<CarouselImageSlider> {
-  final CarouselController carouselController = CarouselController();
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
 
   int currentIndex = 0;
   @override
