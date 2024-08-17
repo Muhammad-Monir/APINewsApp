@@ -115,15 +115,11 @@ class LocalNotificationService {
       String? deviceId = await GetDeviceInfo.getDeviceInfo();
       log(deviceId.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      // bool isLoggedIn = AuthService(prefs).isLoggedIn();
-      // log(AuthService(prefs).isLoggedIn().toString());
-      // if (isLoggedIn) {
       if (appData.read(kKeyIsLoggedIn)) {
-        // log(AuthService(prefs).getUserID().toString());
+        final userId = appData.read(kKeyUserID);
+        log('notification personnalization userI: $userId');
         NotificationData.storeNotification(token, deviceId.toString(),
-            // userId: AuthService(prefs).getUserID().toString(),
-            userId: appData.read(kKeyUserID),
-            isActive: activeStatus);
+            userId: userId, isActive: activeStatus);
       } else {
         NotificationData.storeNotification(token, deviceId.toString());
       }

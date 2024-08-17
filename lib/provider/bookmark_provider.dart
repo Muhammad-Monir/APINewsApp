@@ -36,14 +36,4 @@ class BookmarkProvider with ChangeNotifier {
     }
     notifyListeners(); // Ensure the state is updated immediately
   }
-
-  // void toggleIsFavorite() {
-  //   _isFavorite = !_isFavorite;
-  //   notifyListeners();
-  // }
-
-  // void setFavoriteValue(bool bookmarkValue) {
-  //   _isFavorite = bookmarkValue;
-  //   // notifyListeners();
-  // }
 }

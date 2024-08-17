@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:am_innnn/data/auth_data.dart';
 import 'package:am_innnn/provider/bookmark_provider.dart';
 import 'package:am_innnn/provider/bottom_navigation_provider.dart';
@@ -35,7 +37,8 @@ Future<void> backgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MobileAds.instance.initialize();
+  // await MobileAds.instance.initialize();
+  unawaited(MobileAds.instance.initialize());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -50,12 +53,7 @@ void main() async {
   await LocalNotificationService.initialize();
   await LocalNotificationService.getToken();
   tz.initializeTimeZones();
-  runApp(const MyApp()
-      // DevicePreview(
-      //   enabled: !kReleaseMode,
-      //   builder: (context) => const MyApp(), // Wrap your app
-      // ),
-      );
+  runApp(const MyApp() );
 }
 
 class MyApp extends StatelessWidget {
